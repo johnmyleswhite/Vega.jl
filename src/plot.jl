@@ -92,6 +92,13 @@ function printjson(p::Plot)
     return JSON.to_json(res)
 end
 
+# Open a URL in a browser
+function openurl(url::String) 
+    @osx_only     run(`open $url`)
+    @windows_only run(`start $url`)
+    @linux_only   run(`xdg-open $url`)
+end
+
 # Hack to get automatic browser loading from the REPL on OS X
 function Base.show(io::IO, p::Plot)
     io = open(JSONPATH, "w")
@@ -103,7 +110,7 @@ function Base.show(io::IO, p::Plot)
     close(io)
 
     # Open the browser
-    run(`open $HTMLPATH`)
+    openurl(HTMLPATH)
 
     sleep(2) # To make sure viz is loaded before deleting
 
