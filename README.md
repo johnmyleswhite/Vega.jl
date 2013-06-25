@@ -21,7 +21,7 @@ This will download and install the appropriate release of Vega for you automatic
 
 # Usage Examples
 
-At present this package only works on OS X. I am working to find ways to make it work on Linux and Windows. Assuming that you are on OS X, the following examples should the current API, which is just a demo and will change rapidly over the next few weeks:
+At present this package only works on OS X. I am working to find ways to make it work on Linux and Windows. Assuming that you are on OS X, the following examples show off the current API, which is just a demo and will change rapidly over the next few weeks:
 
 	using Distributions
 	using Vega
