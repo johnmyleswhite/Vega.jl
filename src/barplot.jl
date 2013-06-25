@@ -84,12 +84,12 @@ end
 
 function barplot(x::Vector,
                  y::Vector;
-                 width::Int = 400,
-                 height::Int = 200,
-                 top::Int = 10,
-                 left::Int = 10,
-                 bottom::Int = 10,
-                 right::Int = 10)
+                 width::Int = 500,
+                 height::Int = 500,
+                 top::Int = 40,
+                 left::Int = 40,
+                 bottom::Int = 40,
+                 right::Int = 40)
     Plot(PlotDimensions(width, height),
          PlotPadding(top, left, bottom, right),
          BarPlotData(x, y),

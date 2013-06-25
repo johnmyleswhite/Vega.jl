@@ -1,0 +1,3 @@
+[submodule "deps/vega"]
+	path = deps/vega
+	url = git@github.com:trifacta/vega.git
