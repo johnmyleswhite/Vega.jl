@@ -1,42 +1,7 @@
-type ScatterPlotData <: PlotData
-    x::Vector
-    y::Vector
-    function ScatterPlotData(x::Vector, y::Vector)
-        n = length(x)
-        if length(y) != n
-            throw(ArgumentError("x and y must have the same length"))
-        else
-            new(x, y)
-        end
-    end
-end
-
 type ScatterPlotScales <: PlotScales
 end
 
-type ScatterPlotAxes <: PlotAxes
-end
-
 type ScatterPlotMarks <: PlotMarks
-end
-
-function printjson(p::ScatterPlotData)
-    n = length(p.x)
-    data = Array(Dict, 1)
-    data[1] = Dict()
-    data[1]["name"] = "table"
-    data[1]["values"] = Array(Dict, n)
-    for i in 1:n
-        data[1]["values"][i] = {"x" => p.x[i], "y" => p.y[i]}
-    end
-    return data
-end
-
-function printjson(p::ScatterPlotAxes)
-    return [
-            {"type" => "x", "scale" => "x"},
-            {"type" => "y", "scale" => "y"}
-           ]
 end
 
 function printjson(p::ScatterPlotScales)
@@ -83,18 +48,20 @@ function printjson(p::ScatterPlotMarks)
            ]
 end
 
-function scatterplot(x::Vector,
-                     y::Vector;
-                     width::Int = 500,
-                     height::Int = 500,
-                     top::Int = 40,
-                     left::Int = 40,
-                     bottom::Int = 40,
-                     right::Int = 40)
+function scatterplot(;x::Vector = Float64[],
+                      y::Vector = Float64[],
+                      group::Vector = Int[],
+                      color::Vector = Int[],
+                      width::Int = 400,
+                      height::Int = 400,
+                      top::Int = 80,
+                      left::Int = 80,
+                      bottom::Int = 80,
+                      right::Int = 80)
     Plot(PlotDimensions(width, height),
          PlotPadding(top, left, bottom, right),
-         ScatterPlotData(x, y),
+         PlotData(x, y, group, color),
          ScatterPlotScales(),
-         ScatterPlotAxes(),
+         PlotAxes(),
          ScatterPlotMarks())
 end

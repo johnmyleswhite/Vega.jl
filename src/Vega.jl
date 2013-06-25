@@ -1,7 +1,8 @@
 module Vega
     using JSON
 
-    export barplot, lineplot, scatterplot, printjson
+    export plot
+    export barplot, lineplot, scatterplot, areaplot, printjson
 
 	const VEGADIR = tempdir()
 	const JSONPATH = joinpath(VEGADIR, "vega.jl.json")
@@ -20,4 +21,5 @@ module Vega
     include("barplot.jl")
     include("lineplot.jl")
     include("scatterplot.jl")
+    include("areaplot.jl")
 end

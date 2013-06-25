@@ -10,8 +10,37 @@ type PlotPadding
     right::Int
 end
 
-abstract PlotData
-abstract PlotAxes
+type PlotData
+    x::Vector
+    y::Vector
+    group::Vector
+    color::Vector
+    function PlotData(x::Vector, y::Vector, group::Vector, color::Vector)
+        n = length(x)
+        if length(y) != n
+            throw(ArgumentError("x and y must have the same length"))
+        end
+        if length(group) != n
+            if length(group) != 0
+                throw(ArgumentError("Not enough groups"))
+            else
+                group = ones(Int, n)
+            end
+        end
+        if length(color) != n
+            if length(color) != 0
+                throw(ArgumentError("Not enough colors"))
+            else
+                color = ones(Int, n)
+            end
+        end
+        new(x, y, group, color)
+    end
+end
+
+type PlotAxes
+end
+
 abstract PlotScales
 abstract PlotMarks
 
@@ -27,6 +56,28 @@ end
 function printjson(p::PlotPadding)
     return {"top" => p.top, "left" => p.left,
             "bottom" => p.bottom, "right" => p.right}
+end
+
+function printjson(p::PlotData)
+    n = length(p.x)
+    data = Array(Dict, 1)
+    data[1] = Dict()
+    data[1]["name"] = "table"
+    data[1]["values"] = Array(Dict, n)
+    for i in 1:n
+        data[1]["values"][i] = {"x" => p.x[i],
+                                "y" => p.y[i],
+                                "group" => p.group[i],
+                                "color" => p.color[i]}
+    end
+    return data
+end
+
+function printjson(p::PlotAxes)
+    return [
+            {"type" => "x", "scale" => "x"},
+            {"type" => "y", "scale" => "y"}
+           ]
 end
 
 function printjson(p::Plot)
@@ -82,4 +133,28 @@ function makehtml()
   </script>
 </html>"
     return html
+end
+
+function plot(;x::Vector = Float64[],
+               y::Vector = Float64[],
+               group::Vector = Int[],
+               color::Vector = Int[],
+               kind::Symbol = :scatter,
+               width::Int = 400,
+               height::Int = 400,
+               top::Int = 80,
+               left::Int = 80,
+               bottom::Int = 80,
+               right::Int = 80)
+    if kind == :scatter
+        scatterplot(x = x, y = y, group = group, color = color) # etc...
+    elseif kind == :bar
+        barplot(x = x, y = y, group = group, color = color) # etc...
+    elseif kind == :area
+        areaplot(x = x, y = y, group = group, color = color) # etc...
+    elseif kind == :line
+        lineplot(x = x, y = y, group = group, color = color) # etc...
+    else
+        error("Unknown kind of plot")
+    end
 end
