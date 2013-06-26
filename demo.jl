@@ -10,24 +10,31 @@ plot(x = [1:20],
 	 y = rand(20),
 	 kind = :bar)
 
+plot(x = [1:20],
+	 y = rand(20),
+	 group = vcat([1 for i in 1:10], [2 for i in 1:10]),
+	 kind = :bar)
+
 plot(x = [1:100, 1:100],
 	 y = [[1:100] + randn(100), 3.0 + 1.5 * [1:100] + randn(100)],
 	 group = [[1 for i in 1:100], [2 for i in 1:100]],
 	 kind = :line)
 
 d1 = MultivariateNormal([0.0, 0.0], [1.0 0.9; 0.9 1.0])
-d2 = MultivariateNormal([10.0, 10.0], [3.0 0.1; 0.1 3.0])
+d2 = MultivariateNormal([10.0, 10.0], [4.0 0.5; 0.5 4.0])
 points = vcat(rand(d1, 500)', rand(d2, 500)')
 x = points[:, 1]
 y = points[:, 2]
-plot(x = x, y = y, kind = :scatter)
+plot(x = x, y = y,
+	 group = vcat(ones(Int, 500), ones(Int, 500) + 1),
+	 kind = :scatter)
 
 d = rand(Gamma(1.0, 1.0), 1_000_000)
-k = kde(d)
+k = kde(d, 0.1, 2048)
 plot(x = k.x, y = k.density, kind = :area)
 
 d = rand(Beta(3.0, 2.0), 1_000_000)
-k = kde(d)
+k = kde(d, 0.1, 2048)
 plot(x = k.x, y = k.density, kind = :area)
 
 n = 30

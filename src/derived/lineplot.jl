@@ -21,7 +21,7 @@ function printjson(p::LinePlotScales)
             "domain" => {"data" => "table", "field" => "data.y"}
           },
           {
-            "name" => "color",
+            "name" => "group",
             "type" => "ordinal",
             "range" => "category10",
             "domain" => {"data" => "table", "field" => "data.group"}
@@ -44,27 +44,11 @@ function printjson(p::LinePlotMarks)
                     "enter" => {
                       "x" => {"scale" => "x", "field" => "data.x"},
                       "y" => {"scale" => "y", "field" => "data.y"},
-                      "stroke" => {"scale" => "color", "field" => "data.group"},
-                      "strokeWidth" => {"value" => 2}
+                      "stroke" => {"scale" => "group", "field" => "data.group"},
                     }
                   }
                 }
               ]
-            },
-            {
-              "type" => "text",
-              "from" => {
-                "data" => "table"
-              },
-              "properties" => {
-                "enter" => {
-                  "x" => {"scale" => "x", "field" => "data.x", "offset" => 2},
-                  "y" => {"scale" => "y", "field" => "data.y"},
-                  "fill" => {"scale" => "color", "field" => "data.group"},
-                  "text" => {"field" => "data.group"},
-                  "baseline" => {"value" => "middle"}
-                }
-              }
             }
            ]
 end

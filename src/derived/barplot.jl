@@ -17,6 +17,12 @@ function printjson(p::BarPlotScales)
               "range" => "height",
               "nice" => true,
               "domain" => {"data" => "table", "field" => "data.y"}
+            },
+            {
+              "name" => "group",
+              "type" => "ordinal",
+              "range" => "category10",
+              "domain" => {"data" => "table", "field" => "data.group"}
             }
            ]
 end
@@ -33,15 +39,8 @@ function printjson(p::BarPlotMarks)
                "x" => {"scale" => "x", "field" => "data.x"},
                "width" => {"scale" => "x", "band" => true, "offset" => -1},
                "y" => {"scale" => "y", "field" => "data.y"},
-               "y2" => {"scale" => "y", "value" => 0}
-              },
-              "update" =>
-              {
-               "fill" => {"value" => "steelblue"}
-              },
-              "hover" =>
-              {
-               "fill" => {"value" => "red"}
+               "y2" => {"scale" => "y", "value" => 0},
+               "fill" => {"scale" => "group", "field" => "data.group"},
               }
              }
             }

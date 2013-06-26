@@ -19,6 +19,12 @@ function printjson(p::ScatterPlotScales)
               "range" => "height",
               "nice" => true,
               "domain" => {"data" => "table", "field" => "data.y"}
+            },
+            {
+              "name" => "group",
+              "type" => "ordinal",
+              "range" => "category10",
+              "domain" => {"data" => "table", "field" => "data.group"}
             }
            ]
 end
@@ -32,25 +38,17 @@ function printjson(p::ScatterPlotMarks)
                 "enter" => {
                   "x" => {"scale" => "x", "field" => "data.x"},
                   "y" => {"scale" => "y", "field" => "data.y"},
-                  "stroke" => {"value" => "steelblue"},
+                  "stroke" => {"scale" => "group", "field" => "data.group"},
                   "fillOpacity" => {"value" => 0.5}
-                },
-                "update" => {
-                  "fill" => {"value" => "transparent"},
-                  "size" => {"value" => 100}
-                },
-                "hover" => {
-                  "fill" => {"value" => "pink"},
-                  "size" => {"value" => 300}
                 }
               }
             }
-           ]
+          ]
 end
 
 function scatterplot(;x::Vector = Float64[],
                       y::Vector = Float64[],
-                      group::Vector = Int[],
+                      group::Vector = ones(Int, length(x)),
                       color::Vector = Int[],
                       width::Int = 400,
                       height::Int = 400,
