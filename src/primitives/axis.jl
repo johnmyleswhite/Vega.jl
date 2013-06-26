@@ -50,7 +50,33 @@ type VegaAxis
     # Optional mark property definitions for custom axis styling
     # The input object can include sub-objects for ticks (both major and minor),
     #  majorTicks, minorTicks, labels and axis (for the axis line)
-    properties::Dict
+    properties::Dict{Any, Any}
+
+    function VegaAxis(axistype::Symbol,
+                      scale::Symbol,
+                      orient::Symbol,
+                      format::String,
+                      ticks::Int,
+                      values::Vector,
+                      subdivide::Int,
+                      tickPadding::Int,
+                      tickSize::Int,
+                      tickSizeMajor::Int,
+                      tickSizeMinor::Int,
+                      tickSizeEnd::Int,
+                      offset::Int,
+                      properties::Dict{Any, Any})
+        if !contains([:x, :y], axistype)
+            error("axistype must be :x or :y")
+        end
+        if !contains([:top, :bottom, :left, :right, :null], orient)
+            error("orient must be one of :top, :bottom, :left, :right or :null")
+        end
+        new(axistype, scale, orient, format,
+            ticks, values, subdivide,
+            tickPadding, tickSize, tickSizeMajor, tickSizeMinor,
+            tickSizeEnd, offset, properties)
+    end
 end
 
 function VegaAxis(;axistype::Symbol = :x,

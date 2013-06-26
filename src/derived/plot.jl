@@ -101,31 +101,23 @@ end
 
 # Hack to get automatic browser loading from the REPL on OS X
 function Base.show(io::IO, p::Plot)
-    io = open(JSONPATH, "w")
-    println(io, printjson(p))
-    close(io)
-
     io = open(HTMLPATH, "w")
-    println(io, makehtml())
+    println(io, makehtml(printjson(p)))
     close(io)
 
     # Open the browser
     openurl(HTMLPATH)
 
     # Turn off clean up steps for now
-    # sleep(2) # To make sure viz is loaded before deleting
-
-    # rm(JSONPATH)
     # rm(HTMLPATH)
 
     return
 end
 
-function makehtml()
+function makehtml(spec::String)
     d3path = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
     vegapath = Pkg.dir("Vega", "deps/vega/vega.js")
-    specpath = JSONPATH
-    html = "<html>
+    html = string("<html>
   <head>
     <title>Vega Interaction Test</title/>
     <script src='$d3path'></script>
@@ -135,11 +127,12 @@ function makehtml()
     <div style='text-align: center' id='view' class='view'></div>
   </body>
   <script type='text/javascript'>
-  vg.parse.spec('$specpath', function(chart) {
+  spec = ", spec, ";",
+  "vg.parse.spec(spec, function(chart) {
     self.view = chart({el:'#view'}).update();
   });
   </script>
-</html>"
+</html>")
     return html
 end
 

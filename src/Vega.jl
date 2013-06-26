@@ -10,7 +10,6 @@ module Vega
     export printjson
 
 	const VEGADIR = tempdir()
-	const JSONPATH = joinpath(VEGADIR, "vega.jl.json")
 	const HTMLPATH = joinpath(VEGADIR, "vega.jl.html")
 
 	function install()
