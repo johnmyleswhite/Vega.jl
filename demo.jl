@@ -29,12 +29,12 @@ plot(x = x, y = y,
 	 group = vcat(ones(Int, 500), ones(Int, 500) + 1),
 	 kind = :scatter)
 
-d = rand(Gamma(1.0, 1.0), 1_000_000)
-k = kde(d, 0.1, 2048)
+x = rand(Gamma(1.0, 1.0), 1_000_000)
+k = kde(x, 0.1, 2048)
 plot(x = k.x, y = k.density, kind = :area)
 
-d = rand(Beta(3.0, 2.0), 1_000_000)
-k = kde(d, 0.1, 2048)
+x = rand(Beta(3.0, 2.0), 1_000_000)
+k = kde(x, 0.1, 2048)
 plot(x = k.x, y = k.density, kind = :area)
 
 n = 30
