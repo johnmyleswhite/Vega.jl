@@ -11,6 +11,7 @@ function printjson(p::ScatterPlotScales)
               "type" => "linear",
               "range" => "width",
               "nice" => true,
+              "zero" => false,
               "domain" => {"data" => "table", "field" => "data.x"}
             },
             {
@@ -18,6 +19,7 @@ function printjson(p::ScatterPlotScales)
               "type" => "linear",
               "range" => "height",
               "nice" => true,
+              "zero" => false,
               "domain" => {"data" => "table", "field" => "data.y"}
             },
             {
@@ -39,6 +41,7 @@ function printjson(p::ScatterPlotMarks)
                   "x" => {"scale" => "x", "field" => "data.x"},
                   "y" => {"scale" => "y", "field" => "data.y"},
                   "stroke" => {"scale" => "group", "field" => "data.group"},
+                  "fill" => {"scale" => "group", "field" => "data.group"},
                   "fillOpacity" => {"value" => 0.5}
                 }
               }

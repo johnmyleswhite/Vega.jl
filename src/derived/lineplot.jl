@@ -11,6 +11,7 @@ function printjson(p::LinePlotScales)
             "type" => "linear",
             "range" => "width",
             "nice" => true,
+            "zero" => false,
             "domain" => {"data" => "table", "field" => "data.x"}
           },
           {
@@ -18,6 +19,7 @@ function printjson(p::LinePlotScales)
             "type" => "linear",
             "range" => "height",
             "nice" => true,
+            "zero" => false,
             "domain" => {"data" => "table", "field" => "data.y"}
           },
           {
