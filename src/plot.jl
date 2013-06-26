@@ -112,10 +112,11 @@ function Base.show(io::IO, p::Plot)
     # Open the browser
     openurl(HTMLPATH)
 
-    sleep(2) # To make sure viz is loaded before deleting
+    # Turn off clean up steps for now
+    # sleep(2) # To make sure viz is loaded before deleting
 
-    rm(JSONPATH)
-    rm(HTMLPATH)
+    # rm(JSONPATH)
+    # rm(HTMLPATH)
 
     return
 end
