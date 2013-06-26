@@ -43,8 +43,6 @@ function printjson(p::HeatMapMarks)
                  "shape" => {"value" => "square"},
                  "x" => {"scale" => "x", "field" => "data.x"},
                  "y" => {"scale" => "y", "field" => "data.y"},
-                 # "height" => {"value" => 50}, # This isn't right
-                 # "width" => {"value" => 50}, # This isn't right
                  "fill" => {"scale" => "color", "field" => "data.color"}
                }
              }
@@ -56,8 +54,8 @@ function heatmap(;x::Vector = Float64[],
                  y::Vector = Float64[],
                  group::Vector = Int[],
                  color::Vector = Int[],
-                 width::Int = 400,
-                 height::Int = 400,
+                 width::Int = 450,
+                 height::Int = 450,
                  top::Int = 80,
                  left::Int = 80,
                  bottom::Int = 80,

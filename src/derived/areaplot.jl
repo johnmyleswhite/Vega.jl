@@ -21,6 +21,12 @@ function printjson(p::AreaPlotScales)
             "nice" => true,
             "domain" => {"data" => "table", "field" => "data.y"}
           },
+          {
+            "name" => "group",
+            "type" => "ordinal",
+            "range" => "category10",
+            "domain" => {"data" => "table", "field" => "data.group"}
+          }
          ]
 end
 
@@ -35,13 +41,7 @@ function printjson(p::AreaPlotMarks)
                  "x" => {"scale" => "x", "field" => "data.x"},
                  "y" => {"scale" => "y", "field" => "data.y"},
                  "y2" => {"scale" => "y", "value" => 0},
-                 "fill" => {"value" => "steelblue"}
-               },
-               "update" => {
-                 "fillOpacity" => {"value" => 1}
-               },
-               "hover" => {
-                 "fillOpacity" => {"value" => 0.5}
+                 "fill" => {"scale" => "group", "field" => "data.group"}
                }
              }
             }
@@ -52,8 +52,8 @@ function areaplot(;x::Vector = Float64[],
                   y::Vector = Float64[],
                   group::Vector = Int[],
                   color::Vector = Int[],
-                  width::Int = 400,
-                  height::Int = 400,
+                  width::Int = 450,
+                  height::Int = 450,
                   top::Int = 80,
                   left::Int = 80,
                   bottom::Int = 80,
