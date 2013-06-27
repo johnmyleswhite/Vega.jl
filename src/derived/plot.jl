@@ -156,6 +156,9 @@ function plot(;x::Vector = Float64[],
         areaplot(x = x, y = y, group = group, color = color) # etc...
     elseif kind == :line
         lineplot(x = x, y = y, group = group, color = color) # etc...
+    elseif kind == :hist
+        a, b = hist(x)
+        plot(x = [a][2:end], y = b, kind = :bar)
     else
         error("Unknown kind of plot")
     end
