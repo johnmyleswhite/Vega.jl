@@ -151,3 +151,20 @@ function tojs(x::VegaAxis)
     end
     return res
 end
+
+function Base.copy(x::VegaAxis)
+    VegaAxis(x.axistype,
+             x.scale,
+             x.orient,
+             x.format,
+             x.ticks,
+             copy(x.values),
+             x.subdivide,
+             x.tickPadding,
+             x.tickSize,
+             x.tickSizeMajor,
+             x.tickSizeMinor,
+             x.tickSizeEnd,
+             x.offset,
+             x.properties)
+end

@@ -14,10 +14,10 @@ type VegaMark
 	# If the data property is not defined, the mark will attempt to inherit
 	#  data from its parent group mark, if any
 	# Otherwise, a default, single element data set is assumed
-	from::Any
+	from::Dict{Any, Any}
 
 	# An object containing the property set definitions
-	properties::Any
+	properties::VegaMarkProperties
 
 	# A data field to use as a unique key for data binding
 	# When a visualization's data is updated, the key value will be used
@@ -39,16 +39,20 @@ type VegaMark
 	# plus the modifiers in, out, in-out, and out-in.
 	# The default is cubic-in-out
 	ease::String
+
+	# Fill with other stuff????
+	marks::Vector{VegaMark}
 end
 
 function VegaMark(;marktype::Symbol = :symbol,
 	               name::Symbol = :null,
 	               description::String = "",
-	               from::Any = nothing,
-	               properties::Any = nothing,
+	               from::Dict{Any, Any} = Dict{Any, Any}(),
+	               properties::VegaMarkProperties = VegaMarkProperties(),
 	               key::Symbol = :null,
 	               delay::Int = -1,
-	               ease::String = "")
+	               ease::String = "",
+	               marks::Vector{VegaMark} = VegaMark[])
 	VegaMark(marktype,
 		     name,
 		     description,
@@ -56,7 +60,8 @@ function VegaMark(;marktype::Symbol = :symbol,
 		     properties,
 		     key,
 		     delay,
-		     ease)
+		     ease,
+		     marks)
 end
 
 function tojs(x::VegaMark)
@@ -66,10 +71,10 @@ function tojs(x::VegaMark)
 		res["description"] = x.description
 	end
 	if x.from != nothing
-		res["from"] = x.from
+		res["from"] = tojs(x.from)
 	end
 	if x.properties != nothing
-		res["properties"] = x.properties
+		res["properties"] = tojs(x.properties)
 	end
 	if x.key != :null
 		res["key"] = string(x.key)
@@ -80,5 +85,20 @@ function tojs(x::VegaMark)
 	if !isempty(x.ease)
 		res["ease"] = x.ease
 	end
+	if !isempty(x.marks)
+		res["marks"] = [tojs(z) for z in x.marks]
+	end
 	return res
+end
+
+function Base.copy(x::VegaMark)
+	VegaMark(x.marktype,
+	         x.name,
+	         x.description,
+	         x.from,
+	         copy(x.properties),
+	         x.key,
+	         x.delay,
+	         x.ease,
+	         copy(x.marks))
 end

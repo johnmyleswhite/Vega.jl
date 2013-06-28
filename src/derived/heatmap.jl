@@ -1,58 +1,8 @@
-type HeatMapScales <: PlotScales
-end
-
-type HeatMapMarks <: PlotMarks
-end
-
-function printjson(p::HeatMapScales)
-  return [
-          {
-            "name" => "x",
-            "type" => "linear",
-            "range" => "width",
-            "nice" => true,
-            "zero" => false,
-            "domain" => {"data" => "table", "field" => "data.x"}
-          },
-          {
-            "name" => "y",
-            "type" => "linear",
-            "range" => "height",
-            "nice" => true,
-            "zero" => false,
-            "domain" => {"data" => "table", "field" => "data.y"}
-          },
-          {
-            "name" => "color",
-            "type" => "ordinal",
-            "range" => "category20",
-            "nice" => true,
-            "zero" => false,
-            "domain" => {"data" => "table", "field" => "data.color"}
-          }
-         ]
-end
-
-function printjson(p::HeatMapMarks)
-    return [
-            {
-             "type" => "symbol",
-             "from" => {"data" => "table"},
-             "properties" => {
-               "enter" => {
-                 "shape" => {"value" => "square"},
-                 "x" => {"scale" => "x", "field" => "data.x"},
-                 "y" => {"scale" => "y", "field" => "data.y"},
-                 "fill" => {"scale" => "color", "field" => "data.color"}
-               }
-             }
-            }
-           ]
-end
-
+# TODO: Convert from z to group
+#       Find and use heat colors
 function heatmap(;x::Vector = Float64[],
                  y::Vector = Float64[],
-                 group::Vector = Int[],
+                 z::Vector = Int[],
                  color::Vector = Int[],
                  width::Int = 450,
                  height::Int = 450,
@@ -60,10 +10,45 @@ function heatmap(;x::Vector = Float64[],
                  left::Int = 80,
                  bottom::Int = 80,
                  right::Int = 80)
-    Plot(PlotDimensions(width, height),
-         PlotPadding(top, left, bottom, right),
-         PlotData(x, y, group, color),
-         HeatMapScales(),
-         PlotAxes(),
-         HeatMapMarks())
+    padding = VegaPadding(top, left, bottom, right)
+
+    data = Array(VegaData, 1)
+    data[1] = VegaData(values = makevalues(x, y, z))
+
+    scales = Array(VegaScale, 3)
+    scales[1] = VegaScale(name = :x,
+                          scaletype = :linear,
+                          range = :width,
+                          nice = true,
+                          zero = false,
+                          domain = VegaDataRef("table", "data.x"))
+    scales[2] = VegaScale(name = :y,
+                          scaletype = :linear,
+                          range = :height,
+                          nice = true,
+                          zero = false,
+                          domain = VegaDataRef("table", "data.y"))
+    scales[3] = VegaScale(name = :group,
+                          scaletype = :ordinal,
+                          range = :category20,
+                          domain = VegaDataRef("table", "data.group"))
+
+    marks = Array(VegaMark, 1)
+    enterprops =
+      VegaMarkPropertySet(shape = VegaValueRef(value = :square), # May need to be "string"
+                          x = VegaValueRef(scale = "x",
+                                           field = "data.x"),
+                          y = VegaValueRef(scale = "y",
+                                           field = "data.y"),
+                          fill = VegaValueRef(scale = "group",
+                                              field = "data.group"))
+    marks[1] = VegaMark(marktype = :symbol,
+                        from = {"data" => "table"},
+                        properties = VegaMarkProperties(enter = enterprops))
+    VegaVisualization(width = width,
+                      height = height,
+                      padding = padding,
+                      data = data,
+                      scales = scales,
+                      marks = marks)
 end

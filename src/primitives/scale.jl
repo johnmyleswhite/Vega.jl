@@ -1,6 +1,3 @@
-# TODO: Remove this hack
-typealias VegaDataRef Any
-
 type VegaScale
 	# A unique name for the scale
 	name::Symbol
@@ -24,23 +21,35 @@ type VegaScale
 	#  array with minimum and maximum values
 	# For ordinal/categorical data, this may be an array of valid input values
 	# The domain may also be specified by a reference to a data source
-	domain::Union(Vector, VegaDataRef)
+
+	# Scale Domains
+	# Scale domains may be defined directly as an array of values, or can be inferred from input data. In the latter case, the scale domain can be defined in Vega as an object we call a "DataRef" (for data reference). A DataRef is simply an object with up to two properties:
+	# data - [String] The name of the data set containing domain values.
+	# field - [Field | Array<Field>] A reference to the desired data field(s) (e.g., "data.price"). An array of fields will include values for all referenced fields.
+	domain::Union(Vector, VegaDataRef, Nothing)
 
 	# For quantitative scales only, sets the minimum value in the scale domain
 	# domainMin can be used to override,
 	#  or (with domainMax) used in lieu of, the domain property
-	domainMin::Union(Number, VegaDataRef)
+	domainMin::Union(Number, VegaDataRef, Nothing)
 
 	# For quantitative scales only, sets the maximum value in the scale domain
 	# domainMax can be used to override,
 	#  or (with domainMin) used in lieu of, the domain property
-	domainMax::Union(Number, VegaDataRef)
+	domainMax::Union(Number, VegaDataRef, Nothing)
 
 	# The range of the scale, representing the set of visual values
 	# For numeric values, the range can take the form of a two-element array
 	#  with minimum and maximum values
 	# For ordinal data, the range may by an array of desired output values,
 	#  which are mapped to elements in the specified domain
+	# Scale Range Literals
+	#  The following string values can be used to automatically set a scale range.
+	#   * width - Set the scale range to [0, width], where the width value is defined by the enclosing group or data rectangle.
+	#   * height - Set the scale range to [0, height], where the height value is defined by the enclosing group or data rectangle.
+	#   * shapes - Set the scale range to the symbol type names: ["circle", "cross", "diamond", "square", "triangle-down", "triangle-up"]
+	#   * category10 - Set the scale range to a 10-color categorical palette: #1f77b4 #ff7f0e #2ca02c #d62728 #9467bd #8c564b #e377c2 #7f7f7f #bcbd22 #17becf
+	#   * category20 - Set the scale range to a 20-color categorical palette: #1f77b4 #aec7e8 #ff7f0e #ffbb78 #2ca02c #98df8a #d62728 #ff9896 #9467bd #c5b0d5 #8c564b #c49c94 #e377c2 #f7b6d2 #7f7f7f #c7c7c7 #bcbd22 #dbdb8d #17becf #9edae5
 	range::Union(Vector, Symbol)
 
 	# Sets the minimum value in the scale range
@@ -59,6 +68,25 @@ type VegaScale
 	# If true, rounds numeric output values to integers
 	# This can be helpful for snapping to the pixel grid
 	round::Bool
+
+	# Humanize numbers
+	nice::Bool
+
+	# Force axes to start at zero
+	zero::Bool
+
+	# Specialized properties
+
+	# == Ordinal Scale Properties ==
+	# If true, distributes the ordinal values over a quantitative range at uniformly spaced points. The spacing of the points can be adjusted using the padding property. If false, the ordinal scale will construct evenly-spaced bands, rather than points.
+	points::Bool
+
+	# == Time Scale Properties ==
+	# If true, values that exceed the data domain are clamped to either the minimum or maximum range value.
+	clamp::Bool
+
+	# Sets the exponent of the scale transformation. For pow scale types only, otherwise ignored.
+	exponent::Real
 end
 
 function VegaScale(;name::Symbol = :x,
@@ -70,11 +98,34 @@ function VegaScale(;name::Symbol = :x,
 	                rangeMin::Any = nothing,
 	                rangeMax::Any = nothing,
 	                reverse::Bool = false,
-	                round::Bool = false)
+	                round::Bool = false,
+	                nice::Bool = false,
+	                zero::Bool = false,
+	                points::Bool = false,
+	                clamp::Bool = false,
+	                exponent::Real = 1.0)
 	VegaScale(name, scaletype,
 		      domain, domainMin, domainMax,
 		      range, rangeMin, rangeMax,
-		      reverse, round)
+		      reverse, round, nice, zero, points, clamp, exponent)
+end
+
+function Base.copy(x::VegaScale)
+	VegaScale(x.name,
+		      x.scaletype,
+	          copy(x.domain),
+	          copy(x.domainMin),
+	          copy(x.domainMax),
+	          copy(x.range),
+	          copy(x.rangeMin),
+	          copy(x.rangeMax),
+	          x.reverse,
+	          x.round,
+	          x.nice,
+	          x.zero,
+	          x.points,
+	          x.clamp,
+	          x.exponent)
 end
 
 function tojs(x::VegaScale)
@@ -105,40 +156,20 @@ function tojs(x::VegaScale)
 	if x.round
 		res["round"] = true
 	end
+	if x.nice
+		res["nice"] = true
+	end
+	if x.zero
+		res["zero"] = true
+	end
+	if x.points
+		res["points"] = true
+	end
+	if x.clamp
+		res["clamp"] = true
+	end
+	if x.exponent != 1.0
+		res["exponent"] = true
+	end
 	return res
 end
-
-# TODO:
-# Implement the options below
-# Ordinal Scale Properties
-
-# points - [Boolean] If true, distributes the ordinal values over a quantitative range at uniformly spaced points. The spacing of the points can be adjusted using the padding property. If false, the ordinal scale will construct evenly-spaced bands, rather than points.
-
-# Time Scale Properties
-
-# clamp - [Boolean] If true, values that exceed the data domain are clamped to either the minimum or maximum range value.
-# nice - [String] If specified, modifies the scale domain to use a more human-friendly value range. For time and utc scale types only, the nice value should be a string indicating the desired time interval; legal values are "second", "minute", "hour", "day", "week", "month", or "year".
-
-# Quantitative Scale Properties
-
-# clamp - [Boolean] If true, values that exceed the data domain are clamped to either the minimum or maximum range value.
-# exponent - [Number] Sets the exponent of the scale transformation. For pow scale types only, otherwise ignored.
-# nice - [Boolean] If true, modifies the scale domain to use a more human-friendly number range (e.g., 7 instead of 6.96).
-# zero - [Boolean] If true, ensures that a zero baseline value is included in the scale domain. This option is ignored for non-quantitative scales.
-
-# Scale Domains
-
-# Scale domains may be defined directly as an array of values, or can be inferred from input data. In the latter case, the scale domain can be defined in Vega as an object we call a "DataRef" (for data reference). A DataRef is simply an object with up to two properties:
-
-# data - [String] The name of the data set containing domain values.
-# field - [Field | Array<Field>] A reference to the desired data field(s) (e.g., "data.price"). An array of fields will include values for all referenced fields.
-
-# Scale Range Literals
-
-# The following string values can be used to automatically set a scale range.
-
-# width - Set the scale range to [0, width], where the width value is defined by the enclosing group or data rectangle.
-# height - Set the scale range to [0, height], where the height value is defined by the enclosing group or data rectangle.
-# shapes - Set the scale range to the symbol type names: ["circle", "cross", "diamond", "square", "triangle-down", "triangle-up"]
-# category10 - Set the scale range to a 10-color categorical palette: #1f77b4 #ff7f0e #2ca02c #d62728 #9467bd #8c564b #e377c2 #7f7f7f #bcbd22 #17becf
-# category20 - Set the scale range to a 20-color categorical palette: #1f77b4 #aec7e8 #ff7f0e #ffbb78 #2ca02c #98df8a #d62728 #ff9896 #9467bd #c5b0d5 #8c564b #c49c94 #e377c2 #f7b6d2 #7f7f7f #c7c7c7 #bcbd22 #dbdb8d #17becf #9edae5

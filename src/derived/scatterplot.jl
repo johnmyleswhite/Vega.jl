@@ -1,68 +1,50 @@
-type ScatterPlotScales <: PlotScales
-end
-
-type ScatterPlotMarks <: PlotMarks
-end
-
-function printjson(p::ScatterPlotScales)
-    return [
-            {
-              "name" => "x",
-              "type" => "linear",
-              "range" => "width",
-              "nice" => true,
-              "zero" => false,
-              "domain" => {"data" => "table", "field" => "data.x"}
-            },
-            {
-              "name" => "y",
-              "type" => "linear",
-              "range" => "height",
-              "nice" => true,
-              "zero" => false,
-              "domain" => {"data" => "table", "field" => "data.y"}
-            },
-            {
-              "name" => "group",
-              "type" => "ordinal",
-              "range" => "category10",
-              "domain" => {"data" => "table", "field" => "data.group"}
-            }
-           ]
-end
-
-function printjson(p::ScatterPlotMarks)
-    return [
-            {
-              "type" => "symbol",
-              "from" => {"data" => "table"},
-              "properties" => {
-                "enter" => {
-                  "x" => {"scale" => "x", "field" => "data.x"},
-                  "y" => {"scale" => "y", "field" => "data.y"},
-                  "stroke" => {"scale" => "group", "field" => "data.group"},
-                  "fill" => {"scale" => "group", "field" => "data.group"},
-                  "fillOpacity" => {"value" => 0.5}
-                }
-              }
-            }
-          ]
-end
-
 function scatterplot(;x::Vector = Float64[],
-                      y::Vector = Float64[],
-                      group::Vector = ones(Int, length(x)),
-                      color::Vector = Int[],
-                      width::Int = 450,
-                      height::Int = 450,
-                      top::Int = 80,
-                      left::Int = 80,
-                      bottom::Int = 80,
-                      right::Int = 80)
-    Plot(PlotDimensions(width, height),
-         PlotPadding(top, left, bottom, right),
-         PlotData(x, y, group, color),
-         ScatterPlotScales(),
-         PlotAxes(),
-         ScatterPlotMarks())
+                       y::Vector = Float64[],
+                       group::Vector = Int[],
+                       color::Vector = Int[],
+                       width::Int = 450,
+                       height::Int = 450,
+                       top::Int = 80,
+                       left::Int = 80,
+                       bottom::Int = 80,
+                       right::Int = 80)
+    padding = VegaPadding(top, left, bottom, right)
+
+    data = Array(VegaData, 1)
+    data[1] = VegaData(values = makevalues(x, y, group))
+
+    scales = Array(VegaScale, 3)
+    scales[1] = VegaScale(name = :x,
+                          scaletype = :linear,
+                          range = :width,
+                          nice = true,
+                          zero = false,
+                          domain = VegaDataRef("table", "data.x"))
+    scales[2] = VegaScale(name = :y,
+                          scaletype = :linear,
+                          range = :height,
+                          nice = true,
+                          zero = false,
+                          domain = VegaDataRef("table", "data.y"))
+    scales[3] = VegaScale(name = :group,
+                          scaletype = :ordinal,
+                          range = :category10,
+                          domain = VegaDataRef("table", "data.group"))
+
+    enterprops = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "data.x"),
+                                     y = VegaValueRef(scale = "y", field = "data.y"),
+                                     stroke = VegaValueRef(scale = "group", field = "data.group"),
+                                     fill = VegaValueRef(scale = "group", field = "data.group"),
+                                     fillOpacity = VegaValueRef(value = 0.5))
+    marks = Array(VegaMark, 1)
+    marks[1] = VegaMark(marktype = :symbol,
+                        from = {"data" => "table"},
+                        properties = VegaMarkProperties(enter = enterprops))
+
+    VegaVisualization(width = width,
+                      height = height,
+                      padding = padding,
+                      data = data,
+                      scales = scales,
+                      marks = marks)
 end

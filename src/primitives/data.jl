@@ -64,3 +64,12 @@ function tojs(x::VegaData)
 	end
 	return res
 end
+
+function Base.copy(x::VegaData)
+	VegaData(x.name,
+		     copy(x.format),
+		     copy(x.values),
+		     x.source,
+		     x.url,
+		     copy(x.transform))
+end

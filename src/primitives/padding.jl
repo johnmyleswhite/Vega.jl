@@ -12,6 +12,10 @@ function VegaPadding(;top::Int = 80,
 	VegaPadding(top, left, bottom, right)
 end
 
+function Base.copy(x::VegaPadding)
+	VegaPadding(x.top, x.left, x.bottom, x.right)
+end
+
 function tojs(x::VegaPadding)
 	res = Dict()
 	res["top"] = x.top
