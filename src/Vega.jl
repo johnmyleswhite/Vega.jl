@@ -23,7 +23,7 @@ module Vega
         return
     end
 
-    tojson(x::Any) = JSON.to_json(Vega.tojs(x))
+    tojson(x::Any) = JSON.json(Vega.tojs(x))
 
     Base.copy(x::Nothing) = nothing
 

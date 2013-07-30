@@ -84,7 +84,7 @@ function tojs(x::VegaVisualization)
 end
 
 function tojson(v::VegaVisualization)
-    JSON.to_json(Vega.tojs(v))
+    JSON.json(Vega.tojs(v))
 end
 
 function tohtml(v::VegaVisualization)
