@@ -83,7 +83,7 @@ function tojs(x::VegaVisualization)
 			if haskey(res, "legends")
 				push!(res["legends"], {"fill" => string(z.name), "title" => "Legend"})
 			else
-				res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}}]
+				res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}]
 			end
 		end
 	end
