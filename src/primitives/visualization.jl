@@ -39,8 +39,8 @@ function VegaVisualization(;name::Symbol = :null,
 	                        data::Vector{VegaData} = VegaData[],
 	                        scales::Vector{VegaScale} = VegaScale[],
 	                        axes::Vector{VegaAxis} =
-	                         [VegaAxis(axistype = :x, scale = :x),
-	                          VegaAxis(axistype = :y, scale = :y)],
+	                         [VegaAxis(axistype = :x, scale = :x, title = "x"),
+	                          VegaAxis(axistype = :y, scale = :y, title = "y")],
 	                        marks::Vector{VegaMark} = VegaMark[])
 	VegaVisualization(name,
 		              width,
@@ -78,6 +78,15 @@ function tojs(x::VegaVisualization)
 	res["padding"] = tojs(x.padding)
 	res["data"] = [tojs(z) for z in x.data]
 	res["scales"] = [tojs(z) for z in x.scales]
+	for z in x.scales
+		if isordinal(z)
+			if haskey(res, "legends")
+				push!(res["legends"], {"fill" => string(z.name), "title" => "Legend"})
+			else
+				res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}}]
+			end
+		end
+	end
 	res["axes"] = [tojs(z) for z in x.axes]
 	res["marks"] = [tojs(z) for z in x.marks]
 	return res

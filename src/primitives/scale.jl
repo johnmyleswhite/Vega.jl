@@ -128,6 +128,8 @@ function Base.copy(x::VegaScale)
 	          x.exponent)
 end
 
+isordinal(x::VegaScale) = x.scaletype == :ordinal
+
 function tojs(x::VegaScale)
 	res = Dict()
 	res["name"] = string(x.name)

@@ -3,6 +3,8 @@ type VegaAxis
     # NB: Called "type" by Vega
     axistype::Symbol
 
+    title::String
+
     # The name of the scale backing the axis component
     scale::Symbol
 
@@ -53,6 +55,7 @@ type VegaAxis
     properties::Dict{Any, Any}
 
     function VegaAxis(axistype::Symbol,
+                      title::String,
                       scale::Symbol,
                       orient::Symbol,
                       format::String,
@@ -72,7 +75,7 @@ type VegaAxis
         if !contains([:top, :bottom, :left, :right, :null], orient)
             error("orient must be one of :top, :bottom, :left, :right or :null")
         end
-        new(axistype, scale, orient, format,
+        new(axistype, title, scale, orient, format,
             ticks, values, subdivide,
             tickPadding, tickSize, tickSizeMajor, tickSizeMinor,
             tickSizeEnd, offset, properties)
@@ -80,6 +83,7 @@ type VegaAxis
 end
 
 function VegaAxis(;axistype::Symbol = :x,
+                   title::String = "X",
                    scale::Symbol = :null,
                    orient::Symbol = :null,
                    format::String = "null",
@@ -94,6 +98,7 @@ function VegaAxis(;axistype::Symbol = :x,
                    offset::Int = -1,
                    properties::Dict = Dict())
     VegaAxis(axistype,
+             title,
              scale,
              orient,
              format,
@@ -111,6 +116,7 @@ end
 
 function tojs(x::VegaAxis)
     res = Dict()
+    res["title"] = x.title
     res["type"] = string(x.axistype)
     res["scale"] = string(x.scale)
     if x.orient != :null
