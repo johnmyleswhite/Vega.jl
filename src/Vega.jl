@@ -11,9 +11,6 @@ module Vega
     export plot
     export barplot, lineplot, scatterplot, areaplot, heatmap
 
-    const VEGADIR = tempdir()
-    const HTMLPATH = joinpath(VEGADIR, "vega.jl.html")
-
     function install()
         initial = pwd()
         cd(Pkg.dir("Vega"))
