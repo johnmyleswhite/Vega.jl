@@ -1,11 +1,12 @@
-type VegaDataRef
-	# The name of the data set containing domain values
-	data::String
+dataref_type = :VegaDataRef
 
-	# A reference to the desired data field(s) (e.g., "data.price")
-	# An array of fields will include values for all referenced fields
-	# TODO: Support Vector{String} variant
-	field::String
-end
+dataref_spec =
+[
+	(:data, String, "", false),
+	(:field, String, "", false)
+]
 
-Base.copy(x::VegaDataRef) = VegaDataRef(x.data, x.field)
+eval(maketype(dataref_type, dataref_spec))
+eval(makekwfunc(dataref_type, dataref_spec))
+eval(maketojs(dataref_type, dataref_spec))
+eval(makecopy(dataref_type, dataref_spec))

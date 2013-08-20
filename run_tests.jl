@@ -2,8 +2,7 @@
 # Correctness Tests
 #
 
-require("test.jl")
-
+using Base.Test
 using Vega
 
 my_tests = ["test/padding.jl",

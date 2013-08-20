@@ -12,17 +12,25 @@ function plot(;x::Vector = Float64[],
         group = ones(Int, length(x))
     end
     if kind == :scatter
-        scatterplot(x = x, y = y, group = group) # etc...
+        v = scatterplot(x = x, y = y, group = group) # etc...
     elseif kind == :bar
-        barplot(x = x, y = y, group = group) # etc...
+        v = barplot(x = x, y = y, group = group) # etc...
     elseif kind == :area
-        areaplot(x = x, y = y, group = group) # etc...
+        v = areaplot(x = x, y = y, group = group) # etc...
     elseif kind == :line
-        lineplot(x = x, y = y, group = group) # etc...
+        v = lineplot(x = x, y = y, group = group) # etc...
     elseif kind == :hist
         a, b = hist(x)
-        plot(x = [a][2:end], y = b, kind = :bar)
+        v = plot(x = [a][2:end], y = b, kind = :bar)
     else
         error("Unknown kind of plot")
     end
+
+    axis1 = VegaAxis(_type = "x", scale = "x", title = "x")
+    axis2 = VegaAxis(_type = "y", scale = "y", title = "y")
+    v.axes = [axis1, axis2]
+
+    v.legends = [{"fill" => "group", "title" => "Group"}]
+
+    return v
 end

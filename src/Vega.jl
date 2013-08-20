@@ -1,5 +1,8 @@
 module Vega
     using JSON
+    using JSTypes
+
+    import JSTypes.tojs
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
@@ -11,6 +14,8 @@ module Vega
     export plot
     export barplot, lineplot, scatterplot, areaplot, heatmap
 
+    export xlab!, ylab!, xlim!, ylim!
+
     function install()
         initial = pwd()
         cd(Pkg.dir("Vega"))
@@ -20,14 +25,9 @@ module Vega
         return
     end
 
-    tojson(x::Any) = JSON.json(Vega.tojs(x))
+    # tojson(x::Any) = JSON.json(Vega.tojs(x))
 
     Base.copy(x::Nothing) = nothing
-
-    tojs(s::Symbol) = string(s)
-    tojs(d::Dict) = d
-    tojs(v::Vector) = v
-    tojs(a::Any) = a
 
     # TODO: Move this elsewhere
     function makevalues(x::Vector, y::Vector, group::Vector)
@@ -52,6 +52,8 @@ module Vega
         @linux_only   run(`xdg-open $url`)
     end
 
+    tojson(x::Any) = JSON.json(tojs(x))
+
     # Lower-level API
     include("primitives/dataref.jl")
     include("primitives/valueref.jl")
@@ -60,10 +62,14 @@ module Vega
     include("primitives/format.jl")
     include("primitives/transform.jl")
     include("primitives/data.jl")
+    include("primitives/markpropertyset.jl")
     include("primitives/markproperties.jl")
     include("primitives/mark.jl")
     include("primitives/scale.jl")
     include("primitives/visualization.jl")
+
+    # Intermediates
+    include("primitives/modifiers.jl")
 
     # Higher-level API
     include("derived/plot.jl")

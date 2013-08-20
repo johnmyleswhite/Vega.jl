@@ -3,16 +3,16 @@ d = [VegaData(values = [{"x" => 1, "y" => 1},
                         {"x" => 3, "y" => 10},
                         {"x" => 4, "y" => 3}])]
 
-s = [VegaScale(name = :x,
-               scaletype = :ordinal,
-               range = :width,
+s = [VegaScale(name = "x",
+               _type = "ordinal",
+               range = "width",
                domain = VegaDataRef("table", "data.x"))
-       VegaScale(name = :y,
-                 scaletype = :linear,
-                 range = :height,
+       VegaScale(name = "y",
+                 _type = "linear",
+                 range = "height",
                  domain = VegaDataRef("table", "data.y"))]
 
-m = [VegaMark(marktype = :rect,
+m = [VegaMark(_type = "rect",
               from = {"data" => "table"},
               properties =
                 VegaMarkProperties(enter =

@@ -14,18 +14,18 @@ function barplot(;x::Vector = Float64[],
     data[1] = VegaData(values = makevalues(x, y, group))
 
     scales = Array(VegaScale, 3)
-    scales[1] = VegaScale(name = :x,
-                          scaletype = :ordinal,
-                          range = :width,
+    scales[1] = VegaScale(name = "x",
+                          _type = "ordinal",
+                          range = "width",
                           domain = VegaDataRef("table", "data.x"))
-    scales[2] = VegaScale(name = :y,
-                          scaletype = :linear,
-                          range = :height,
+    scales[2] = VegaScale(name = "y",
+                          _type = "linear",
+                          range = "height",
                           nice = true,
                           domain = VegaDataRef("table", "data.y"))
-    scales[3] = VegaScale(name = :group,
-                          scaletype = :ordinal,
-                          range = :category10,
+    scales[3] = VegaScale(name = "group",
+                          _type = "ordinal",
+                          range = "category10",
                           domain = VegaDataRef("table", "data.group"))
 
     marks = Array(VegaMark, 1)
@@ -41,9 +41,10 @@ function barplot(;x::Vector = Float64[],
                                                 field = "data.group"),
                           fill = VegaValueRef(scale = "group",
                                               field = "data.group"))
-    marks[1] = VegaMark(marktype = :rect,
+    marks[1] = VegaMark(_type = "rect",
                         from = {"data" => "table"},
                         properties = VegaMarkProperties(enter = enterprops))
+
     VegaVisualization(width = width,
                       height = height,
                       padding = padding,

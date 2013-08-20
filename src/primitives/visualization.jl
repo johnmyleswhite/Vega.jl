@@ -1,105 +1,53 @@
-type VegaVisualization
-	# A unique name for the visualization specification
-	name::Symbol
+vis_type = :VegaVisualization
 
-	# The total width, in pixels, of the data rectangle
-	# Default is 450 if undefined
-	width::Int
+# vis_spec =
+# [
+#     (:value, Any, nothing, true),
+# 	(:name, String, "Vega Visualization", false),
+# 	(:width, Number, 450, false),
+# 	(:height, Number, 450, false),
+# 	(:viewport, Vector{Int}, nothing, true),
+# 	(:padding, VegaPadding, VegaPadding(), false),
+# 	(:data, Vector{VegaData}, nothing, true),
+# 	(:scales, Vector{VegaScale}, nothing, true),
+# 	(:axes, Vector{VegaAxis}, nothing, true),
+# 	(:marks, Vector{VegaMark}, nothing, true)
+# ]
 
-	# The total height, in pixels, of the data rectangle
-	# Default is 450 if undefined
-	height::Int
+vis_spec =
+[
+    (:name, String, "Vega", true),
+    (:value, Any, nothing, true),
+    (:width, Number, 450, false),
+    (:height, Number, 450, false),
+    (:viewport, Vector{Int}, nothing, true),
+    (:padding, VegaPadding, VegaPadding(), false),
+    (:data, Vector{VegaData}, nothing, true),
+    (:scales, Vector{VegaScale}, nothing, true),
+    (:axes, Vector{VegaAxis}, nothing, true),
+    (:marks, Vector{VegaMark}, nothing, true),
+    (:legends, Vector, nothing, true)
+]
 
-	# The width and height of the on-screen viewport, in pixels
-	# If necessary, clipping and scrolling will be applied
-	viewport::Vector{Int}
+eval(maketype(vis_type, vis_spec))
+eval(makekwfunc(vis_type, vis_spec))
+eval(maketojs(vis_type, vis_spec))
+eval(makecopy(vis_type, vis_spec))
 
-	# The internal padding, in pixels, from the edge of the
-	#  visualization canvas to the data rectangle
-	padding::VegaPadding
-
-	# Definitions of data to visualize
-	data::Vector{VegaData}
-
-	# Scale transform definitions
-	scales::Vector{VegaScale}
-
-	# Axis definitions
-	axes::Vector{VegaAxis}
-
-	# Graphical mark definitions
-	marks::Vector{VegaMark}
-end
-
-function VegaVisualization(;name::Symbol = :null,
-	                        width::Int = 450,
-	                        height::Int = 450,
-	                        viewport::Vector{Int} = Int[],
-	                        padding::VegaPadding = VegaPadding(),
-	                        data::Vector{VegaData} = VegaData[],
-	                        scales::Vector{VegaScale} = VegaScale[],
-	                        axes::Vector{VegaAxis} =
-	                         [VegaAxis(axistype = :x, scale = :x, title = "x"),
-	                          VegaAxis(axistype = :y, scale = :y, title = "y")],
-	                        marks::Vector{VegaMark} = VegaMark[])
-	VegaVisualization(name,
-		              width,
-		              height,
-		              viewport,
-		              padding,
-		              data,
-		              scales,
-		              axes,
-		              marks)
-end
-
-function Base.copy(x::VegaVisualization)
-	VegaVisualization(x.name,
-		              x.width,
-		              x.height,
-		              copy(x.viewport),
-		              copy(x.padding),
-		              copy(x.data),
-		              copy(x.scales),
-		              copy(x.axes),
-		              copy(x.marks))
-end
-
-function tojs(x::VegaVisualization)
-	res = Dict()
-	if x.name != :null
-		res["name"] = string(x.name)
-	end
-	res["width"] = x.width
-	res["height"] = x.height
-	if !isempty(x.viewport)
-		res["viewport"] = [x.viewport[1], x.viewport[2]]
-	end
-	res["padding"] = tojs(x.padding)
-	res["data"] = [tojs(z) for z in x.data]
-	res["scales"] = [tojs(z) for z in x.scales]
-	for z in x.scales
-		if isordinal(z)
-			if haskey(res, "legends")
-				push!(res["legends"], {"fill" => string(z.name), "title" => "Legend"})
-			else
-				res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}]
-			end
-		end
-	end
-	res["axes"] = [tojs(z) for z in x.axes]
-	res["marks"] = [tojs(z) for z in x.marks]
-	return res
-end
-
-function tojson(v::VegaVisualization)
-    JSON.json(Vega.tojs(v))
-end
+# for z in x.scales
+# 	if isordinal(z)
+# 		if haskey(res, "legends")
+# 			push!(res["legends"], {"fill" => string(z.name), "title" => "Legend"})
+# 		else
+# 			res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}]
+# 		end
+# 	end
+# end
 
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 	js = tojs(v)
 
-	spec = tojson(v)
+	# spec = tojson(v)
     d3path = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
     vegapath = Pkg.dir("Vega", "deps/vega/vega.js")
 
@@ -113,7 +61,7 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     println(io, "</head>")
 
     # print body
-    println(io, "<body>x<div style='text-align: center' id='view' class='view'></div></body>")
+    println(io, "<body><div style='text-align: center' id='view' class='view'></div></body>")
 
     # print script
     println(io, "<script type='text/javascript'>")
@@ -125,7 +73,6 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
   	});")
     println(io, "</script>")
 end
-
 
 function Base.show(io::IO, v::VegaVisualization)
 	# create a temporary file 

@@ -1,26 +1,14 @@
-type VegaPadding
-	top::Int
-	left::Int
-	bottom::Int
-	right::Int
-end
+padding_type = :VegaPadding
 
-function VegaPadding(;top::Int = 80,
-	                  left::Int = 80,
-	                  bottom::Int = 80,
-	                  right::Int = 80)
-	VegaPadding(top, left, bottom, right)
-end
+padding_spec =
+[
+	(:top, Number, 80, false),
+	(:left, Number, 80, false),
+	(:bottom, Number, 80, false),
+	(:right, Number, 80, false)
+]
 
-function Base.copy(x::VegaPadding)
-	VegaPadding(x.top, x.left, x.bottom, x.right)
-end
-
-function tojs(x::VegaPadding)
-	res = Dict()
-	res["top"] = x.top
-	res["left"] = x.left
-	res["bottom"] = x.bottom
-	res["right"] = x.right
-	return res
-end
+eval(maketype(padding_type, padding_spec))
+eval(makekwfunc(padding_type, padding_spec))
+eval(maketojs(padding_type, padding_spec))
+eval(makecopy(padding_type, padding_spec))
