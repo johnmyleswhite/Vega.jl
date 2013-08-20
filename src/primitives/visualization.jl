@@ -1,48 +1,24 @@
 vis_type = :VegaVisualization
 
-# vis_spec =
-# [
-#     (:value, Any, nothing, true),
-# 	(:name, String, "Vega Visualization", false),
-# 	(:width, Number, 450, false),
-# 	(:height, Number, 450, false),
-# 	(:viewport, Vector{Int}, nothing, true),
-# 	(:padding, VegaPadding, VegaPadding(), false),
-# 	(:data, Vector{VegaData}, nothing, true),
-# 	(:scales, Vector{VegaScale}, nothing, true),
-# 	(:axes, Vector{VegaAxis}, nothing, true),
-# 	(:marks, Vector{VegaMark}, nothing, true)
-# ]
-
+# NB: This fails if "Vega Visualization" is set to `nothing`
 vis_spec =
 [
-    (:name, String, "Vega", true),
-    (:value, Any, nothing, true),
-    (:width, Number, 450, false),
-    (:height, Number, 450, false),
+    (:name, String, "Vega Visualization", true),
+    (:width, Int, 450, false),
+    (:height, Int, 450, false),
+    (:padding, Union(VegaPadding, Number, String), "auto", false),
     (:viewport, Vector{Int}, nothing, true),
-    (:padding, VegaPadding, VegaPadding(), false),
     (:data, Vector{VegaData}, nothing, true),
     (:scales, Vector{VegaScale}, nothing, true),
     (:axes, Vector{VegaAxis}, nothing, true),
     (:marks, Vector{VegaMark}, nothing, true),
-    (:legends, Vector, nothing, true)
+    (:legends, Vector{VegaLegend}, nothing, true)
 ]
 
 eval(maketype(vis_type, vis_spec))
 eval(makekwfunc(vis_type, vis_spec))
 eval(maketojs(vis_type, vis_spec))
 eval(makecopy(vis_type, vis_spec))
-
-# for z in x.scales
-# 	if isordinal(z)
-# 		if haskey(res, "legends")
-# 			push!(res["legends"], {"fill" => string(z.name), "title" => "Legend"})
-# 		else
-# 			res["legends"] = [{"fill" => string(z.name), "title" => "Legend"}]
-# 		end
-# 	end
-# end
 
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 	js = tojs(v)
@@ -85,7 +61,7 @@ function Base.show(io::IO, v::VegaVisualization)
     openurl(tmppath)
 
     # Turn off clean up steps for now
-    # rm(HTMLPATH)
+    # rm(tmppath)
 
     return
 end

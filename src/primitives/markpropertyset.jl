@@ -14,6 +14,8 @@ markpropertyset_spec =
 	(:stroke, VegaValueRef, nothing, true),
 	(:strokeWidth, VegaValueRef, nothing, true),
 	(:strokeOpacity, VegaValueRef, nothing, true),
+	(:strokeDash, VegaValueRef, nothing, true),
+	(:strokeDashOffset, VegaValueRef, nothing, true),
 	(:size, VegaValueRef, nothing, true),
 	(:shape, VegaValueRef, nothing, true),
 	(:path, VegaValueRef, nothing, true),
@@ -23,9 +25,9 @@ markpropertyset_spec =
 	(:endAngle, VegaValueRef, nothing, true),
 	(:interpolate, VegaValueRef, nothing, true),
 	(:tension, VegaValueRef, nothing, true),
+	(:url, VegaValueRef, nothing, true),
 	(:align, VegaValueRef, nothing, true),
 	(:baseline, VegaValueRef, nothing, true),
-	(:url, VegaValueRef, nothing, true),
 	(:text, VegaValueRef, nothing, true),
 	(:dx, VegaValueRef, nothing, true),
 	(:dy, VegaValueRef, nothing, true),
@@ -33,7 +35,7 @@ markpropertyset_spec =
 	(:font, VegaValueRef, nothing, true),
 	(:fontSize, VegaValueRef, nothing, true),
 	(:fontWeight, VegaValueRef, nothing, true),
-	(:fontStyle, VegaValueRef, nothing, true),
+	(:fontStyle, VegaValueRef, nothing, true)
 ]
 
 eval(maketype(markpropertyset_type, markpropertyset_spec))

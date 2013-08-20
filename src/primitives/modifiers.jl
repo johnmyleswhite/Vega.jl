@@ -34,3 +34,20 @@ function title!(v::VegaVisualization, title::String)
 	titlemark.properties = VegaMarkProperties(enter = enterprops)
 	push!(v.marks, titlemark)
 end
+
+function title!(v::VegaVisualization, title::String)
+	titlemark = VegaMark()
+	titlemark.type = "text"
+	titlemark.from = {"value" => title}
+    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
+                                     y = VegaValueRef(value = 0),
+                                     text = VegaValueRef(value = title))
+	titlemark.properties = VegaMarkProperties(enter = enterprops)
+	push!(v.marks, titlemark)
+end
+
+# function legend!(title::String = "")
+# end
+
+# function colorscheme!()
+# end

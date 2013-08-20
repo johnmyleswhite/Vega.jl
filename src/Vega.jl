@@ -66,6 +66,7 @@ module Vega
     include("primitives/markproperties.jl")
     include("primitives/mark.jl")
     include("primitives/scale.jl")
+    include("primitives/legend.jl")
     include("primitives/visualization.jl")
 
     # Intermediates

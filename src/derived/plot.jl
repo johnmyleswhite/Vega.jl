@@ -30,7 +30,7 @@ function plot(;x::Vector = Float64[],
     axis2 = VegaAxis(_type = "y", scale = "y", title = "y")
     v.axes = [axis1, axis2]
 
-    v.legends = [{"fill" => "group", "title" => "Group"}]
+    v.legends = [VegaLegend(fill = "group", title = "Group")]
 
     return v
 end
