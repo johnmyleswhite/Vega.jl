@@ -65,3 +65,6 @@ function Base.show(io::IO, v::VegaVisualization)
 
     return
 end
+
+typealias vg VegaVisualization
+

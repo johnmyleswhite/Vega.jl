@@ -12,13 +12,13 @@ plot(x = x, y = y, kind = :area)
 srand(1)
 x = [1:20]
 y = rand(20)
-g = vcat([1 for i in 1:10], [2 for i in 1:10])
+g = repeat([1, 2], inner = [10])
 plot(x = x, y = y, kind = :bar)
 plot(x = x, y = y, group = g, kind = :bar)
 
 x = [1:100, 1:100]
 y = [[1:100] + randn(100), 3.0 + 1.5 * [1:100] + randn(100)]
-g = [[1 for i in 1:100], [2 for i in 1:100]]
+g = repeat([1, 2], inner = [100])
 plot(x = x, y = y, group = g, kind = :line)
 
 x = rand(Gamma(1.0, 1.0), 1_000_000)
@@ -35,8 +35,8 @@ points = vcat(rand(d1, 500)', rand(d2, 500)')
 x = points[:, 1]
 y = points[:, 2]
 p = plot(x = x, y = y,
-	 group = vcat(ones(Int, 500), ones(Int, 500) + 1),
-	 kind = :scatter)
+         group = repeat([1, 2], inner = [500]),
+	     kind = :scatter)
 p.marks[1].properties.hover = copy(p.marks[1].properties.enter)
 p.marks[1].properties.update = copy(p.marks[1].properties.enter)
 p.marks[1].properties.hover.fill = VegaValueRef(value = "#33ff33")
@@ -46,11 +46,11 @@ p
 
 p1 = plot(x = [1:100, 1:100],
 	      y = [[1:100] + randn(100), 3.0 + 1.5 * [1:100] + randn(100)],
-	      group = [[1 for i in 1:100], [2 for i in 1:100]],
+	      group = repeat([1, 2], inner = [100]),
 	      kind = :line)
 p2 = plot(x = [1:100, 1:100],
 	      y = [[1:100] + randn(100), 3.0 + 1.5 * [1:100] + randn(100)],
-	      group = [[1 for i in 1:100], [2 for i in 1:100]],
+	      group = repeat([1, 2], inner = [100]),
 	      kind = :scatter)
 p2.marks[1].properties.enter.size = VegaValueRef(value = 10.0)
 p2.marks[1].properties.enter.shape = VegaValueRef(value = "diamond")

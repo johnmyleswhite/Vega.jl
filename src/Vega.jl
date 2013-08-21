@@ -7,14 +7,20 @@ module Vega
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
            VegaCSV, VegaTSV, VegaDataRef, VegaValueRef,
-           VegaMarkPropertySet, VegaMarkProperties
+           VegaMarkPropertySet, VegaMarkProperties, VegaLegend
+
+    export vg
 
     export tojson, tohtml
 
     export plot
     export barplot, lineplot, scatterplot, areaplot, heatmap
 
-    export xlab!, ylab!, xlim!, ylim!
+    export xlab!, ylab!, xlim!, ylim!, title!, legend!, showlegend!
+
+    export default_scales!, default_axes!, default_legend!
+    export add_data!, add_points!, add_area!, add_rects!, add_lines!
+    export showlegend!, hidelegend!
 
     function install()
         initial = pwd()
@@ -70,7 +76,14 @@ module Vega
     include("primitives/visualization.jl")
 
     # Intermediates
-    include("primitives/modifiers.jl")
+    include("intermediates/modifiers.jl")
+    include("intermediates/defaults.jl")
+    include("intermediates/data.jl")
+    include("intermediates/points.jl")
+    include("intermediates/props.jl")
+    include("intermediates/area.jl")
+    include("intermediates/lines.jl")
+    include("intermediates/rects.jl")
 
     # Higher-level API
     include("derived/plot.jl")
