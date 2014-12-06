@@ -1,6 +1,10 @@
 Vega.jl
 =======
 
+# NOTICE
+
+**This package is unmaintained. Its reliability is not guaranteed.**
+
 # Introduction
 
 A Julia package for creating the simplest kinds of Vega visualizations. We currently support barebones versions of the following:
