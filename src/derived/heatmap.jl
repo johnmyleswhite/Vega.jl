@@ -43,7 +43,7 @@ function heatmap(;x::Vector = Float64[],
                           fill = VegaValueRef(scale = "group",
                                               field = "data.group"))
     marks[1] = VegaMark(_type = "symbol",
-                        from = {"data" => "table"},
+                        from = Dict{Any, Any}("data" => "table"),
                         properties = VegaMarkProperties(enter = enterprops))
     VegaVisualization(width = width,
                       height = height,

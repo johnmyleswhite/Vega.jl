@@ -27,7 +27,7 @@ end
 function title!(v::VegaVisualization, title::String)
 	titlemark = VegaMark()
 	titlemark.type = "text"
-	titlemark.from = {"value" => title}
+	titlemark.from = Dict("value" => title)
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
                                      y = VegaValueRef(value = 0),
                                      text = VegaValueRef(value = title))
@@ -37,7 +37,7 @@ function title!(v::VegaVisualization, title::String)
 end
 
 function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark(_type = "text", from = {"value" => title})
+	titlemark = VegaMark(_type = "text", from = Dict("value" => title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
                                      y = VegaValueRef(value = -50),
                                      text = VegaValueRef(value = title),

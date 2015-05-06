@@ -1,6 +1,6 @@
 function add_rects!(v::VegaVisualization)
     res = VegaMark(_type = "rect",
-                   from = {"data" => "table"},
+                   from = Dict("data" => "table"),
                    properties = VegaMarkProperties(enter = default_props()))
 
     if v.marks == nothing
