@@ -1,8 +1,5 @@
 module Vega
     using JSON
-    using JSTypes
-
-    import JSTypes.tojs
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
@@ -21,6 +18,7 @@ module Vega
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
     export showlegend!, hidelegend!
+
 
     function install()
         initial = pwd()
@@ -59,6 +57,9 @@ module Vega
     end
 
     tojson(x::Any) = JSON.json(tojs(x))
+
+    #Import JSTypes code
+    include("jstypes.jl")
 
     # Lower-level API
     include("primitives/dataref.jl")
