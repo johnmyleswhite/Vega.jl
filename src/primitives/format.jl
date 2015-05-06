@@ -1,6 +1,6 @@
 abstract VegaFormat
 
-tojs(x::VegaFormat) = Dict()
+tojs(x::VegaFormat) = Dict{Any, Any}()
 
 type VegaJSON <: VegaFormat
 	parse::Any

@@ -1,6 +1,6 @@
 function add_area!(v::VegaVisualization)
     res = VegaMark(_type = "area",
-                   from = Dict("data" => "table"),
+                   from = Dict{Any, Any}("data" => "table"),
                    properties = VegaMarkProperties(enter = default_props()))
 
     if v.marks == nothing

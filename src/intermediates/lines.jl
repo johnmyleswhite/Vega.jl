@@ -4,10 +4,10 @@ function add_lines!(v::VegaVisualization)
       VegaMark(_type = "line",
                properties = VegaMarkProperties(enter = default_props()))
     res = VegaMark(_type = "group",
-                   from = Dict(
+                   from = Dict{Any, Any}(
                            "data" => "table",
                            "transform" =>
-                             [Dict("type" => "facet", "keys" => ["data.group"])]
+                             [Dict{Any, Any}("type" => "facet", "keys" => ["data.group"])]
                           ),
                    marks = innermarks)
 
