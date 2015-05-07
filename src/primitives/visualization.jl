@@ -32,8 +32,12 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     # print head
     println(io, "<head>")
     println(io, "  <title>$title</title>")
-    println(io, "  <script src='$d3path'></script>")
-    println(io, "  <script src='$vegapath'></script>")
+    #println(io, "  <script src='$d3path'></script>")
+    #println(io, "  <script src='$vegapath'></script>")
+    println(io," <script src=\"http://trifacta.github.io/vega/lib/d3.v3.min.js\"></script>")
+    println(io," <script src=\"http://trifacta.github.io/vega/lib/d3.geo.projection.min.js\"></script>")
+    println(io," <script src=\"http://trifacta.github.io/vega/lib/topojson.js\"></script>")
+    println(io," <script src=\"http://trifacta.github.io/vega/vega.js\"></script>")
     println(io, "</head>")
 
     # print body
@@ -51,7 +55,7 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 end
 
 function Base.show(io::IO, v::VegaVisualization)
-	# create a temporary file 
+	# create a temporary file
 	tmppath = string(tempname(), ".vega.html")
     io = open(tmppath, "w")
     writehtml(io, v)
@@ -65,6 +69,11 @@ function Base.show(io::IO, v::VegaVisualization)
 
     return
 end
+
+function writemime(io::IOBuffer, ::MIME"text/html", x::VegaVisualization)
+    writemime(io, "text/html", x)
+end
+
 
 typealias vg VegaVisualization
 
