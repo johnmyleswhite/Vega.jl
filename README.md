@@ -5,6 +5,8 @@ Vega.jl
 
 **This package is unmaintained. Its reliability is not guaranteed.**
 
+**5/7/2015: This package is trying to be revived by [Randy Zwitch](https://github.com/randyzwitch) for v0.4. Its reliability is still in flux**
+
 # Introduction
 
 A Julia package for creating the simplest kinds of Vega visualizations. We currently support barebones versions of the following:
@@ -70,18 +72,20 @@ The current API provides some convenience wrappers around Vega for generating st
 
 ![Example 5](content/demo5.jpg)
 
+	using KernelDensity
 	x = rand(Gamma(1.0, 1.0), 1_000_000)
-	k = kde(x, 0.1, 2048)
+	k = kde(x)
 	plot(x = k.x, y = k.density, kind = :area)
 
 ![Example 6](content/demo6.jpg)
 
 	x = rand(Beta(3.0, 2.0), 1_000_000)
-	k = kde(x, 0.1, 2048)
+	k = kde(x)
 	plot(x = k.x, y = k.density, kind = :area)
 
 ![Example 7](content/demo7.jpg)
 
+	#Not currently working
 	n = 30
 	x = Array(Int, n^2)
 	y = Array(Int, n^2)
