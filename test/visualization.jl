@@ -1,7 +1,7 @@
-d = [VegaData(values = [{"x" => 1, "y" => 1},
-                        {"x" => 2, "y" => 3},
-                        {"x" => 3, "y" => 10},
-                        {"x" => 4, "y" => 3}])]
+d = [VegaData(values = [Dict{Any, Any}("x" => 1, "y" => 1),
+                        Dict{Any, Any}("x" => 2, "y" => 3),
+                        Dict{Any, Any}("x" => 3, "y" => 10),
+                        Dict{Any, Any}("x" => 4, "y" => 3)])]
 
 s = [VegaScale(name = "x",
                _type = "ordinal",
@@ -13,7 +13,7 @@ s = [VegaScale(name = "x",
                  domain = VegaDataRef("table", "data.y"))]
 
 m = [VegaMark(_type = "rect",
-              from = {"data" => "table"},
+    from = Dict{Any, Any}("data" => "table"),
               properties =
                 VegaMarkProperties(enter =
                   VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "data.x"),
