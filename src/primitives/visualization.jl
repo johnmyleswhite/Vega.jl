@@ -70,9 +70,6 @@ function Base.show(io::IO, v::VegaVisualization)
     return
 end
 
-function writemime(io::IOBuffer, ::MIME"text/html", x::VegaVisualization)
-    writemime(io, "text/html", x)
-end
 
 
 typealias vg VegaVisualization
