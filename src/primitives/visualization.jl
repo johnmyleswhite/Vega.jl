@@ -20,10 +20,33 @@ eval(makekwfunc(vis_type, vis_spec))
 eval(maketojs(vis_type, vis_spec))
 eval(makecopy(vis_type, vis_spec))
 
-function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
-	js = tojs(v)
+import Base.writemime
+function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
-	# spec = tojson(v)
+        spec = JSON.json(tojs(v))
+        divid = randstring(5)
+        vegahtml =
+            """
+              <body>
+                <div id="$divid"></div>
+              </body>
+            <script type='text/javascript'>
+            // parse a spec and create a visualization view
+            function parse(spec) {
+              vg.parse.spec(spec, function(chart) { chart({el:"#$divid", renderer:"svg"}).update(); });
+            }
+        parse($spec);
+            </script>
+            """
+
+        print(io, vegahtml)
+
+end
+
+function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
+    js = tojs(v)
+
+    # spec = tojson(v)
     d3path = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
     vegapath = Pkg.dir("Vega", "deps/vega/vega.js")
 
@@ -49,28 +72,28 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     JSON.print(io, js)
     println(io, ";")
     println(io, "vg.parse.spec(spec, function(chart) {
-    	self.view = chart({el:'#view'}).update();
-  	});")
+        self.view = chart({el:'#view'}).update();
+    });")
     println(io, "</script>")
 end
 
 function Base.show(io::IO, v::VegaVisualization)
-	# create a temporary file
-	tmppath = string(tempname(), ".vega.html")
-    io = open(tmppath, "w")
-    writehtml(io, v)
-    close(io)
 
-    # Open the browser
-    openurl(tmppath)
+    if displayable("text/html")
+        v
+    else
+        # create a temporary file
+        tmppath = string(tempname(), ".vega.html")
+        io = open(tmppath, "w")
+        writehtml(io, v)
+        close(io)
 
-    # Turn off clean up steps for now
-    # rm(tmppath)
+        # Open the browser
+        openurl(tmppath)
+
+        # Turn off clean up steps for now
+        # rm(tmppath)
+    end
 
     return
 end
-
-
-
-typealias vg VegaVisualization
-

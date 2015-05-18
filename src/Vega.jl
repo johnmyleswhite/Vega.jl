@@ -8,18 +8,19 @@ module Vega
 
     export vg
 
-    export tojson, tohtml
+    export tojson, tojs #, tohtml,
 
     export plot
     export barplot, lineplot, scatterplot, areaplot, heatmap
 
-    export xlab!, ylab!, xlim!, ylim!, title!, legend!, showlegend!
+    export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
     export showlegend!, hidelegend!
 
 
+    #Run to get up-to-date vega library from github
     function install()
         initial = pwd()
         cd(Pkg.dir("Vega"))
@@ -28,6 +29,20 @@ module Vega
         cd(initial)
         return
     end
+
+    #Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
+    if displayable("text/html")
+        const d3 = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
+        const geo = Pkg.dir("Vega", "deps/vega/examples/lib/d3.geo.projection.min.js")
+        const topo = Pkg.dir("Vega", "deps/vega/examples/lib/topojson.js")
+        const vega = Pkg.dir("Vega", "deps/vega/vega.js")
+
+        display("text/html", "<script>$(readall(topo))</script>")
+        display("text/html", "<script>$(readall(d3))</script>")
+        display("text/html", "<script>$(readall(geo))</script>")
+        display("text/html", "<script>$(readall(vega))</script>")
+    end
+
 
     # tojson(x::Any) = JSON.json(Vega.tojs(x))
 
@@ -94,23 +109,6 @@ module Vega
     include("derived/areaplot.jl")
     include("derived/heatmap.jl")
 
-    # Output formats -- require Node.js
-    # function tosvg(v::VegaVisualization)
-    #   jsonpath = tempname()
-    #   io = open(jsonpath, "w")
-    #   print(io, tojson(v))
-    #   close(io)
-    #   exe = Pkg.dir("Vega", "deps/vega/bin/vg2svg")
-    #   run(`$exe $jsonpath output.svg`)
-    #   return
-    # end
-    # function topng(v::VegaVisualization)
-    #   jsonpath = tempname()
-    #   io = open(jsonpath, "w")
-    #   print(io, tojson(v))
-    #   close(io)
-    #   exe = Pkg.dir("Vega", "deps/vega/bin/vg2png")
-    #   run(`$exe $jsonpath output.svg`)
-    #   return
-    # end
+    typealias vg VegaVisualization
+
 end
