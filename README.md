@@ -85,20 +85,19 @@ The current API provides some convenience wrappers around Vega for generating st
 
 ![Example 7](content/demo7.jpg)
 
-	#Not currently working
 	n = 30
 	x = Array(Int, n^2)
 	y = Array(Int, n^2)
 	color = Array(Int, n^2)
 	t = 0
 	for i in 1:n
-		for j in 1:n
-			t += 1
-			x[t] = i
-			y[t] = j
-			color[t] = int(rand() > 0.5)
-		end
+	    for j in 1:n
+	        t += 1
+	        x[t] = i
+	        y[t] = j
+	        color[t] = Int(rand() > 0.5)
+	    end
 	end
-	heatmap(x = x, y = y, color = color)
+	heatmap(x = x, y = y, group = color)
 
-![Example 8](content/demo8.jpg)
+![Example 8](content/heatmap.png)

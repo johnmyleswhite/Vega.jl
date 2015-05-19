@@ -2,7 +2,7 @@
 #       Find and use heat colors
 function heatmap(;x::Vector = Float64[],
                  y::Vector = Float64[],
-                 z::Vector = Int[],
+                 group::Vector = Int[],
                  color::Vector = Int[],
                  width::Int = 450,
                  height::Int = 450,
@@ -13,7 +13,7 @@ function heatmap(;x::Vector = Float64[],
     padding = VegaPadding(top, left, bottom, right)
 
     data = Array(VegaData, 1)
-    data[1] = VegaData(values = makevalues(x, y, z))
+    data[1] = VegaData(values = makevalues(x, y, group))
 
     scales = Array(VegaScale, 3)
     scales[1] = VegaScale(name = "x",

@@ -57,3 +57,18 @@ p2.marks[1].properties.enter.size = VegaValueRef(value = 10.0)
 p2.marks[1].properties.enter.shape = VegaValueRef(value = "diamond")
 push!(p1.marks, p2.marks[1])
 p1
+
+n = 30
+x = Array(Int, n^2)
+y = Array(Int, n^2)
+color = Array(Int, n^2)
+t = 0
+for i in 1:n
+    for j in 1:n
+        t += 1
+        x[t] = i
+        y[t] = j
+        color[t] = Int(rand() > 0.5)
+    end
+end
+heatmap(x = x, y = y, group = color)
