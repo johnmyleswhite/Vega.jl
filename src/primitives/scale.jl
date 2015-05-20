@@ -1,5 +1,3 @@
-scale_type = :VegaScale
-
 scale_spec =
 [
 	(:name, String, "x", false),
@@ -21,9 +19,6 @@ scale_spec =
 	(:zero, Bool, nothing, true)
 ]
 
-eval(maketype(scale_type, scale_spec))
-eval(makekwfunc(scale_type, scale_spec))
-eval(maketojs(scale_type, scale_spec))
-eval(makecopy(scale_type, scale_spec))
+primitivefactory(:VegaScale, scale_spec)
 
 isordinal(x::VegaScale) = x._type == :ordinal

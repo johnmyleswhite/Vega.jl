@@ -1,5 +1,3 @@
-markpropertyset_type = :VegaMarkPropertySet
-
 markpropertyset_spec =
 [
 	(:x, VegaValueRef, nothing, true),
@@ -38,7 +36,4 @@ markpropertyset_spec =
 	(:fontStyle, VegaValueRef, nothing, true)
 ]
 
-eval(maketype(markpropertyset_type, markpropertyset_spec))
-eval(makekwfunc(markpropertyset_type, markpropertyset_spec))
-eval(maketojs(markpropertyset_type, markpropertyset_spec))
-eval(makecopy(markpropertyset_type, markpropertyset_spec))
+primitivefactory(:VegaMarkPropertySet, markpropertyset_spec)

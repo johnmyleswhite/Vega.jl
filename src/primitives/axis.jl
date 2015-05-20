@@ -1,5 +1,3 @@
-axis_type = :VegaAxis
-
 axis_spec =
 [
     (:_type, String, "x", false),
@@ -22,7 +20,4 @@ axis_spec =
     (:properties, Dict{Any,Any}, nothing, true)
 ]
 
-eval(maketype(axis_type, axis_spec))
-eval(makekwfunc(axis_type, axis_spec))
-eval(maketojs(axis_type, axis_spec))
-eval(makecopy(axis_type, axis_spec))
+primitivefactory(:VegaAxis, axis_spec)

@@ -1,5 +1,3 @@
-data_type = :VegaData
-
 data_spec =
 [
 	(:name, String, "table", false),
@@ -10,7 +8,4 @@ data_spec =
 	(:transform, Vector{VegaTransform}, nothing, true)
 ]
 
-eval(maketype(data_type, data_spec))
-eval(makekwfunc(data_type, data_spec))
-eval(maketojs(data_type, data_spec))
-eval(makecopy(data_type, data_spec))
+primitivefactory(:VegaData, data_spec)

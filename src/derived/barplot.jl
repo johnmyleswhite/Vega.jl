@@ -1,7 +1,7 @@
 function barplot(;x::AbstractVector = Int[],
                   y::AbstractVector = Int[],
                   group::AbstractVector = Int[])
-    v = vg()
+    v = VegaVisualization()
 
     default_scales!(v)
     v.scales[1]._type = "ordinal"

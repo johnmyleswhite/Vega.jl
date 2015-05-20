@@ -1,7 +1,7 @@
 function scatterplot(;x::AbstractVector = Int[],
                       y::AbstractVector = Int[],
                       group::AbstractVector = Int[])
-    v = vg()
+    v = VegaVisualization()
 
     default_scales!(v)
     default_axes!(v)

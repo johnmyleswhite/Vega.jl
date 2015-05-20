@@ -1,12 +1,11 @@
 module Vega
+
     using JSON
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
            VegaCSV, VegaTSV, VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend
-
-    export vg
 
     export tojson, tojs #, tohtml,
 
@@ -73,7 +72,15 @@ module Vega
 
     tojson(x::Any) = JSON.json(tojs(x))
 
-    #Import JSTypes code
+    #Create primitives from one function instead of repeating
+    function primitivefactory(create::Symbol, spec::AbstractArray)
+        eval(maketype(create, spec))
+        eval(makekwfunc(create, spec))
+        eval(maketojs(create, spec))
+        eval(makecopy(create, spec))
+    end
+
+    #Import helper code
     include("jstypes.jl")
 
     # Lower-level API
@@ -90,6 +97,8 @@ module Vega
     include("primitives/scale.jl")
     include("primitives/legend.jl")
     include("primitives/visualization.jl")
+
+    include("render.jl")
 
     # Intermediates
     include("intermediates/modifiers.jl")
@@ -109,6 +118,5 @@ module Vega
     include("derived/areaplot.jl")
     include("derived/heatmap.jl")
 
-    typealias vg VegaVisualization
 
 end

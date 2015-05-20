@@ -1,5 +1,3 @@
-valueref_type = :VegaValueRef
-
 valueref_spec =
 [
 	(:value, Any, nothing, true),
@@ -11,7 +9,4 @@ valueref_spec =
 	(:band, Bool, nothing, true)
 ]
 
-eval(maketype(valueref_type, valueref_spec))
-eval(makekwfunc(valueref_type, valueref_spec))
-eval(maketojs(valueref_type, valueref_spec))
-eval(makecopy(valueref_type, valueref_spec))
+primitivefactory(:VegaValueRef, valueref_spec)

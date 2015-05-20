@@ -1,5 +1,3 @@
-legend_type = :VegaLegend
-
 legend_spec =
 [
 	(:size, String, nothing, true),
@@ -13,7 +11,4 @@ legend_spec =
 	(:properties, VegaMarkProperties, nothing, true)
 ]
 
-eval(maketype(legend_type, legend_spec))
-eval(makekwfunc(legend_type, legend_spec))
-eval(maketojs(legend_type, legend_spec))
-eval(makecopy(legend_type, legend_spec))
+primitivefactory(:VegaLegend, legend_spec)

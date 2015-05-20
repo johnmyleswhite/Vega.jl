@@ -1,5 +1,3 @@
-mark_type = :VegaMark
-
 mark_spec =
 [
 	(:_type, String, "symbol", false),
@@ -10,11 +8,7 @@ mark_spec =
 	(:key, String, nothing, true),
 	(:delay, VegaValueRef, nothing, true),
 	(:ease, String, nothing, true),
-	# (:marks, Vector{VegaMark}, nothing, true)
 	(:marks, Vector, nothing, true)
 ]
 
-eval(maketype(mark_type, mark_spec))
-eval(makekwfunc(mark_type, mark_spec))
-eval(maketojs(mark_type, mark_spec))
-eval(makecopy(mark_type, mark_spec))
+primitivefactory(:VegaMark, mark_spec)
