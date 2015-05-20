@@ -127,3 +127,31 @@ function makecopy(typename::Symbol, spec)
                      Expr(:(::), :x, typename)),
                 makecopybody(typename, spec))
 end
+
+#Create primitives from one function instead of repeating
+function primitivefactory(create::Symbol, spec::AbstractArray)
+    eval(maketype(create, spec))
+    eval(makekwfunc(create, spec))
+    eval(maketojs(create, spec))
+    eval(makecopy(create, spec))
+end
+
+Base.copy(x::Nothing) = nothing
+
+# TODO: Move this elsewhere
+function makevalues(x::Vector, y::Vector, group::Vector)
+    n = length(x)
+    res = Array(Dict{Any, Any}, n)
+    if isempty(group)
+        group = ones(Int, n)
+    end
+    for i in 1:n
+        res[i] = Dict{Any, Any}()
+        res[i]["x"] = x[i]
+        res[i]["y"] = y[i]
+        res[i]["group"] = group[i]
+    end
+    return res
+end
+
+tojson(x::Any) = JSON.json(tojs(x))

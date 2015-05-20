@@ -4,9 +4,7 @@ Vega.jl
 
 # NOTICE
 
-**This package is unmaintained. Its reliability is not guaranteed.**
-
-**5/7/2015: This package is trying to be revived by [Randy Zwitch](https://github.com/randyzwitch) for v0.4. Its reliability is still in flux**
+**5/20/2015: This package is being revived by [Randy Zwitch](https://github.com/randyzwitch) for v0.4. Its reliability is still in flux, but should work in Jupyter Notebook and from the REPL**
 
 # Introduction
 
@@ -21,16 +19,14 @@ In addition, this package wraps Vega's pseudo-type system inside of Julia types.
 
 # Installation
 
-Because this package depends upon Vega, Vega is provided as a Git submodule of Vega.jl. When you first install this repo from GitHub, you must then take additional steps to install the Vega submodule. This can be done by running the following commands:
+This package depends upon [Vega.js](https://github.com/trifacta/vega) from Trifacta and is provided automatically within Vega.jl. If you want to upgrade the library yourself, be sure that the file structure remains the same (and, submit a pull request here!)
 
+	Pkg.add("Vega")
 	using Vega
-	Vega.install()
-
-This will download and install the appropriate release of Vega for you automatically.
 
 # Usage Examples
 
-The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below.
+The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below. If you have any issues with the examples, please try checking out master for `Distributions`, `Grid`, and `KernelDensity`. While these three packages aren't requirements to use Vega.jl, they are used for generating data to plot in the examples.
 
 	using Distributions
 	using Vega

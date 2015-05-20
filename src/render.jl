@@ -1,3 +1,24 @@
+# Open a URL in a browser
+function openurl(url::String)
+    @osx_only     run(`open $url`)
+    @windows_only run(`start $url`)
+    @linux_only   run(`xdg-open $url`)
+end
+
+#Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
+if displayable("text/html")
+    const d3 = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
+    const geo = Pkg.dir("Vega", "deps/vega/examples/lib/d3.geo.projection.min.js")
+    const topo = Pkg.dir("Vega", "deps/vega/examples/lib/topojson.js")
+    const vega = Pkg.dir("Vega", "deps/vega/vega.js")
+
+    display("text/html", "<script>$(readall(topo))</script>")
+    display("text/html", "<script>$(readall(d3))</script>")
+    display("text/html", "<script>$(readall(geo))</script>")
+    display("text/html", "<script>$(readall(vega))</script>")
+end
+
+#Overload writemime so that plots are displayed inline for Jupyter
 import Base.writemime
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
@@ -21,6 +42,7 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
 end
 
+#Function to create full HTML version in cases where browser pops open
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     js = tojs(v)
 
@@ -69,8 +91,6 @@ function Base.show(io::IO, v::VegaVisualization)
         # Open the browser
         openurl(tmppath)
 
-        # Turn off clean up steps for now
-        # rm(tmppath)
     end
 
     return
