@@ -14,6 +14,7 @@ A Julia package for creating the simplest kinds of Vega visualizations. We curre
 * Bar plots
 * Line plots
 * Scatter plots
+* Pie/Donut charts
 
 In addition, this package wraps Vega's pseudo-type system inside of Julia types. This will eventually provide tools for manipulating graphics with a higher level of control over layout.
 
@@ -26,7 +27,7 @@ This package depends upon [Vega.js](https://github.com/trifacta/vega) from Trifa
 
 # Usage Examples
 
-The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below. If you have any issues with the examples, please try checking out master for `Distributions`, `Grid`, and `KernelDensity`. While these three packages aren't requirements to use Vega.jl, they are used for generating data to plot in the examples.
+The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below. If you have any issues with the examples, please try checking out master for `Distributions`, `Grid`, `Optim` and `KernelDensity`. While these three packages aren't requirements to use Vega.jl, they are used for generating data to plot in the examples.
 
 	using Distributions
 	using Vega
@@ -98,3 +99,13 @@ The current API provides some convenience wrappers around Vega for generating st
 	heatmap(x = x, y = y, group = color)
 
 ![Example 8](content/heatmap.png)
+
+	fruit = ["peaches", "plums", "blueberries", "strawberries", "bananas"]
+	bushels = [100, 32, 180, 46, 21]
+	plot(x = fruit, y = bushels, kind = :pie)
+
+![Example 9](content/pie.png)
+
+	plot(x = fruit, y = bushels, kind = :donut)
+
+![Example 10](content/donut.png)

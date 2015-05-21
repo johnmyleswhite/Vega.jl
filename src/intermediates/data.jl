@@ -1,6 +1,6 @@
-function add_data!{R <: Real,
-	               S <: Real,
-	               T <: Real}(v::VegaVisualization;
+function add_data!{R <: Any,
+	               S <: Any,
+	               T <: Any}(v::VegaVisualization;
 	                          x::AbstractVector{R} = Int[],
 	                          y::AbstractVector{S} = Int[],
 	                          group::AbstractVector{T} = Int[])

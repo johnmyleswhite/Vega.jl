@@ -13,6 +13,10 @@ function plot(;x::AbstractVector = Int[],
     elseif kind == :hist
         a, b = hist(x)
         v = plot(x = [a][2:end], y = b, kind = :bar)
+    elseif kind == :pie
+        v = piechart(x = x, y = y)
+    elseif kind == :donut
+        v = donutchart(x = x, y = y)
     else
         error("Unknown kind of plot")
     end

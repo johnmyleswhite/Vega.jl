@@ -10,7 +10,7 @@ module Vega
     export tojson, tojs
 
     export plot
-    export barplot, lineplot, scatterplot, areaplot, heatmap
+    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart, donutchart
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
@@ -55,6 +55,7 @@ module Vega
     include("derived/scatterplot.jl")
     include("derived/areaplot.jl")
     include("derived/heatmap.jl")
+    include("derived/piechart.jl")
 
 
 end

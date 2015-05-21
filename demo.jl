@@ -72,3 +72,8 @@ for i in 1:n
     end
 end
 heatmap(x = x, y = y, group = color)
+
+fruit = ["peaches", "plums", "blueberries", "strawberries", "bananas"]
+bushels = [100, 32, 180, 46, 21]
+plot(x = fruit, y = bushels, kind = :pie)
+plot(x = fruit, y = bushels, kind = :donut)
