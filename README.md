@@ -27,7 +27,7 @@ This package depends upon [Vega.js](https://github.com/trifacta/vega) from Trifa
 
 # Usage Examples
 
-The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below. If you have any issues with the examples, please try checking out master for `Distributions`, `Grid`, `Optim` and `KernelDensity`. While these three packages aren't requirements to use Vega.jl, they are used for generating data to plot in the examples.
+The current API provides some convenience wrappers around Vega for generating standard kinds of plots. These are described below. If you have any issues with the examples, please try checking out master for `Distributions`, `Grid`, `Optim` and `KernelDensity`. While these packages aren't requirements to use Vega.jl, they are used for generating data to plot in the examples.
 
 	using Distributions
 	using Vega
@@ -109,3 +109,8 @@ The current API provides some convenience wrappers around Vega for generating st
 	plot(x = fruit, y = bushels, kind = :donut)
 
 ![Example 10](content/donut.png)
+
+	x = rand(Gamma(3.0, 1.0), 1_000_000)
+	v = histogram(x = x, relativefreq = true)
+	hidelegend!(v)
+![Example 11](content/histogram.png)
