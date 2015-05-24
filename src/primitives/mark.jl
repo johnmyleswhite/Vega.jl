@@ -8,7 +8,10 @@ mark_spec =
 	(:key, String, nothing, true),
 	(:delay, VegaValueRef, nothing, true),
 	(:ease, String, nothing, true),
-	(:marks, Vector, nothing, true)
+	(:marks, Vector, nothing, true),
+	(:scales, Vector{VegaScale}, nothing, true),
+	(:axes, Vector{VegaAxis}, nothing, true)
+
 ]
 
 primitivefactory(:VegaMark, mark_spec)

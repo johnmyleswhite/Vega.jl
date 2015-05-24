@@ -8,7 +8,7 @@ scale_spec =
 	(:range, Union(Vector, String), nothing, true),
 	(:rangeMin, Any, nothing, true),
 	(:rangeMax, Any, nothing, true),
-	(:reverse, Bool, nothing, true),
+	(:reverse, Union(Bool, VegaDataRef), nothing, true),
 	(:round, Bool, nothing, true),
 	(:points, Bool, nothing, true),
 	(:padding, Number, nothing, true),

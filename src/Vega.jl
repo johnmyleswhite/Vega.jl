@@ -10,7 +10,7 @@ module Vega
     export tojson, tojs
 
     export plot
-    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart, donutchart, histogram
+    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart, donutchart, histogram, popchart
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
@@ -31,8 +31,8 @@ module Vega
     include("primitives/data.jl")
     include("primitives/markpropertyset.jl")
     include("primitives/markproperties.jl")
-    include("primitives/mark.jl")
     include("primitives/scale.jl")
+    include("primitives/mark.jl")
     include("primitives/legend.jl")
     include("primitives/visualization.jl")
 
@@ -57,6 +57,7 @@ module Vega
     include("derived/heatmap.jl")
     include("derived/piechart.jl")
     include("derived/histogram.jl")
+    include("derived/popchart.jl")
 
 
 end

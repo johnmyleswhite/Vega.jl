@@ -23,16 +23,7 @@ function isvalidentry(entry::Tuple)
     end
 end
 
-# function isvalidspec(spec)
-#     for entry in spec
-#         if !isvalidentry(entry)
-#             return false
-#         end
-#     end
-#     return true
-# end
-
-#Build types from spects
+#Build types from specs
 function fielddef(entry::Tuple)
     if entry[4]
         return Expr(:(::), entry[1], Union(entry[2], Nothing))

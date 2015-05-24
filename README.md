@@ -11,7 +11,7 @@ Vega.jl
 A Julia package for creating the simplest kinds of Vega visualizations. We currently support barebones versions of the following:
 
 * Area plots
-* Bar plots
+* Bar plots/Histograms
 * Line plots
 * Scatter plots
 * Pie/Donut charts
@@ -114,3 +114,15 @@ The current API provides some convenience wrappers around Vega for generating st
 	v = histogram(x = x, relativefreq = true)
 	hidelegend!(v)
 ![Example 11](content/histogram.png)
+
+	using DataFrames, JSON
+	df = DataFrame()
+	for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega/examples/data/population.json")))
+	    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+	end
+	pop1900 = df[df[:year] .== 1900, :];
+	x = pop1900[:people]
+	y = pop1900[:age]
+	group = pop1900[:sex]
+	popchart(x = x, y = y, group = group)
+![Example 12](content/popchart.png)
