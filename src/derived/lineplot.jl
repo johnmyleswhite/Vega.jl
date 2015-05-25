@@ -10,5 +10,7 @@ function lineplot(;x::AbstractVector = Int[],
     add_data!(v, x = x, y = y, group = group)
     add_lines!(v)
 
+    v.marks[1].marks[1].properties.enter.stroke = VegaValueRef(scale = "group", field = "data.group")
+
     return v
 end
