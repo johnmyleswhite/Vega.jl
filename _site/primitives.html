@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <a href='gettingstarted.html'>Getting Started</a>
+          <br/>
+          <a href='primitives.html'>Visualization Primitives</a>
+          <br/>
+          <a href='createviz.html'>Creating A Visualization</a>
+          <br/>
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+          <ul>
+          <li><a href="https://github.com/johnmyleswhite/Vega.jl/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/johnmyleswhite/Vega.jl/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/johnmyleswhite/Vega.jl">View On <strong>GitHub</strong></a></li>
+        </ul>
+
+      </header>
+      <section>
+        <h1 id="vega-visualization-primitives">Vega Visualization Primitives</h1>
+
+<p>At the most fundamental level, Vega.jl translates the Vega grammar into a series of Julia composite types as primitives to build upon. This allows for users to build visualizations using familiar Julia syntax, without having to worry about how those types translate into JSON.</p>
+
+<p>For example, here is the highest-level composite type defined, <code>:VegaVisualization</code>:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">type</span><span class="nc"> VegaVisualization</span>
+	<span class="n">name</span><span class="p">::</span><span class="n">String</span>
+	<span class="n">width</span><span class="p">::</span><span class="kt">Int</span>
+	<span class="n">height</span><span class="p">::</span><span class="kt">Int</span>
+	<span class="n">padding</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">VegaPadding</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+	<span class="n">viewport</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span>
+	<span class="n">data</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaData</span><span class="p">}</span>
+	<span class="n">scales</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaScale</span><span class="p">}</span>
+	<span class="n">axes</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaAxis</span><span class="p">},</span>
+	<span class="n">marks</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaMark</span><span class="p">},</span>
+	<span class="n">legends</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaLegend</span><span class="p">}</span>
+<span class="k">end</span></code></pre></div>
+
+<p>This is a one-to-one mapping of the grammar outlined in the Vega Documentation for <a href="https://github.com/trifacta/vega/wiki/Visualization">Visualization</a>.</p>
+
+<h2 id="defined-primitives">Defined Primitives</h2>
+
+<p>The following primitives have been defined in Julia, to correspond to the types outlined in the Vega.js documentation. See link to Vega documentation to understand structure of each type (or view <a href="https://github.com/johnmyleswhite/Vega.jl/tree/master/src/primitives">Vega.jl primitives source code</a>)</p>
+
+<ul>
+  <li><a href="https://github.com/trifacta/vega/wiki/Visualization">VegaVisualization</a></li>
+  <li><a href="https://github.com/trifacta/vega/wiki/Data">VegaData</a></li>
+  <li><a href="https://github.com/trifacta/vega/wiki/Scales">VegaScale</a></li>
+  <li><a href="https://github.com/trifacta/vega/wiki/Axes">VegaAxis</a></li>
+  <li><a href="https://github.com/trifacta/vega/wiki/Legends">VegaLegend</a></li>
+  <li><a href="https://github.com/trifacta/vega/wiki/Marks">VegaMark</a></li>
+</ul>
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/randyzwitch">randyzwitch</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
