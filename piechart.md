@@ -39,4 +39,4 @@ bushels = [100, 32, 180, 46, 21]
 piechart(x = fruit, y = bushels, holesize = 175)
 {% endhighlight %}
 
-![donut](https://github.com/johnmyleswhite/Vega.jl/blob/gh-pages/images/donutchart.png)
+![donut](http://johnmyleswhite.github.io/Vega.jl/images/donutchart.png)

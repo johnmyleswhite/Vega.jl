@@ -30,4 +30,4 @@ group = vcat(ones(Int, 500), ones(Int, 500) + 1)
 
 scatterplot(x = x, y = y, group = group)
 {% endhighlight %}
-![scatter](https://github.com/johnmyleswhite/Vega.jl/blob/gh-pages/images/scatterplot.png)
+![scatter](http://johnmyleswhite.github.io/Vega.jl/images/scatterplot.png)
