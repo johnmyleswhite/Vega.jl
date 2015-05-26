@@ -25,4 +25,4 @@ group = [[1 for i in 1:100]; [2 for i in 1:100]]
 
 lineplot(x = x, y = y, group = group)
 {% endhighlight %}
-![barplot](http://johnmyleswhite.github.io/Vega.jl/images/lineplot.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/lineplot.png" alt = "lineplot">

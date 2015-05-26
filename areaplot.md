@@ -25,4 +25,4 @@ k = kde(x)
 
 areaplot(x = k.x, y = k.density)
 {% endhighlight %}
-![area](http://johnmyleswhite.github.io/Vega.jl/images/areaplot.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/areaplot.png" alt="areaplot">

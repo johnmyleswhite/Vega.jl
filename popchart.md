@@ -34,4 +34,4 @@ group = pop1900[:sex]
 popchart(x = x, y = y, group = group)
 {% endhighlight %}
 
-![pop](http://johnmyleswhite.github.io/Vega.jl/images/popchart.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/popchart.png" alt = "popchart">

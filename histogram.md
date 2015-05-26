@@ -23,7 +23,7 @@ x = rand(Gamma(3.0, 1.0), 1_000_000)
 
 v = histogram(x = x)
 {% endhighlight %}
-![hist](/images/histogram.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histogram.png" alt = "histogram" >
 
 ### Histogram - Relative Frequency
 
@@ -34,4 +34,4 @@ x = rand(Gamma(3.0, 1.0), 1_000_000)
 
 v = histogram(x = x, relativefreq = true)
 {% endhighlight %}
-![histrel](http://johnmyleswhite.github.io/Vega.jl/images/histogram_rel.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histogram_rel.png" alt = "histrel">

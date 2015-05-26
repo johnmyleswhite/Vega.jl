@@ -26,7 +26,7 @@ bushels = [100, 32, 180, 46, 21]
 piechart(x = fruit, y = bushels)
 {% endhighlight %}
 
-![pie](https://github.com/johnmyleswhite/Vega.jl/blob/gh-pages/images/piechart.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/piechart.png" alt = "piechart">
 
 ### Donut Chart
 
@@ -39,4 +39,4 @@ bushels = [100, 32, 180, 46, 21]
 piechart(x = fruit, y = bushels, holesize = 175)
 {% endhighlight %}
 
-![donut](http://johnmyleswhite.github.io/Vega.jl/images/donutchart.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/donutchart.png" alt = "donut">

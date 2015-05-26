@@ -23,7 +23,7 @@ y = [1, 2, 3, 2, 1]
 barplot(x = x, y = y)
 {% endhighlight %}
 
-![barplot](http://johnmyleswhite.github.io/Vega.jl/images/barplot.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/barplot.png" alt = "barplot" >
 
 ### Group Argument
 {% highlight julia %}
@@ -34,4 +34,4 @@ group = [round(val/10) for val in x]
 barplot(x = x, y = y, group = group)
 {% endhighlight %}
 
-![barplot](http://johnmyleswhite.github.io/Vega.jl/images/groupbar.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/groupbar.png" alt = "groupedbar">

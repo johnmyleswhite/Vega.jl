@@ -34,4 +34,4 @@ end
 
 heatmap(x = x, y = y, group = color)
 {% endhighlight %}
-![heat](http://johnmyleswhite.github.io/Vega.jl/images/heatmap.png)
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/heatmap.png" alt = "heatmap">
