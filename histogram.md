@@ -34,4 +34,4 @@ x = rand(Gamma(3.0, 1.0), 1_000_000)
 
 v = histogram(x = x, relativefreq = true)
 {% endhighlight %}
-![histrel](/images/histogram_rel.png)
+![histrel](https://github.com/johnmyleswhite/Vega.jl/blob/gh-pages/images/histogram_rel.png)

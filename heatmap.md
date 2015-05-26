@@ -34,4 +34,4 @@ end
 
 heatmap(x = x, y = y, group = color)
 {% endhighlight %}
-![heat](/images/heatmap.png)
+![heat](https://github.com/johnmyleswhite/Vega.jl/blob/gh-pages/images/heatmap.png)
