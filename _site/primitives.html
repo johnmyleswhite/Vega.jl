@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <a href="/"><h1>Vega.jl</h1></a>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
         <p>A Julia package for generating visualizations in Vega</p>
 
         <p>
@@ -23,10 +23,34 @@
           <br/>
           <a href='primitives.html'>Visualization Primitives</a>
           <br/>
-          <a href='createviz.html'>Creating A Visualization</a>
+          <a href='createviz.html'>Creating A Visualization From Scratch</a>
           <br/>
+          <h4>Pre-defined Visualizations</h4>
+          <a href='areaplot.html'>Area Plot</a>
+          <br/>
+          <a href='barplot.html'>Bar Plot</a>
+          <br/>
+          <a href='heatmap.html'>Heatmap</a>
+          <br/>
+          <a href='histogram.html'>Histogram</a>
+          <br/>
+          <a href='lineplot.html'>Line Plot</a>
+          <br/>
+          <a href='piechart.html'>Pie/Donut Chart</a>
+          <br/>
+          <a href='popchart.html'>Population Chart</a>
+          <br/>
+          <a href='scatterplot.html'>Scatter Plot</a>
+          <br/>
+          <br/>
+          <h4>Visualization Modifying Functions</h4>
         </p>
 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
 
           <ul>
@@ -37,7 +61,7 @@
 
       </header>
       <section>
-        <h1 id="vega-visualization-primitives">Vega Visualization Primitives</h1>
+        <h1 id="visualization-primitives">Visualization Primitives</h1>
 
 <p>At the most fundamental level, Vega.jl translates the Vega grammar into a series of Julia composite types as primitives to build upon. This allows for users to build visualizations using familiar Julia syntax, without having to worry about how those types translate into JSON.</p>
 
@@ -58,7 +82,7 @@
 
 <p>This is a one-to-one mapping of the grammar outlined in the Vega Documentation for <a href="https://github.com/trifacta/vega/wiki/Visualization">Visualization</a>.</p>
 
-<h2 id="defined-primitives">Defined Primitives</h2>
+<h2 id="defined-primitives-in-julia">Defined Primitives in Julia</h2>
 
 <p>The following primitives have been defined in Julia, to correspond to the types outlined in the Vega.js documentation. See link to Vega documentation to understand structure of each type (or view <a href="https://github.com/johnmyleswhite/Vega.jl/tree/master/src/primitives">Vega.jl primitives source code</a>)</p>
 

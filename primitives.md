@@ -5,7 +5,7 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 ---
 
-# Vega Visualization Primitives
+# Visualization Primitives
 
 At the most fundamental level, Vega.jl translates the Vega grammar into a series of Julia composite types as primitives to build upon. This allows for users to build visualizations using familiar Julia syntax, without having to worry about how those types translate into JSON.
 
@@ -28,7 +28,7 @@ end
 
 This is a one-to-one mapping of the grammar outlined in the Vega Documentation for [Visualization](https://github.com/trifacta/vega/wiki/Visualization).
 
-## Defined Primitives
+## Defined Primitives in Julia
 
 The following primitives have been defined in Julia, to correspond to the types outlined in the Vega.js documentation. See link to Vega documentation to understand structure of each type (or view [Vega.jl primitives source code](https://github.com/johnmyleswhite/Vega.jl/tree/master/src/primitives))
 

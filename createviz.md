@@ -5,9 +5,9 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 ---
 
-# Creating a Visualization
+# Creating a Visualization From Scratch
 
-To create a visualization from scratch, all code will instantiate a `:VegaVisualization` type, which comes with a handful of default values. As stated in the [Primitives](primitives.html) section, we will always work with Julia types, there is no need to worry about the JSON representation (although it can always be viewed using `tojson()`):
+To create a visualization from scratch, all code will need to instantiate a `:VegaVisualization` type, which comes with a handful of default values. As stated in the [Visualization Primitives](primitives.html) section, we will always work with Julia types, there is no need to worry about the JSON representation (although it can always be viewed using `tojson()`):
 
 {% highlight julia %}
 #Create new :VegaVisualization container
