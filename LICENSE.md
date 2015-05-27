@@ -1,6 +1,6 @@
 The Vega.jl package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2015: John Myles White.
+> Copyright (c) 2015: John Myles White and Randy Zwitch.
 >
 > Permission is hereby granted, free of charge, to any person obtaining
 > a copy of this software and associated documentation files (the
