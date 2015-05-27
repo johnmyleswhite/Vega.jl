@@ -9,7 +9,6 @@ module Vega
 
     export tojson, tojs
 
-    export plot
     export barplot, lineplot, scatterplot, areaplot, heatmap, piechart, donutchart, histogram, popchart
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
