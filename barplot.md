@@ -18,8 +18,10 @@ group::AbstractVector
 ### No Group Argument
 {% highlight julia %}
 using Vega
+
 x = [1, 2, 3, 4, 5]
 y = [1, 2, 3, 2, 1]
+
 barplot(x = x, y = y)
 {% endhighlight %}
 
@@ -28,9 +30,11 @@ barplot(x = x, y = y)
 ### Group Argument
 {% highlight julia %}
 using Vega
+
 x = [1:20]
 y = rand(20)
 group = [round(val/10) for val in x]
+
 barplot(x = x, y = y, group = group)
 {% endhighlight %}
 

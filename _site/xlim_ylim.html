@@ -48,6 +48,8 @@
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='legend.html'>legend! (Add Title)</a></small>
           <br/>
           <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
@@ -58,7 +60,34 @@
 
       </header>
       <section>
-        <h1 id="xlim">xlim!</h1>
+        <h1 id="xlim--ylim">xlim! / ylim!</h1>
+
+<p>Required Arguments:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">min</span><span class="p">::</span><span class="n">Real</span>
+<span class="n">max</span><span class="p">::</span><span class="n">Real</span></code></pre></div>
+
+<p>This function mutates <code>:VegaVisualization</code>, modifying the min/max of the axes.</p>
+
+<h3 id="default-axis-limits">Default Axis limits</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/lineplot.png" alt="lineplot" /></p>
+
+<h3 id="modified-axis-limits">Modified Axis limits</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">xlim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/lineplotlimits.png" alt="lineplot" /></p>
 
       </section>
       <footer>

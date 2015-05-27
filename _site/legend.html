@@ -48,6 +48,8 @@
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='legend.html'>legend! (Add Title)</a></small>
           <br/>
           <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
@@ -59,6 +61,30 @@
       </header>
       <section>
         <h1 id="legend">legend!</h1>
+
+<p>Required Arguments:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">title</span><span class="p">::</span><span class="n">String</span></code></pre></div>
+
+<p>This function mutates <code>:VegaVisualization</code>, modifying the legend title.</p>
+
+<h3 id="default-legend-title">Default legend title</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;peaches&quot;</span><span class="p">,</span> <span class="s">&quot;plums&quot;</span><span class="p">,</span> <span class="s">&quot;blueberries&quot;</span><span class="p">,</span> <span class="s">&quot;strawberries&quot;</span><span class="p">,</span> <span class="s">&quot;bananas&quot;</span><span class="p">]</span>
+<span class="n">bushels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">piechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">bushels</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/piechart.png" alt="piechart" /></p>
+
+<h3 id="modified-legend-title">Modified legend title</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">legend</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s">&quot;Fruit&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/piechartlegend.png" alt="piechart" /></p>
 
       </section>
       <footer>

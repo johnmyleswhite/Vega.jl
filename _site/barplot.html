@@ -48,6 +48,8 @@
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='legend.html'>legend! (Add Title)</a></small>
           <br/>
           <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
@@ -69,8 +71,10 @@
 <h3 id="no-group-argument">No Group Argument</h3>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
 <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/barplot.png" alt="barplot" /></p>
@@ -78,9 +82,11 @@
 <h3 id="group-argument">Group Argument</h3>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="k">in</span> <span class="n">x</span><span class="p">]</span>
+
 <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/groupbar.png" alt="groupedbar" /></p>
