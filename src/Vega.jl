@@ -48,7 +48,6 @@ module Vega
     include("intermediates/rects.jl")
 
     # Higher-level API
-    include("derived/plot.jl")
     include("derived/barplot.jl")
     include("derived/lineplot.jl")
     include("derived/scatterplot.jl")
