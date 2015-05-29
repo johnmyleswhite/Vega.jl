@@ -62,18 +62,42 @@
 
       </header>
       <section>
-        <h1 id="title">title!</h1>
+        <h1 id="colorscheme">colorscheme!</h1>
 
 <p>Required Arguments:</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
-<span class="n">title</span><span class="p">::</span><span class="n">String</span></code></pre></div>
+<span class="n">palette</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">Tuple</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">AbstractString</span><span class="p">,</span> <span class="n">Array</span><span class="p">)</span></code></pre></div>
 
-<p>This function mutates <code>:VegaVisualization</code>, adding a chart title.</p>
+<p>This function mutates <code>:VegaVisualization</code>, modifying the colors for the <code>group</code> or <code>fill</code> properties of the visualization. The <code>palette</code> argument supports:</p>
 
-<h3 id="no-title">No title</h3>
+<pre><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
+* AbstractString: A string representing a color the browser understands (i.e. "Pink", "#FFF")
+* Array: An array of colors (i.e. ["Red", "Green"])
+</code></pre>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span>
+<h3 id="colorbrewer-scale">ColorBrewer scale</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/barcolorbrewerpurple.png" alt="barcolorbrewerpurple" /></p>
+
+<h3 id="single-color">Single Color</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">srand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&quot;Violet&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/barviolet.png" alt="barviolet" /></p>
+
+<h3 id="array-of-colors">Array of Colors</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">Vega</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega/examples/data/population.json&quot;</span><span class="p">)))</span>
@@ -86,15 +110,10 @@
 <span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
 <span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
 
-<span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
+<span class="n">pc1</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">pc1</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;Green&quot;</span><span class="p">,</span> <span class="s">&quot;Red&quot;</span><span class="p">])</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/popchart.png" alt="popchart" /></p>
-
-<h3 id="with-title">With title</h3>
-
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&quot;Gender &amp; Age Comparison - 1900&quot;</span><span class="p">)</span></code></pre></div>
-
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/poptitle.png" alt="lineplot" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/bararray.png" alt="bararray" /></p>
 
       </section>
       <footer>
