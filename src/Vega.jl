@@ -1,6 +1,6 @@
 module Vega
 
-    using JSON
+    using JSON, ColorBrewer
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
@@ -15,7 +15,7 @@ module Vega
 
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
-    export showlegend!, hidelegend!
+    export showlegend!, hidelegend!, colorscheme!
 
     #Import helper code
     include("jstypes.jl")

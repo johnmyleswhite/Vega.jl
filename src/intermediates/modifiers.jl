@@ -72,5 +72,25 @@ function hidelegend!(v)
 	return v
 end
 
-# function colorscheme!()
-# end
+#Use ColorBrewer.jl scales
+function colorscheme!(v::VegaVisualization, palette::Union(Tuple{AbstractString,Int64}, AbstractString, Array))
+
+    #See if group or color key exists
+    i = findfirst([z.name == "group" for z in v.scales])
+    i = i > 0? i: findfirst([z.name == "color" for z in v.scales])
+
+    #Copy scales property
+    s = v.scales[i]
+
+    #colorscheme, single color or array of arbitrary string colors
+    if isa(palette, Tuple)
+        s.range = ColorBrewer.colorSchemes[palette[1]]["$(palette[2])"]
+    elseif isa(palette, AbstractString)
+        s.range = [palette]
+    elseif isa(palette, Array)
+        s.range = palette
+    end
+
+    return v
+
+end

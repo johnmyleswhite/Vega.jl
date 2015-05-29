@@ -6,7 +6,7 @@ function popchart(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::A
     v.scales = Array(VegaScale, 3)
     v.scales[1] = VegaScale(name = "g", domain = [0,1], range = [340, 10])
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef("table", "data.y"))
-    v.scales[3] = VegaScale(name = "c", _type = "ordinal", domain = [1,2], range = ["#1f77b4", "#e377c2"])
+    v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = [1,2], range = ["#1f77b4", "#e377c2"])
 
     v.marks = Array(VegaMark,2)
 
@@ -57,7 +57,7 @@ function popchart(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::A
                                                                     y = VegaValueRef(scale = "y", field = "data.y"),
                                                                     height = VegaValueRef(scale = "y", band = true, offset = -1),
                                                                     fillOpacity = VegaValueRef(value = 0.6),
-                                                                    fill = VegaValueRef(scale = "c", field = "data.group")
+                                                                    fill = VegaValueRef(scale = "group", field = "data.group")
 
 
         )

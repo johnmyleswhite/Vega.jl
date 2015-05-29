@@ -12,16 +12,16 @@ end
 tojs(x::Any) = x
 
 #validation functions
-function isvalidentry(entry::Tuple)
-    if length(entry) != 4
-        return false
-    else
-        return isa(entry[1], Symbol) &&
-               isa(entry[2], Type) &&
-               isa(entry[3], entry[2]) &&
-               isa(entry[4], Bool)
-    end
-end
+# function isvalidentry(entry::Tuple)
+#     if length(entry) != 4
+#         return false
+#     else
+#         return isa(entry[1], Symbol) &&
+#                isa(entry[2], Type) &&
+#                isa(entry[3], entry[2]) &&
+#                isa(entry[4], Bool)
+#     end
+# end
 
 #Build types from specs
 function fielddef(entry::Tuple)
@@ -128,21 +128,5 @@ function primitivefactory(create::Symbol, spec::AbstractArray)
 end
 
 Base.copy(x::Nothing) = nothing
-
-# TODO: Move this elsewhere
-function makevalues(x::Vector, y::Vector, group::Vector)
-    n = length(x)
-    res = Array(Dict{Any, Any}, n)
-    if isempty(group)
-        group = ones(Int, n)
-    end
-    for i in 1:n
-        res[i] = Dict{Any, Any}()
-        res[i]["x"] = x[i]
-        res[i]["y"] = y[i]
-        res[i]["group"] = group[i]
-    end
-    return res
-end
 
 tojson(x::Any) = JSON.json(tojs(x))
