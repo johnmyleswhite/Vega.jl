@@ -12,6 +12,7 @@ Function Keywords:
 {% highlight julia %}
 x::AbstractVector
 y::AbstractVector
+y2::AbstractVector
 group::AbstractVector
 {% endhighlight %}
 

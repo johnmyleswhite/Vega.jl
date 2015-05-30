@@ -17,3 +17,5 @@ In particular, Vega.jl provides:
 * Support for ColorBrewer color scales via the [ColorBrewer.jl](https://github.com/timothyrenner/ColorBrewer.jl) package, for visually stunning color schemes
 
 To learn more about specific features, see the Table of Contents on the left sidebar.
+
+This project is maintained by [randyzwitch](https://github.com/randyzwitch/).

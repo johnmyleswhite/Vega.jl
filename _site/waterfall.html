@@ -64,31 +64,25 @@
 
       </header>
       <section>
-        <h1 id="legend">legend!</h1>
+        <h1 id="waterfall">Waterfall</h1>
 
-<p>Required Arguments:</p>
+<p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
-<span class="n">title</span><span class="p">::</span><span class="n">String</span></code></pre></div>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
-<p>This function mutates <code>:VegaVisualization</code>, modifying the legend title.</p>
+<p>A waterfall chart is often used in marketing and finance to show the cumulative effect of multiple line items in an Income Statement or Marketing Campaign.</p>
 
-<h3 id="default-legend-title">Default legend title</h3>
+<p>To create this chart, pass in each line-item individually; the function will do the appropriate calculations, as well as setting the positive values to green, the negative values to red and the total to blue (customizable using <a href="http://johnmyleswhite.github.io/Vega.jl/colorscheme.html">colorscheme!</a>)</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-<span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;peaches&quot;</span><span class="p">,</span> <span class="s">&quot;plums&quot;</span><span class="p">,</span> <span class="s">&quot;blueberries&quot;</span><span class="p">,</span> <span class="s">&quot;strawberries&quot;</span><span class="p">,</span> <span class="s">&quot;bananas&quot;</span><span class="p">]</span>
-<span class="n">bushels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Product Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Services Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Fixed Costs&quot;</span><span class="p">,</span> <span class="s">&quot;Variable Costs&quot;</span><span class="p">,</span> <span class="s">&quot;One-Time Costs&quot;</span><span class="p">]</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">420000</span><span class="p">,</span> <span class="mi">210000</span><span class="p">,</span> <span class="o">-</span><span class="mi">170000</span><span class="p">,</span> <span class="o">-</span><span class="mi">140000</span><span class="p">,</span> <span class="o">-</span><span class="mi">75000</span><span class="p">]</span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">piechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">bushels</span><span class="p">)</span></code></pre></div>
+<span class="n">waterfall</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">categories</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/piechart.png" alt="piechart" /></p>
-
-<h3 id="modified-legend-title">Modified legend title</h3>
-
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">legend</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s">&quot;Fruit&quot;</span><span class="p">)</span></code></pre></div>
-
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/piechartlegend.png" alt="piechart" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/waterfall.png" alt="waterfall" /></p>
 
       </section>
       <footer>
