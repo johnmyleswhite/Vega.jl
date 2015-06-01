@@ -66,33 +66,21 @@
 
       </header>
       <section>
-        <h1 id="heatmap">Heatmap</h1>
+        <h1 id="wordcloud">Wordcloud</h1>
 
 <p>Function Keywords:</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
-<h3 id="heatmap-1">Heatmap</h3>
+<h3 id="wordcloud-1">Wordcloud</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">color</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
-        <span class="n">color</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
-    <span class="k">end</span>
-<span class="k">end</span>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;mullet&quot;</span><span class="p">,</span> <span class="s">&quot;mull it&quot;</span><span class="p">,</span> <span class="s">&quot;julialang&quot;</span><span class="p">,</span> <span class="s">&quot;viz&quot;</span><span class="p">,</span> <span class="s">&quot;visualization&quot;</span><span class="p">,</span> <span class="s">&quot;muppet&quot;</span><span class="p">,</span> <span class="s">&quot;business&quot;</span><span class="p">,</span> <span class="s">&quot;front&quot;</span><span class="p">,</span> <span class="s">&quot;party&quot;</span><span class="p">,</span> <span class="s">&quot;back&quot;</span><span class="p">,</span> <span class="s">&quot;juliacon&quot;</span><span class="p">,</span> <span class="s">&quot;julia&quot;</span><span class="p">]</span>
+<span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 
-<span class="n">heatmap</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">color</span><span class="p">)</span></code></pre></div>
+<span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">words</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/heatmap.png" alt="heatmap" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/wordcloud.png" alt="wordcloud" /></p>
 
       </section>
       <footer>
