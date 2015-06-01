@@ -5,11 +5,12 @@ module Vega
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
            VegaCSV, VegaTSV, VegaDataRef, VegaValueRef,
-           VegaMarkPropertySet, VegaMarkProperties, VegaLegend
+           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform
 
     export tojson, tojs
 
-    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart, donutchart, histogram, popchart, waterfall
+    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart,
+           donutchart, histogram, popchart, waterfall, wordcloud
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
@@ -57,6 +58,7 @@ module Vega
     include("derived/histogram.jl")
     include("derived/popchart.jl")
     include("derived/waterfall.jl")
+    include("derived/wordcloud.jl")
 
 
 

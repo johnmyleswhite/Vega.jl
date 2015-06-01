@@ -5,17 +5,21 @@ function openurl(url::String)
     @linux_only   run(`xdg-open $url`)
 end
 
+const d3 = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
+const geo = Pkg.dir("Vega", "deps/vega/examples/lib/d3.geo.projection.min.js")
+const topo = Pkg.dir("Vega", "deps/vega/examples/lib/topojson.js")
+const vega = Pkg.dir("Vega", "deps/vega/vega.js")
+const cloud = Pkg.dir("Vega", "deps/vega/examples/lib/d3.layout.cloud.js")
+
+
 #Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
 if displayable("text/html")
-    const d3 = Pkg.dir("Vega", "deps/vega/examples/lib/d3.v3.min.js")
-    const geo = Pkg.dir("Vega", "deps/vega/examples/lib/d3.geo.projection.min.js")
-    const topo = Pkg.dir("Vega", "deps/vega/examples/lib/topojson.js")
-    const vega = Pkg.dir("Vega", "deps/vega/vega.js")
 
     display("text/html", "<script>$(readall(topo))</script>")
     display("text/html", "<script>$(readall(d3))</script>")
     display("text/html", "<script>$(readall(geo))</script>")
     display("text/html", "<script>$(readall(vega))</script>")
+    display("text/html", "<script>$(readall(cloud))</script>")
 end
 
 #Overload writemime so that plots are displayed inline for Jupyter
@@ -29,6 +33,7 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
               <body>
                 <div id="$divid"></div>
               </body>
+
             <script type='text/javascript'>
             // parse a spec and create a visualization view
             function parse(spec) {

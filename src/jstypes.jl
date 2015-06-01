@@ -11,18 +11,6 @@ function tojs(v::Dict)
 end
 tojs(x::Any) = x
 
-#validation functions
-# function isvalidentry(entry::Tuple)
-#     if length(entry) != 4
-#         return false
-#     else
-#         return isa(entry[1], Symbol) &&
-#                isa(entry[2], Type) &&
-#                isa(entry[3], entry[2]) &&
-#                isa(entry[4], Bool)
-#     end
-# end
-
 #Build types from specs
 function fielddef(entry::Tuple)
     if entry[4]

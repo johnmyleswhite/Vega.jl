@@ -11,6 +11,8 @@ A Julia package for creating Vega visualizations. We currently support barebones
 * Line plots
 * Scatter plots
 * Pie/Donut charts
+* Waterfall
+* Wordclouds
 
 In addition, this package wraps Vega's pseudo-type system inside of Julia types. This will eventually provide tools for manipulating graphics with a higher level of control over layout.
 
