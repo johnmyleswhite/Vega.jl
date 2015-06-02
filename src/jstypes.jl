@@ -11,7 +11,7 @@ function tojs(v::Dict)
 end
 tojs(x::Any) = x
 
-#Build types from specs
+#Helper function for building Expr body given a specification
 function fielddef(entry::Tuple)
     if entry[4]
         return Expr(:(::), entry[1], Union(entry[2], Nothing))
@@ -20,6 +20,18 @@ function fielddef(entry::Tuple)
     end
 end
 
+#Takes in a type name and its specification
+#Returns Expr for the type code as if you had written it yourself
+
+#Ex: padding_spec = [(:top, Number, 80, false), (:left, Number, 80, false), (:bottom, Number, 80, false), (:right, Number, 80, false)
+# > maketype(:VegaPadding, padding_spec)]
+# :(type VegaPadding
+#     top::Number
+#     left::Number
+#     bottom::Number
+#     right::Number
+# end)
+
 function maketype(typename::Symbol, spec)
     n = length(spec)
     lines = Array(Expr, n)
@@ -27,13 +39,21 @@ function maketype(typename::Symbol, spec)
         entry = spec[i]
         lines[i] = fielddef(entry)
     end
-    return Expr(:type, true, typename, Expr(:block, lines...))
+
+    return Expr(:type, #type
+                true, typename, Expr(:block, lines...) #arguments
+                )
 end
 
-# Build up a constructor that takes in all fields for a type
-# as keyword args using defaults
+#Takes in typename and its specification
+#Builds a function with the same name as the type (i.e function VegaPadding and type :VegaPadding)
+#An Expr is returned, as if you had typed it yourself
+
+#:(function VegaPadding(; top::Number=80,left::Number=80,bottom::Number=80,right::Number=80)
+#        VegaPadding(top,left,bottom,right)
+#    end)
 function makekwfunc(typename::Symbol, spec)
-    return Expr(:function,
+    return Expr(:function, #type
                 Expr(:call, typename,
                      Expr(:parameters,
                           map(entry -> Expr(:kw, fielddef(entry), entry[3]),
@@ -43,6 +63,9 @@ function makekwfunc(typename::Symbol, spec)
 end
 
 
+#Intermediate helper function to maketojs()
+#Make a dict from fieldname
+#If fieldname happens to be _type (because type is a reserved keyword), take the underscore off when placing in dict
 function makehash(fieldname::Symbol)
     if fieldname == :_type
         return Expr(:(=),
@@ -55,7 +78,7 @@ function makehash(fieldname::Symbol)
     end
 end
 
-# Define translation of type to JSON-ready data structure
+##Intermediate helper function to maketojs()
 function makejsline(entry::Tuple)
     fieldname = entry[1]
     if entry[4]
@@ -71,7 +94,7 @@ function makejsline(entry::Tuple)
     end
 end
 
-#COnvert to js functions
+#Intermediate helper function to maketojs()
 function makejsbody(spec)
     return Expr(:block,
                 :(res = Dict()),
@@ -79,6 +102,18 @@ function makejsbody(spec)
                 :(return res))
 end
 
+#Function uses makejsbody, makejsline, makehash to create a custom tojs() function for each type
+
+#Ex:
+# > maketojs(:VegaPadding, padding_spec)
+# :(function tojs(x::VegaPadding)
+#         res = Dict()
+#         res["top"] = tojs(x.top)
+#         res["left"] = tojs(x.left)
+#         res["bottom"] = tojs(x.bottom)
+#         res["right"] = tojs(x.right)
+#         return res
+#     end)
 function maketojs(typename::Symbol, spec)
     return Expr(:function,
                 Expr(:call,
@@ -87,7 +122,7 @@ function maketojs(typename::Symbol, spec)
                      makejsbody(spec))
 end
 
-#Copy functions
+#makecopy helper functions
 function makecopyline(entry::Tuple)
     return Expr(:call, :copy, Expr(:., :x, Expr(:quote, entry[1])))
 end
@@ -99,6 +134,15 @@ function makecopybody(typename::Symbol, spec)
                      map(makecopyline, spec)...))
 end
 
+#Main function to add methods for shallow copy (i.e. structure only) of the object being passed in
+#This is likely for just for initializing types
+
+#Ex:
+# > makecopy(:VegaPadding, padding_spec)
+# :(function Base.copy(x::VegaPadding)
+#         VegaPadding(copy(x.top),copy(x.left),copy(x.bottom),copy(x.right))
+#     end)
+
 function makecopy(typename::Symbol, spec)
     return Expr(:function,
                 Expr(:call,
@@ -108,6 +152,7 @@ function makecopy(typename::Symbol, spec)
 end
 
 #Create primitives from one function instead of repeating
+#Use of eval() takes all Expr created above, evaluates their results, so that they become Julia citizens
 function primitivefactory(create::Symbol, spec::AbstractArray)
     eval(maketype(create, spec))
     eval(makekwfunc(create, spec))
@@ -115,6 +160,8 @@ function primitivefactory(create::Symbol, spec::AbstractArray)
     eval(makecopy(create, spec))
 end
 
+#Guess this behavior is undefined in Base?
 Base.copy(x::Nothing) = nothing
 
+#Export to JSON representation any of the Vega objects
 tojson(x::Any) = JSON.json(tojs(x))
