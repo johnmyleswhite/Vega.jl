@@ -1,14 +1,14 @@
 legend_spec =
 [
-	(:size, String, nothing, true),
-	(:shape, String, nothing, true),
-	(:fill, String, nothing, true),
-	(:stroke, String, nothing, true),
-	(:orient, String, nothing, true),
-	(:title, String, nothing, true),
-	(:format, String, nothing, true),
-	(:values, Array, nothing, true),
-	(:properties, VegaMarkProperties, nothing, true)
+	(:size, String, nothing),
+	(:shape, String, nothing),
+	(:fill, String, nothing),
+	(:stroke, String, nothing),
+	(:orient, String, nothing),
+	(:title, String, nothing),
+	(:format, String, nothing),
+	(:values, Array, nothing),
+	(:properties, VegaMarkProperties, nothing)
 ]
 
 primitivefactory(:VegaLegend, legend_spec)

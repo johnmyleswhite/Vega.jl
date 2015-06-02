@@ -1,23 +1,23 @@
 axis_spec =
 [
-    (:_type, String, "x", false),
-    (:scale, String, "x", false),
-    (:orient, String, nothing, true),
-    (:title, String, nothing, true),
-    (:titleOffset, Number, nothing, true),
-    (:format, String, nothing, true),
-    (:ticks, Number, nothing, true),
-    (:values, Vector, nothing, true),
-    (:subdivide, Number, nothing, true),
-    (:tickPadding, Number, nothing, true),
-    (:tickSize, Number, nothing, true),
-    (:tickSizeMajor, Number, nothing, true),
-    (:tickSizeMinor, Number, nothing, true),
-    (:tickSizeEnd, Number, nothing, true),
-    (:offset, Number, nothing, true),
-    (:layer, String, nothing, true),
-    (:grid, Bool, nothing, true),
-    (:properties, Dict{Any,Any}, nothing, true)
+    (:_type, String, "x"),
+    (:scale, String, "x"),
+    (:orient, String, nothing),
+    (:title, String, nothing),
+    (:titleOffset, Number, nothing),
+    (:format, String, nothing),
+    (:ticks, Number, nothing),
+    (:values, Vector, nothing),
+    (:subdivide, Number, nothing),
+    (:tickPadding, Number, nothing),
+    (:tickSize, Number, nothing),
+    (:tickSizeMajor, Number, nothing),
+    (:tickSizeMinor, Number, nothing),
+    (:tickSizeEnd, Number, nothing),
+    (:offset, Number, nothing),
+    (:layer, String, nothing),
+    (:grid, Bool, nothing),
+    (:properties, Dict{Any,Any}, nothing)
 ]
 
 primitivefactory(:VegaAxis, axis_spec)

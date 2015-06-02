@@ -1,16 +1,16 @@
 mark_spec =
 [
-	(:_type, String, "symbol", false),
-	(:name, String, nothing, true),
-	(:description, String, nothing, true),
-	(:from, Dict{Any, Any}, nothing, true),
-	(:properties, VegaMarkProperties, nothing, true),
-	(:key, String, nothing, true),
-	(:delay, VegaValueRef, nothing, true),
-	(:ease, String, nothing, true),
-	(:marks, Vector, nothing, true),
-	(:scales, Vector{VegaScale}, nothing, true),
-	(:axes, Vector{VegaAxis}, nothing, true)
+	(:_type, String, "symbol"),
+	(:name, String, nothing),
+	(:description, String, nothing),
+	(:from, Dict{Any, Any}, nothing),
+	(:properties, VegaMarkProperties, nothing),
+	(:key, String, nothing),
+	(:delay, VegaValueRef, nothing),
+	(:ease, String, nothing),
+	(:marks, Vector, nothing),
+	(:scales, Vector{VegaScale}, nothing),
+	(:axes, Vector{VegaAxis}, nothing)
 
 ]
 

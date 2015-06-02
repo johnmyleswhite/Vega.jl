@@ -1,7 +1,7 @@
 dataref_spec =
 [
-	(:data, String, "", false),
-	(:field, String, "", false)
+	(:data, String, ""),
+	(:field, String, "")
 ]
 
 primitivefactory(:VegaDataRef, dataref_spec)

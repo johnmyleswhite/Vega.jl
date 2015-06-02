@@ -13,11 +13,9 @@ tojs(x::Any) = x
 
 #Helper function for building Expr body given a specification
 function fielddef(entry::Tuple)
-    if entry[4]
-        return Expr(:(::), entry[1], Union(entry[2], Nothing))
-    else
-        return Expr(:(::), entry[1], entry[2])
-    end
+
+    return Expr(:(::), entry[1], Union(entry[2], Nothing))
+
 end
 
 #Takes in a type name and its specification
@@ -81,17 +79,14 @@ end
 ##Intermediate helper function to maketojs()
 function makejsline(entry::Tuple)
     fieldname = entry[1]
-    if entry[4]
-        return Expr(:if,
-                    Expr(:comparison,
-                        Expr(:., :x, Expr(:quote, fieldname)),
-                        :!=,
-                        :nothing),
-                    Expr(:block, makehash(fieldname)))
 
-    else
-        return makehash(fieldname)
-    end
+    return Expr(:if,
+                Expr(:comparison,
+                    Expr(:., :x, Expr(:quote, fieldname)),
+                    :!=,
+                    :nothing),
+                Expr(:block, makehash(fieldname)))
+
 end
 
 #Intermediate helper function to maketojs()

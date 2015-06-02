@@ -1,11 +1,11 @@
 data_spec =
 [
-	(:name, String, "table", false),
-	(:format, VegaFormat, nothing, true),
-	(:values, Vector{Dict{Any, Any}}, nothing, true),
-	(:source, String, nothing, true),
-	(:url, String, nothing, true),
-	(:transform, Vector{VegaTransform}, nothing, true)
+	(:name, String, "table"),
+	(:format, VegaFormat, nothing),
+	(:values, Vector{Dict{Any, Any}}, nothing),
+	(:source, String, nothing),
+	(:url, String, nothing),
+	(:transform, Vector{VegaTransform}, nothing)
 ]
 
 primitivefactory(:VegaData, data_spec)
