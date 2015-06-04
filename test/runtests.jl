@@ -9,9 +9,7 @@ my_tests = ["test/padding.jl",
             "test/data.jl",
             "test/mark.jl",
             "test/scale.jl",
-            "test/scale.jl",
-            "test/visualization.jl",
-            "demo.jl"]
+            "test/visualization.jl"]
 
 println("Running tests:")
 

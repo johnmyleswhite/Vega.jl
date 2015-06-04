@@ -1,6 +1,6 @@
 Vega.jl
 =======
-[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)
+[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_release.svg)](http://pkg.julialang.org/?pkg=Vega&ver=release)
 
 # Introduction
 
