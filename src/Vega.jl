@@ -3,13 +3,14 @@ module Vega
     using JSON, ColorBrewer
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
-           VegaTransform, VegaVisualization, VegaFormat, VegaJSON,
-           VegaCSV, VegaTSV, VegaDataRef, VegaValueRef,
+           VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
+           #VegaCSV, VegaTSV,
+           VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform
 
     export tojson, tojs
 
-    export barplot, lineplot, scatterplot, areaplot, heatmap, piechart,
+    export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            donutchart, histogram, popchart, waterfall, wordcloud
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
@@ -49,6 +50,7 @@ module Vega
     include("intermediates/rects.jl")
 
     # Higher-level API
+    include("derived/choropleth.jl")
     include("derived/barplot.jl")
     include("derived/lineplot.jl")
     include("derived/scatterplot.jl")
