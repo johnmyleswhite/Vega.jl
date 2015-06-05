@@ -68,25 +68,19 @@
 
       </header>
       <section>
-        <h1 id="waterfall">Waterfall</h1>
+        <h1 id="choropleth">Choropleth</h1>
 
 <p>Function Keywords:</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
 <span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
-<p>A waterfall chart is often used in marketing and finance to show the cumulative effect of multiple line items in an Income Statement or Marketing Campaign.</p>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega/examples/data/unemployment.tsv&quot;</span><span class="p">))</span>
 
-<p>To create this chart, pass in each line-item individually; the function will do the appropriate calculations, as well as setting the positive values to green, the negative values to red and the total to blue (customizable using <a href="http://johnmyleswhite.github.io/Vega.jl/colorscheme.html">colorscheme!</a>)</p>
+<span class="n">v</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">id</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">rate</span><span class="p">])</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
-
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Product Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Services Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Fixed Costs&quot;</span><span class="p">,</span> <span class="s">&quot;Variable Costs&quot;</span><span class="p">,</span> <span class="s">&quot;One-Time Costs&quot;</span><span class="p">]</span>
-<span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">420000</span><span class="p">,</span> <span class="mi">210000</span><span class="p">,</span> <span class="o">-</span><span class="mi">170000</span><span class="p">,</span> <span class="o">-</span><span class="mi">140000</span><span class="p">,</span> <span class="o">-</span><span class="mi">75000</span><span class="p">]</span>
-
-<span class="n">waterfall</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">categories</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span></code></pre></div>
-
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/waterfall.png" alt="waterfall" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/choropleth.png" alt="choropleth" /></p>
 
       </section>
       <footer>
