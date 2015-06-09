@@ -15,9 +15,10 @@ y::AbstractVector
 y2::AbstractVector
 group::AbstractVector
 stacked::Bool = false
+horizontal::Bool = false
 {% endhighlight %}
 
-### No Group Argument
+### Vertical Bar
 {% highlight julia %}
 using Vega
 
@@ -28,6 +29,18 @@ barplot(x = x, y = y)
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/barplot.png" alt = "barplot" >
+
+### Horizontal Bar
+{% highlight julia %}
+using Vega
+
+x = [1, 2, 3, 4, 5]
+y = [1, 2, 3, 2, 1]
+
+barplot(x = x, y = y, horizontal = true)
+{% endhighlight %}
+
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/horizontalbar.png" alt = "horizontalbar" >
 
 ### Group Argument
 {% highlight julia %}
@@ -55,3 +68,17 @@ colorscheme!(b, ("Greens", 3))
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedbar.png" alt = "stackedbar">
+
+### Horizontal Stacked Bar (with additional `colorscheme!` change)
+{% highlight julia %}
+using Vega
+
+x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
+y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
+g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
+
+barplot(x = x, y = y, group = g, stacked = true, horizontal = true)
+colorscheme!(b, ("Greens", 3))
+{% endhighlight %}
+
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedbarh.png" alt = "stackedbarh">

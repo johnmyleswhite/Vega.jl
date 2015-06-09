@@ -14,6 +14,8 @@ x::AbstractVector
 y::AbstractVector
 {% endhighlight %}
 
+Note: The input for the X array are FIPS codes, not zip codes. The two are not interchangeable. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.
+
 {% highlight julia %}
 using Vega, DataFrames
 df = readtable(Pkg.dir("Vega", "deps/vega/examples/data/unemployment.tsv"))

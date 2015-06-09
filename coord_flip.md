@@ -5,15 +5,15 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 ---
 
-# Histogram
+# coord_flip!
 
 Function Keywords:
 
 {% highlight julia %}
-x::AbstractVector
-relativefreq::Bool = false
-horizontal::Bool = false
+v::VegaVisualization
 {% endhighlight %}
+
+The purpose of this function is effectively to rotate a bar chart 90 degrees to the right, creating a horizontal bar chart from a vertical bar chart. This function is exported for completeness, but for clarity, it's probably easier to just use the `horizontal` keyword argument for `barchart` or `histogram`.
 
 ### Histogram
 
@@ -26,7 +26,7 @@ v = histogram(x = x)
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/histogram.png" alt = "histogram" >
 
-### Histogram - Relative Frequency
+### Histogram - Rotated
 
 {% highlight julia %}
 using Vega, Distributions
@@ -34,5 +34,6 @@ using Vega, Distributions
 x = rand(Gamma(3.0, 1.0), 1_000_000)
 
 v = histogram(x = x, relativefreq = true)
+coord_flip!(v)
 {% endhighlight %}
-<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histogram_rel.png" alt = "histrel">
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histh" alt = "histh">

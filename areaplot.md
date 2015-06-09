@@ -13,7 +13,7 @@ Function Keywords:
 x::AbstractVector
 y::AbstractVector
 group::AbstractVector
-stacked::Bool
+stacked::Bool = false
 {% endhighlight %}
 
 ### Area Plot

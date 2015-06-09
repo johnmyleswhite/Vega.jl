@@ -12,7 +12,7 @@ Function Keywords:
 {% highlight julia %}
 x::AbstractArray
 y::AbstractArray
-holesize::Int
+holesize::Int = 175
 {% endhighlight %}
 
 ### Pie Chart
