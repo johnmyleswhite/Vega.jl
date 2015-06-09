@@ -48,14 +48,39 @@ function title!(v::VegaVisualization, title::String)
 	return v
 end
 
-# # TODO: Make this work
-# function coord_flip!(v::VegaVisualization)
-# 	v.axes[1]._type = "y"
-# 	v.axes[1].orient = "left"
-# 	v.axes[2]._type = "x"
-# 	v.axes[2].orient = "bottom"
-# 	return v
-# end
+#Works for bar and grouped bar charts, add more cases if it makes sense
+function coord_flip!(v::VegaVisualization)
+
+    #Switch scales
+    v.scales[findfirst([z.name == "x" for z in v.scales])].range = "height"
+    v.scales[findfirst([z.name == "y" for z in v.scales])].range = "width"
+
+    #Switch axes and title names
+    v.axes[findfirst([z._type == "x" for z in v.axes])].scale = "y"
+    v.axes[findfirst([z._type == "x" for z in v.axes])].title = "y"
+    v.axes[findfirst([z._type == "y" for z in v.axes])].scale = "x"
+    v.axes[findfirst([z._type == "y" for z in v.axes])].title = "x"
+
+    #Change mark properties
+
+    #No group marks
+    if typeof(v.marks[1].marks) == Void
+        v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
+        v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
+        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
+        v.marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
+        v.marks[1].properties.enter.y2 = nothing
+    #Group Marks
+    else
+        v.marks[1].marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
+        v.marks[1].marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
+        v.marks[1].marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
+        v.marks[1].marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
+        v.marks[1].marks[1].properties.enter.y2 = nothing
+    end
+
+    return v
+end
 
 function legend!(v::VegaVisualization, title::String = "")
 	v.legends[1].title = title

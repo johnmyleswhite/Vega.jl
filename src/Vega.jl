@@ -17,7 +17,7 @@ module Vega
 
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
-    export showlegend!, hidelegend!, colorscheme!
+    export showlegend!, hidelegend!, colorscheme!, coord_flip!
 
     #Import helper code
     include("jstypes.jl")

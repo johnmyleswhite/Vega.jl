@@ -2,7 +2,8 @@ function barplot(;x::AbstractVector = Int[],
                   y::AbstractVector = Int[],
                   y2::AbstractVector = Int[],
                   group::AbstractVector = Int[],
-                  stacked::Bool = false)
+                  stacked::Bool = false,
+                  horizontal::Bool = false)
 
     v = VegaVisualization()
 
@@ -43,6 +44,11 @@ function barplot(;x::AbstractVector = Int[],
                                                           )
                                   )
                           ]
+    end
+
+    #Return horizontal bar chart
+    if horizontal
+        coord_flip!(v)
     end
 
     return v
