@@ -36,4 +36,4 @@ x = rand(Gamma(3.0, 1.0), 1_000_000)
 v = histogram(x = x, relativefreq = true)
 coord_flip!(v)
 {% endhighlight %}
-<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histh" alt = "histh">
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/histh.png" alt = "histh">
