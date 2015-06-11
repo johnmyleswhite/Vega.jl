@@ -7,8 +7,12 @@ function histogram(; x::AbstractArray = Int[],
 
     v = barplot(x = a[2:end], y = b/total)
 
+    #Remove space between bars per theory
+    v.marks[1].properties.enter.width.offset = 0
+
     if horizontal
         coord_flip!(v)
+        v.marks[1].properties.enter.height.offset = 0
     end
 
 

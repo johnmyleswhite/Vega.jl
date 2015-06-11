@@ -11,7 +11,7 @@ module Vega
     export tojson, tojs
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
-           donutchart, histogram, popchart, waterfall, wordcloud
+           donutchart, histogram, popchart, waterfall, wordcloud, groupedbar
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
@@ -52,6 +52,7 @@ module Vega
     # Higher-level API
     include("derived/choropleth.jl")
     include("derived/barplot.jl")
+    include("derived/groupedbar.jl")
     include("derived/lineplot.jl")
     include("derived/scatterplot.jl")
     include("derived/areaplot.jl")
