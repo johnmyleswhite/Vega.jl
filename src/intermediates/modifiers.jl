@@ -119,3 +119,31 @@ function colorscheme!(v::VegaVisualization, palette::Union(Tuple{AbstractString,
     return v
 
 end
+
+function stroke!(v::VegaVisualization; color::String = "Black", width::Real = 0.75, opacity::Real = 1, visible::Bool = true)
+
+    if typeof(v.marks[1].marks) == Void
+        if visible
+            v.marks[1].properties.enter.stroke = VegaValueRef(value = color)
+            v.marks[1].properties.enter.strokeWidth = VegaValueRef(value = width)
+            v.marks[1].properties.enter.strokeOpacity = VegaValueRef(value = opacity)
+        else
+            v.marks[1].properties.enter.stroke = nothing
+            v.marks[1].properties.enter.strokeWidth = nothing
+            v.marks[1].properties.enter.strokeOpacity = nothing
+        end
+    #Group Marks
+    else
+        if visible
+            v.marks[1].marks[1].properties.enter.stroke = VegaValueRef(value = color)
+            v.marks[1].marks[1].properties.enter.strokeWidth = VegaValueRef(value = width)
+            v.marks[1].marks[1].properties.enter.strokeOpacity = VegaValueRef(value = opacity)
+        else
+            v.marks[1].marks[1].properties.enter.stroke = nothing
+            v.marks[1].marks[1].properties.enter.strokeWidth = nothing
+            v.marks[1].marks[1].properties.enter.strokeOpacity = nothing
+        end
+    end
+
+    return v
+end
