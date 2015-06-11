@@ -32,6 +32,8 @@
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
           <small><a href='histogram.html'>Histogram</a></small>
@@ -76,7 +78,7 @@
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span></code></pre></div>
 
-<p>The purpose of this function is effectively to rotate a bar chart 90 degrees to the right, creating a horizontal bar chart from a vertical bar chart. This function is exported for completeness, but for clarity, it’s probably easier to just use the <code>horizontal</code> keyword argument for <code>barchart</code> or <code>histogram</code>.</p>
+<p>The purpose of this function is effectively to rotate a bar chart 90 degrees to the right, creating a horizontal bar chart from a vertical bar chart. This function is exported for completeness, but for clarity, it’s probably easier to just use the <code>horizontal</code> keyword argument for <a href="http://johnmyleswhite.github.io/Vega.jl/barplot.html"><code>barchart</code></a> or <a href="http://johnmyleswhite.github.io/Vega.jl/histogram.html"><code>histogram</code></a>.</p>
 
 <h3 id="histogram">Histogram</h3>
 
@@ -97,7 +99,7 @@
 <span class="n">v</span> <span class="o">=</span> <span class="n">histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">relativefreq</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
 <span class="n">coord_flip</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/histh" alt="histh" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/histh.png" alt="histh" /></p>
 
       </section>
       <footer>

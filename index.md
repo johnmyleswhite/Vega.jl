@@ -7,7 +7,7 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # Overview
 
-The Vega package provides a Julia wrapper around the [Vega Visualization Grammar](http://trifacta.github.io/vega/) from [Trifacta](http://www.trifacta.com/). Vega is a declarative format on top of d3.js for creating interactive visualizations using JSON.
+The Vega package provides a Julia wrapper around the [Vega Visualization Grammar](http://trifacta.github.io/vega/) from [Trifacta](http://www.trifacta.com/). Vega is a declarative format on top of [d3.js](http://d3js.org/) for creating interactive visualizations using JSON.
 
 In particular, Vega.jl provides:
 

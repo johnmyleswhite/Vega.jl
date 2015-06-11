@@ -72,22 +72,27 @@
 
       </header>
       <section>
-        <h1 id="overview">Overview</h1>
+        <h1 id="grouped-bar-chart">Grouped Bar Chart</h1>
 
-<p>The Vega package provides a Julia wrapper around the <a href="http://trifacta.github.io/vega/">Vega Visualization Grammar</a> from <a href="http://www.trifacta.com/">Trifacta</a>. Vega is a declarative format on top of <a href="http://d3js.org/">d3.js</a> for creating interactive visualizations using JSON.</p>
+<p>Function Keywords:</p>
 
-<p>In particular, Vega.jl provides:</p>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
-<ul>
-  <li>A series of Julia composite types representing Vega visualization primitives</li>
-  <li>An intermediate grammar in Julia for quickly creating default settings for scales, axes, legends, etc.</li>
-  <li>High-level functions for quickly creating visualizations such as bar charts, area charts, line charts and others</li>
-  <li>Support for ColorBrewer color scales via the <a href="https://github.com/timothyrenner/ColorBrewer.jl">ColorBrewer.jl</a> package, for visually stunning color schemes</li>
-</ul>
+<h3 id="grouped-bar-chart-1">Grouped Bar Chart</h3>
 
-<p>To learn more about specific features, see the Table of Contents on the left sidebar.</p>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
 
-<p>This project is maintained by <a href="https://github.com/randyzwitch/">randyzwitch</a>.</p>
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega/examples/data/groups.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="n">gb</span> <span class="o">=</span> <span class="n">groupedbar</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">category</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">value</span><span class="p">],</span> <span class="n">group</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">position</span><span class="p">])</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">gb</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Spectral&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/groupedbar.png" alt="groupedbar" /></p>
 
       </section>
       <footer>
