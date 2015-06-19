@@ -1,4 +1,4 @@
-function scatterplot(;x::AbstractVector = Int[],
+@compat function scatterplot(;x::AbstractVector = Int[],
                       y::AbstractVector = Int[],
                       group::AbstractVector = Int[])
     v = VegaVisualization()

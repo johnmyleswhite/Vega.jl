@@ -1,4 +1,4 @@
-function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::AbstractArray = Int[])
+@compat function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::AbstractArray = Int[])
 
     v = VegaVisualization(height = 240, width = 300)
     add_data!(v, x = x, y = y, group = group)

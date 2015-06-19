@@ -1,6 +1,6 @@
 module Vega
 
-    using JSON, ColorBrewer
+    using JSON, ColorBrewer, Compat
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,

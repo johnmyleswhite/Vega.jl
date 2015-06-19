@@ -1,4 +1,4 @@
-function areaplot(;x::AbstractVector = Int[],
+@compat function areaplot(;x::AbstractVector = Int[],
                    y::AbstractVector = Int[],
                    group::AbstractVector = Int[],
                    stacked::Bool = false)

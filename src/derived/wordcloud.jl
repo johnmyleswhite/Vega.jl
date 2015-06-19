@@ -1,4 +1,4 @@
-function wordcloud(; x::AbstractVector =  String[], y::AbstractVector = Int[])
+@compat function wordcloud(; x::AbstractVector =  String[], y::AbstractVector = Int[])
     v = VegaVisualization(height = 400, width = 400, padding = "auto")
 
     add_data!(v, x = x, y = y)

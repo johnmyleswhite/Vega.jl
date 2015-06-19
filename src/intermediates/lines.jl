@@ -1,4 +1,4 @@
-function add_lines!(v::VegaVisualization)
+@compat function add_lines!(v::VegaVisualization)
 	innermarks = Array(VegaMark, 1)
     innermarks[1] =
       VegaMark(_type = "line",
