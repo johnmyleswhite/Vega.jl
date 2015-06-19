@@ -11,7 +11,7 @@ module Vega
     export tojson, tojs
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
-           donutchart, histogram, popchart, waterfall, wordcloud, groupedbar
+           histogram, popchart, waterfall, wordcloud, groupedbar
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 

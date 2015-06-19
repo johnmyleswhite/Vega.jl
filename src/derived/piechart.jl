@@ -26,7 +26,5 @@ function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::
                         )
                 ]
 
-v
+    return v
 end
-
-donutchart(;x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 175) = piechart(x = x, y = y, holesize = holesize)
