@@ -24,28 +24,24 @@ end
 	return v
 end
 
-@compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark()
-	titlemark.type = "text"
-	titlemark.from = Dict{Any, Any}("value" => title)
-    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     y = VegaValueRef(value = 0),
-                                     text = VegaValueRef(value = title))
-	titlemark.properties = VegaMarkProperties(enter = enterprops)
-	push!(v.marks, titlemark)
-	return v
-end
+# TODO: is there a better way to find this axis?
+find_title_ax(v::Vega.VegaVisualization) =
+    find(x->x.orient=="top" && x.values==[], v.axes)
 
-@compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark(_type = "text", from = Dict{Any, Any}("value" => title))
-    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     y = VegaValueRef(value = -50),
-                                     text = VegaValueRef(value = title),
-                                     fill = VegaValueRef(value = "black"),
-                                     fontSize = VegaValueRef(value = 12))
-	titlemark.properties = VegaMarkProperties(enter = enterprops)
-	push!(v.marks, titlemark)
-	return v
+@compat function Vega.title!(v::Vega.VegaVisualization, title::String)
+    ti_ind = find_title_ax(v)
+
+    if length(ti_ind) == 1
+        v.axes[ti_ind[1]].title = title
+        return v
+    end
+
+    ti = Vega.VegaAxis(_type="x", scale="x", title=title, orient="top", values=[])
+    ti.properties = Dict{Any,Any}("title" => Dict{Any,Any}("fill" => Dict{Any,Any}("value" => "black")),
+                                  "axis" => Dict{Any,Any}("strokeOpacity" => Dict{Any,Any}("value"=>0)))
+    push!(v.axes, ti)
+    v
+
 end
 
 #Works for bar and grouped bar charts, add more cases if it makes sense
