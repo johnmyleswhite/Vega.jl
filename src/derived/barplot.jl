@@ -16,12 +16,12 @@
     add_rects!(v)
 
     v.marks[1].properties.enter.width = VegaValueRef(scale = "x", band = true, offset = -1)
-    v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "data.y2")
-    v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "data.group")
+    v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "y2")
+    v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "group")
 
     if stacked
       push!(v.data, VegaData(name = "stats", source = "table",
-                             transform = [VegaTransform(Dict{Any, Any}("type" => "facet", "keys" => ["data.x"])), VegaTransform(Dict{Any, Any}("type" => "stats", "value" => "data.y"))]))
+                             transform = [VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["x"])), VegaTransform(Dict{Any, Any}("type" => "stats", "value" => "y"))]))
 
       v.scales[2].domain = VegaDataRef("stats", "sum")
       v.scales[3].domain = nothing
@@ -30,16 +30,16 @@
       v.marks[1]._type = "group"
 
       v.marks[1].from = Dict{Any, Any}("data" => "table",
-                                       "transform" => [VegaTransform(Dict{Any, Any}("type" => "facet", "keys" => ["data.group"])), VegaTransform(Dict{Any, Any}("type" => "stack", "point" => "data.x", "height" => "data.y"))])
+                                       "transform" => [VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"])), VegaTransform(Dict{Any, Any}("type" => "stack", "point" => "x", "height" => "y"))])
 
       v.marks[1].marks = [
                           VegaMark(_type = "rect",
                           properties = VegaMarkProperties(
-                                                      enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "data.x"),
+                                                      enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
                                                                                   width = VegaValueRef(scale = "x", band = true, offset = -1),
                                                                                   y = VegaValueRef(scale = "y", field = "y"),
                                                                                   y2 = VegaValueRef(scale = "y", field = "y2"),
-                                                                                  fill = VegaValueRef(scale = "group", field = "data.group")
+                                                                                  fill = VegaValueRef(scale = "group", field = "group")
                                                                                   )
                                                           )
                                   )

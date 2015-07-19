@@ -32,29 +32,29 @@
                           range = "width",
                           nice = true,
                           zero = false,
-                          domain = VegaDataRef("table", "data.x"))
+                          domain = VegaDataRef("table", "x"))
 
     v.scales[2] = VegaScale(name = "y",
                           _type = "linear",
                           range = "height",
                           nice = true,
                           zero = false,
-                          domain = VegaDataRef("table", "data.y"))
+                          domain = VegaDataRef("table", "y"))
 
     v.scales[3] = VegaScale(name = "group",
                           _type = "ordinal",
                           range = "category20",
-                          domain = VegaDataRef("table", "data.group"))
+                          domain = VegaDataRef("table", "group"))
 
     v.marks = Array(VegaMark, 1)
     enterprops =
       VegaMarkPropertySet(shape = VegaValueRef(value = "square"), # May need to be "string"
                           x = VegaValueRef(scale = "x",
-                                           field = "data.x"),
+                                           field = "x"),
                           y = VegaValueRef(scale = "y",
-                                           field = "data.y"),
+                                           field = "y"),
                           fill = VegaValueRef(scale = "group",
-                                              field = "data.group"))
+                                              field = "group"))
     v.marks[1] = VegaMark(_type = "symbol",
                         from = Dict{Any, Any}("data" => "table"),
                         properties = VegaMarkProperties(enter = enterprops))

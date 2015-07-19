@@ -1,6 +1,6 @@
 function default_props()
     return VegaMarkPropertySet(x = VegaValueRef(scale = "x",
-                                                field = "data.x"),
+                                                field = "x"),
                                y = VegaValueRef(scale = "y",
-                                                field = "data.y"))
+                                                field = "y"))
 end
