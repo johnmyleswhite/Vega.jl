@@ -26,7 +26,7 @@
     #Clean-up presentation
     v.width = 110 * length(x) #Make the graph variable width based on number of levels
     v.marks[1].properties.enter.width = VegaValueRef(scale = "x", band = true, mult= 0.5)
-    v.marks[1].properties.enter.x  = VegaValueRef(scale = "x", field = "data.x", offset = 31)
+    v.marks[1].properties.enter.x  = VegaValueRef(scale = "x", field = "x", offset = 31)
 
     xlab!(v, "")
     ylab!(v, "")

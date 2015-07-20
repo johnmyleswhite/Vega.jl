@@ -65,7 +65,7 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     println(io," <script src=\"http://trifacta.github.io/vega/lib/d3.v3.min.js\"></script>")
     println(io," <script src=\"http://trifacta.github.io/vega/lib/d3.geo.projection.min.js\"></script>")
     println(io," <script src=\"http://trifacta.github.io/vega/lib/topojson.js\"></script>")
-    println(io," <script src=\"http://trifacta.github.io/vega/vega.js\"></script>")
+    println(io," <script src=\"http://vega.github.io/vega/vega.js\"></script>")
     println(io, "</head>")
 
     # print body

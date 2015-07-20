@@ -4,15 +4,15 @@
     v.scales[1] = VegaScale(name = "x",
                             _type = "linear",
                             range = "width",
-                            domain = VegaDataRef("table", "data.x"))
+                            domain = VegaDataRef("table", "x"))
     v.scales[2] = VegaScale(name = "y",
                             _type = "linear",
                             range = "height",
-                            domain = VegaDataRef("table", "data.y"))
+                            domain = VegaDataRef("table", "y"))
     v.scales[3] = VegaScale(name = "group",
                             _type = "ordinal",
                             range = "category10",
-                            domain = VegaDataRef("table", "data.group"))
+                            domain = VegaDataRef("table", "group"))
 
     return v
 end

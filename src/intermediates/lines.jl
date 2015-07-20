@@ -7,7 +7,7 @@
                    from = Dict{Any, Any}(
                            "data" => "table",
                            "transform" =>
-                             [Dict{Any, Any}("type" => "facet", "keys" => ["data.group"])]
+                             [Dict{Any, Any}("type" => "facet", "groupby" => ["group"])]
                           ),
                    marks = innermarks)
 

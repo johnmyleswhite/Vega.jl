@@ -65,16 +65,16 @@ end
 
     #No group marks
     if typeof(v.marks[1].marks) in (Nothing, Void)
-        v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
+        v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "x")
         v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
-        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
+        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "y")
         v.marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
         v.marks[1].properties.enter.y2 = nothing
     #Group Marks
     else
-        v.marks[1].marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
+        v.marks[1].marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "x")
         v.marks[1].marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
-        v.marks[1].marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
+        v.marks[1].marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "y")
         v.marks[1].marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
         v.marks[1].marks[1].properties.enter.y2 = nothing
     end

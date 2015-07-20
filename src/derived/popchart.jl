@@ -5,7 +5,7 @@
 
     v.scales = Array(VegaScale, 3)
     v.scales[1] = VegaScale(name = "g", domain = [0,1], range = [340, 10])
-    v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef("table", "data.y"))
+    v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef("table", "y"))
     v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = [1,2], range = ["#1f77b4", "#e377c2"])
 
     v.marks = Array(VegaMark,2)
@@ -13,7 +13,7 @@
     v.marks[1] = VegaMark(
     _type = "text",
     from = Dict{Any, Any}("data" => "table",
-                          "transform" => [Dict{Any, Any}("type" => "unique",  "field" => "data.y", "as" => "y")]
+                          "transform" => [Dict{Any, Any}("type" => "unique",  "field" => "y", "as" => "y")]
                          ),
     properties = VegaMarkProperties(
     enter = VegaMarkPropertySet(
@@ -30,9 +30,9 @@
     _type = "group",
     from = Dict{Any, Any}(
             "data" => "table",
-    "transform" => [Dict{Any, Any}("type" => "facet", "keys" => ["data.group"])]),
+    "transform" => [Dict{Any, Any}("type" => "facet", "groupby" => ["group"])]),
     properties = VegaMarkProperties(update = VegaMarkPropertySet(
-                                                                x = VegaValueRef(scale = "g", field = "index"),
+                                                                x = VegaValueRef(scale = "g", field = "_id"),
                                                                 y = VegaValueRef(value = 0),
                                                                 width = VegaValueRef(value = 300),
                                                                 height = VegaValueRef(group = "height")
@@ -42,9 +42,9 @@
         name = "x",
         _type = "linear",
         range = "width",
-        reverse = VegaDataRef(field = "index"),
+        reverse = VegaDataRef(field = "_id"),
         nice = true,
-        domain = VegaDataRef(data = "table", field = "data.x")
+        domain = VegaDataRef(data = "table", field = "x")
         )
 
     ],
@@ -52,12 +52,12 @@
 
     marks = [VegaMark(
     _type = "rect",
-    properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "data.x"),
+    properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
                                                                     x2 = VegaValueRef(scale = "x", value = 0),
-                                                                    y = VegaValueRef(scale = "y", field = "data.y"),
+                                                                    y = VegaValueRef(scale = "y", field = "y"),
                                                                     height = VegaValueRef(scale = "y", band = true, offset = -1),
                                                                     fillOpacity = VegaValueRef(value = 0.6),
-                                                                    fill = VegaValueRef(scale = "group", field = "data.group")
+                                                                    fill = VegaValueRef(scale = "group", field = "group")
 
 
         )

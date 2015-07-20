@@ -6,15 +6,15 @@
     add_data!(v, x = x, y = y)
 
     v.scales = [VegaScale(name = "color",
-                      domain = VegaDataRef("table", "data.x"),
+                      domain = VegaDataRef("table", "x"),
                       range = "category10",
                       _type = "ordinal")]
 
     v.marks = [VegaMark(_type = "arc",
-                       from = Dict{Any, Any}("data"=> "table", "transform"=> [Dict{Any, Any}("type"=> "pie", "value"=> "data.y")]),
+                       from = Dict{Any, Any}("data"=> "table", "transform"=> [Dict{Any, Any}("type"=> "pie", "value"=> "y")]),
                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(
                                                                                    endAngle = VegaValueRef(field = "endAngle"),
-                                                                                   fill = VegaValueRef(field = "data.x", scale = "color"),
+                                                                                   fill = VegaValueRef(field = "x", scale = "color"),
                                                                                    innerRadius = VegaValueRef(value = holesize),
                                                                                    outerRadius = VegaValueRef(value = 250),
                                                                                    startAngle = VegaValueRef(field = "startAngle"),
