@@ -23,8 +23,10 @@
     if stacked
       push!(v.data, VegaData(name = "stats", source = "table",
                              transform = [VegaTransform(Dict{Any, Any}("type"=> "aggregate", "groupby" => ["x"], "summarize"=>[Dict{Any,Any}("field" => "y", "ops" => ["sum"])]))]))
+
+      # bind the y scale to layout start and layout end
       v.marks[1].properties.enter.y = VegaValueRef(scale = "y", field = "layout_start")
-    v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "layout_end")
+      v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "layout_end")
 
       v.scales[2].domain = VegaDataRef("stats", "sum_y")
 
