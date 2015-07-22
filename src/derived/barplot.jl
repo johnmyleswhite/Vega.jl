@@ -30,8 +30,8 @@
 
       v.scales[2].domain = VegaDataRef("stats", "sum_y")
 
-      v.marks[1].from = Dict{Any, Any}("data" => "table",
-                                       "transform" => [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y"))])
+      v.marks[1].from = VegaMarkFrom(data = "table",
+                                     transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y"))])
     end
 
     #Return horizontal bar chart

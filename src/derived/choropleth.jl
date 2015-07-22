@@ -20,7 +20,7 @@
                         )]
 
     v.marks = [VegaMark(_type = "path",
-                        from = Dict{Any, Any}("data" => "counties"),
+                        from = VegaMarkFrom(data="counties"),
                         properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "path")),
                                                         update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "value.y")),
                                                         hover = VegaMarkPropertySet(fill = VegaValueRef(value = "red")))

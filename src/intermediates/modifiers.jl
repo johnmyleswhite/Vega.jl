@@ -25,19 +25,7 @@ end
 end
 
 @compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark()
-	titlemark.type = "text"
-	titlemark.from = Dict{Any, Any}("value" => title)
-    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     y = VegaValueRef(value = 0),
-                                     text = VegaValueRef(value = title))
-	titlemark.properties = VegaMarkProperties(enter = enterprops)
-	push!(v.marks, titlemark)
-	return v
-end
-
-@compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark(_type = "text", from = Dict{Any, Any}("value" => title))
+	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
                                      y = VegaValueRef(value = -50),
                                      text = VegaValueRef(value = title),

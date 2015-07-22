@@ -56,7 +56,7 @@
                           fill = VegaValueRef(scale = "group",
                                               field = "group"))
     v.marks[1] = VegaMark(_type = "symbol",
-                        from = Dict{Any, Any}("data" => "table"),
+                        from = VegaMarkFrom(data="table"),
                         properties = VegaMarkProperties(enter = enterprops))
 
     return v

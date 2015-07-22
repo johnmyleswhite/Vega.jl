@@ -11,13 +11,14 @@
                       _type = "ordinal")]
 
     v.marks = [VegaMark(_type = "arc",
-                       from = Dict{Any, Any}("data"=> "table", "transform"=> [Dict{Any, Any}("type"=> "pie", "value"=> "y")]),
+                       from = VegaMarkFrom(data = "table",
+                                           transform = [VegaTransform(Dict{Any, Any}("type"=> "pie", "value"=> "y"))]),
                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(
-                                                                                   endAngle = VegaValueRef(field = "endAngle"),
+                                                                                   endAngle = VegaValueRef(field = "layout_end"),
                                                                                    fill = VegaValueRef(field = "x", scale = "color"),
                                                                                    innerRadius = VegaValueRef(value = holesize),
                                                                                    outerRadius = VegaValueRef(value = 250),
-                                                                                   startAngle = VegaValueRef(field = "startAngle"),
+                                                                                   startAngle = VegaValueRef(field = "layout_start"),
                                                                                    stroke = VegaValueRef(value = "white"),
                                                                                    x = VegaValueRef(group = "width", mult = 0.5),
                                                                                    y = VegaValueRef(group = "height", mult = 0.5)

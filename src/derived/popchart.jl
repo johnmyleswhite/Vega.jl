@@ -12,9 +12,8 @@
 
     v.marks[1] = VegaMark(
     _type = "text",
-    from = Dict{Any, Any}("data" => "table",
-                          "transform" => [Dict{Any, Any}("type" => "unique",  "field" => "y", "as" => "y")]
-                         ),
+    from = VegaMarkFrom(data = "table",
+                        transform = [VegaTransform(Dict{Any, Any}("type" => "unique",  "field" => "y", "as" => "y"))]),
     properties = VegaMarkProperties(
     enter = VegaMarkPropertySet(
     x = VegaValueRef(value = 325),
@@ -28,9 +27,8 @@
 
     v.marks[2] = VegaMark(
     _type = "group",
-    from = Dict{Any, Any}(
-            "data" => "table",
-    "transform" => [Dict{Any, Any}("type" => "facet", "groupby" => ["group"])]),
+    from = VegaMarkFrom(data = "table",
+                        transform = [VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"]))]),
     properties = VegaMarkProperties(update = VegaMarkPropertySet(
                                                                 x = VegaValueRef(scale = "g", field = "_id"),
                                                                 y = VegaValueRef(value = 0),

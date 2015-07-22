@@ -8,7 +8,7 @@
 
     v.marks = Array(VegaMark,1)
     v.marks[1] = VegaMark(_type = "text",
-                          from = Dict{Any, Any}("data" => "table"),
+                          from = VegaMarkFrom(data="table"),
                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(
                                                                     x = VegaValueRef(field = "x"),
                                                                     y = VegaValueRef(field = "y"),
