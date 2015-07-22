@@ -12,7 +12,7 @@ scale_spec =
 	(:round, Bool, nothing),
 	(:points, Bool, nothing),
 	(:padding, Number, nothing),
-	(:sort, Bool, nothing),
+	(:sort, Bool, nothing),  # TODO: docs say sort should be object
 	(:clamp, Bool, nothing),
 	(:nice, Bool, nothing),
 	(:exponent, Number, nothing),

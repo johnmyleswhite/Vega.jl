@@ -22,8 +22,8 @@
                             domain = VegaDataRef("table", "group"))
 
     v.marks = [VegaMark(_type = "group")]
-    v.marks[1].from = Dict{Any, Any}("data" => "table",
-                                     "transform" => [VegaTransform(Dict{Any, Any}("groupby" => ["x"], "type" => "facet"))])
+    v.marks[1].from = VegaMarkFrom(data = "table",
+                                   transform = [VegaTransform(Dict{Any, Any}("groupby" => ["x"], "type" => "facet"))])
 
     v.marks[1].marks = [VegaMark(_type = "rect")]
     v.marks[1].marks[1].properties = VegaMarkProperties(enter = VegaMarkPropertySet(fill = VegaValueRef(field = "group", scale = "group"),

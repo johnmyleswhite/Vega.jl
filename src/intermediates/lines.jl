@@ -4,11 +4,9 @@
       VegaMark(_type = "line",
                properties = VegaMarkProperties(enter = default_props()))
     res = VegaMark(_type = "group",
-                   from = Dict{Any, Any}(
-                           "data" => "table",
-                           "transform" =>
-                             [Dict{Any, Any}("type" => "facet", "groupby" => ["group"])]
-                          ),
+                   from = VegaMarkFrom(data = "table",
+                                       transform =[VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"]))]
+                                       ),
                    marks = innermarks)
 
     if v.marks == nothing

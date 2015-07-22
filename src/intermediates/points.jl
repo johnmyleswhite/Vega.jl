@@ -1,6 +1,6 @@
 @compat function add_points!(v::VegaVisualization)
     res = VegaMark(_type = "symbol",
-                   from = Dict{Any, Any}("data" => "table"),
+                   from = VegaMarkFrom(data="table"),
                    properties = VegaMarkProperties(enter = default_props()))
 
     if v.marks == nothing

@@ -32,6 +32,7 @@ module Vega
     include("primitives/data.jl")
     include("primitives/markpropertyset.jl")
     include("primitives/markproperties.jl")
+    include("primitives/markfrom.jl")
     include("primitives/scale.jl")
     include("primitives/mark.jl")
     include("primitives/legend.jl")

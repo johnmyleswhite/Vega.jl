@@ -13,7 +13,7 @@ s = [VegaScale(name = "x",
                  domain = VegaDataRef("table", "y"))]
 
 m = [VegaMark(_type = "rect",
-    from = Dict{Any, Any}("data" => "table"),
+    from = VegaMarkFrom(data="table"),
               properties =
                 VegaMarkProperties(enter =
                   VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),

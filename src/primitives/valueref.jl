@@ -1,5 +1,7 @@
 valueref_spec =
 [
+    # TODO: field can also be an `Object` (`Dict{Any,Any}`)
+    # TODO: scale can also be an `Object` (`Dict{Any,Any}`)
 	(:value, Any, nothing),
 	(:field, String, nothing),
 	(:group, Union(String, Bool), nothing),
