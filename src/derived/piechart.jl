@@ -12,7 +12,7 @@
 
     v.marks = [VegaMark(_type = "arc",
                        from = VegaMarkFrom(data = "table",
-                                           transform = [VegaTransform(Dict{Any, Any}("type"=> "pie", "value"=> "y"))]),
+                                           transform = [VegaTransform(Dict{Any, Any}("type"=> "pie", "field"=> "y"))]),
                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(
                                                                                    endAngle = VegaValueRef(field = "layout_end"),
                                                                                    fill = VegaValueRef(field = "x", scale = "color"),
