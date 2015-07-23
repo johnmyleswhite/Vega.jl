@@ -41,7 +41,7 @@
     v.marks[1].scales = [VegaScale(name = "pos",
                                     _type = "ordinal",
                                     range = "width",
-                                    domain = VegaDataRef("field", "group"))]
+                                    domain = VegaDataRef(field = "group"))]
 
     return v
 
