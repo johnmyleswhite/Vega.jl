@@ -1,4 +1,16 @@
-#tojs functions
+# All types in Vega.jl are subtypes of AbstractVegaType. Overloading `call` as
+# a parametric type over the field of `AbstractVegaType`s allows us to get much
+# better performance for the first visualization after importing Vega
+abstract AbstractVegaType
+
+function Base.call{T<:AbstractVegaType}(::Type{T}; kwargs...)
+    out = T()
+    for (sym, val) in kwargs
+        setfield!(out, sym, val)
+    end
+    out
+end
+
 tojs(s::Symbol) = string(s)
 tojs(v::Vector) = [tojs(v_i) for v_i in v]
 
@@ -21,9 +33,9 @@ end
 #Takes in a type name and its specification
 #Returns Expr for the type code as if you had written it yourself
 
-#Ex: padding_spec = [(:top, Number, 80, false), (:left, Number, 80, false), (:bottom, Number, 80, false), (:right, Number, 80, false)
-# > maketype(:VegaPadding, padding_spec)]
-# :(type VegaPadding
+#Ex: padding_spec = [(:top, Number, 80, false), (:left, Number, 80, false), (:bottom, Number, 80, false), (:right, Number, 80, false)]
+# > maketype(:VegaPadding, padding_spec)
+# :(type VegaPadding <: AbstractVegaType
 #     top::Number
 #     left::Number
 #     bottom::Number
@@ -39,7 +51,7 @@ function maketype(typename::Symbol, spec)
     end
 
     return Expr(:type, #type
-                true, typename, Expr(:block, lines...) #arguments
+                true, Expr(:<:, typename, AbstractVegaType), Expr(:block, lines...) #arguments
                 )
 end
 
@@ -47,17 +59,15 @@ end
 #Builds a function with the same name as the type (i.e function VegaPadding and type :VegaPadding)
 #An Expr is returned, as if you had typed it yourself
 
-#:(function VegaPadding(; top::Number=80,left::Number=80,bottom::Number=80,right::Number=80)
-#        VegaPadding(top,left,bottom,right)
+#:(function VegaPadding()
+#        VegaPadding(80,80,80,80)
 #    end)
-function makekwfunc(typename::Symbol, spec)
+
+function makedefaultfunc(typename::Symbol, spec)
     return Expr(:function, #type
-                Expr(:call, typename,
-                     Expr(:parameters,
-                          map(entry -> Expr(:kw, fielddef(entry), entry[3]),
-                              spec)...)),
+                Expr(:call, typename),
                 Expr(:block,
-                     Expr(:call, typename, map(entry -> entry[1], spec)...)))
+                     Expr(:call, typename, map(entry -> entry[3], spec)...)))
 end
 
 
@@ -150,7 +160,7 @@ end
 #Use of eval() takes all Expr created above, evaluates their results, so that they become Julia citizens
 function primitivefactory(create::Symbol, spec::AbstractArray)
     eval(maketype(create, spec))
-    eval(makekwfunc(create, spec))
+    eval(makedefaultfunc(create, spec))
     eval(maketojs(create, spec))
     eval(makecopy(create, spec))
 end
