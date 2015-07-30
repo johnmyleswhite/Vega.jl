@@ -5,16 +5,16 @@ scale_spec =
 	(:domain, Union(Vector, VegaDataRef), nothing),
 	(:domainMin, Union(Number, VegaDataRef), nothing),
 	(:domainMax, Union(Number, VegaDataRef), nothing),
-	(:range, Union(Vector, String), nothing),
+	(:range, Union(Vector, String, VegaDataRef), nothing), #TODO: What are Scale Range Literal docs trying to tell us?
 	(:rangeMin, Any, nothing),
 	(:rangeMax, Any, nothing),
 	(:reverse, Union(Bool, VegaDataRef), nothing),
 	(:round, Bool, nothing),
 	(:points, Bool, nothing),
 	(:padding, Number, nothing),
-	(:sort, Bool, nothing),  # TODO: docs say sort should be object
+	(:sort, Union(Bool, Dict{Any, Any}), nothing),  # TODO: docs say sort should be object, union with bool until we're sure
 	(:clamp, Bool, nothing),
-	(:nice, Bool, nothing),
+	(:nice, Union(Bool, String), nothing), #TODO: Docs say string now, union until we know
 	(:exponent, Number, nothing),
 	(:zero, Bool, nothing)
 ]

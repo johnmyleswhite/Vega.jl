@@ -5,8 +5,8 @@ data_spec =
 	(:values, Vector{Dict{Any, Any}}, nothing),
 	(:source, String, nothing),
 	(:url, String, nothing),
-	(:transform, Vector{VegaTransform}, nothing)
-    # TODO: (:modify, Vector{VegaStreamingOps}, nothing)
+	(:transform, Vector{VegaTransform}, nothing),
+    (:modify, Vector{VegaStreamingOps}, nothing)
 ]
 
 primitivefactory(:VegaData, data_spec)

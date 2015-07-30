@@ -14,7 +14,7 @@ axis_spec =
     (:tickSizeMajor, Number, nothing),
     (:tickSizeMinor, Number, nothing),
     (:tickSizeEnd, Number, nothing),
-    (:offset, Number, nothing),
+    (:offset, Union(Number, Dict{Any, Any}), nothing),
     (:layer, String, nothing),
     (:grid, Bool, nothing),
     (:properties, Dict{Any,Any}, nothing)
