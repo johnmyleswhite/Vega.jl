@@ -6,7 +6,7 @@ module Vega
            VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
            #VegaCSV, VegaTSV,
            VegaDataRef, VegaValueRef,
-           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStreamingOps
+           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStreamingOps, VegaMarkFrom
 
     export tojson, tojs
 

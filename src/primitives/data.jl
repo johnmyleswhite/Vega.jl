@@ -2,7 +2,7 @@ data_spec =
 [
 	(:name, String, "table"),
 	(:format, VegaFormat, nothing),
-	(:values, Vector{Dict{Any, Any}}, nothing),
+	(:values, Union(Vector{Dict{Any, Any}}, Vector), nothing),
 	(:source, String, nothing),
 	(:url, String, nothing),
 	(:transform, Vector{VegaTransform}, nothing),

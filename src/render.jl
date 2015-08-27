@@ -17,7 +17,9 @@ println(io,
     <script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\"></script>
     <script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\"></script>
     <script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\"></script>
+    <script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\"></script>
     <script src=\"http://vega.github.io/vega/vega.min.js\"></script>
+
   </head>
   <body>
     <div id=\"vis\"></div>
