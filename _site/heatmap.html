@@ -83,21 +83,21 @@
 
 <h3 id="heatmap-1">Heatmap</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">color</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+
 <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">30</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">30</span>
         <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
         <span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
-        <span class="n">color</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">color</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
     <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="n">heatmap</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">color</span><span class="p">)</span></code></pre></div>
+<span class="n">hm</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/heatmap.png" alt="heatmap" /></p>
 
