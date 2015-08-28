@@ -29,6 +29,8 @@ markpropertyset_spec =
 	(:text, VegaValueRef, nothing),
 	(:dx, VegaValueRef, nothing),
 	(:dy, VegaValueRef, nothing),
+	(:radius, VegaValueRef, nothing),
+	(:theta, VegaValueRef, nothing),
 	(:angle, VegaValueRef, nothing),
 	(:font, VegaValueRef, nothing),
 	(:fontSize, VegaValueRef, nothing),

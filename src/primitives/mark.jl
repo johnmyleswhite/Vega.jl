@@ -3,7 +3,7 @@ mark_spec =
 	(:_type, String, "symbol"),
 	(:name, String, nothing),
 	(:description, String, nothing),
-	(:from, Dict{Any, Any}, nothing),
+	(:from, VegaMarkFrom, nothing),
 	(:properties, VegaMarkProperties, nothing),
 	(:key, String, nothing),
 	(:delay, VegaValueRef, nothing),

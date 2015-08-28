@@ -7,7 +7,7 @@ legend_spec =
 	(:orient, String, nothing),
 	(:title, String, nothing),
 	(:format, String, nothing),
-	(:values, Array, nothing),
+	(:values, Vector, nothing),
 	(:properties, VegaMarkProperties, nothing)
 ]
 

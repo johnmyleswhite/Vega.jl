@@ -1,63 +1,41 @@
-# TODO: Move this elsewhere
-# function makevalues(x::Vector, y::Vector, group::Vector)
-#     n = length(x)
-#     res = Array(Dict{Any, Any}, n)
-#     if isempty(group)
-#         group = ones(Int, n)
-#     end
-#     for i in 1:n
-#         res[i] = Dict{Any, Any}()
-#         res[i]["x"] = x[i]
-#         res[i]["y"] = y[i]
-#         res[i]["group"] = group[i]
-#     end
-#     return res
-# end
-
-# TODO: Convert from z to group
-#       Find and use heat colors
 @compat function heatmap(;
                  x::Vector = Float64[],
                  y::Vector = Float64[],
-                 group::Vector = Int[],
                  color::Vector = Int[])
 
-    v = VegaVisualization()
+    v = VegaVisualization(width = 800, height = 500)
+    add_data!(v, x = x, y = y, group = color)
 
-    add_data!(v, x = x, y = y, group = group)
+    #Use defaults as shortcut, update properties as necessary
+    default_scales!(v)
+    v.scales[1]._type = "ordinal"
+    v.scales[2]._type = "ordinal"
 
-    v.scales = Array(VegaScale, 3)
-    v.scales[1] = VegaScale(name = "x",
-                          _type = "linear",
-                          range = "width",
-                          nice = true,
-                          zero = false,
-                          domain = VegaDataRef("table", "data.x"))
+    v.scales[3]._type = "linear"
+    v.scales[3].domain = [0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    v.scales[3].range = ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#ffffbf", "#fee090", "#fdae61", "#f46d43", "#d73027", "#a50026"]
 
-    v.scales[2] = VegaScale(name = "y",
-                          _type = "linear",
-                          range = "height",
-                          nice = true,
-                          zero = false,
-                          domain = VegaDataRef("table", "data.y"))
+    #Use defaults for axes
+    default_axes!(v)
 
-    v.scales[3] = VegaScale(name = "group",
-                          _type = "ordinal",
-                          range = "category20",
-                          domain = VegaDataRef("table", "data.group"))
+    #Use default legend
+    default_legend!(v)
+    v.legends[1].values = [0, 0.5, 1]
+    v.legends[1].title = ""
 
+    #Marks
     v.marks = Array(VegaMark, 1)
-    enterprops =
-      VegaMarkPropertySet(shape = VegaValueRef(value = "square"), # May need to be "string"
-                          x = VegaValueRef(scale = "x",
-                                           field = "data.x"),
-                          y = VegaValueRef(scale = "y",
-                                           field = "data.y"),
-                          fill = VegaValueRef(scale = "group",
-                                              field = "data.group"))
-    v.marks[1] = VegaMark(_type = "symbol",
-                        from = Dict{Any, Any}("data" => "table"),
-                        properties = VegaMarkProperties(enter = enterprops))
+    v.marks[1] = VegaMark(_type = "rect",
+                          from = VegaMarkFrom(data = "table"),
+                          properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                                      width = VegaValueRef(value = 26),
+                                                                                      y = VegaValueRef(scale = "y", field = "y"),
+                                                                                      height = VegaValueRef(scale = "y", band = true),
+                                                                                      fill = VegaValueRef(scale = "group", field = "group")
+                                                                                      )
+                                                          )
+                                               )
+
 
     return v
 end

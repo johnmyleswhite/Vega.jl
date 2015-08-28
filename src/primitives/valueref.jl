@@ -1,9 +1,9 @@
 valueref_spec =
 [
 	(:value, Any, nothing),
-	(:field, String, nothing),
+	(:field, Union(String, Dict{Any,Any}), nothing), 
 	(:group, Union(String, Bool), nothing),
-	(:scale, String, nothing),
+	(:scale, Union(String, Dict{Any,Any}), nothing),
 	(:mult, Number, nothing),
 	(:offset, Number, nothing),
 	(:band, Bool, nothing)

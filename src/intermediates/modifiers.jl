@@ -25,19 +25,7 @@ end
 end
 
 @compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark()
-	titlemark.type = "text"
-	titlemark.from = Dict{Any, Any}("value" => title)
-    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     y = VegaValueRef(value = 0),
-                                     text = VegaValueRef(value = title))
-	titlemark.properties = VegaMarkProperties(enter = enterprops)
-	push!(v.marks, titlemark)
-	return v
-end
-
-@compat function title!(v::VegaVisualization, title::String)
-	titlemark = VegaMark(_type = "text", from = Dict{Any, Any}("value" => title))
+	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
                                      y = VegaValueRef(value = -50),
                                      text = VegaValueRef(value = title),
@@ -63,20 +51,16 @@ end
 
     #Change mark properties
 
-    #No group marks
-    if typeof(v.marks[1].marks) in (Nothing, Void)
-        v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
-        v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
-        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
+    v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "x")
+    v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
+    v.marks[1].properties.enter.y2 = nothing
+
+    if isempty(filter(x-> x.name == "stats", v.data))
+        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "y")
         v.marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
-        v.marks[1].properties.enter.y2 = nothing
-    #Group Marks
-    else
-        v.marks[1].marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "data.x")
-        v.marks[1].marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
-        v.marks[1].marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "data.y")
-        v.marks[1].marks[1].properties.enter.x2 = VegaValueRef(scale = "y", value = 0)
-        v.marks[1].marks[1].properties.enter.y2 = nothing
+    else  # stacked
+        v.marks[1].properties.enter.x = VegaValueRef(scale = "y", field = "layout_start")
+        v.marks[1].properties.enter.x2 = VegaValueRef(scale = "y", field = "layout_end")
     end
 
     return v

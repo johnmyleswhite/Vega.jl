@@ -7,9 +7,9 @@
     push!(v.data, VegaData(name = "counties",
                             url = "http://trifacta.github.io/vega/data/us-10m.json",
                            format = VegaFormat(_type = "topojson", feature = "counties"),
-                            transform = [VegaTransform(Dict{Any, Any}("type" => "geopath", "value" => "data", "projection" => "albersUsa")),
-        VegaTransform(Dict{Any, Any}("type" => "zip", "key" => "data.id", "with" => "table", "withKey" => "data.x", "as" => "value", "default" => nothing)),
-                                        VegaTransform(Dict{Any, Any}("type" => "filter", "test" => "d.path!=null && d.value!=null"))]
+                           transform = [VegaTransform(Dict{Any, Any}("type" => "geopath", "projection" => "albersUsa")),
+        VegaTransform(Dict{Any, Any}("type" => "zip", "key" => "id", "with" => "table", "withKey" => "x", "as" => "table", "default" => nothing)),
+                                        VegaTransform(Dict{Any, Any}("type" => "filter", "test" => "datum.layout_path!=null && datum.table!=null"))]
                           )
          )
 
@@ -20,11 +20,12 @@
                         )]
 
     v.marks = [VegaMark(_type = "path",
-                        from = Dict{Any, Any}("data" => "counties"),
-                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "path")),
-                                                        update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "value.data.y")),
+                        from = VegaMarkFrom(data="counties"),
+                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "layout_path")),
+                                                        update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "table.y")),
                                                         hover = VegaMarkPropertySet(fill = VegaValueRef(value = "red")))
             )]
 
     v
+
 end
