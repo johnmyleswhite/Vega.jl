@@ -77,15 +77,17 @@
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
 <h3 id="wordcloud-1">Wordcloud</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;mullet&quot;</span><span class="p">,</span> <span class="s">&quot;mull it&quot;</span><span class="p">,</span> <span class="s">&quot;julialang&quot;</span><span class="p">,</span> <span class="s">&quot;viz&quot;</span><span class="p">,</span> <span class="s">&quot;visualization&quot;</span><span class="p">,</span> <span class="s">&quot;muppet&quot;</span><span class="p">,</span> <span class="s">&quot;business&quot;</span><span class="p">,</span> <span class="s">&quot;front&quot;</span><span class="p">,</span> <span class="s">&quot;party&quot;</span><span class="p">,</span> <span class="s">&quot;back&quot;</span><span class="p">,</span> <span class="s">&quot;juliacon&quot;</span><span class="p">,</span> <span class="s">&quot;julia&quot;</span><span class="p">]</span>
-<span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s">&quot;Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Julia’s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Julia’s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.&quot;</span><span class="p">,</span>
+<span class="s">&quot;Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual.&quot;</span>
+<span class="p">]</span>
 
-<span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">words</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">)</span></code></pre></div>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Spectral&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/wordcloud.png" alt="wordcloud" /></p>
 

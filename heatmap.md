@@ -18,20 +18,20 @@ group::AbstractVector
 ### Heatmap
 
 {% highlight julia %}
-n = 30
-x = Array(Int, n^2)
-y = Array(Int, n^2)
-color = Array(Int, n^2)
+x = Array(Int, 900)
+y = Array(Int, 900)
+color = Array(Float64, 900)
+
 t = 0
-for i in 1:n
-    for j in 1:n
+for i in 1:30
+    for j in 1:30
         t += 1
         x[t] = i
         y[t] = j
-        color[t] = Int(rand() > 0.5)
+        color[t] = rand()
     end
 end
 
-heatmap(x = x, y = y, group = color)
+hm = heatmap(x = x, y = y, color = color)
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/heatmap.png" alt = "heatmap">
