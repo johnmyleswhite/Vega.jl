@@ -15,11 +15,19 @@ const vega = Pkg.dir("Vega", "deps/vega2/vega.min.js")
 #Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
 if displayable("text/html")
 
-  display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(topo))</script>")
-  display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(d3))</script>")
-  display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(geo))</script>")
-  display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(cloud))</script>")
-  display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(vega))</script>")
+  display("text/html", "<script type=\"text/javascript\">alert(\"Hello! Vega.jl doesn't yet work with Jupyter Notebook.\");</script>")
+
+  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(topo))</script>")
+  # display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(d3))</script>")
+  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(geo))</script>")
+  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(cloud))</script>")
+  # display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(vega))</script>")
+
+  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
+  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>")
+  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>")
+  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>")
+  display("text/html", "<script src=\"http://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>")
 
 end
 
