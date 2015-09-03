@@ -5,7 +5,6 @@ function openurl(url::String)
     @linux_only   run(`xdg-open $url`)
 end
 
-
 const d3 = Pkg.dir("Vega", "deps/d3/d3.min.js")
 const geo = Pkg.dir("Vega", "deps/d3/d3.geo.projection.min.js")
 const topo = Pkg.dir("Vega", "deps/d3/topojson.js")
@@ -15,42 +14,43 @@ const vega = Pkg.dir("Vega", "deps/vega2/vega.min.js")
 #Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
 if displayable("text/html")
 
-  display("text/html", "<script type=\"text/javascript\">alert(\"Hello! Vega.jl doesn't yet work with Jupyter Notebook.\");</script>")
+        #creates global d3 object
+        display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
 
-  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(topo))</script>")
-  # display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(d3))</script>")
-  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(geo))</script>")
-  # display("text/html", "<script type="text/javascript\" charset=\"utf-8\">$(readall(cloud))</script>")
-  # display("text/html", "<script type=\"text/javascript\" charset=\"utf-8\">$(readall(vega))</script>")
-
-  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
-  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>")
-  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>")
-  display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>")
-  display("text/html", "<script src=\"http://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>")
+        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>")
+        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>")
+        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>")
+        # display("text/html", "<script src=\"http://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>")
 
 end
+
+
 
 #Only part of displaying that doesn't work
 import Base.writemime
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
         spec = JSON.json(tojs(v))
-        divid = randstring(5)
-        vegahtml =
-            """
+        divid = "vg" * randstring(3)
+
+        display("text/html", """
+
               <body>
-                <div id=\"$(divid)\"></div>
+                <div id=\"$divid\"></div>
               </body>
-            <script type='text/javascript'>
-            // parse a spec and create a visualization view
-            function parse(spec) {
-              vg.parse.spec(spec, function(chart) { chart({el:\"#$divid\", renderer:\"svg\"}).update(); });
-            }
-        parse($spec);
-            </script>
-            """
-        print(io, vegahtml)
+
+              <script type="text/javascript">
+              require.config({paths: {vega: "http://vega.github.io/vega/vega.min"}});
+
+              require(["vega"], function(vg) {
+
+                  vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+
+              });
+              </script>
+
+
+              """)
 end
 
 #Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
