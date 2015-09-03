@@ -1,7 +1,13 @@
-@compat function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::AbstractArray = Int[])
+@compat function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], position::Vector{Int} = Int[])
 
     v = VegaVisualization(height = 240, width = 300)
-    add_data!(v, x = x, y = y, group = group)
+
+    #This seems like it should be a method, but so easy to do right here
+    if typeof(x) == Vector{Char}
+        x = String[string(s) for s in x]
+    end
+
+    add_data!(v, x = x, y = y, group = position)
     default_axes!(v)
     default_legend!(v)
 
