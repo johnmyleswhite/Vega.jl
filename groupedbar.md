@@ -12,20 +12,19 @@ Function Keywords:
 {% highlight julia %}
 x::AbstractVector
 y::AbstractVector
-group::AbstractVector
+position::Vector{Int}
 {% endhighlight %}
 
 ### Grouped Bar Chart
 
 {% highlight julia %}
-using Vega, DataFrames
+using Vega
 
-df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega2/test/data/groups.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
-end
+category = ["A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C"]
+position = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+value = [0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.2, 0.1, 0.7]
 
-gb = groupedbar(x = df[:category], y = df[:value], group = df[:position])
+gb = groupedbar(x = category, y = value, position = position)
 colorscheme!(gb, ("Spectral", 5))
 {% endhighlight %}
 
