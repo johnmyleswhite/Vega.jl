@@ -15,7 +15,7 @@ const vega = Pkg.dir("Vega", "deps/vega2/vega.min.js")
 if displayable("text/html")
 
         #creates global d3 object
-        display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
+        display("text/html", "<script src=\"https://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
 
         # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>")
         # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>")
@@ -40,7 +40,7 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
               </body>
 
               <script type="text/javascript">
-              require.config({paths: {vega: "http://vega.github.io/vega/vega.min"}});
+              require.config({paths: {vega: "https://vega.github.io/vega/vega.min"}});
 
               require(["vega"], function(vg) {
 
@@ -62,11 +62,11 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     <html>
       <head>
         <title>$title</title>
-        <script src=\"http://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>
-        <script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>
-        <script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>
-        <script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>
-        <script src=\"http://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>
+        <script src=\"https://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>
+        <script src=\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>
+        <script src=\"https://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>
+        <script src=\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>
+        <script src=\"https://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>
 
       </head>
       <body>
