@@ -5,27 +5,6 @@ function openurl(url::String)
     @linux_only   run(`xdg-open $url`)
 end
 
-const d3 = Pkg.dir("Vega", "deps/d3/d3.min.js")
-const geo = Pkg.dir("Vega", "deps/d3/d3.geo.projection.min.js")
-const topo = Pkg.dir("Vega", "deps/d3/topojson.js")
-const cloud = Pkg.dir("Vega", "deps/d3/d3.layout.cloud.js")
-const vega = Pkg.dir("Vega", "deps/vega2/vega.min.js")
-
-#Only inject javascript if html can be displayed (i.e. Jupyter Notebook)
-if displayable("text/html")
-
-        #creates global d3 object
-        display("text/html", "<script src=\"https://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>")
-
-        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>")
-        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>")
-        # display("text/html", "<script src=\"http://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>")
-        # display("text/html", "<script src=\"http://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>")
-
-end
-
-
-
 #Only part of displaying that doesn't work
 import Base.writemime
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
@@ -40,15 +19,22 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
               </body>
 
               <script type="text/javascript">
-              require.config({paths: {vega: "https://vega.github.io/vega/vega.min"}});
 
-              require(["vega"], function(vg) {
+                  require.config({
+                    paths: {
+                      d3: "../nbextensions/vegajl/deps/d3/d3",
+                      vega: "../nbextensions/vegajl/deps/vega2/vega.min",
+                      cloud: "../nbextensions/vegajl/deps/d3/d3.layout.cloud",
+                      topojson: "../nbextensions/vegajl/deps/d3/topojson"
+                    }
+                  });
 
-                  vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+                  require(["vega", "d3", "cloud", "topojson"], function(vg, d3, cloud, topojson) {
 
-              });
+                      vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+
+                  });
               </script>
-
 
               """)
 end
@@ -63,7 +49,6 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
       <head>
         <title>$title</title>
         <script src=\"https://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>
-        <script src=\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\" charset=\"utf-8\"></script>
         <script src=\"https://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>
         <script src=\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>
         <script src=\"https://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>
