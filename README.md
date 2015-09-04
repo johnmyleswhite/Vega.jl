@@ -4,21 +4,11 @@ Vega.jl
 
 # Introduction
 
-A Julia package for creating Vega visualizations. We currently support barebones versions of the following:
-
-* Area plots
-* Bar plots/Histograms
-* Line plots
-* Scatter plots
-* Pie/Donut charts
-* Waterfall
-* Wordclouds
-
-In addition, this package wraps Vega's pseudo-type system inside of Julia types. This will eventually provide tools for manipulating graphics with a higher level of control over layout.
+A Julia package for creating Vega visualizations. Convenience functions for common visualizations are provided, while also allowing for unlimited customization through modification of the main `VegaVisualization` composite type.
 
 # Installation
 
-This package depends upon [Vega.js](https://github.com/trifacta/vega) from Trifacta and is provided automatically within Vega.jl. If you want to upgrade the library yourself, be sure that the file structure remains the same.
+This package depends upon [Vega.js](https://github.com/vega/vega) from Trifacta and is provided automatically within Vega.jl.
 
 	Pkg.add("Vega")
 	using Vega
@@ -35,20 +25,19 @@ High-level Goals:
 - Achieve Python Vincent functionality (pretty close, if not already there)
 - Achieve Seaborn functionality
 - All basic charts from d3 website
-- Integrate with DataFrames more in-depth
 
 To Do:
 
 Functions/Types:
-- Move all legend attributes into one function
-- yticks! xticks! function
-- Vega transform type (correctly)
-- Vega format type (correctly)
-- Keyword options for title!, xlab!/ylab!, legend!
+- Move all `legend` attributes into one function
+- `yticks!`, `xticks!` function
+- Vega `transform` type (correctly)
+- Vega `format` type (correctly)
+- Keyword options for `title!`, `xlab!/ylab!`, `legend!`
 - Add keyword arguments to visualizations for commonly used features
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
-- grouped bar horizontal in coord_flip!
+- grouped bar horizontal, area in `coord_flip!`
 - How to layer plots?
 - Make all functions have keyword arguments, with only v::VegaVisualization the required argument
 
@@ -89,3 +78,4 @@ Value unclear:
 - Arc visualization
 - overload Base.+ with pipe operator to mimic ggplot syntax
 - Have global settings for size similar to Seaborn/Gadfly themes
+- Integrate with DataFrames more in-depth

@@ -52,7 +52,9 @@ end
     #Change mark properties
 
     v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "x")
-    v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = -1)
+
+    _offset = v.marks[1].properties.enter.width.offset
+    v.marks[1].properties.enter.height = VegaValueRef(scale = "x", band = true, offset = _offset)
     v.marks[1].properties.enter.y2 = nothing
 
     if isempty(filter(x-> x.name == "stats", v.data))
