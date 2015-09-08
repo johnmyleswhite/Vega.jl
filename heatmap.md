@@ -12,7 +12,7 @@ Function Keywords:
 {% highlight julia %}
 x::AbstractVector
 y::AbstractVector
-group::AbstractVector
+color::AbstractVector
 {% endhighlight %}
 
 ### Heatmap

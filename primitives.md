@@ -26,15 +26,15 @@ type VegaVisualization
 end
 {% endhighlight %}
 
-This is a one-to-one mapping of the grammar outlined in the Vega Documentation for [Visualization](https://github.com/trifacta/vega/wiki/Visualization).
+This is a one-to-one mapping of the grammar outlined in the Vega Documentation for [Visualization](https://github.com/vega/vega/wiki).
 
 ## Defined Primitives in Julia
 
 The following primitives have been defined in Julia, to correspond to the types outlined in the Vega.js documentation. See link to Vega documentation to understand structure of each type (or view [Vega.jl primitives source code](https://github.com/johnmyleswhite/Vega.jl/tree/master/src/primitives))
 
-* [VegaVisualization](https://github.com/trifacta/vega/wiki/Visualization)
-* [VegaData](https://github.com/trifacta/vega/wiki/Data)
-* [VegaScale](https://github.com/trifacta/vega/wiki/Scales)
-* [VegaAxis](https://github.com/trifacta/vega/wiki/Axes)
-* [VegaLegend](https://github.com/trifacta/vega/wiki/Legends)
-* [VegaMark](https://github.com/trifacta/vega/wiki/Marks)
+* [VegaVisualization](https://github.com/vega/vega/wiki/Visualization)
+* [VegaData](https://github.com/vega/vega/wiki/Data)
+* [VegaScale](https://github.com/vega/vega/wiki/Scales)
+* [VegaAxis](https://github.com/vega/vega/wiki/Axes)
+* [VegaLegend](https://github.com/vega/vega/wiki/Legends)
+* [VegaMark](https://github.com/vega/vega/wiki/Marks)

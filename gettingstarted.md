@@ -14,15 +14,13 @@ Pkg.add("Vega")
 using Vega
 {% endhighlight %}
 
-The [vega.js](http://trifacta.github.io/vega/vega.min.js) and [d3.js](https://github.com/mbostock/d3/releases/download/v3.5.5/d3.zip) libraries needed to render graphics have been provided as part of the package for convenience, as well as for the ability to create visualizations without requiring an Internet connection.
-
-Should you choose to update to a newer version of either of these libraries, just be sure that the [`deps/vega`](https://github.com/johnmyleswhite/Vega.jl/tree/master/deps/vega) directory structure remains the same, so that the Julia code references will continue to work.
+Currerntly, Vega.jl requires an Internet connection to render graphs, as the [vega](https://github.com/vega/vega) project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.
 
 ## Supported Environments
 
 Vega.jl works with both Jupyter Notebook and the Julia REPL. When using Jupyter Notebooks, the graphics will automatically be printed in-line. Submitting commands via the REPL will either open a new tab in the currently open (default) browser, or trigger the default browser to open.
 
-Note that given the consistent updates to Base Julia, Vega.jl is only targeted to work against v0.4 of Julia (or newer). Use of the [`Compat.jl`](https://github.com/JuliaLang/Compat.jl) package to provide backwards compatibility is not planned.
+Vega.jl is only targeted to work against v0.4 of Julia (or newer). However, some use of the [`Compat.jl`](https://github.com/JuliaLang/Compat.jl) package to provide backwards compatibility has been done. If you are looking for increased backwards capatibility, please submit a pull request as necessary to support your preferred version of Julia.
 
 ## Browser / OS compatibility
 

@@ -1,7 +1,7 @@
 ---
 
 layout: minimal
-title: Vega.jl - A Julia package for generating visualizations using Vega
+title: Vega.jl - A Julia package for generating visualizations using Vega 
 
 ---
 

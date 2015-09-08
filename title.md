@@ -31,7 +31,7 @@ x = pop1900[:people]
 y = pop1900[:age]
 group = pop1900[:sex]
 
-popchart(x = x, y = y, group = group)
+a = popchart(x = x, y = y, group = group)
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/popchart.png" alt = "popchart">
