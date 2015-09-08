@@ -18,23 +18,44 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
                 <div id=\"$divid\"></div>
               </body>
 
-              <script type="text/javascript">
+                <script type="text/javascript">
 
-                  require.config({
-                    paths: {
-                      d3: "../nbextensions/vegajl/deps/d3/d3",
-                      vega: "../nbextensions/vegajl/deps/vega2/vega.min",
-                      cloud: "../nbextensions/vegajl/deps/d3/d3.layout.cloud",
-                      topojson: "../nbextensions/vegajl/deps/d3/topojson"
-                    }
-                  });
+                    require.config({
+                      paths: {
+                        d3: "https://vega.github.io/vega-editor/vendor/d3.min",
+                        vega: "https://vega.github.io/vega/vega.min",
+                        cloud: "https://vega.github.io/vega-editor/vendor/d3.layout.cloud",
+                        topojson: "https://vega.github.io/vega-editor/vendor/topojson"
+                      }
+                    });
 
-                  require(["vega", "d3", "cloud", "topojson"], function(vg, d3, cloud, topojson) {
+                    require(["d3"], function(d3){
 
-                      vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+                        console.log('Loading from require.js...')
+                        window.d3 = d3;
 
-                  });
-              </script>
+                        require(["topojson"], function(topojson){
+
+                          window.topojson = topojson;
+
+                          require(["cloud"], function(cloud){
+
+                            window.cloud = cloud;
+
+                              require(["vega"], function(vg) {
+
+                              vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+
+                          }); //vega require end
+
+                        }); //cloud require end
+
+                      }); //topojson require end
+
+                    }); //d3 require end
+
+                  </script>
+
 
               """)
 end

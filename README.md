@@ -15,7 +15,7 @@ This package depends upon [Vega.js](https://github.com/vega/vega) from Trifacta 
 
 # Documentation
 
-For documentation of the current functionality of this package, please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/)
+For examples of the current functionality of this package, please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/)
 
 # TODO/Contributing
 
