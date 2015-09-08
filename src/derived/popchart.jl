@@ -1,4 +1,4 @@
-@compat function popchart(; x::AbstractArray = Int[], y::AbstractArray = Int[], group::AbstractArray = [])
+@compat function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group::AbstractVector = [])
 
     v = VegaVisualization(width = 640, height = 400)
     add_data!(v, x = x, y = y, group = group)

@@ -1,4 +1,4 @@
-@compat function waterfall(;x::AbstractArray = Int[], y::AbstractArray = Int[])
+@compat function waterfall(;x::AbstractVector = Int[], y::AbstractVector = Int[])
     if length(x) != length(y)
         error("X and Y need to be the same length")
     end

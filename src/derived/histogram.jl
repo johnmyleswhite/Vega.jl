@@ -1,4 +1,4 @@
-function histogram(; x::AbstractArray = Int[],
+function histogram(; x::AbstractVector = Int[],
 					relativefreq::Bool = false,
 					horizontal::Bool = false)
 

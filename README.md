@@ -6,9 +6,11 @@ Vega.jl
 
 A Julia package for creating Vega visualizations. Convenience functions for common visualizations are provided, while also allowing for unlimited customization through modification of the main `VegaVisualization` composite type.
 
+At a high-level, my hope with this package is to provide an easy-to-use library to quickly make common visualizations, while also including some of the interactivity provided as part of the Vega 2 project. This package also provides a declarative syntax that deviates from Grammar-of-Graphics style packages.
+
 # Installation
 
-This package depends upon [Vega.js](https://github.com/vega/vega) from Trifacta and is provided automatically within Vega.jl.
+This package depends upon [Vega.js](https://github.com/vega/vega) from Trifacta and is provided automatically within Vega.jl. Currently, an Internet connection is required to use this package, as the required JavaScript libraries are delivered from a CDN.
 
 	Pkg.add("Vega")
 	using Vega
@@ -19,12 +21,9 @@ For examples of the current functionality of this package, please see the [docum
 
 # TODO/Contributing
 
-I would love to collaborate with anyone interested in interactive graphics and simplistic APIs. Here's the current TODO list; of course, any contribution, on this list or not, is greatly appreciated!
+I would love to collaborate with anyone interested in interactive graphics and simplistic APIs.
 
-High-level Goals:
-- Achieve Python Vincent functionality (pretty close, if not already there)
-- Achieve Seaborn functionality
-- All basic charts from d3 website
+Here's the current TODO list (along with the [GitHub issues](https://github.com/johnmyleswhite/Vega.jl/issues)); of course, any contribution, on this list or not, is greatly appreciated!
 
 To Do:
 
@@ -39,7 +38,7 @@ Functions/Types:
 - change icon type (circles, triangles, etc.)
 - grouped bar horizontal, area in `coord_flip!`
 - How to layer plots?
-- Make all functions have keyword arguments, with only v::VegaVisualization the required argument
+- Make all functions have keyword arguments, with only `v::VegaVisualization` the required argument
 
 Visualizations:
 
