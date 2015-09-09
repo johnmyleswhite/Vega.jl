@@ -28,11 +28,11 @@ Here's the current TODO list (along with the [GitHub issues](https://github.com/
 To Do:
 
 Functions/Types:
-- Move all `legend` attributes into one function
+- Move all `legend` attributes into one function [#34](https://github.com/johnmyleswhite/Vega.jl/issues/34)
 - `yticks!`, `xticks!` function
 - Vega `transform` type (correctly)
 - Vega `format` type (correctly)
-- Keyword options for `title!`, `xlab!/ylab!`, `legend!`
+- Keyword options for `title!`, `xlab!/ylab!`, `legend!`  [#35](https://github.com/johnmyleswhite/Vega.jl/issues/35)
 - Add keyword arguments to visualizations for commonly used features
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
@@ -49,7 +49,6 @@ Visualizations:
 - Add chord chart from d3.js
 - Sankey from d3.js
 - Calendar View Chart from d3.js
-- Rug plot
 - Weather
 - parallel coordinates
 - Treemap

@@ -11,7 +11,7 @@ module Vega
     export tojson, tojs
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
-           histogram, popchart, waterfall, wordcloud, groupedbar
+           histogram, popchart, waterfall, wordcloud, groupedbar, rugplot
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!
 
@@ -62,6 +62,7 @@ module Vega
     include("derived/piechart.jl")
     include("derived/histogram.jl")
     include("derived/popchart.jl")
+    include("derived/rugplot.jl")
     include("derived/waterfall.jl")
     include("derived/wordcloud.jl")
 
