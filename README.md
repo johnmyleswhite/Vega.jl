@@ -38,7 +38,7 @@ Functions/Types:
 - change icon type (circles, triangles, etc.)
 - grouped bar horizontal, area in `coord_flip!`
 - How to layer plots?
-- Make all functions have keyword arguments, with only `v::VegaVisualization` the required argument
+- Make all mutating functions have keyword arguments, with only `v::VegaVisualization` the required argument (or none in the case of `coord_flip!`)
 
 Visualizations:
 

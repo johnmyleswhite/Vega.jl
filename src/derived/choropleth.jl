@@ -8,7 +8,7 @@
                             url = "http://trifacta.github.io/vega/data/us-10m.json",
                            format = VegaFormat(_type = "topojson", feature = "counties"),
                            transform = [VegaTransform(Dict{Any, Any}("type" => "geopath", "projection" => "albersUsa")),
-        VegaTransform(Dict{Any, Any}("type" => "zip", "key" => "id", "with" => "table", "withKey" => "x", "as" => "table", "default" => nothing)),
+                                        VegaTransform(Dict{Any, Any}("type" => "lookup", "on" => "table", "onKey" => "x", "keys" => ["id"], "as" => ["id"])),
                                         VegaTransform(Dict{Any, Any}("type" => "filter", "test" => "datum.layout_path!=null && datum.table!=null"))]
                           )
          )
