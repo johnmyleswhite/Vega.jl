@@ -1,4 +1,1 @@
 
-[submodule "deps/vega"]
-	path = deps/vega
-	url = https://github.com/vega/vega.git
