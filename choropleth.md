@@ -18,7 +18,7 @@ Note: The input for the X array are FIPS codes, not zip codes. The two are not i
 
 {% highlight julia %}
 using Vega, DataFrames
-df = readtable(Pkg.dir("Vega", "deps/vega2/test/data/unemployment.tsv"))
+df = readtable(Pkg.dir("Vega", "deps/vega/test/data/unemployment.tsv"))
 
 v = choropleth(x = df[:id], y = df[:rate])
 {% endhighlight %}

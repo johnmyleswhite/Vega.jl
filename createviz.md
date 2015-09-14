@@ -26,7 +26,7 @@ Note that the above doesn't represent the minimum necessary structure for buildi
 using Vega, DataFrames, JSON
 
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega2/test/data/population.json")))
+for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega/test/data/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 

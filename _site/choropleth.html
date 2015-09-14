@@ -83,7 +83,7 @@
 <p>Note: The input for the X array are FIPS codes, not zip codes. The two are not interchangeable. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega2/test/data/unemployment.tsv&quot;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega/test/data/unemployment.tsv&quot;</span><span class="p">))</span>
 
 <span class="n">v</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">id</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">rate</span><span class="p">])</span></code></pre></div>
 

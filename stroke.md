@@ -37,7 +37,7 @@ v = choropleth(x = df[:id], y = df[:rate])
 
 {% highlight julia %}
 using Vega, DataFrames
-df = readtable(Pkg.dir("Vega", "deps/vega2/test/data/unemployment.tsv"))
+df = readtable(Pkg.dir("Vega", "deps/vega/test/data/unemployment.tsv"))
 
 v = choropleth(x = df[:id], y = df[:rate])
 stroke!(v)

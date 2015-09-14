@@ -100,7 +100,7 @@
 <h3 id="stroke-1">Stroke</h3>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega2/test/data/unemployment.tsv&quot;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega/test/data/unemployment.tsv&quot;</span><span class="p">))</span>
 
 <span class="n">v</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">id</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">rate</span><span class="p">])</span>
 <span class="n">stroke</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code></pre></div>
