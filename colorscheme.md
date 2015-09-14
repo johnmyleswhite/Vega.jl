@@ -48,7 +48,7 @@ colorscheme!(a, "Violet")
 using DataFrames, JSON, Vega
 
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega/test/data/population.json")))
+for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega2/test/data/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 
