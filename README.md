@@ -40,16 +40,14 @@ Functions/Types:
 - How to layer plots?
 - Make all mutating functions have keyword arguments, with only `v::VegaVisualization` the required argument (or none in the case of `coord_flip!`)
 - How to incorporate interactive features of Vega?
+- Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 
-Visualizations:
+Vega Visualizations:
 
 - Force
-- State choropleth
+-
 - Bullet Chart
 - Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
-- Add chord chart from d3.js
-- Sankey from d3.js
-- Calendar View Chart from d3.js
 - Weather
 - parallel coordinates
 - Treemap
@@ -68,9 +66,22 @@ Visualizations:
 - correlation plot
 - violin plot
 - cluster map
-- control charts
+- control charts [#41](https://github.com/johnmyleswhite/Vega.jl/issues/41)
+
+d3 Visualizations:
+
+- Add chord chart from d3.js
+- Sankey from d3.js
+- Calendar View Chart from d3.js
+
+Maps:
+
+- US State
+- State-level
+- Country-level (by pull request from someone else!)
 
 Value unclear:
+
 - Switch to Nullable Types
 - Sanitize inputs to be correct for visualization
 - change add_data! to not add zeroes everywhere there are blanks

@@ -8,8 +8,8 @@
                             url = "http://trifacta.github.io/vega/data/us-10m.json",
                            format = VegaFormat(_type = "topojson", feature = "counties"),
                            transform = [VegaTransform(Dict{Any, Any}("type" => "geopath", "projection" => "albersUsa")),
-                                        VegaTransform(Dict{Any, Any}("type" => "lookup", "on" => "table", "onKey" => "x", "keys" => ["id"], "as" => ["id"])),
-                                        VegaTransform(Dict{Any, Any}("type" => "filter", "test" => "datum.layout_path!=null && datum.table!=null"))]
+                                        VegaTransform(Dict{Any, Any}("type" => "lookup", "on" => "table", "onKey" => "x", "keys" => ["id"], "as" => ["table2"])),
+                                        VegaTransform(Dict{Any, Any}("type" => "filter", "test" => "datum.layout_path!=null && datum.table2!=null"))]
                           )
          )
 
@@ -22,7 +22,7 @@
     v.marks = [VegaMark(_type = "path",
                         from = VegaMarkFrom(data="counties"),
                         properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "layout_path")),
-                                                        update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "table.y")),
+                                                        update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "table2.y")),
                                                         hover = VegaMarkPropertySet(fill = VegaValueRef(value = "red")))
             )]
 
