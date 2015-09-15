@@ -45,7 +45,6 @@ Functions/Types:
 Vega Visualizations:
 
 - Force
--
 - Bullet Chart
 - Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Weather
