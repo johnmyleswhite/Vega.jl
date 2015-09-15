@@ -39,13 +39,14 @@ Functions/Types:
 - grouped bar horizontal, area in `coord_flip!`
 - How to layer plots?
 - Make all mutating functions have keyword arguments, with only `v::VegaVisualization` the required argument (or none in the case of `coord_flip!`)
+- How to incorporate interactive features of Vega?
 
 Visualizations:
 
 - Force
 - State choropleth
 - Bullet Chart
-- Boxplot / Horizontal Boxplot / Grouped Boxplot
+- Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Add chord chart from d3.js
 - Sankey from d3.js
 - Calendar View Chart from d3.js

@@ -1,6 +1,6 @@
 @compat function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 0)
 
-    v = VegaVisualization()
+    v = VegaVisualization(height = 250, width = 250)
     v.legends = [VegaLegend(fill = "color", title = "group")]
 
     add_data!(v, x = x, y = y)
