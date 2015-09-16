@@ -68,19 +68,16 @@ end
     return v
 end
 
-@compat function legend!(v::VegaVisualization, title::String = "")
-	v.legends[1].title = title
-	return v
-end
+@compat function legend!(v::VegaVisualization; title::String="Group", show::Bool=true)
 
-@compat function showlegend!(v::VegaVisualization)
-	default_legend!(v)
-	return v
-end
+    if show == true
+        default_legend!(v)
+        v.legends[1].title = title
+    else
+        empty!(v.legends)
+    end
 
-@compat function hidelegend!(v)
-	empty!(v.legends)
-	return v
+    return v
 end
 
 #Use ColorBrewer.jl scales
