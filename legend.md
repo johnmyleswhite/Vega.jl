@@ -7,14 +7,15 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # legend!
 
-Required Arguments:
+Function Keywords:
 
 {% highlight julia %}
 v::VegaVisualization
 title::String
+show::Bool
 {% endhighlight %}
 
-This function mutates `:VegaVisualization`, modifying the legend title.
+This function mutates `:VegaVisualization`, modifying the legend attributes.
 
 ### Default legend title
 {% highlight julia %}
