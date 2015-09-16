@@ -27,5 +27,7 @@
                         )
                 ]
 
+    #Default to Paired color scale, 12
+    colorscheme!(v, ("Paired", 12))
     return v
 end
