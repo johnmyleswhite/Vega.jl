@@ -5,7 +5,11 @@ function lineplot(;x::AbstractVector = Int[],
 
     default_scales!(v)
     default_axes!(v)
-    default_legend!(v)
+
+    #If non-null array passed, put legend
+    if group != Int[]
+        default_legend!(v)
+    end
 
     add_data!(v, x = x, y = y, group = group)
     add_lines!(v)

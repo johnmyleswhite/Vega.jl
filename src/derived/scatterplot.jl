@@ -5,7 +5,12 @@
 
     default_scales!(v)
     default_axes!(v)
-    default_legend!(v)
+
+    #if non-null array for group, add legend
+
+    if group != Int[]
+        default_legend!(v)
+    end
 
     add_data!(v, x = x, y = y, group = group)
     add_points!(v)

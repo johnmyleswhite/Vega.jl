@@ -3,6 +3,8 @@
     v = VegaVisualization(width = 640, height = 400)
     add_data!(v, x = x, y = y, group = group)
 
+    default_legend!(v)
+
     v.scales = Array(VegaScale, 3)
     v.scales[1] = VegaScale(name = "g", domain = [2,1], range = "width",  _type = "ordinal")
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef("table", "y"))

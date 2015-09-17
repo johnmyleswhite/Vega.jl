@@ -10,7 +10,11 @@
     default_scales!(v)
     v.scales[1]._type = "ordinal"
     default_axes!(v)
-    default_legend!(v)
+
+    #If non-zero group is passed, add a legend
+    if group != Int[]
+      default_legend!(v)
+    end
 
     add_data!(v, x = x, y = y, group = group, y2 = y2)
     add_rects!(v)
@@ -32,6 +36,7 @@
 
       v.marks[1].from = VegaMarkFrom(data = "table",
                                      transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y"))])
+
     end
 
     #Return horizontal bar chart
