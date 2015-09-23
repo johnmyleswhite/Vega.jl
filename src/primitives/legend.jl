@@ -1,12 +1,12 @@
 legend_spec =
 [
-	(:size, String, nothing),
-	(:shape, String, nothing),
-	(:fill, String, nothing),
-	(:stroke, String, nothing),
-	(:orient, String, nothing),
-	(:title, String, nothing),
-	(:format, String, nothing),
+	(:size, AbstractString, nothing),
+	(:shape, AbstractString, nothing),
+	(:fill, AbstractString, nothing),
+	(:stroke, AbstractString, nothing),
+	(:orient, AbstractString, nothing),
+	(:title, AbstractString, nothing),
+	(:format, AbstractString, nothing),
 	(:values, Vector, nothing),
 	(:properties, VegaMarkProperties, nothing)
 ]

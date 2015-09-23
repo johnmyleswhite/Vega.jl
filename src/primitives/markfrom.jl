@@ -1,8 +1,8 @@
 markfrom_spec =
 [
-    (:data, String, nothing),
+    (:data, AbstractString, nothing),
     (:transform, Vector{VegaTransform}, nothing),
-    (:value, String, nothing)
+    (:value, AbstractString, nothing)
 ]
 
 primitivefactory(:VegaMarkFrom, markfrom_spec)

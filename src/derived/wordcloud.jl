@@ -1,4 +1,4 @@
-@compat function wordcloud(; x::AbstractVector =  String[])
+@compat function wordcloud(; x::AbstractVector =  UTF8String[])
 
     v = VegaVisualization(height = 400,
                       width = 800,

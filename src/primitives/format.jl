@@ -31,11 +31,11 @@
 
 format_spec =
 [
-    (:_type, String, nothing),
+    (:_type, AbstractString, nothing),
     (:parse, Dict{Any, Any}, nothing),
-    (:property, String, nothing),
-    (:feature, String, nothing),
-    (:mesh, String, nothing),
+    (:property, AbstractString, nothing),
+    (:feature, AbstractString, nothing),
+    (:mesh, AbstractString, nothing),
     (:children, Dict{Any, Any}, nothing)
 ]
 

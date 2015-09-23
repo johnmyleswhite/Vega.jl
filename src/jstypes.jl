@@ -26,7 +26,7 @@ tojs(x::Any) = x
 #Helper function for building Expr body given a specification
 function fielddef(entry::Tuple)
 
-    return Expr(:(::), entry[1], Union(entry[2], Nothing))
+    return Expr(:(::), entry[1], Union{entry[2], Void})
 
 end
 
@@ -166,7 +166,7 @@ function primitivefactory(create::Symbol, spec::AbstractArray)
 end
 
 #Guess this behavior is undefined in Base?
-Base.copy(x::Nothing) = nothing
+Base.copy(x::Void) = nothing
 
 #Export to JSON representation any of the Vega objects
 tojson(x::Any) = JSON.json(tojs(x))

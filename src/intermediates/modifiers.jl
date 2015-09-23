@@ -1,10 +1,10 @@
-@compat function xlab!(v::VegaVisualization, title::String)
+@compat function xlab!(v::VegaVisualization, title::AbstractString)
 	a = v.axes[findfirst([z.name == "x" for z in v.scales])]
 	a.title = title
 	return v
 end
 
-@compat function ylab!(v::VegaVisualization, title::String)
+@compat function ylab!(v::VegaVisualization, title::AbstractString)
 	a = v.axes[findfirst([z.name == "y" for z in v.scales])]
 	a.title = title
 	return v
@@ -24,7 +24,7 @@ end
 	return v
 end
 
-@compat function title!(v::VegaVisualization, title::String)
+@compat function title!(v::VegaVisualization, title::AbstractString)
 	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
                                      y = VegaValueRef(value = -50),
@@ -68,7 +68,7 @@ end
     return v
 end
 
-@compat function legend!(v::VegaVisualization; title::String="Group", show::Bool=true)
+@compat function legend!(v::VegaVisualization; title::AbstractString="Group", show::Bool=true)
 
     if show == true
         default_legend!(v)
@@ -81,7 +81,7 @@ end
 end
 
 #Use ColorBrewer.jl scales
-@compat function colorscheme!(v::VegaVisualization, palette::Union(Tuple{AbstractString,Int64}, AbstractString, Array))
+@compat function colorscheme!(v::VegaVisualization, palette::Union{Tuple{AbstractString,Int64}, AbstractString, Array})
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])

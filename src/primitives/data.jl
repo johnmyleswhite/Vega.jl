@@ -1,10 +1,10 @@
 data_spec =
 [
-	(:name, String, "table"),
+	(:name, AbstractString, "table"),
 	(:format, VegaFormat, nothing),
-	(:values, Union(Vector{Dict{Any, Any}}, Vector), nothing),
-	(:source, String, nothing),
-	(:url, String, nothing),
+	(:values, Union{Vector{Dict{Any, Any}}, Vector}, nothing),
+	(:source, AbstractString, nothing),
+	(:url, AbstractString, nothing),
 	(:transform, Vector{VegaTransform}, nothing),
     (:modify, Vector{VegaStreamingOps}, nothing)
 ]

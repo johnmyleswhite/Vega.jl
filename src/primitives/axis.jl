@@ -1,11 +1,11 @@
 axis_spec =
 [
-    (:_type, String, "x"),
-    (:scale, String, "x"),
-    (:orient, String, nothing),
-    (:title, String, nothing),
+    (:_type, AbstractString, "x"),
+    (:scale, AbstractString, "x"),
+    (:orient, AbstractString, nothing),
+    (:title, AbstractString, nothing),
     (:titleOffset, Number, nothing),
-    (:format, String, nothing),
+    (:format, AbstractString, nothing),
     (:ticks, Number, nothing),
     (:values, Vector, nothing),
     (:subdivide, Number, nothing),
@@ -14,8 +14,8 @@ axis_spec =
     (:tickSizeMajor, Number, nothing),
     (:tickSizeMinor, Number, nothing),
     (:tickSizeEnd, Number, nothing),
-    (:offset, Union(Number, Dict{Any, Any}), nothing),
-    (:layer, String, nothing),
+    (:offset, Union{Number, Dict{Any, Any}}, nothing),
+    (:layer, AbstractString, nothing),
     (:grid, Bool, nothing),
     (:properties, Dict{Any,Any}, nothing)
 ]

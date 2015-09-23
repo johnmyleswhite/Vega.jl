@@ -1,8 +1,8 @@
 streamingops_spec =
 [
-	(:_type, String, nothing),
-	(:signal, String, nothing),
-	(:field, String, nothing),
+	(:_type, AbstractString, nothing),
+	(:signal, AbstractString, nothing),
+	(:field, AbstractString, nothing),
 ]
 
 primitivefactory(:VegaStreamingOps, streamingops_spec)
