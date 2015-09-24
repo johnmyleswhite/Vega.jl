@@ -22,7 +22,7 @@ end
 
     v.axes[1] = VegaAxis(_type = "x", scale = "x", title = "x")
     v.axes[1].properties = Dict{Any, Any}("title" => Dict{Any, Any}("fontSize" => Dict{Any, Any}("value" => 14)))
-    v.axes[2] = VegaAxis(_type = "y", scale = "y", title = "y")
+    v.axes[2] = VegaAxis(_type = "y", scale = "y", title = "y", titleOffset = 50)
     v.axes[2].properties = Dict{Any, Any}("title" => Dict{Any, Any}("fontSize" => Dict{Any, Any}("value" => 14)))
 
     return v

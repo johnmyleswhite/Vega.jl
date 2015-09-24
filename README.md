@@ -37,7 +37,6 @@ Functions/Types:
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
 - How to layer plots?
-- Make all mutating functions have keyword arguments, with only `v::VegaVisualization` the required argument (or no keywords in the case of `coord_flip!`)
 - How to incorporate interactive features of Vega?
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 

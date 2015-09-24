@@ -29,11 +29,11 @@
     v.marks[1].properties.enter.x  = VegaValueRef(scale = "x", field = "x", offset = 31)
 
     #Hide unneeded labels
-    xlab!(v, "")
-    ylab!(v, "")
+    xlab!(v)
+    ylab!(v)
     legend!(v, show = false)
 
-    colorscheme!(v, ["#4daf4a", "#e41a1c", "#377eb8"])
+    colorscheme!(v; palette = ["#4daf4a", "#e41a1c", "#377eb8"])
 
     return v
 end

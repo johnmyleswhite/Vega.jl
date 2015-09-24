@@ -1,36 +1,49 @@
-@compat function xlab!(v::VegaVisualization, title::AbstractString)
+@compat function xlab!(v::VegaVisualization; title::AbstractString = "")
 	a = v.axes[findfirst([z.name == "x" for z in v.scales])]
 	a.title = title
 	return v
 end
 
-@compat function ylab!(v::VegaVisualization, title::AbstractString)
+@compat function ylab!(v::VegaVisualization; title::AbstractString = "")
 	a = v.axes[findfirst([z.name == "y" for z in v.scales])]
 	a.title = title
 	return v
 end
 
-@compat function xlim!(v::VegaVisualization, min::Real, max::Real)
-	s = v.scales[findfirst([z.name == "x" for z in v.scales])]
+@compat function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000)
+
+    if min > max
+        error("Min must be less than Max")
+    end
+
+    s = v.scales[findfirst([z.name == "x" for z in v.scales])]
 	s.domainMin = min
 	s.domainMax = max
 	return v
 end
 
-@compat function ylim!(v::VegaVisualization, min::Real, max::Real)
-	s = v.scales[findfirst([z.name == "y" for z in v.scales])]
+@compat function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000)
+
+    if min > max
+        error("Min must be less than Max")
+    end
+
+    s = v.scales[findfirst([z.name == "y" for z in v.scales])]
 	s.domainMin = min
 	s.domainMax = max
 	return v
 end
 
-@compat function title!(v::VegaVisualization, title::AbstractString)
+@compat function title!(v::VegaVisualization; title::AbstractString = "")
 	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     y = VegaValueRef(value = -50),
+                                     dy = VegaValueRef(value = -40),
                                      text = VegaValueRef(value = title),
                                      fill = VegaValueRef(value = "black"),
-                                     fontSize = VegaValueRef(value = 12))
+                                     fontSize = VegaValueRef(value = 16),
+                                     align = VegaValueRef(value = "center"),
+                                     baseline = VegaValueRef(value = "top"),
+                                     fontWeight = VegaValueRef(value = "bold"))
 	titlemark.properties = VegaMarkProperties(enter = enterprops)
 	push!(v.marks, titlemark)
 	return v
@@ -81,7 +94,7 @@ end
 end
 
 #Use ColorBrewer.jl scales
-@compat function colorscheme!(v::VegaVisualization, palette::Union{Tuple{AbstractString,Int64}, AbstractString, Array})
+@compat function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int64}, AbstractString, Array} = "ordinal10")
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])
@@ -103,9 +116,9 @@ end
 
 end
 
-@compat function stroke!(v::VegaVisualization; color::String = "Black", width::Real = 0.75, opacity::Real = 1, visible::Bool = true)
+@compat function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::Real = 0.75, opacity::Real = 1, visible::Bool = true)
 
-    if typeof(v.marks[1].marks) in (Nothing, Void)
+    if typeof(v.marks[1].marks) == Void
         if visible
             v.marks[1].properties.enter.stroke = VegaValueRef(value = color)
             v.marks[1].properties.enter.strokeWidth = VegaValueRef(value = width)

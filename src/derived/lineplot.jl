@@ -16,7 +16,10 @@ function lineplot(;x::AbstractVector = Int[],
 
     v.marks[1].marks[1].properties.enter.stroke = VegaValueRef(scale = "group", field="group")
 
+    #Make line width a little thicker
+    v.marks[1].marks[1].properties.enter.strokeWidth = VegaValueRef(value = 2)
+
     #Default to Paired color scale, 12
-    colorscheme!(v, ("Paired", 12))
+    colorscheme!(v; palette = ("Paired", 12))
     return v
 end
