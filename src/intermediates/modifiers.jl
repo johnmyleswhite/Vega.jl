@@ -1,16 +1,26 @@
-@compat function xlab!(v::VegaVisualization; title::AbstractString = "")
+@compat function xlab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
+                       format::AbstractString = "", layer::AbstractString = "front")
 	a = v.axes[findfirst([z.name == "x" for z in v.scales])]
 	a.title = title
+    a.grid = grid
+    a.ticks = ticks
+    a.format = format
+    a.layer = layer
 	return v
 end
 
-@compat function ylab!(v::VegaVisualization; title::AbstractString = "")
+@compat function ylab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
+                       format::AbstractString = "", layer::AbstractString = "front")
 	a = v.axes[findfirst([z.name == "y" for z in v.scales])]
 	a.title = title
+    a.grid = grid
+    a.ticks = ticks
+    a.format = format
+    a.layer = layer
 	return v
 end
 
-@compat function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000)
+@compat function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
 
     if min > max
         error("Min must be less than Max")
@@ -19,10 +29,12 @@ end
     s = v.scales[findfirst([z.name == "x" for z in v.scales])]
 	s.domainMin = min
 	s.domainMax = max
+    s.reverse = reverse
+    s.round = round
 	return v
 end
 
-@compat function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000)
+@compat function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
 
     if min > max
         error("Min must be less than Max")
@@ -31,19 +43,26 @@ end
     s = v.scales[findfirst([z.name == "y" for z in v.scales])]
 	s.domainMin = min
 	s.domainMax = max
+    s.reverse = reverse
+    s.round = round
 	return v
 end
 
-@compat function title!(v::VegaVisualization; title::AbstractString = "")
+@compat function title!(v::VegaVisualization;
+                        title::AbstractString = "", y::Int = -40, fill::AbstractString = "black", fontSize::Int = 16,
+                        align::AbstractString = "center", baseline::AbstractString = "top", fontWeight::AbstractString = "bold",
+                        font::AbstractString = "")
 	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
     enterprops = VegaMarkPropertySet(x = VegaValueRef(value = v.width / 2),
-                                     dy = VegaValueRef(value = -40),
+                                     y = VegaValueRef(value = y),
                                      text = VegaValueRef(value = title),
-                                     fill = VegaValueRef(value = "black"),
-                                     fontSize = VegaValueRef(value = 16),
-                                     align = VegaValueRef(value = "center"),
-                                     baseline = VegaValueRef(value = "top"),
-                                     fontWeight = VegaValueRef(value = "bold"))
+                                     fill = VegaValueRef(value = fill),
+                                     fontSize = VegaValueRef(value = fontSize),
+                                     align = VegaValueRef(value = align),
+                                     baseline = VegaValueRef(value = baseline),
+                                     fontWeight = VegaValueRef(value = fontWeight),
+                                     font = VegaValueRef(value = font)
+                                     )
 	titlemark.properties = VegaMarkProperties(enter = enterprops)
 	push!(v.marks, titlemark)
 	return v
