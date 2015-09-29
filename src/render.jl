@@ -5,7 +5,7 @@ function openurl(url::AbstractString)
     @linux_only   run(`xdg-open $url`)
 end
 
-#Only part of displaying that doesn't work
+#Jupyter Notebook display
 import Base.writemime
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
@@ -31,7 +31,6 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
                     require(["d3"], function(d3){
 
-                        console.log('Loading from require.js...')
                         window.d3 = d3;
 
                         require(["topojson"], function(topojson){
@@ -45,6 +44,12 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
                               require(["vega"], function(vg) {
 
                               vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+
+                              window.setTimeout(function() {
+                                var pnglink = document.getElementById(\"$divid\").getElementsByTagName(\"canvas\")[0].toDataURL(\"image/png\")
+                                document.getElementById(\"$divid\").insertAdjacentHTML('beforeend', '<br><a href=\"' + pnglink + '\" download>Save as PNG</a>')
+
+                              }, 20);
 
                           }); //vega require end
 
@@ -64,6 +69,8 @@ end
 #Only Julia code is tojson(v), converting from ::VegaVisualization to JSON
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
+    divid = "vg" * randstring(3)
+
     println(io,
     "
     <html>
@@ -76,15 +83,25 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
       </head>
       <body>
-        <div id=\"vis\"></div>
+        <div id=\"$divid\"></div>
       </body>
+
     <script type=\"text/javascript\">
     // parse a spec and create a visualization view
     function parse(spec) {
-      vg.parse.spec(spec, function(chart) { chart({el:\"#vis\"}).update(); });
+      vg.parse.spec(spec, function(chart) { chart({el:\"#$divid\"}).update(); });
     }
     parse($(tojson(v)));
+
+    window.setTimeout(function() {
+      var pnglink = document.getElementById(\"$divid\").getElementsByTagName(\"canvas\")[0].toDataURL(\"image/png\")
+      document.getElementById(\"$divid\").insertAdjacentHTML('beforeend', '<br><a href=\"' + pnglink + '\" download>Save as PNG</a>')
+
+    }, 20);
+
     </script>
+
+
     </html>
     ")
 
