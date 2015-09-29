@@ -29,22 +29,20 @@ To Do:
 
 Functions/Types:
 
-- Keyword options for `title!`, `xlab!/ylab!`, `legend!`  [#35](https://github.com/johnmyleswhite/Vega.jl/issues/35)
 - Add keyword arguments to visualizations for commonly used features
 - grouped bar horizontal, area in `coord_flip!`
-- `yticks!`, `xticks!` function
 - Fill in Vega `transform` and `format` types with actual fields
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
 - How to layer plots?
-- How to incorporate interactive features of Vega?
+- How to incorporate interactive features of Vega? `tooltip` function seems useful
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 
 Vega Visualizations:
 
 - Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Force
-- Bullet Chart
+- Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Weather
 - parallel coordinates
 - Treemap
@@ -87,3 +85,4 @@ Value unclear:
 - Have global settings similar to Seaborn/Gadfly themes
 - Integrate with DataFrames more in-depth
 - control charts ~~[#41](https://github.com/johnmyleswhite/Vega.jl/issues/41)~~
+- `yticks!`, `xticks!` function (covered by keyword arguments on `xlab!` and `ylab!` I think)
