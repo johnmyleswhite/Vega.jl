@@ -1,7 +1,8 @@
 using Vega
 using Base.Test
+using Compat
 
-@assert 1 == 1
+@compat @assert 1 == 1
 
 # my_tests = ["test/padding.jl",
 #             "test/valueref.jl",
