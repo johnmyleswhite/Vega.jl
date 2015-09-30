@@ -7,14 +7,18 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # xlab! / ylab!
 
-Required Arguments:
+Arguments:
 
 {% highlight julia %}
 v::VegaVisualization
-title::String
+title::AbstractString = ""
+grid::Bool = false
+ticks::Number = 0
+format::AbstractString = ""
+layer::AbstractString = "front"
 {% endhighlight %}
 
-This function mutates `:VegaVisualization`, adding/modifying a label of the X axis or Y axis.
+This function mutates `:VegaVisualization`, adding/modifying the X axis or Y axis.
 
 ### Default Axis labels
 {% highlight julia %}
@@ -31,8 +35,8 @@ v = lineplot(x = x, y = y, group = group)
 ### Modified Axis labels
 
 {% highlight julia %}
-xlab!(v, "Weight (kg)")
-ylab!(v, "Height (cm)")
+xlab!(v, title = "Weight (kg)")
+ylab!(v, title = "Height (cm)")
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/lineplotaxis.png" alt = "lineplot">

@@ -7,15 +7,17 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # xlim! / ylim!
 
-Required Arguments:
+Arguments:
 
 {% highlight julia %}
 v::VegaVisualization
-min::Real
-max::Real
+min::Real = 0
+max::Real = 1000
+reverse::Bool = false
+round::Bool = false
 {% endhighlight %}
 
-This function mutates `:VegaVisualization`, modifying the min/max of the axes.
+This function mutates `:VegaVisualization`, modifying the min/max and scale of the axes.
 
 ### Default Axis limits
 {% highlight julia %}

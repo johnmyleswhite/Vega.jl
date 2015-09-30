@@ -7,14 +7,21 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # title!
 
-Required Arguments:
+Arguments:
 
 {% highlight julia %}
 v::VegaVisualization
-title::String
+title::AbstractString = ""
+y::Int = -40
+fill::AbstractString = "black"
+fontSize::Int = 16
+align::AbstractString = "center"
+baseline::AbstractString = "top"
+fontWeight::AbstractString = "bold"
+font::AbstractString = ""
 {% endhighlight %}
 
-This function mutates `:VegaVisualization`, adding a chart title.
+This function mutates `:VegaVisualization`, adding/modifying a chart title.
 
 ### No title
 {% highlight julia %}
