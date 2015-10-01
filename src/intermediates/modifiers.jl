@@ -164,20 +164,16 @@ end
 end
 
 
-@compat function hline!(v::VegaVisualization; value::Real = 0, lineweight::Real = 1.5, fill::AbstractString = "#000")
-    line = VegaMark(_type = "rect",
-                    from = VegaMarkFrom(data = "table",
-                                        transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "summarize" => Dict{Any, Any}("x" => ["min", "max"])
+@compat function hline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
+    line = VegaMark(_type = "rule",
+                    properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(field = Dict{Any, Any}("group" => "x")),
+                                                                                x2 = VegaValueRef(field = Dict{Any, Any}("group" => "width")),
+                                                                                y = VegaValueRef(scale = "y", value = value),
+                                                                                strokeWidth = VegaValueRef(value = strokeWidth),
+                                                                                stroke = VegaValueRef(value = stroke),
+                                                                                strokeDash = VegaValueRef(value = [strokeDash])
                                                                                 )
-                                                                    )]
-                                        ),
-                                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "min_x"),
-                                                                                                    x2 = VegaValueRef(scale = "x", field = "max_x"),
-                                                                                                    y = VegaValueRef(scale = "y", value = value),
-                                                                                                    height = VegaValueRef(value = lineweight),
-                                                                                                    fill = VegaValueRef(value = fill)
-                                                                                                    )
-                                                    )
+                                )
                     )
 
     push!(v.marks, line)
@@ -185,20 +181,16 @@ end
     return v
 end
 
-@compat function vline!(v::VegaVisualization; value::Real = 0, lineweight::Real = 1.5, fill::AbstractString = "#000")
-    line = VegaMark(_type = "rect",
-                    from = VegaMarkFrom(data = "table",
-                                        transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "summarize" => Dict{Any, Any}("y" => ["min", "max"])
+@compat function vline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
+    line = VegaMark(_type = "rule",
+                    properties = VegaMarkProperties(enter = VegaMarkPropertySet(y = VegaValueRef(field = Dict{Any, Any}("group" => "y")),
+                                                                                y2 = VegaValueRef(field = Dict{Any, Any}("group" => "height")),
+                                                                                x = VegaValueRef(scale = "y", value = value),
+                                                                                strokeWidth = VegaValueRef(value = strokeWidth),
+                                                                                stroke = VegaValueRef(value = stroke),
+                                                                                strokeDash = VegaValueRef(value = [strokeDash])
                                                                                 )
-                                                                    )]
-                                        ),
-                                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(y = VegaValueRef(scale = "y", field = "min_y"),
-                                                                                                    y2 = VegaValueRef(scale = "y", field = "max_y"),
-                                                                                                    x = VegaValueRef(scale = "x", value = value),
-                                                                                                    width = VegaValueRef(value = lineweight),
-                                                                                                    fill = VegaValueRef(value = fill)
-                                                                                                    )
-                                                    )
+                                )
                     )
 
     push!(v.marks, line)
