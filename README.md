@@ -31,7 +31,7 @@ Functions/Types:
 
 - Add keyword arguments to visualizations for commonly used features
 - grouped bar horizontal, area in `coord_flip!`
-- Fill in Vega `transform` and `format` types with actual fields
+- Fill in Vega `transform` type with actual fields
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
 - How to layer plots?
@@ -61,7 +61,6 @@ Vega Visualizations:
 - correlation plot
 - violin plot
 - cluster map
-
 
 d3 Visualizations:
 

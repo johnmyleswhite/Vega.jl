@@ -19,7 +19,7 @@ module Vega
 
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
-    export colorscheme!, coord_flip!, stroke!
+    export colorscheme!, coord_flip!, stroke!, hline!, vline!
 
     #Import helper code
     include("jstypes.jl")
