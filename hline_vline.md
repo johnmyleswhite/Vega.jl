@@ -29,7 +29,7 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 
 a = areaplot(x = x, y = y, group = g, stacked = true)
 {% endhighlight %}
-<img src ="http://johnmyleswhite.github.io/Vega.jl/images/lineplot.png" alt = "hline">
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedarea.png" alt = "hline">
 
 ### With horizontal lines
 
