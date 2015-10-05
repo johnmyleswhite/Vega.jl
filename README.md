@@ -29,7 +29,7 @@ To Do:
 
 Functions/Types:
 
-- Add keyword arguments to visualizations for commonly used features
+- Add keyword arguments to visualizations for commonly used features [#48](https://github.com/johnmyleswhite/Vega.jl/issues/48)
 - area in `coord_flip!`
 - Fill in Vega `transform` type with actual fields
 - error bars/shading around lines
@@ -42,7 +42,7 @@ Vega Visualizations:
 
 - Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Force
-- Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/30)
+- Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Weather
 - parallel coordinates
 - Treemap
