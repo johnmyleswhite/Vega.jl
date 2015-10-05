@@ -30,7 +30,7 @@ To Do:
 Functions/Types:
 
 - Add keyword arguments to visualizations for commonly used features
-- grouped bar horizontal, area in `coord_flip!`
+- area in `coord_flip!`
 - Fill in Vega `transform` type with actual fields
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)

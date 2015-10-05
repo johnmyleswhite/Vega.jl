@@ -97,6 +97,23 @@ end
         v.marks[1].properties.enter.x2 = VegaValueRef(scale = "y", field = "layout_end")
     end
 
+    #Grouped bar hack
+    if v.name == "groupedbar"
+        v.marks[1].marks[1].properties.enter.height = v.marks[1].marks[1].properties.enter.width
+        v.marks[1].marks[1].properties.enter.width = nothing
+
+        v.marks[1].marks[1].properties.enter.x2 = v.marks[1].marks[1].properties.enter.y2
+        v.marks[1].marks[1].properties.enter.y2 = nothing
+
+        v.marks[1].marks[1].properties.enter.y, v.marks[1].marks[1].properties.enter.x = v.marks[1].marks[1].properties.enter.x, v.marks[1].marks[1].properties.enter.y
+
+        v.marks[1].properties.enter.width = nothing
+        v.marks[1].properties.enter.x = nothing
+        v.marks[1].properties.enter.x2 = nothing
+        v.marks[1].properties.enter.y = VegaValueRef(scale = "x", field = "key")
+        v.marks[1].scales[1].range = "height"
+    end
+
     return v
 end
 

@@ -1,6 +1,6 @@
-@compat function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], position::Vector{Int} = Int[])
+@compat function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], position::Vector{Int} = Int[], horizontal::Bool = false)
 
-    v = VegaVisualization(height = 240, width = 300)
+    v = VegaVisualization(height = 300, width = 500, name = "groupedbar")
 
     #This seems like it should be a method, but so easy to do right here
     if typeof(x) == Vector{Char}
@@ -51,6 +51,11 @@
 
     #Default to Paired color scale, 12
     colorscheme!(v; palette = ("Paired", 12))
+
+    if horizontal == true
+        coord_flip!(v)
+    end
+
     return v
 
 end
