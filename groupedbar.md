@@ -13,6 +13,7 @@ Function Keywords:
 x::AbstractVector
 y::AbstractVector
 position::Vector{Int}
+horizontal::Bool = false
 {% endhighlight %}
 
 ### Grouped Bar Chart
