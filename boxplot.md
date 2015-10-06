@@ -25,6 +25,7 @@ boxplot(y = df[:MPG])
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/boxplot.png" alt = "boxplot" >
 
 ### Grouped Box Plot
+{% highlight julia %}
 using RDatasets, Vega
 df = dataset("datasets", "mtcars")
 
