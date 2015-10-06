@@ -30,7 +30,8 @@ To Do:
 Functions/Types:
 
 - Add keyword arguments to visualizations for commonly used features [#48](https://github.com/johnmyleswhite/Vega.jl/issues/48)
-- area in `coord_flip!`
+- area, (vertical) boxplot in `coord_flip!`
+- colorscheme! for `boxplot`
 - Fill in Vega `transform` type with actual fields
 - error bars/shading around lines
 - change icon type (circles, triangles, etc.)
@@ -40,7 +41,6 @@ Functions/Types:
 
 Vega Visualizations:
 
-- Boxplot / Horizontal Boxplot / Grouped Boxplot [#30](https://github.com/johnmyleswhite/Vega.jl/issues/30)
 - Force
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Weather

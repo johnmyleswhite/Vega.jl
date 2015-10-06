@@ -2,9 +2,11 @@ markpropertyset_spec =
 [
 	(:x, VegaValueRef, nothing),
 	(:x2, VegaValueRef, nothing),
+	(:xc, VegaValueRef, nothing),
 	(:width, VegaValueRef, nothing),
 	(:y, VegaValueRef, nothing),
 	(:y2, VegaValueRef, nothing),
+	(:yc, VegaValueRef, nothing),
 	(:height, VegaValueRef, nothing),
 	(:opacity, VegaValueRef, nothing),
 	(:fill, VegaValueRef, nothing),
