@@ -24,8 +24,8 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
     #Calculate whiskers
     whiskers = VegaData(name = "iqrcalcs",
                         source = "stats",
-                        transform = [VegaTransform(Dict{Any, Any}("type" => "formula", "field" => "lower", "expr" => "max(datum.min_y,datum.q1_y-1.58*(datum.q3_y-datum.q1_y))")),
-                                     VegaTransform(Dict{Any, Any}("type" => "formula", "field" => "upper", "expr" => "min(datum.max_y,datum.q1_y+1.58*(datum.q3_y-datum.q1_y))"))
+                        transform = [VegaTransform(Dict{Any, Any}("type" => "formula", "field" => "lower", "expr" => "max(datum.min_y,datum.q1_y-1.5*(datum.q3_y-datum.q1_y))")),
+                                     VegaTransform(Dict{Any, Any}("type" => "formula", "field" => "upper", "expr" => "min(datum.max_y,datum.q1_y+1.5*(datum.q3_y-datum.q1_y))"))
                                     ]
                         )
 
