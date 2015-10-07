@@ -14,6 +14,8 @@ y::AbstractVector
 group::AbstractVector
 {% endhighlight %}
 
+This function calculates a Tukey boxplot, where the whiskers are the min(max) of 1.5 * IQR or the smallest(largest) datapoint. The circles on the boxplot represents the most extreme values in the data. Currently, printing outliers on the boxplot is not implemented.
+
 ### Single Box Plot
 {% highlight julia %}
 using RDatasets, Vega
