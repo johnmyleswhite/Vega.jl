@@ -1,4 +1,4 @@
-@compat function wordcloud(; x::AbstractVector =  UTF8String[])
+@compat function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVector = [-45, 0, 45], minThreshold::Int = 0)
 
     v = VegaVisualization(height = 400,
                       width = 800,
@@ -10,7 +10,7 @@
 
     v.data[1] = VegaData(name = "table",
                          values = x,
-                         transform = Array(VegaTransform, 4))
+                         transform = Array(VegaTransform, 5))
 
     v.data[1].transform[1] = VegaTransform(Dict{Any, Any}("type" => "countpattern",
                                                         "field" => "data",
@@ -22,7 +22,7 @@
     #Calculate angles
     v.data[1].transform[3] = VegaTransform(Dict{Any, Any}("type" => "formula",
                                                             "field" => "angle",
-                                                            "expr" => "[-45, 0, 45][~~(random() * 3)]"
+                                                            "expr" => "$(wordAngles)[~~(random() * $(length(wordAngles)))]"
                                                             ))
 
     #Specify wordcloud properties
@@ -42,6 +42,13 @@
     "expr" => "if(datum.text=='VEGA', 600, 300)"
 
                                                          ))
+
+    #Set min word count
+    v.data[1].transform[5] = VegaTransform(Dict{Any, Any}("type" => "filter",
+    "test" => "datum.count > $(minThreshold)"
+
+                                                         ))
+
 
 
     #Define color palette

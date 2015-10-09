@@ -1,6 +1,6 @@
 Vega.jl
 =======
-[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_0.3.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.3)[![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4)
+[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4)
 
 # Introduction
 
@@ -29,7 +29,7 @@ To Do:
 
 Functions/Types:
 
-- Add keyword arguments to visualizations for commonly used features [#48](https://github.com/johnmyleswhite/Vega.jl/issues/48), [#51](https://github.com/johnmyleswhite/Vega.jl/issues/51), [#52](https://github.com/johnmyleswhite/Vega.jl/issues/52), [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- Add keyword arguments to visualizations for commonly used features [#52](https://github.com/johnmyleswhite/Vega.jl/issues/52), [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - area, (vertical) boxplot in `coord_flip!`
 - colorscheme! for `boxplot`
 - Fill in Vega `transform` type with actual fields
