@@ -7,6 +7,9 @@ end
 
 #Jupyter Notebook display
 import Base.writemime
+
+asset(url) = joinpath(Pkg.dir("Vega","assets"), url)
+
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
         spec = JSON.json(tojs(v))
@@ -69,6 +72,11 @@ end
 #Only Julia code is tojson(v), converting from ::VegaVisualization to JSON
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
+    d3 = readall(asset("d3.min.js"))
+    topojson = readall(asset("topojson.js"))
+    cloudlayout = readall(asset("d3.layout.cloud.js"))
+    vega = readall(asset("vega.js"))
+
     divid = "vg" * randstring(3)
 
     println(io,
@@ -76,10 +84,10 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     <html>
       <head>
         <title>$title</title>
-        <script src=\"https://vega.github.io/vega-editor/vendor/d3.min.js\" charset=\"utf-8\"></script>
-        <script src=\"https://vega.github.io/vega-editor/vendor/topojson.js\" charset=\"utf-8\"></script>
-        <script src=\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\" charset=\"utf-8\"></script>
-        <script src=\"https://vega.github.io/vega/vega.min.js\" charset=\"utf-8\"></script>
+        <script>$d3</script>
+        <script>$topojson</script>
+        <script>$cloudlayout</script>
+        <script>$vega</script>
 
       </head>
       <body>
