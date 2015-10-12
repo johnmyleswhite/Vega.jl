@@ -68,6 +68,10 @@ module Vega
     include("derived/rugplot.jl")
     include("derived/waterfall.jl")
     include("derived/wordcloud.jl")
+    
+    if Pkg.installed("Escher") != @compat Void 
+        include("escher_integration.jl")
+    end
 
 
 

@@ -1,0 +1,37 @@
+{
+  "name": "vega-elements",
+  "authors": [
+    "Rohit Varkey Thankachan <rohitvarkey@gmail.com>"
+  ],
+  "description": "Polymer web components for Vega",
+  "keywords": [
+    "Vega",
+    "polymer",
+    "elements"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.6",
+    "d3-cloud": "jasondavies/d3-cloud#~1.2.0",
+    "polymer": "~1.1.5",
+    "topojson": "~1.6.19",
+    "vega": "~2.2.6"
+  },
+  "homepage": "https://github.com/rohitvarkey/Vega-element",
+  "_release": "270aa09295",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "270aa09295c45327a03825202eb26c8eee888762"
+  },
+  "_source": "git://github.com/rohitvarkey/Vega-element.git",
+  "_target": "*",
+  "_originalSource": "rohitvarkey/Vega-element"
+}
