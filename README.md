@@ -29,7 +29,7 @@ To Do:
 
 Functions/Types:
 
-- Add keyword arguments to visualizations for commonly used features [#52](https://github.com/johnmyleswhite/Vega.jl/issues/52), [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- Add keyword arguments to visualizations for commonly used features [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - area, (vertical) boxplot in `coord_flip!`
 - colorscheme! for `boxplot`
 - Fill in Vega `transform` type with actual fields
@@ -41,6 +41,7 @@ Functions/Types:
 
 Vega Visualizations:
 
+- Bubble Chart
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
 - Weather
@@ -50,7 +51,6 @@ Vega Visualizations:
 - Jobs
 - Scatterplot matrix (faceting)
 - Barley (Faceting)
-- Bubble Chart
 - Lifelines
 - Aster plot
 - Diverging Stacked Bar Chart

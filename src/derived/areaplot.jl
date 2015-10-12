@@ -1,12 +1,14 @@
 @compat function areaplot(;x::AbstractVector = Int[],
                    y::AbstractVector = Int[],
                    group::AbstractVector = Int[],
-                   stacked::Bool = false)
+                   stacked::Bool = false,
+                   pct100::Bool = false)
+
 
     if stacked
     	v = barplot(x = x, y = y, group = group, stacked = true)
 	    v.scales[1].points = true
-		v.scales[1]._type = nothing
+		  v.scales[1]._type = nothing
 
         innermark = VegaMark(_type="area", properties=VegaMarkProperties(enter = default_props()))
         innermark.properties.enter.y = VegaValueRef(scale = "y", field = "layout_start")
@@ -19,7 +21,31 @@
                                             transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y")),
                                                        VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))]),
                         marks = [innermark])
+
+
+        if pct100
+
+            ylab!(v, format = "%")
+            ylim!(v, min = 0, max = 1)
+
+            #write over marks for simplicity, instead of using unshift!
+            #transforms have to be in correct order to work
+            mark = VegaMark(_type = "group",
+                            from = VegaMarkFrom(data="table",
+                                                transform=[
+                                                           VegaTransform(Dict{Any,Any}("type"=>"lookup", "on" => "stats", "onKey" => "x", "keys" => "x", "as" => "sum_y")),
+                                                           VegaTransform(Dict{Any,Any}("type"=>"formula", "field" => "pcttot", "expr" => "datum.y/datum.sum_y.sum_y" )),
+                                                           VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "pcttot")),
+                                                           VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))
+                                                           ]
+                                                ),
+                            marks = [innermark])
+
+
+        end
+
         v.marks = [mark]
+
 	else
         v = barplot(x = x, y = y, group = group)
 
