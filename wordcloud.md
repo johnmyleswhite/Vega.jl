@@ -11,6 +11,8 @@ Function Keywords:
 
 {% highlight julia %}
 x::AbstractVector
+wordAngles::AbstractVector = [-45, 0, 45]
+minThreshold::Int = 0
 {% endhighlight %}
 
 ### Wordcloud
@@ -25,3 +27,15 @@ wc = wordcloud(x = corpus)
 colorscheme!(wc, ("Spectral", 11))
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/wordcloud.png" alt="wordcloud">
+
+### Wordcloud With Custom Angles
+{% highlight julia %}
+wordcloud(x = corpus, wordAngles = [0, 90])
+{% endhighlight %}
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/wordcloudangles.png" alt="wordcloudangles">
+
+### Wordcloud With Minimum Word Count Threshold
+{% highlight julia %}
+wordcloud(x = corpus, minThreshold = 1)
+{% endhighlight %}
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/wordcloudthreshold.png" alt="wordcloudthreshold">
