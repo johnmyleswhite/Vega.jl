@@ -69,7 +69,7 @@ module Vega
     include("derived/waterfall.jl")
     include("derived/wordcloud.jl")
     
-    if Pkg.installed("Escher") != @compat Void 
+    if Pkg.installed("Escher") != nothing 
         include("escher_integration.jl")
     end
 
