@@ -14,6 +14,7 @@ x::AbstractVector
 y::AbstractVector
 group::AbstractVector
 stacked::Bool = false
+pct100::Bool = false
 {% endhighlight %}
 
 ### Area Plot
@@ -41,3 +42,10 @@ a = areaplot(x = x, y = y, group = g, stacked = true)
 colorscheme!(a, ("Reds", 3))
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedarea.png" alt="stackedarea">
+
+### 100% Stacked Area
+
+{% highlight julia %}
+a = areaplot(x = x, y = y, group = g, stacked = true, pct100 = true)
+{% endhighlight %}
+<img src ="http://johnmyleswhite.github.io/Vega.jl/images/100pctstackedarea.png" alt="100pctstackedarea">
