@@ -13,7 +13,7 @@ At a high-level, my hope with this package is to provide an easy-to-use library 
 	Pkg.add("Vega")
 	using Vega
 
-Currently, an Internet connection is required to use Vega.jl, as the required JavaScript libraries are delivered from a CDN.
+Currently, an Internet connection is required to use Vega.jl through Jupyter Notebook, as the required JavaScript libraries are delivered from a CDN. Using Vega from the REPL will work without an Internet connection.
 
 # Documentation
 
