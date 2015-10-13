@@ -202,7 +202,7 @@ end
     line = VegaMark(_type = "rule",
                     properties = VegaMarkProperties(enter = VegaMarkPropertySet(y = VegaValueRef(field = Dict{Any, Any}("group" => "y")),
                                                                                 y2 = VegaValueRef(field = Dict{Any, Any}("group" => "height")),
-                                                                                x = VegaValueRef(scale = "y", value = value),
+                                                                                x = VegaValueRef(scale = "x", value = value),
                                                                                 strokeWidth = VegaValueRef(value = strokeWidth),
                                                                                 stroke = VegaValueRef(value = stroke),
                                                                                 strokeDash = VegaValueRef(value = [strokeDash])
