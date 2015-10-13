@@ -21,7 +21,7 @@ group::AbstractVector
 using Vega, DataFrames, JSON
 
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega2/test/data/population.json")))
+for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 
