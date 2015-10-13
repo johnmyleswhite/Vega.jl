@@ -190,7 +190,7 @@ end
                                                                                 y = VegaValueRef(scale = "y", value = value),
                                                                                 strokeWidth = VegaValueRef(value = strokeWidth),
                                                                                 stroke = VegaValueRef(value = stroke),
-                                                                                strokeDash = VegaValueRef(value = [strokeDash])
+                                                                                strokeDash = VegaValueRef(value = strokeDash != 0? [strokeDash] : [])
                                                                                 )
                                 )
                     )
@@ -207,7 +207,7 @@ end
                                                                                 x = VegaValueRef(scale = "x", value = value),
                                                                                 strokeWidth = VegaValueRef(value = strokeWidth),
                                                                                 stroke = VegaValueRef(value = stroke),
-                                                                                strokeDash = VegaValueRef(value = [strokeDash])
+                                                                                strokeDash = VegaValueRef(value = strokeDash != 0? [strokeDash] : [])
                                                                                 )
                                 )
                     )

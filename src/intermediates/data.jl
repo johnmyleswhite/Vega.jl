@@ -1,5 +1,6 @@
 function add_data!(v::VegaVisualization;
-	                          x::AbstractVector = Int[],
+	                          name::AbstractString = "table",
+                              x::AbstractVector = Int[],
 	                          y::AbstractVector = Int[],
                               y2::AbstractVector = Int[],
 	                          group::AbstractVector = Int[])
@@ -27,7 +28,7 @@ function add_data!(v::VegaVisualization;
         res[i]["y2"] = y2[i]
     end
 
-    d = VegaData(values = res)
+    d = VegaData(name = name, values = res)
 
     if v.data == nothing
 		v.data = [d]

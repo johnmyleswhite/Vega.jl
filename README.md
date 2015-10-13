@@ -41,7 +41,6 @@ Functions/Types:
 
 Vega Visualizations:
 
-- Bubble Chart
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
 - Weather

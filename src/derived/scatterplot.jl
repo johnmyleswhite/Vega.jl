@@ -16,7 +16,7 @@
     add_points!(v)
 
     v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "group")
-    v.marks[1].properties.enter.fillOpacity = VegaValueRef(value = 0.5)
+    v.marks[1].properties.enter.fillOpacity = VegaValueRef(value = 0.9)
 
     #Default to Paired color scale, 12
     colorscheme!(v; palette = ("Paired", 12))
