@@ -8,7 +8,7 @@ end
 #Jupyter Notebook display
 import Base.writemime
 
-asset(url) = joinpath(Pkg.dir("Vega","assets"), url)
+asset(url...) = readall(Pkg.dir("Vega", "assets", "bower_components", url...))
 
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
@@ -72,10 +72,10 @@ end
 #Only Julia code is tojson(v), converting from ::VegaVisualization to JSON
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
-    d3 = readall(asset("d3.min.js"))
-    topojson = readall(asset("topojson.js"))
-    cloudlayout = readall(asset("d3.layout.cloud.js"))
-    vega = readall(asset("vega.js"))
+    d3 = asset("d3","d3.min.js")
+    topojson = asset("topojson","topojson.js")
+    cloudlayout = asset("d3-cloud", "build", "d3.layout.cloud.js")
+    vega = asset("vega", "vega.js")
 
     divid = "vg" * randstring(3)
 
