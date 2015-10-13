@@ -31,6 +31,7 @@ end
 	s.domainMax = max
     s.reverse = reverse
     s.round = round
+    min != 0? s.zero = false : s.zero = true
 	return v
 end
 
@@ -45,6 +46,7 @@ end
 	s.domainMax = max
     s.reverse = reverse
     s.round = round
+    min != 0? s.zero = false : s.zero = true
 	return v
 end
 
