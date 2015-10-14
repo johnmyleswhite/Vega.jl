@@ -29,11 +29,10 @@ To Do:
 
 Functions/Types:
 
-- Add keyword arguments to visualizations for commonly used features [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- Add keyword arguments to visualizations for commonly used features
 - area, (vertical) boxplot in `coord_flip!`
-- colorscheme! for `boxplot`
 - Fill in Vega `transform` type with actual fields
-- error bars/shading around lines
+- error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - change icon type (circles, triangles, etc.)
 - How to layer plots?
 - How to incorporate interactive features of Vega? `tooltip` function seems useful

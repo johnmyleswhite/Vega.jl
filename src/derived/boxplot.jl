@@ -37,13 +37,16 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
     v.axes[2] = VegaAxis(_type = "y", scale = "y", tickSize = 0, offset = 5, properties = Dict{Any, Any}("axis" => Dict{Any, Any}("stroke" => Dict{Any, Any}("value" => "transparent"))))
 
     #Scales
-    v.scales = Array(VegaScale, 2)
+    v.scales = Array(VegaScale, 3)
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", points = true, round = true,
                             padding = 1.5, domain = VegaDataRef(data = "table", field = "x"))
 
 
     v.scales[1] = VegaScale(name = "x", _type = "linear", domain = VegaDataRef(data = "table", field = "y"),
                             range = "width", round = true, nice = true)
+
+    v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = VegaDataRef(data = "table", field = "x"),
+                            range = "ordinal20", round = true, nice = true)
 
     #Marks
     v.marks = Array(VegaMark, 7)
@@ -54,6 +57,7 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
                                                                                                          yc = VegaValueRef(scale = "y", field = "x"),
                                                                                                          height = VegaValueRef(value = 1),
                                                                                                          fill = VegaValueRef(value = "#888")
+
                                                                                                         )
                                                          )
     )
@@ -64,8 +68,9 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
                                                                                                          x2 = VegaValueRef(scale = "x", field = "q3_y"),
                                                                                                          yc = VegaValueRef(scale = "y", field = "x"),
                                                                                                          height = VegaValueRef(signal = "boxSize"),
-                                                                                                         fill = VegaValueRef(value = "rgb(166,206,227)"),
+                                                                                                         fill = VegaValueRef(scale = "group", field = "x"),
                                                                                                          stroke = VegaValueRef(value = "#888")
+
                                                                                                         )
                          )
     )
@@ -127,6 +132,10 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
                                                                                                         )
                          )
     )
+
+    #Default to Paired color scale, 12
+    colorscheme!(v; palette = ("Paired", 12))
+    return v
 
 
     return v
