@@ -3,7 +3,8 @@
                   y2::AbstractVector = Int[],
                   group::AbstractVector = Int[],
                   stacked::Bool = false,
-                  horizontal::Bool = false)
+                  horizontal::Bool = false,
+                  normalize::Bool = false)
 
     v = VegaVisualization()
 
@@ -35,7 +36,11 @@
       v.scales[2].domain = VegaDataRef("stats", "sum_y")
 
       v.marks[1].from = VegaMarkFrom(data = "table",
-                                     transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y"))])
+                                     transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y", "offset" => normalize == true? "normalize" : "zero"))])
+
+      if normalize
+        ylim!(v, min = 0, max = 1)
+      end
 
     end
 

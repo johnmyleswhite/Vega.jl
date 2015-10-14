@@ -2,7 +2,7 @@
                    y::AbstractVector = Int[],
                    group::AbstractVector = Int[],
                    stacked::Bool = false,
-                   pct100::Bool = false)
+                   normalize::Bool = false)
 
 
     if stacked
@@ -18,31 +18,15 @@
 
         mark = VegaMark(_type = "group",
                         from = VegaMarkFrom(data="table",
-                                            transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => "zero")),
+                                            transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => normalize == true? "normalize" : "zero")),
                                                        VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))]),
                         marks = [innermark])
 
-
-        if pct100
-
-            ylab!(v, format = "%")
-            ylim!(v, min = 0, max = 1)
-
-            #write over marks for simplicity, instead of using unshift!
-            #transforms have to be in correct order to work
-            mark = VegaMark(_type = "group",
-                            from = VegaMarkFrom(data="table",
-                                                transform=[
-                                                           VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => "normalize")),
-                                                           VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))
-                                                           ]
-                                                ),
-                            marks = [innermark])
-
-
-        end
-
         v.marks = [mark]
+
+      if normalize
+        ylim!(v, min = 0, max = 1)
+      end
 
 	else
         v = barplot(x = x, y = y, group = group)
