@@ -33,7 +33,7 @@ Functions/Types:
 - area, (vertical) boxplot in `coord_flip!`
 - Fill in Vega `transform` type with actual fields
 - error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
-- change icon type (circles, triangles, etc.)
+- change icon type (circles, triangles, etc.) [#62](https://github.com/johnmyleswhite/Vega.jl/issues/62)
 - How to layer plots?
 - How to incorporate interactive features of Vega? `tooltip` function seems useful
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
