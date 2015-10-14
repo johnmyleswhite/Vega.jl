@@ -1,7 +1,7 @@
 ---
 
 layout: minimal
-title: Vega.jl - A Julia package for generating visualizations using Vega 
+title: Vega.jl - A Julia package for generating visualizations using Vega
 
 ---
 
@@ -16,6 +16,7 @@ y2::AbstractVector
 group::AbstractVector
 stacked::Bool = false
 horizontal::Bool = false
+normalize::Bool = false
 {% endhighlight %}
 
 ### Vertical Bar
