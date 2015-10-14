@@ -18,7 +18,7 @@
 
         mark = VegaMark(_type = "group",
                         from = VegaMarkFrom(data="table",
-                                            transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y")),
+                                            transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => "zero")),
                                                        VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))]),
                         marks = [innermark])
 
@@ -33,9 +33,7 @@
             mark = VegaMark(_type = "group",
                             from = VegaMarkFrom(data="table",
                                                 transform=[
-                                                           VegaTransform(Dict{Any,Any}("type"=>"lookup", "on" => "stats", "onKey" => "x", "keys" => "x", "as" => "sum_y")),
-                                                           VegaTransform(Dict{Any,Any}("type"=>"formula", "field" => "pcttot", "expr" => "datum.y/datum.sum_y.sum_y" )),
-                                                           VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "pcttot")),
+                                                           VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => "normalize")),
                                                            VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))
                                                            ]
                                                 ),
