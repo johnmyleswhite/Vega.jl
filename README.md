@@ -30,6 +30,7 @@ To Do:
 Functions/Types:
 
 - Add keyword arguments to visualizations for commonly used features
+- Function for v.width, v.height, v.padding? Not obvious to look inside `::VegaVisualization` type to change these properties
 - area, (vertical) boxplot in `coord_flip!`
 - Fill in Vega `transform` type with actual fields
 - error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
@@ -38,7 +39,7 @@ Functions/Types:
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 
 Vega Visualizations:
-
+- Stem and Leaf
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
 - Weather
