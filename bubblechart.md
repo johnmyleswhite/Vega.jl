@@ -13,6 +13,8 @@ Function Keywords:
 x::AbstractVector
 y::AbstractVector
 group::AbstractVector
+pointSize::AbstractVector
+pointShape::AbstractString = "circle"
 {% endhighlight %}
 
 ### Bubble Chart
@@ -24,7 +26,7 @@ y = [95, 102.9, 91.5, 102.5, 86.1, 70.1, 68.5, 83.1, 93.2, 57.6, 20, 126.4, 50.8
 cont = ["EU", "EU", "EU", "EU", "EU", "EU", "EU", "NO", "EU", "EU", "RU", "US", "EU", "EU", "NZ"]
 z = [13.8, 14.7, 15.8, 12, 11.8, 16.6, 14.5, 10, 24.7, 10.4, 16, 35.3, 28.5, 15.4, 31.3]
 
-v = bubblechart(x = x, y = y, group = cont, size = z)
+v = bubblechart(x = x, y = y, group = cont, pointSize = z)
 
 #Chart mods
 v.width = 600

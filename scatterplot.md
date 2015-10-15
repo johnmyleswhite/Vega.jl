@@ -13,6 +13,8 @@ Function Keywords:
 x::AbstractVector
 y::AbstractVector
 group::AbstractVector
+pointShape::AbstractString = "circle"
+pointSize::Real = 50
 {% endhighlight %}
 
 ### Scatterplot By Group
