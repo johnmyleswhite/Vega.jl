@@ -27,8 +27,8 @@ end
     end
 
     s = v.scales[findfirst([z.name == "x" for z in v.scales])]
-	s.domainMin = min
-	s.domainMax = max
+	s.domainMin = min == 0? s.domainMin : min
+	s.domainMax = max == 0? s.domainMax : max
     s.reverse = reverse
     s.round = round
     min != 0? s.zero = false : s.zero = true
@@ -42,8 +42,8 @@ end
     end
 
     s = v.scales[findfirst([z.name == "y" for z in v.scales])]
-	s.domainMin = min
-	s.domainMax = max
+	s.domainMin = min == 0? s.domainMin : min
+	s.domainMax = max == 1000? s.domainMax : max
     s.reverse = reverse
     s.round = round
     min != 0? s.zero = false : s.zero = true
