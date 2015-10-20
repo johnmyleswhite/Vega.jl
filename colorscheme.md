@@ -25,7 +25,7 @@ This function mutates `:VegaVisualization`, modifying the colors for the `group`
 using Vega
 
 ab = barplot(x = [1:20], y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
-colorscheme!(ab, ("Purples", 3))
+colorscheme!(ab, palette = ("Purples", 3))
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/barcolorbrewerpurple.png" alt = "barcolorbrewerpurple">
@@ -37,7 +37,7 @@ using Vega
 
 srand(1)
 a = barplot(x = [1:20], y = rand(20))
-colorscheme!(a, "Violet")
+colorscheme!(a, palette = "Violet")
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/barviolet.png" alt = "barviolet">
@@ -59,7 +59,7 @@ y = pop1900[:age]
 group = pop1900[:sex]
 
 pc1 = popchart(x = x, y = y, group = group)
-colorscheme!(pc1, ["Green", "Red"])
+colorscheme!(pc1, palette = ["Green", "Red"])
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/bararray.png" alt = "bararray">
