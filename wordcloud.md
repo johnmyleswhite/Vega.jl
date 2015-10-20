@@ -24,7 +24,7 @@ corpus = [
 ]
 
 wc = wordcloud(x = corpus)
-colorscheme!(wc, ("Spectral", 11))
+colorscheme!(wc, palette = ("Spectral", 11))
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/wordcloud.png" alt="wordcloud">
 

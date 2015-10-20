@@ -65,7 +65,7 @@ y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16,
 g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 
 b = barplot(x = x, y = y, group = g, stacked = true)
-colorscheme!(b, ("Greens", 3))
+colorscheme!(b, palette = ("Greens", 3))
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedbar.png" alt = "stackedbar">
@@ -79,7 +79,7 @@ y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16,
 g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 
 b = barplot(x = x, y = y, group = g, stacked = true, horizontal = true)
-colorscheme!(b, ("Greens", 3))
+colorscheme!(b, palette = ("Greens", 3))
 {% endhighlight %}
 
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedbarh.png" alt = "stackedbarh">

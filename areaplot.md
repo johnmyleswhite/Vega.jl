@@ -39,7 +39,7 @@ y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16,
 g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 
 a = areaplot(x = x, y = y, group = g, stacked = true)
-colorscheme!(a, ("Reds", 3))
+colorscheme!(a, palette = ("Reds", 3))
 {% endhighlight %}
 <img src ="http://johnmyleswhite.github.io/Vega.jl/images/stackedarea.png" alt="stackedarea">
 
