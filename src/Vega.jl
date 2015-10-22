@@ -16,7 +16,7 @@ module Vega
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
            bubblechart, streamplot
 
-    export xlab!, ylab!, xlim!, ylim!, title!, legend!
+    export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
     export default_scales!, default_axes!, default_legend!
     export add_data!, add_points!, add_area!, add_rects!, add_lines!
