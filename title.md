@@ -12,6 +12,7 @@ Arguments:
 {% highlight julia %}
 v::VegaVisualization
 title::AbstractString = ""
+x::Int = 0
 y::Int = -40
 fill::AbstractString = "black"
 fontSize::Int = 16
