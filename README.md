@@ -6,7 +6,7 @@ Vega.jl
 
 A Julia package for creating Vega visualizations. Convenience functions for common visualizations are provided, while also allowing for unlimited customization through modification of the main `VegaVisualization` composite type.
 
-At a high-level, my hope with this package is to provide an easy-to-use library to quickly make common visualizations, while also including some of the interactivity provided as part of the Vega 2 project. This package also provides a declarative syntax that deviates from Grammar-of-Graphics style packages.
+At a high-level, Vega.jl is designed to provide an easy-to-use library to quickly make common visualizations, while also including some of the interactivity provided as part of the Vega 2.x JavaScript library. This package also provides a declarative syntax that deviates from [Grammar-of-Graphics](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html) style packages.
 
 # Installation
 
@@ -21,20 +21,16 @@ For examples of the current functionality of Vega.jl, please see the [documentat
 
 # TODO/Contributing
 
-I would love to collaborate with anyone interested in interactive graphics and simplistic APIs.
-
 Here's the current TODO list (along with the [GitHub issues](https://github.com/johnmyleswhite/Vega.jl/issues)); of course, any contribution, on this list or not, is greatly appreciated!
 
 To Do:
 
 Functions/Types:
 
-- Add keyword arguments to visualizations for commonly used features
-- Function for v.width, v.height, v.padding? Not obvious to look inside `::VegaVisualization` type to change these properties
-- area, (vertical) boxplot in `coord_flip!`
-- Fill in Vega `transform` type with actual fields
-- error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
+- Fill in `::VegaTransform` type with actual fields
 - How to layer plots?
+- error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to incorporate interactive features of Vega? `tooltip` function seems useful
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 
@@ -60,7 +56,7 @@ Vega Visualizations:
 - violin plot
 - cluster map
 
-d3 Visualizations:
+d3 Visualizations (?):
 
 - Add chord chart from d3.js
 - Sankey from d3.js
@@ -72,12 +68,11 @@ Maps:
 - State-level
 - Country-level (by pull request from someone else!)
 
-Value unclear:
+Value unclear (but still possible):
 
 - Switch to Nullable Types
 - Sanitize inputs to be correct for visualization
 - change add_data! to not add zeroes everywhere there are blanks
-- Arc visualization
 - overload Base.+ with pipe operator to mimic ggplot syntax
 - Have global settings similar to Seaborn/Gadfly themes
 - Integrate with DataFrames more in-depth
