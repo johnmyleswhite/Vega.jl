@@ -14,7 +14,7 @@ Pkg.add("Vega")
 using Vega
 {% endhighlight %}
 
-Currerntly, Vega.jl requires an Internet connection to render graphs, as the [vega](https://github.com/vega/vega) project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.
+Currently, Vega.jl requires an Internet connection to render graphs, as the [vega](https://github.com/vega/vega) project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.
 
 ## Supported Environments
 
