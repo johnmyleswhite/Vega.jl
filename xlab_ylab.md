@@ -15,7 +15,12 @@ title::AbstractString = ""
 grid::Bool = false
 ticks::Number = 0
 format::AbstractString = ""
-layer::AbstractString = "front"
+layer::AbstractString = "front",
+properties::Dict = Dict{Any, Any}
+tickSize::Number = 0
+tickSizeMajor::Number = 0
+tickSizeMinor::Number = 0
+tickSizeEnd::Number = 0
 {% endhighlight %}
 
 This function mutates `:VegaVisualization`, adding/modifying the X axis or Y axis.
