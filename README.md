@@ -37,6 +37,7 @@ Functions/Types:
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
+- Horizon [#69](https://github.com/johnmyleswhite/Vega.jl/issues/69)
 - Weather
 - parallel coordinates
 - Treemap
@@ -57,7 +58,8 @@ Vega Visualizations:
 
 d3 Visualizations (?):
 
-- Add chord chart from d3.js
+- Add chord chart from d3.js (requested at vega/vega project)
+- Hexbinning (requested at vega/vega project)
 - Sankey from d3.js
 - Calendar View Chart from d3.js
 
