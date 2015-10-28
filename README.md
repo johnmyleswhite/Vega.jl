@@ -65,7 +65,6 @@ d3 Visualizations (?):
 
 Maps:
 
-- US State [#68](https://github.com/johnmyleswhite/Vega.jl/issues/68)
 - State-level
 - Country-level (by pull request from someone else!)
 
