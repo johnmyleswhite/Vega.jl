@@ -13,7 +13,7 @@
     v.marks = Array(VegaMark,2)
 
     #Y-axis labels
-    v.marks[1] = VegaMark(
+    v.marks[2] = VegaMark(
                             _type = "text",
                             from = VegaMarkFrom(data = "table",
                                                 transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby" => ["y"]))]),
@@ -32,7 +32,7 @@
 
 
 
-    v.marks[2] = VegaMark(
+    v.marks[1] = VegaMark(
                             _type = "group",
                             from = VegaMarkFrom(data = "table",
                                                 transform = [VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"])),
@@ -63,7 +63,6 @@
                                                                                             x2 = VegaValueRef(scale = "x", value = 0),
                                                                                             y = VegaValueRef(scale = "y", field = "y"),
                                                                                             height = VegaValueRef(scale = "y", band = true, offset = -1),
-                                                                                            fillOpacity = VegaValueRef(value = 0.6),
                                                                                             fill = VegaValueRef(scale = "group", field = "group")
 
 

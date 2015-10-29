@@ -40,8 +40,8 @@
 
     v.marks = [VegaMark(_type = "path",
                         from = VegaMarkFrom(data="geodata"),
-                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "layout_path")),
-                                                        update = VegaMarkPropertySet(fill = VegaValueRef(scale = "color", field = "table2.y")),
+                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(path = VegaValueRef(field = "layout_path"), fill = VegaValueRef(scale = "color", field = "table2.y"))
+
                                                         )
             )]
 

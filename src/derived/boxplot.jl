@@ -49,10 +49,22 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
                             range = "ordinal20", round = true, nice = true)
 
     #Marks
-    v.marks = Array(VegaMark, 7)
-    v.marks[1] = VegaMark(_type = "rect",
+    v.marks = Array(VegaMark, 8)
+    v.marks[2] = VegaMark(_type = "rect",
                           from = VegaMarkFrom(data = "iqrcalcs"),
                                              properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "lower"),
+                                                                                                         x2 = VegaValueRef(scale = "x", field = "q1_y"),
+                                                                                                         yc = VegaValueRef(scale = "y", field = "x"),
+                                                                                                         height = VegaValueRef(value = 1),
+                                                                                                         fill = VegaValueRef(value = "#888")
+
+                                                                                                        )
+                                                         )
+    )
+
+    v.marks[8] = VegaMark(_type = "rect",
+                          from = VegaMarkFrom(data = "iqrcalcs"),
+                                             properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "q3_y"),
                                                                                                          x2 = VegaValueRef(scale = "x", field = "upper"),
                                                                                                          yc = VegaValueRef(scale = "y", field = "x"),
                                                                                                          height = VegaValueRef(value = 1),
@@ -62,7 +74,7 @@ function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
                                                          )
     )
 
-    v.marks[2] = VegaMark(_type = "rect",
+    v.marks[1] = VegaMark(_type = "rect",
                           from = VegaMarkFrom(data = "iqrcalcs"),
                                               properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "q1_y"),
                                                                                                          x2 = VegaValueRef(scale = "x", field = "q3_y"),

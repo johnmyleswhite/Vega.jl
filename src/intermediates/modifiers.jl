@@ -257,3 +257,23 @@ end
 
     return v
 end
+
+function hover!(v::VegaVisualization; opacity::Number = 1)
+
+    #Grouped bar, line chart, popchart
+    if v.marks[1].marks != nothing
+
+        v.marks[1].marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity), strokeOpacity = VegaValueRef(value = opacity))
+        v.marks[1].marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1), strokeOpacity = VegaValueRef(value = 1))
+
+
+    #Area, Bar, Heatmap, Pie Chart, Scatterplot, Waterfall, WordCloud, Bubble Chart, Stemleaf, Choropleth
+    else
+
+        v.marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity))
+        v.marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1))
+
+    end
+
+    return v
+end

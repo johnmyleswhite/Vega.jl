@@ -70,13 +70,7 @@
                                                                                       align = VegaValueRef(value = "center"),
                                                                                       baseline = VegaValueRef(value = "alphabetic"),
                                                                                       fill = VegaValueRef(scale = "color", field = "text")
-                                                                                     ),
-                                                            update = VegaMarkPropertySet(
-                                                                                        fillOpacity = VegaValueRef(value = 1)
-                                                                                        ),
-                                                            hover = VegaMarkPropertySet(
-                                                                                        fillOpacity = VegaValueRef(value = 0.5)
-                                                                                        )
+                                                                                     )
 
                                                           )
                          )
