@@ -12,6 +12,7 @@ Function Keywords:
 {% highlight julia %}
 x::AbstractVector
 y::AbstractVector
+entity::Symbol = :uscounties
 {% endhighlight %}
 
 # U.S. Counties
