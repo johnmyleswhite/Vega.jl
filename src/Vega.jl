@@ -14,7 +14,7 @@ module Vega
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
-           bubblechart, streamplot, stemleaf
+           bubblechart, streamplot, stemleaf, asterplot
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
@@ -72,6 +72,7 @@ module Vega
     include("derived/streamplot.jl")
     include("derived/waterfall.jl")
     include("derived/wordcloud.jl")
+    include("derived/asterplot.jl")
 
     if Pkg.installed("Escher") != nothing
         include("escher_integration.jl")
