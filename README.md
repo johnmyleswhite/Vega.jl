@@ -38,16 +38,13 @@ Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
 - Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
 - Horizon [#69](https://github.com/johnmyleswhite/Vega.jl/issues/69)
+- Aster plot [#71](https://github.com/johnmyleswhite/Vega.jl/issues/71)
 - Contour
-- Weather
 - parallel coordinates
 - Treemap
 - Force
-- Jobs
 - Scatterplot matrix (faceting)
 - Barley (Faceting)
-- Lifelines
-- Aster plot
 - Diverging Stacked Bar Chart
 - polar coordinate graph
 - spiderweb graph / radial
