@@ -29,8 +29,6 @@ y = [1, 2, 3, 2, 1]
 barplot(x = x, y = y)
 {% endhighlight %}
 
-<img src ="http://johnmyleswhite.github.io/Vega.jl/images/barplot.png" alt = "barplot" >
-
  <div id="vis"></div>
 
  <script type="text/javascript">
