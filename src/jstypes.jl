@@ -127,46 +127,13 @@ function maketojs(typename::Symbol, spec)
                      makejsbody(spec))
 end
 
-#makecopy helper functions
-function makecopyline(entry::Tuple)
-    return Expr(:call, :copy, Expr(:., :x, Expr(:quote, entry[1])))
-end
-
-function makecopybody(typename::Symbol, spec)
-    return Expr(:block,
-                Expr(:call,
-                     typename,
-                     map(makecopyline, spec)...))
-end
-
-#Main function to add methods for shallow copy (i.e. structure only) of the object being passed in
-#This is likely for just for initializing types
-
-#Ex:
-# > makecopy(:VegaPadding, padding_spec)
-# :(function Base.copy(x::VegaPadding)
-#         VegaPadding(copy(x.top),copy(x.left),copy(x.bottom),copy(x.right))
-#     end)
-
-function makecopy(typename::Symbol, spec)
-    return Expr(:function,
-                Expr(:call,
-                     Expr(:., :Base, Expr(:quote, :copy)),
-                     Expr(:(::), :x, typename)),
-                makecopybody(typename, spec))
-end
-
 #Create primitives from one function instead of repeating
 #Use of eval() takes all Expr created above, evaluates their results, so that they become Julia citizens
 function primitivefactory(create::Symbol, spec::AbstractArray)
     eval(maketype(create, spec))
     eval(makedefaultfunc(create, spec))
     eval(maketojs(create, spec))
-    eval(makecopy(create, spec))
 end
-
-#Guess this behavior is undefined in Base?
-Base.copy(x::Void) = nothing
 
 #Export to JSON representation any of the Vega objects
 tojson(x::Any) = JSON.json(tojs(x))
