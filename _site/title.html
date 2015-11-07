@@ -11,6 +11,20 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -28,7 +42,13 @@
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
           <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
@@ -38,35 +58,49 @@
           <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
           <small><a href='lineplot.html'>Line Plot</a></small>
           <br/>
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
           <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
           <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
           <br/>
           <small><a href='waterfall.html'>Waterfall</a></small>
           <br/>
-          <small><a href='wordcloud.html'>Wordcloud</a></small>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
-          <h4>Visualization Modifying Functions</h4>
+          <br/>
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
-          <small><a href='title.html'>title!</a></small>
-          <br/>
-          <small><a href='legend.html'>legend! (Add Title)</a></small>
-          <br/>
-          <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
-          <br/>
-          <small><a href='colorscheme.html'>colorscheme!</a></small>
-          <br/>
-          <small><a href='coord_flip.html'>coord_flip!</a></small>
-          <br/>
-          <small><a href='stroke.html'>stroke!</a></small>
-          <br/>
+
         </p>
 
         <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
@@ -75,12 +109,20 @@
       <section>
         <h1 id="title">title!</h1>
 
-<p>Required Arguments:</p>
+<p>Arguments:</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
-<span class="n">title</span><span class="p">::</span><span class="n">String</span></code></pre></div>
+<span class="n">title</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">x</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">40</span>
+<span class="n">fill</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span>
+<span class="n">fontSize</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">align</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;center&quot;</span>
+<span class="n">baseline</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;top&quot;</span>
+<span class="n">fontWeight</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span>
+<span class="n">font</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span></code></pre></div>
 
-<p>This function mutates <code>:VegaVisualization</code>, adding a chart title.</p>
+<p>This function mutates <code>:VegaVisualization</code>, adding/modifying a chart title.</p>
 
 <h3 id="no-title">No title</h3>
 
@@ -105,7 +147,37 @@
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&quot;Gender &amp; Age Comparison - 1900&quot;</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/poptitle.png" alt="lineplot" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/poptitle.png" alt="poptile" /></p>
+
+<h3 id="add-subtitle">Add subtitle</h3>
+<p>In Vega, there are only concepts of “marks”. What this implies is, you can continually add additional marks as desired, such as for a subtitle.</p>
+
+<p>In Vega.jl, to add a subtitle (or multiple!), just change the y offset value. The larger the value (i.e. less negative until you cross over 0), the further DOWN the chart the title will be located. Note that there is nothing that keeps the titles from overlapping the chart; if you find the text to be in a sub-optimal location, just keep modifying the y parameter until you get the desired outcome.</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">86.5</span><span class="p">,</span> <span class="mf">80.8</span><span class="p">,</span> <span class="mf">80.4</span><span class="p">,</span> <span class="mf">80.3</span><span class="p">,</span> <span class="mf">78.4</span><span class="p">,</span> <span class="mf">74.2</span><span class="p">,</span> <span class="mf">73.5</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mf">69.2</span><span class="p">,</span> <span class="mf">68.6</span><span class="p">,</span> <span class="mf">65.5</span><span class="p">,</span> <span class="mf">65.4</span><span class="p">,</span> <span class="mf">63.4</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">102.9</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="mf">102.5</span><span class="p">,</span> <span class="mf">86.1</span><span class="p">,</span> <span class="mf">70.1</span><span class="p">,</span> <span class="mf">68.5</span><span class="p">,</span> <span class="mf">83.1</span><span class="p">,</span> <span class="mf">93.2</span><span class="p">,</span> <span class="mf">57.6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">126.4</span><span class="p">,</span> <span class="mf">50.8</span><span class="p">,</span> <span class="mf">51.8</span><span class="p">,</span> <span class="mf">82.9</span><span class="p">]</span>
+<span class="n">cont</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NO&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;RU&quot;</span><span class="p">,</span> <span class="s">&quot;US&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NZ&quot;</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mf">13.8</span><span class="p">,</span> <span class="mf">14.7</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">11.8</span><span class="p">,</span> <span class="mf">16.6</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">24.7</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">35.3</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">15.4</span><span class="p">,</span> <span class="mf">31.3</span><span class="p">]</span>
+
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">bubblechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">cont</span><span class="p">,</span> <span class="n">pointSize</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="c">#Chart mods</span>
+<span class="n">v</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">v</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">xlim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">160</span><span class="p">)</span>
+<span class="c">#Main title</span>
+<span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Sugar and Fat Intake Per Country&quot;</span><span class="p">)</span>
+<span class="c">#Subtitle - just change y offset, and fontSize/Weight if desired</span>
+<span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Source: Euromonitor and OECD&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontSize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">fontWeight</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Sugar Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Fat Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">vline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">65</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/subtitle.png" alt="subtitle" /></p>
+
 
       </section>
       <footer>

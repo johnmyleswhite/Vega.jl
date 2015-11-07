@@ -17,6 +17,14 @@
     <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
     <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
     <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
   </head>
   <body>
     <div class="wrapper">

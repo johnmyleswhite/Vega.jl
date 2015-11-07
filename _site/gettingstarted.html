@@ -11,6 +11,20 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -28,7 +42,13 @@
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
           <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
@@ -38,35 +58,49 @@
           <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
           <small><a href='lineplot.html'>Line Plot</a></small>
           <br/>
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
           <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
           <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
           <br/>
           <small><a href='waterfall.html'>Waterfall</a></small>
           <br/>
-          <small><a href='wordcloud.html'>Wordcloud</a></small>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
-          <h4>Visualization Modifying Functions</h4>
+          <br/>
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
-          <small><a href='title.html'>title!</a></small>
-          <br/>
-          <small><a href='legend.html'>legend! (Add Title)</a></small>
-          <br/>
-          <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
-          <br/>
-          <small><a href='colorscheme.html'>colorscheme!</a></small>
-          <br/>
-          <small><a href='coord_flip.html'>coord_flip!</a></small>
-          <br/>
-          <small><a href='stroke.html'>stroke!</a></small>
-          <br/>
+
         </p>
 
         <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
@@ -80,7 +114,7 @@
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">)</span>
 <span class="k">using</span> <span class="n">Vega</span></code></pre></div>
 
-<p>Currerntly, Vega.jl requires an Internet connection to render graphs, as the <a href="https://github.com/vega/vega">vega</a> project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.</p>
+<p>Currently, Vega.jl requires an Internet connection to render graphs, as the <a href="https://github.com/vega/vega">vega</a> project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.</p>
 
 <h2 id="supported-environments">Supported Environments</h2>
 

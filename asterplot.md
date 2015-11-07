@@ -18,9 +18,8 @@ holesize::Int
 
 This plot is a replication of the [Aster Plot d3.js](http://bl.ocks.org/bbest/2de0e25d4840c68f2db1) example on [bl.ocks.org](http://bl.ocks.org/). From their description:
 
-{% highlight julia %}
 "This aster plot displays pie slices as lengths extending outward to the edge (0 at inner to 100 at outer). Widths of the pie slices represent the weight of each pie..."
-{% endhighlight %}
+
 
 ### Aster Plot With Interactivity
 {% highlight julia %}

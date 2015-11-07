@@ -11,6 +11,20 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -28,7 +42,13 @@
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
           <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
@@ -38,35 +58,49 @@
           <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
           <small><a href='lineplot.html'>Line Plot</a></small>
           <br/>
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
           <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
           <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
           <br/>
           <small><a href='waterfall.html'>Waterfall</a></small>
           <br/>
-          <small><a href='wordcloud.html'>Wordcloud</a></small>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
-          <h4>Visualization Modifying Functions</h4>
+          <br/>
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
-          <small><a href='title.html'>title!</a></small>
-          <br/>
-          <small><a href='legend.html'>legend! (Add Title)</a></small>
-          <br/>
-          <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
-          <br/>
-          <small><a href='colorscheme.html'>colorscheme!</a></small>
-          <br/>
-          <small><a href='coord_flip.html'>coord_flip!</a></small>
-          <br/>
-          <small><a href='stroke.html'>stroke!</a></small>
-          <br/>
+
         </p>
 
         <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
@@ -78,16 +112,28 @@
 <p>Function Keywords:</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">entity</span><span class="p">::</span><span class="n">Symbol</span> <span class="o">=</span> <span class="p">:</span><span class="n">uscounties</span></code></pre></div>
 
-<p>Note: The input for the X array are FIPS codes, not zip codes. The two are not interchangeable. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
+<h1 id="us-counties">U.S. Counties</h1>
+<p>The input for the X array are <a href="https://en.wikipedia.org/wiki/FIPS_county_code">5-digit U.S. county-level FIPS codes</a>, not zip codes. The two are not interchangeable. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega2/test/data/unemployment.tsv&quot;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/unemployment.tsv&quot;</span><span class="p">))</span>
 
 <span class="n">v</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">id</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">rate</span><span class="p">])</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/choropleth.png" alt="choropleth" /></p>
+
+<h1 id="us-states">U.S. States</h1>
+<p>The input for the X array are 2-digit <a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code">U.S. state-level FIPS codes</a>. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">entity</span> <span class="o">=</span> <span class="p">:</span><span class="n">usstates</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/usstates.png" alt="usstates" /></p>
 
       </section>
       <footer>

@@ -11,6 +11,20 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -28,7 +42,13 @@
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
           <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
@@ -38,35 +58,49 @@
           <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
           <small><a href='lineplot.html'>Line Plot</a></small>
           <br/>
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
           <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
           <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
           <br/>
           <small><a href='waterfall.html'>Waterfall</a></small>
           <br/>
-          <small><a href='wordcloud.html'>Wordcloud</a></small>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
-          <h4>Visualization Modifying Functions</h4>
+          <br/>
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
           <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
           <br/>
           <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
           <br/>
-          <small><a href='title.html'>title!</a></small>
-          <br/>
-          <small><a href='legend.html'>legend! (Add Title)</a></small>
-          <br/>
-          <small><a href='showlegend_hidelegend.html'>showlegend! / hidelegend!</a></small>
-          <br/>
-          <small><a href='colorscheme.html'>colorscheme!</a></small>
-          <br/>
-          <small><a href='coord_flip.html'>coord_flip!</a></small>
-          <br/>
-          <small><a href='stroke.html'>stroke!</a></small>
-          <br/>
+
         </p>
 
         <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
@@ -82,7 +116,8 @@
 <span class="n">y2</span><span class="p">::</span><span class="n">AbstractVector</span>
 <span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
 <span class="n">stacked</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
-<span class="n">horizontal</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
+<span class="n">horizontal</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">normalize</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
 
 <h3 id="vertical-bar">Vertical Bar</h3>
 
@@ -93,7 +128,12 @@
 
 <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/barplot.png" alt="barplot" /></p>
+<div id="verticalbar"></div>
+<script type="text/javascript">
+parse("verticalbar",
+	{"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"titleOffset":40,"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":1},{"x":2,"y2":0,"group":1,"y":2},{"x":3,"y2":0,"group":1,"y":3},{"x":4,"y2":0,"group":1,"y":2},{"x":5,"y2":0,"group":1,"y":1}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450}
+	);
+</script>
 
 <h3 id="horizontal-bar">Horizontal Bar</h3>
 
@@ -104,7 +144,12 @@
 
 <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">horizontal</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/horizontalbar.png" alt="horizontalbar" /></p>
+<div id="horizontalbar"></div>
+<script type="text/javascript">
+parse("horizontalbar",
+	{"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"height":{"offset":-1,"scale":"x","band":true},"x2":{"value":0,"scale":"y"},"x":{"field":"y","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"x","scale":"x"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"x","scale":"y"},{"titleOffset":40,"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"y","scale":"x"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":1},{"x":2,"y2":0,"group":1,"y":2},{"x":3,"y2":0,"group":1,"y":3},{"x":4,"y2":0,"group":1,"y":2},{"x":5,"y2":0,"group":1,"y":1}]}],"scales":[{"name":"x","range":"height","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"width","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450}
+	);
+</script>
 
 <h3 id="group-argument">Group Argument</h3>
 
@@ -116,7 +161,12 @@
 
 <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/groupbar.png" alt="groupedbar" /></p>
+<div id="groupbar"></div>
+<script type="text/javascript">
+parse("groupbar",
+	{"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"titleOffset":40,"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":0.0,"y":0.7410184502461228},{"x":2,"y2":0,"group":0.0,"y":0.6380260092604406},{"x":3,"y2":0,"group":0.0,"y":0.3496893538132799},{"x":4,"y2":0,"group":0.0,"y":0.46145201956179727},{"x":5,"y2":0,"group":0.0,"y":0.31548888152566534},{"x":6,"y2":0,"group":1.0,"y":0.44012296055687306},{"x":7,"y2":0,"group":1.0,"y":0.3521419933283525},{"x":8,"y2":0,"group":1.0,"y":0.44166522951021503},{"x":9,"y2":0,"group":1.0,"y":0.6374618249663895},{"x":10,"y2":0,"group":1.0,"y":0.045634914012558925},{"x":11,"y2":0,"group":1.0,"y":0.7412386028436626},{"x":12,"y2":0,"group":1.0,"y":0.6087211365044194},{"x":13,"y2":0,"group":1.0,"y":0.5680089466459857},{"x":14,"y2":0,"group":1.0,"y":0.7919740929540833},{"x":15,"y2":0,"group":2.0,"y":0.19686439272603673},{"x":16,"y2":0,"group":2.0,"y":0.11205444468660697},{"x":17,"y2":0,"group":2.0,"y":0.44870461621058344},{"x":18,"y2":0,"group":2.0,"y":0.5943806383626922},{"x":19,"y2":0,"group":2.0,"y":0.263901299646756},{"x":20,"y2":0,"group":2.0,"y":0.7365808830157612}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+	);
+</script>
 
 <h3 id="stacked-bar-with-additional-colorscheme-change">Stacked Bar (with additional <code>colorscheme!</code> change)</h3>
 
@@ -126,12 +176,18 @@
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="n">b</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Greens&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Greens&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/stackedbar.png" alt="stackedbar" /></p>
+<div id="stacked"></div>
+<script type="text/javascript">
+parse("stacked",
 
-<h3 id="horizontal-stacked-bar-with-additional-colorscheme-change">Horizontal Stacked Bar (with additional <code>colorscheme!</code> change)</h3>
+{"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"layout_end","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"layout_start","scale":"y"}}},"from":{"data":"table","transform":[{"sortby":["group"],"offset":"zero","field":"y","groupby":["x"],"type":"stack"}]},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"titleOffset":40,"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":0,"y2":0,"group":0,"y":28},{"x":1,"y2":0,"group":0,"y":43},{"x":2,"y2":0,"group":0,"y":81},{"x":3,"y2":0,"group":0,"y":19},{"x":4,"y2":0,"group":0,"y":52},{"x":5,"y2":0,"group":0,"y":24},{"x":6,"y2":0,"group":0,"y":87},{"x":7,"y2":0,"group":0,"y":17},{"x":8,"y2":0,"group":0,"y":68},{"x":9,"y2":0,"group":0,"y":49},{"x":0,"y2":0,"group":1,"y":55},{"x":1,"y2":0,"group":1,"y":91},{"x":2,"y2":0,"group":1,"y":53},{"x":3,"y2":0,"group":1,"y":87},{"x":4,"y2":0,"group":1,"y":48},{"x":5,"y2":0,"group":1,"y":49},{"x":6,"y2":0,"group":1,"y":66},{"x":7,"y2":0,"group":1,"y":27},{"x":8,"y2":0,"group":1,"y":16},{"x":9,"y2":0,"group":1,"y":15}]},{"name":"stats","source":"table","transform":[{"groupby":["x"],"type":"aggregate","summarize":[{"ops":["sum"],"field":"y"}]}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"stats","field":"sum_y"},"type":"linear"},{"name":"group","range":["rgb(229,245,224)","rgb(161,217,155)","rgb( 49,163, 84)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+	);
+</script>
+
+<h3 id="normalized-horizontal-stacked-bar-with-additional-hover-change">Normalized Horizontal Stacked Bar (with additional <code>hover!</code> change)</h3>
 
 <div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
@@ -139,10 +195,17 @@
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="n">b</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">horizontal</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Greens&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">horizontal</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">hover</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span></code></pre></div>
 
-<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/stackedbarh.png" alt="stackedbarh" /></p>
+<div id="horizhover"></div>
+<script type="text/javascript">
+parse("horizhover",
+
+{"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"update":{"fillOpacity":{"value":1}},"hover":{"fillOpacity":{"value":0.75}},"enter":{"height":{"offset":-1,"scale":"x","band":true},"x2":{"field":"layout_end","scale":"y"},"x":{"field":"layout_start","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"x","scale":"x"}}},"from":{"data":"table","transform":[{"sortby":["group"],"offset":"normalize","field":"y","groupby":["x"],"type":"stack"}]},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"x","scale":"y"},{"titleOffset":40,"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"y","scale":"x"}],"data":[{"name":"table","values":[{"x":0,"y2":0,"group":0,"y":28},{"x":1,"y2":0,"group":0,"y":43},{"x":2,"y2":0,"group":0,"y":81},{"x":3,"y2":0,"group":0,"y":19},{"x":4,"y2":0,"group":0,"y":52},{"x":5,"y2":0,"group":0,"y":24},{"x":6,"y2":0,"group":0,"y":87},{"x":7,"y2":0,"group":0,"y":17},{"x":8,"y2":0,"group":0,"y":68},{"x":9,"y2":0,"group":0,"y":49},{"x":0,"y2":0,"group":1,"y":55},{"x":1,"y2":0,"group":1,"y":91},{"x":2,"y2":0,"group":1,"y":53},{"x":3,"y2":0,"group":1,"y":87},{"x":4,"y2":0,"group":1,"y":48},{"x":5,"y2":0,"group":1,"y":49},{"x":6,"y2":0,"group":1,"y":66},{"x":7,"y2":0,"group":1,"y":27},{"x":8,"y2":0,"group":1,"y":16},{"x":9,"y2":0,"group":1,"y":15}]},{"name":"stats","source":"table","transform":[{"groupby":["x"],"type":"aggregate","summarize":[{"ops":["sum"],"field":"y"}]}]}],"scales":[{"name":"x","range":"height","domain":{"data":"table","field":"x"},"type":"ordinal"},{"reverse":false,"name":"y","zero":true,"domainMax":1,"domain":{"data":"stats","field":"sum_y"},"range":"width","type":"linear","round":false},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+	);
+</script>
+
 
       </section>
       <footer>
