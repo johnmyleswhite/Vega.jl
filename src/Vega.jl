@@ -2,7 +2,7 @@ VERSION >= v"0.4-" && __precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, Compat
+    using JSON, ColorBrewer, Compat, KernelDensity
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
@@ -14,7 +14,7 @@ module Vega
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
-           bubblechart, streamplot, stemleaf, asterplot
+           bubblechart, streamplot, stemleaf, asterplot, jointplot
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
@@ -73,6 +73,7 @@ module Vega
     include("derived/waterfall.jl")
     include("derived/wordcloud.jl")
     include("derived/asterplot.jl")
+    include("derived/jointplot.jl")
 
     if Pkg.installed("Escher") != nothing
         include("escher_integration.jl")
