@@ -1,0 +1,28 @@
+{
+  "name": "vega-elements",
+  "version": "0.0.0",
+  "authors": [
+    "Rohit Varkey Thankachan <rohitvarkey@gmail.com>"
+  ],
+  "description": "Polymer web components for Vega",
+  "keywords": [
+    "Vega",
+    "polymer",
+    "elements"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.6",
+    "d3-cloud": "jasondavies/d3-cloud#~1.2.0",
+    "polymer": "~1.1.5",
+    "topojson": "~1.6.19",
+    "vega": "~2.2.6"
+  }
+}

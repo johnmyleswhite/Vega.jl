@@ -1,0 +1,78 @@
+Vega.jl
+=======
+[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4)
+
+# Introduction
+
+A Julia package for creating Vega visualizations. Convenience functions for common visualizations are provided, while also allowing for unlimited customization through modification of the main `VegaVisualization` composite type.
+
+At a high-level, Vega.jl is designed to provide an easy-to-use library to quickly make common visualizations, while also including some of the interactivity provided as part of the Vega 2.x JavaScript library. This package also provides a declarative syntax that deviates from [Grammar-of-Graphics](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html) style packages.
+
+# Installation
+
+	Pkg.add("Vega")
+	using Vega
+
+Currently, an Internet connection is required to use Vega.jl through Jupyter Notebook, as the required JavaScript libraries are delivered from a CDN. Using Vega from the REPL will work without an Internet connection.
+
+# Documentation
+
+For examples of the current functionality of Vega.jl, please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/)
+
+# TODO/Contributing
+
+Here's the current TODO list (along with the [GitHub issues](https://github.com/johnmyleswhite/Vega.jl/issues)); of course, any contribution, on this list or not, is greatly appreciated!
+
+To Do:
+
+Functions/Types:
+
+- area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
+- Fill in `::VegaTransform` type with actual fields
+- `jitter!` function for adding small delta to points [#74](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
+- error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
+- Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
+
+Vega Visualizations:
+- Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
+- Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
+- Horizon [#69](https://github.com/johnmyleswhite/Vega.jl/issues/69)
+- annotate heatmap / `marklabels!` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
+- Treemap
+- Force
+- Violin plot
+- Contour
+- Parallel coordinates
+- Scatterplot matrix (faceting)
+- Barley (Faceting)
+- Diverging Stacked Bar Chart
+- Polar coordinate graph
+- Spiderweb graph / radial
+- hexbin
+- correlation plot
+- cluster map
+
+d3 Visualizations (?):
+
+- Add chord chart from d3.js (requested at vega/vega project)
+- Hexbinning (requested at vega/vega project)
+- Sankey from d3.js
+- Calendar View Chart from d3.js
+
+Maps:
+
+- State-level
+- Country-level
+
+Value unclear (but still possible):
+
+- Switch to Nullable Types
+- Sanitize inputs to be correct for visualization
+- change add_data! to not add zeroes everywhere there are blanks
+- overload Base.+ with pipe operator to mimic ggplot syntax
+- Have global settings similar to Seaborn/Gadfly themes
+- Integrate with DataFrames more in-depth
+- control charts ~~[#41](https://github.com/johnmyleswhite/Vega.jl/issues/41)~~
+- `yticks!`, `xticks!` function (covered by keyword arguments on `xlab!` and `ylab!` I think)

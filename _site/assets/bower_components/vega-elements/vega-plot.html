@@ -1,0 +1,45 @@
+<html>
+  <script src="../d3/d3.js"></script>
+  <script src="../topojson/topojson.js"></script>
+  <script src="../d3-cloud/build/d3.layout.cloud.js"></script>
+  <script src="../vega/vega.min.js"></script>
+
+  <dom-module id="vega-plot">
+    <template>
+      <div id="plot">
+          <content></content>
+      </div>
+      <br>
+      <a href="" id="pnglink" download>Save as PNG</a>
+    </template>
+    <script>
+      Polymer({
+        is: "vega-plot",
+        properties: {
+          json: {
+            type: Object,
+            notify: true,
+            observer: 'render'
+          }
+        },
+        render: function() {
+          var self = this;
+          vg.parse.spec(this.json, function (chart) {
+            chart({el:(Polymer.dom(self.$.plot)).node}).update()
+          });
+          this.async(function (){
+            this.saveAsPNG();
+          }, 100);
+        },
+        ready: function (){
+          this.render()
+        },
+        saveAsPNG: function (){
+          var pnglink = this.$.plot.querySelector(".vega").querySelector("canvas").toDataURL("image/png");
+          this.$.pnglink.href = pnglink;
+        },
+      });
+    </script>
+  </dom-module>
+
+</html>

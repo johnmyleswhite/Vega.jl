@@ -1,0 +1,11 @@
+import Escher: Elem, Tile, render
+import Base: convert
+
+type VegaPlot <: Tile
+    json::AbstractString
+end
+
+convert(::Type{Tile}, v::VegaVisualization) = VegaPlot(tojson(v))
+
+render(plot::VegaPlot, state) =
+    Elem(:"vega-plot", attributes = Dict(:json=>plot.json))
