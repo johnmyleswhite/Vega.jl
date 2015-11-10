@@ -51,6 +51,9 @@ parse("jitter5pct",
 ### Jitter along X-axis only
 
 {% highlight julia %}
+x = rand(1:10, 500)
+y = rand(0:10, 500) + x
+a = scatterplot(x = x, y = y)
 jitter!(a)
 {% endhighlight %}
 
