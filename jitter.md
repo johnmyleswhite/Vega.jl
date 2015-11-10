@@ -54,7 +54,7 @@ parse("jitter5pct",
 x = rand(1:10, 500)
 y = rand(0:10, 500) + x
 a = scatterplot(x = x, y = y)
-jitter!(a)
+jitter!(a, pctXrange = 0.1, pctYrange = 0)
 {% endhighlight %}
 
 <div id="jitterx"></div>
