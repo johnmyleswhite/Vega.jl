@@ -75,7 +75,7 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     d3 = asset("d3","d3.min.js")
     topojson = asset("topojson","topojson.js")
     cloudlayout = asset("d3-cloud", "build", "d3.layout.cloud.js")
-    vega = asset("vega", "vega.js")
+    vega = asset("vega", "vega.min.js")
 
     divid = "vg" * randstring(3)
 

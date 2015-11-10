@@ -277,3 +277,30 @@ function hover!(v::VegaVisualization; opacity::Number = 1)
 
     return v
 end
+
+function jitter!(v::VegaVisualization; pctXrange::Real = 0.05, pctYrange::Real = 0.05)
+
+    #Calculate range, then use random pct of range
+    _y = []
+    _x = []
+
+    for datum in v.data[1].values
+        push!(_x, datum["x"])
+        push!(_y, datum["y"])
+    end
+
+    xrange = maximum(_x) - minimum(_x)
+    yrange = maximum(_y) - minimum(_y)
+
+    #Iterate over VegaData to jitter dataset
+    for datum in v.data[1].values
+        if typeof(datum["x"]) <: Number
+            datum["x"] = rand(0:0.001:pctXrange) * xrange + datum["x"]
+        end
+        if typeof(datum["y"]) <: Number
+            datum["y"] = rand(0:0.001:pctYrange) * yrange + datum["y"]
+        end
+    end
+
+    return v
+end
