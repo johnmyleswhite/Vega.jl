@@ -29,7 +29,6 @@ Functions/Types:
 
 - area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
 - Fill in `::VegaTransform` type with actual fields
-- `jitter!` function for adding small delta to points [#74](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
 - error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
