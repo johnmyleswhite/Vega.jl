@@ -2,7 +2,30 @@ using Vega
 using Base.Test
 using Compat
 
-@compat @assert 1 == 1
+
+using Conda
+using PyCall
+
+#Added just for testing purposes to validate generated JSON
+Conda.add("jsonschema")
+
+@pyimport jsonschema
+vegaschema = JSON.parse(readall(Pkg.dir("Vega", "assets/bower_components/vega/vega-schema.json")))
+
+#### Tests ####
+#1. Area Plot
+using Vega, KernelDensity, Distributions
+
+x = rand(Beta(3.0, 2.0), 10)
+k = kde(x)
+
+#Test that Julia returned VegaVisulization (every public function does)
+#jsonschema.validate returns nothing if json validates against schema
+a = areaplot(x = k.x, y = k.density);
+@test typeof(a) == VegaVisualization
+@test jsonschema.validate(tojs(a), vegaschema) == nothing
+
+#@compat @assert 1 == 1
 
 # my_tests = ["test/padding.jl",
 #             "test/valueref.jl",
