@@ -1,13 +1,7 @@
 using Vega
 using Base.Test
 using Compat
-
-
-using Conda
 using PyCall
-
-#Added just for testing purposes to validate generated JSON
-Conda.add("jsonschema")
 
 @pyimport jsonschema
 vegaschema = JSON.parse(readall(Pkg.dir("Vega", "assets/bower_components/vega/vega-schema.json")))
