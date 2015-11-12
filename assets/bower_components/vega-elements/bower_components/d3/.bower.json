@@ -31,6 +31,6 @@
     "commit": "7fd9c922abdb974bf385c2129a0520b7a19982f1"
   },
   "_source": "git://github.com/mbostock/d3.git",
-  "_target": "~3.5.6",
+  "_target": "^3.5.6",
   "_originalSource": "d3"
 }

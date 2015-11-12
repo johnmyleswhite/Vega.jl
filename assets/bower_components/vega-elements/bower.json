@@ -5,6 +5,9 @@
     "Rohit Varkey Thankachan <rohitvarkey@gmail.com>"
   ],
   "description": "Polymer web components for Vega",
+  "main": [
+     "vega-plot.html"
+  ],
   "keywords": [
     "Vega",
     "polymer",

@@ -4,6 +4,9 @@
     "Rohit Varkey Thankachan <rohitvarkey@gmail.com>"
   ],
   "description": "Polymer web components for Vega",
+  "main": [
+    "vega-plot.html"
+  ],
   "keywords": [
     "Vega",
     "polymer",
@@ -25,11 +28,11 @@
     "vega": "~2.2.6"
   },
   "homepage": "https://github.com/rohitvarkey/Vega-element",
-  "_release": "2c0bd0bfac",
+  "_release": "b38b99b545",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "2c0bd0bfac0f3b03141af22bd683c4d8b3987a44"
+    "commit": "b38b99b54580857d48682ddbead9c68c66b8518e"
   },
   "_source": "git://github.com/rohitvarkey/Vega-element.git",
   "_target": "*",
