@@ -4,7 +4,7 @@
     end
 
     #Calculate waterfall
-    _start = zeros(Int64, length(x))
+    _start = zeros(Int, length(x))
     _end = cumsum(y) #End values for bar
 
     #Do lag calculation for bar starting value

@@ -173,7 +173,7 @@ end
 end
 
 #Use ColorBrewer.jl scales
-@compat function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int64}, AbstractString, Array} = "ordinal10")
+@compat function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int}, AbstractString, Array} = "ordinal10")
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])

@@ -2,10 +2,10 @@ function stemleaf(; y::AbstractArray{Int} = Int[])
 
     #Stem and Leaf calculations
     sort!(y)
-    leaf = Int64[x % 10 for x in y]
-    stem = Int64[fld(x, 10) for x in y]
+    leaf = Int[x % 10 for x in y]
+    stem = Int[fld(x, 10) for x in y]
 
-    position = Int64[]
+    position = Int[]
     i = stem[1]
     counter = 1
 
