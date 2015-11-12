@@ -2,7 +2,7 @@ VERSION >= v"0.4-" && __precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, Compat, KernelDensity, PyCall
+    using JSON, ColorBrewer, Compat, KernelDensity
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
