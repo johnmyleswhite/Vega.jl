@@ -1,18 +1,12 @@
-language: cpp
-compiler:
-  - clang
+language: julia
+os:
+  - linux
+  - osx
 notifications:
   email: false
-env:
-  matrix:
-    - JULIAVERSION="juliareleases"
-    - JULIAVERSION="julianightlies"
-before_install:
-  - sudo add-apt-repository ppa:staticfloat/julia-deps -y
-  - sudo add-apt-repository ppa:staticfloat/${JULIAVERSION} -y
-  - sudo apt-get update -qq -y
-  - sudo apt-get install libpcre3-dev julia python-pip -y
-  - sudo pip install jsonschema
-  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+julia:
+  - release
+  - nightly
 script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia -e 'Pkg.init(); Pkg.add("PyCall"); Pkg.add("RDatasets"); Pkg.clone(pwd()); Pkg.test("Vega")'
