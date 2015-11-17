@@ -7,6 +7,8 @@ notifications:
 julia:
   - release
   - nightly
-script:
+before_install:
+  - sudo pip install jsonschema
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+script:
   - julia -e 'Pkg.init(); Pkg.add("PyCall"); Pkg.add("RDatasets"); Pkg.clone(pwd()); Pkg.test("Vega")'
