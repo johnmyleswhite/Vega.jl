@@ -1,6 +1,7 @@
 Vega.jl
 =======
-[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4)
+[![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl)[![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4)[![Build status](https://ci.appveyor.com/api/projects/status/5rdwxsajxo5ybbfn?svg=true)](https://ci.appveyor.com/project/randyzwitch/vega-jl)
+
 
 # Introduction
 
