@@ -23,12 +23,12 @@
     "test"
   ],
   "homepage": "https://github.com/mbostock/d3",
-  "version": "3.5.6",
-  "_release": "3.5.6",
+  "version": "3.5.9",
+  "_release": "3.5.9",
   "_resolution": {
     "type": "version",
-    "tag": "v3.5.6",
-    "commit": "0e88ef5aacbc565b7282790c829ea51dd86c978d"
+    "tag": "v3.5.9",
+    "commit": "9951df10b4c72a25e9e8796100a02d9ecab47a0e"
   },
   "_source": "git://github.com/mbostock/d3.git",
   "_target": "^3.5.6",
