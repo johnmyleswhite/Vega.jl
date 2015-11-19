@@ -467,7 +467,7 @@ title!(a, title = "Gender & Age Comparison - 1900")
 #44 xlab!/ylab!
 println("Test 44")
 x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
 group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group);
 xlab!(a, title = "Weight (kg)")
@@ -479,7 +479,7 @@ ylab!(a, title = "Height (cm)")
 #45 xlim!/ylim!
 println("Test 45")
 x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
 group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group);
 xlim!(a, min=0, max=200)

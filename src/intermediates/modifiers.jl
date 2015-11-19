@@ -2,8 +2,12 @@
 @compat function xlab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
                        format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
                        tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
-	a = v.axes[findfirst([z.name == "x" for z in v.scales])]
-	a.title = title
+
+    #Find where axis is in array
+    a = v.axes[findfirst([z.name == "x" for z in v.scales])]
+
+    #Assign properties, checking for values already set
+    title == "" && a.title != "" ? a.title = a.title: a.title = title
     a.grid = grid
     ticks == 0 && a.ticks != nothing? a.ticks = a.ticks: a.ticks = ticks
     tickSize == 0 && a.tickSize != nothing? a.tickSize = a.tickSize: a.tickSize = tickSize
@@ -23,8 +27,12 @@ end
 @compat function ylab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
                        format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
                        tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
-	a = v.axes[findfirst([z.name == "y" for z in v.scales])]
-	a.title = title
+
+    #Find where axis is in array
+    a = v.axes[findfirst([z.name == "y" for z in v.scales])]
+
+    #Assign properties, checking for values already set
+    title == "" && a.title != "" ? a.title = a.title: a.title = title
     a.grid = grid
     ticks == 0 && a.ticks != nothing? a.ticks = a.ticks: a.ticks = ticks
     tickSize == 0 && a.tickSize != nothing? a.tickSize = a.tickSize: a.tickSize = tickSize

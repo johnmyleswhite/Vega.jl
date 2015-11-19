@@ -1,0 +1,48 @@
+function dotplot(; x::AbstractArray = Real[], y::AbstractArray = Real[], group::AbstractArray = Real[], sorted::Bool = true)
+
+    v = VegaVisualization(width = 800, height = 400)
+
+    #Quick defaults
+    add_data!(v, y = y, x = x)
+    default_axes!(v)
+    default_scales!(v)
+
+    #Switch data source
+    v.scales[1].domain.data = v.scales[2].domain.data = "aggregate"
+    v.scales[1].domain.field = "average_x"
+
+    #Switch y scale for categorical, padding and data source
+    v.scales[2]._type = "ordinal"
+    v.scales[2].padding = 1
+
+    #Add gridlines
+    ylab!(v, grid = true, layer = "back")
+
+    #Calculate average
+    push!(v.data, VegaData(name = "aggregate", source = "table",
+                          transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby"=> "y", "summarize"=> Dict{Any, Any}("x" => ["average"])))
+                                      ]
+                )
+       )
+
+    if sorted
+        push!(v.data[2].transform, VegaTransform(Dict{Any, Any}("type" => "sort", "by"=> "-average_x")))
+    end
+
+    v.marks = [VegaMark(_type = "symbol",
+                        from = VegaMarkFrom(data = "aggregate"),
+                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "average_x"),
+                                                                                      y = VegaValueRef(scale = "y", field = "y"),
+                                                                                      size = VegaValueRef(value = 50),
+                                                                                      shape = VegaValueRef(value = "circle"),
+                                                                                      stroke = VegaValueRef(field = "group", scale = "group"),
+                                                                                      strokeWidth = VegaValueRef(value = 2)
+                                                                                    )
+                                                       )
+      )]
+
+
+    colorscheme!(v; palette = ("Paired", 12))
+
+    return v
+end
