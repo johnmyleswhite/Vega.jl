@@ -25,8 +25,9 @@ for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
 end
 
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre])
+a.width = 500
 ylab!(a, title = " ", grid = true)
-xlab!(a, title = "Avg. U.S. Gross Movie Receipts")
+xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")
 {% endhighlight %}
 
 <div id="dot"></div>
