@@ -29,17 +29,16 @@ To Do:
 Functions/Types:
 
 - area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
+- annotate heatmap / `marklabels!` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
 - Fill in `::VegaTransform` type with actual fields
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
-- error bars/shading around lines, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- error bars/shading around lines/bars/dots, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
-- Dotplot/Error [#49](https://github.com/johnmyleswhite/Vega.jl/issues/49)
 - Horizon [#69](https://github.com/johnmyleswhite/Vega.jl/issues/69)
-- annotate heatmap / `marklabels!` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
 - Treemap
 - Force
 - Violin plot
