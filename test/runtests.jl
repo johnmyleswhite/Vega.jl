@@ -1,5 +1,6 @@
-using PyCall, JSON, Vega, Base.Test, KernelDensity, Distributions, RDatasets
-@pyimport jsonschema
+#using PyCall
+#@pyimport jsonschema
+using JSON, Vega, Base.Test, KernelDensity, Distributions, RDatasets
 vegaschema = JSON.parse(readall(Pkg.dir("Vega", "assets/bower_components/vega/vega-schema.json")))
 
 #### Tests ####
