@@ -6,6 +6,7 @@ vis_spec =
     (:height, Int, 450),
     (:padding, Union{VegaPadding, Number, AbstractString}, "auto"),
     (:viewport, Vector{Int}, nothing),
+    (:background, AbstractString, nothing),
     (:data, Vector{VegaData}, nothing),
     (:scales, Vector{VegaScale}, nothing),
     (:axes, Vector{VegaAxis}, nothing),
