@@ -35,6 +35,20 @@ v2 = barplot(x = x, y = y)
 v2.width = 1000
 {% endhighlight %}
 
+### Background
+
+The default for background is `transparent`, which can become an issue when you download PNG files. Set background to white or the desired color of your background is this is an issue.
+
+Keyword:
+{% highlight julia %}
+background::AbstractString
+{% endhighlight %}
+
+{% highlight julia %}
+v2 = barplot(x = x, y = y)
+v2.background = "green"
+{% endhighlight %}
+
 ### Padding
 
 Padding is an awkward union of CSS padding through the `::VegaPadding` type, a single number for even padding all around the plot. The default is "auto", which should be sufficient for most cases.
