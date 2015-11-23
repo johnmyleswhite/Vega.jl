@@ -24,11 +24,11 @@ end
 tojs(x::Any) = x
 
 #Helper function for building Expr body given a specification
-function fielddef(entry::Tuple)
+# function fielddef(entry::Tuple)
 
-    return Expr(:(::), entry[1], Union{entry[2], Void})
+#     return Expr(:(::), entry[1], Union{entry[2], Void})
 
-end
+# end
 
 #Takes in a type name and its specification
 #Returns Expr for the type code as if you had written it yourself
@@ -47,7 +47,7 @@ function maketype(typename::Symbol, spec)
     lines = Array(Expr, n)
     for i in 1:n
         entry = spec[i]
-        lines[i] = fielddef(entry)
+        lines[i] = Expr(:(::), entry[1], Union{entry[2], Void})
     end
 
     return Expr(:type, #type
@@ -136,4 +136,4 @@ function primitivefactory(create::Symbol, spec::AbstractArray)
 end
 
 #Export to JSON representation any of the Vega objects
-tojson(x::Any) = JSON.json(tojs(x))
+#tojson(x::Any) = JSON.json(tojs(x))

@@ -1,4 +1,4 @@
-VERSION >= v"0.4-" && __precompile__()
+VERSION >= v"0.4" && __precompile__()
 
 module Vega
 
@@ -10,7 +10,7 @@ module Vega
            VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStreamingOps, VegaMarkFrom
 
-    export tojson, tojs
+    export tojs
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
