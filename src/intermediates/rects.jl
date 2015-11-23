@@ -1,5 +1,5 @@
 function add_rects!(v::VegaVisualization)
-    res = @compat VegaMark(_type = "rect",
+    res = VegaMark(_type = "rect",
                    from = VegaMarkFrom(data="table"),
                    properties = VegaMarkProperties(enter = default_props()))
 

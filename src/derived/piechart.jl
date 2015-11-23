@@ -1,4 +1,4 @@
-@compat function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 0)
+function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 0)
 
     v = VegaVisualization(height = 250, width = 250)
     v.legends = [VegaLegend(fill = "group", title = "group")]

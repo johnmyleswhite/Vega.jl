@@ -1,4 +1,4 @@
-@compat function default_scales!(v::VegaVisualization)
+function default_scales!(v::VegaVisualization)
     v.scales = Array(VegaScale, 3)
 
     v.scales[1] = VegaScale(name = "x",
@@ -17,7 +17,7 @@
     return v
 end
 
-@compat function default_axes!(v::VegaVisualization)
+function default_axes!(v::VegaVisualization)
     v.axes = Array(VegaAxis, 2)
 
     v.axes[1] = VegaAxis(_type = "x", scale = "x", title = "x")
@@ -28,7 +28,7 @@ end
     return v
 end
 
-@compat function default_legend!(v::VegaVisualization)
+function default_legend!(v::VegaVisualization)
     v.legends = Array(VegaLegend, 1)
     v.legends[1] = VegaLegend(fill = "group", title = "Group")
     return v

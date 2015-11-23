@@ -1,4 +1,4 @@
-@compat function barplot(;x::AbstractVector = Int[],
+function barplot(;x::AbstractVector = Int[],
                   y::AbstractVector = Int[],
                   y2::AbstractVector = Int[],
                   group::AbstractVector = Int[],

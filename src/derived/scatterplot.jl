@@ -1,4 +1,4 @@
-@compat function scatterplot(;x::AbstractVector = Int[],
+function scatterplot(;x::AbstractVector = Int[],
                       y::AbstractVector = Int[],
                       group::AbstractVector = Int[],
                       pointShape::AbstractString = "circle",
@@ -18,7 +18,6 @@
     add_points!(v)
 
     v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "group")
-    #v.marks[1].properties.enter.fillOpacity = VegaValueRef(value = 0.9)
     v.marks[1].properties.enter.size = VegaValueRef(value = pointSize)
     v.marks[1].properties.enter.shape = VegaValueRef(value = pointShape)
 

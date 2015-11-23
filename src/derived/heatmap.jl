@@ -1,4 +1,4 @@
-@compat function heatmap(;
+function heatmap(;
                  x::Vector = Float64[],
                  y::Vector = Float64[],
                  color::Vector = Int[])

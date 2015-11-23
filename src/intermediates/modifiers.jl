@@ -1,5 +1,5 @@
 #Axes
-@compat function xlab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
+function xlab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
                        format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
                        tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
 
@@ -24,7 +24,7 @@
 end
 
 #Axes
-@compat function ylab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
+function ylab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
                        format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
                        tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
 
@@ -49,7 +49,7 @@ end
 end
 
 #Scales
-@compat function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
+function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
 
     if min > max
         error("Min must be less than Max")
@@ -65,7 +65,7 @@ end
 end
 
 #Scales
-@compat function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
+function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
 
     if min > max
         error("Min must be less than Max")
@@ -80,7 +80,7 @@ end
 	return v
 end
 
-@compat function title!(v::VegaVisualization;
+function title!(v::VegaVisualization;
                         title::AbstractString = "", y::Int = -40, fill::AbstractString = "black", fontSize::Int = 16,
                         align::AbstractString = "center", baseline::AbstractString = "top", fontWeight::AbstractString = "bold",
                         font::AbstractString = "", x::Int = 0)
@@ -101,7 +101,7 @@ end
 end
 
 #Same function as title, just with different name and defaults for a different conceptual feel
-@compat function text!(v::VegaVisualization;
+function text!(v::VegaVisualization;
                         title::AbstractString = "", y::Int = 50, fill::AbstractString = "black", fontSize::Int = 12,
                         align::AbstractString = "center", baseline::AbstractString = "top", fontWeight::AbstractString = "",
                         font::AbstractString = "", x::Int = 50)
@@ -120,7 +120,7 @@ end
 end
 
 #Works for bar and grouped bar charts, add more cases if it makes sense
-@compat function coord_flip!(v::VegaVisualization)
+function coord_flip!(v::VegaVisualization)
 
     #Switch scales
     v.scales[findfirst([z.name == "x" for z in v.scales])].range = "height"
@@ -168,7 +168,7 @@ end
     return v
 end
 
-@compat function legend!(v::VegaVisualization; title::AbstractString="Group", show::Bool=true)
+function legend!(v::VegaVisualization; title::AbstractString="Group", show::Bool=true)
 
     if show == true
         default_legend!(v)
@@ -181,7 +181,7 @@ end
 end
 
 #Use ColorBrewer.jl scales
-@compat function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int}, AbstractString, Array} = "ordinal10")
+function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int}, AbstractString, Array} = "ordinal10")
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])
@@ -203,7 +203,7 @@ end
 
 end
 
-@compat function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::Real = 0.75, opacity::Real = 1, visible::Bool = true)
+function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::Real = 0.75, opacity::Real = 1, visible::Bool = true)
 
     if typeof(v.marks[1].marks) == Void
         if visible
@@ -232,7 +232,7 @@ end
 end
 
 
-@compat function hline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
+function hline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
     line = VegaMark(_type = "rule",
                     properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(field = Dict{Any, Any}("group" => "x")),
                                                                                 x2 = VegaValueRef(field = Dict{Any, Any}("group" => "width")),
@@ -249,7 +249,7 @@ end
     return v
 end
 
-@compat function vline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
+function vline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
     line = VegaMark(_type = "rule",
                     properties = VegaMarkProperties(enter = VegaMarkPropertySet(y = VegaValueRef(field = Dict{Any, Any}("group" => "y")),
                                                                                 y2 = VegaValueRef(field = Dict{Any, Any}("group" => "height")),

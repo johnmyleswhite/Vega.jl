@@ -1,4 +1,4 @@
-@compat function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVector = [-45, 0, 45], minThreshold::Int = 0)
+function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVector = [-45, 0, 45], minThreshold::Int = 0)
 
     v = VegaVisualization(height = 400,
                       width = 800,
