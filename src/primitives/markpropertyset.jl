@@ -16,6 +16,7 @@ markpropertyset_spec =
 	(:strokeOpacity, VegaValueRef, nothing),
 	(:strokeDash, VegaValueRef, nothing),
 	(:strokeDashOffset, VegaValueRef, nothing),
+	(:clip, VegaValueRef, nothing),
 	(:size, VegaValueRef, nothing),
 	(:shape, VegaValueRef, nothing),
 	(:path, VegaValueRef, nothing),
@@ -37,7 +38,14 @@ markpropertyset_spec =
 	(:font, VegaValueRef, nothing),
 	(:fontSize, VegaValueRef, nothing),
 	(:fontWeight, VegaValueRef, nothing),
-	(:fontStyle, VegaValueRef, nothing)
+	(:fontStyle, VegaValueRef, nothing),
+	(:title, VegaValueRef, nothing),
+	(:labels, VegaValueRef, nothing),
+	(:legend, VegaValueRef, nothing),
+	(:symbols, VegaValueRef, nothing),
+	(:gradient, VegaValueRef, nothing)
+
+
 ]
 
 primitivefactory(:VegaMarkPropertySet, markpropertyset_spec)

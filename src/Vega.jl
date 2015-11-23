@@ -8,7 +8,7 @@ module Vega
            VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
            #VegaCSV, VegaTSV,
            VegaDataRef, VegaValueRef,
-           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStreamingOps, VegaMarkFrom
+           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStream, VegaMarkFrom, VegaPredicate
 
     export tojs
 
@@ -25,21 +25,24 @@ module Vega
     #Import helper code
     include("jstypes.jl")
 
-    # Lower-level API
-    include("primitives/streamingops.jl")
+    # Lower-level API - These are in specific order!
+    include("primitives/stream.jl")
     include("primitives/dataref.jl")
     include("primitives/valueref.jl")
     include("primitives/padding.jl")
+    include("primitives/markpropertyset.jl")
     include("primitives/axis.jl")
     include("primitives/format.jl")
     include("primitives/transform.jl")
     include("primitives/data.jl")
-    include("primitives/markpropertyset.jl")
     include("primitives/markproperties.jl")
     include("primitives/markfrom.jl")
+    include("primitives/signal.jl")
     include("primitives/scale.jl")
     include("primitives/mark.jl")
     include("primitives/legend.jl")
+    include("primitives/container.jl")
+    include("primitives/predicate.jl")
     include("primitives/visualization.jl")
 
     include("render.jl")

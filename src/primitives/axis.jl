@@ -15,9 +15,9 @@ axis_spec =
     (:tickSizeMinor, Number, nothing),
     (:tickSizeEnd, Number, nothing),
     (:offset, Union{Number, Dict{Any, Any}}, nothing),
-    (:layer, AbstractString, nothing),
-    (:grid, Bool, nothing),
-    (:properties, Dict{Any,Any}, nothing)
+    (:layer, AbstractString, "front"),
+    (:grid, Bool, false),
+    (:properties, Union{Dict{Any,Any}, VegaMarkPropertySet}, nothing)
 ]
 
 primitivefactory(:VegaAxis, axis_spec)

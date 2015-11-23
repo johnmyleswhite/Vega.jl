@@ -488,3 +488,40 @@ ylim!(a, min=0, max=200)
 
 @test typeof(a) == VegaVisualization
 #@test jsonschema.validate(tojs(a), vegaschema) == nothing
+
+#46 background color
+println("Test 46")
+x = [1:100; 1:100]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
+group = [[1 for i in 1:100]; [2 for i in 1:100]]
+a = lineplot(x = x, y = y, group = group);
+a.background = "green"
+
+@test typeof(a) == VegaVisualization
+#@test jsonschema.validate(tojs(a), vegaschema) == nothing
+
+#47 dotplot
+println("Test 47")
+df = DataFrame()
+for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
+    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+end
+
+a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre])
+a.width = 500
+ylab!(a, title = " ", grid = true)
+xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")
+
+@test typeof(a) == VegaVisualization
+#@test jsonschema.validate(tojs(a), vegaschema) == nothing
+
+#48 dotplot
+println("Test 48")
+df = DataFrame()
+for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
+    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+end
+
+a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre], sorted = false)
+@test typeof(a) == VegaVisualization
+#@test jsonschema.validate(tojs(a), vegaschema) == nothing
