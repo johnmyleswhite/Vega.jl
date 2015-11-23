@@ -69,7 +69,6 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 end
 
 #Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
-#Only Julia code is tojson(v), converting from ::VegaVisualization to JSON
 function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
     d3 = asset("d3","d3.min.js")
@@ -99,7 +98,7 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     function parse(spec) {
       vg.parse.spec(spec, function(chart) { chart({el:\"#$divid\"}).update(); });
     }
-    parse($(tojson(v)));
+    parse($(JSON.json(tojs(v))));
 
     window.setTimeout(function() {
       var pnglink = document.getElementById(\"$divid\").getElementsByTagName(\"canvas\")[0].toDataURL(\"image/png\")
