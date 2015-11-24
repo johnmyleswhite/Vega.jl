@@ -1,4 +1,4 @@
-function jointplot(; x::AbstractArray = Int[], y::AbstractArray = Int[], smoothing::Int = 4)
+function jointplot(; x::AbstractVector = Int[], y::AbstractVector = Int[], smoothing::Int = 4)
 
     #Calculate kde
     a = kde((x,y))

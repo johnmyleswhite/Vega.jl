@@ -1,4 +1,4 @@
-function dotplot(; x::AbstractArray = Real[], y::AbstractArray = Real[], group::AbstractArray = Real[], sorted::Bool = true)
+function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group::AbstractVector = Real[], sorted::Bool = true)
 
     v = VegaVisualization(width = 800, height = 400)
 

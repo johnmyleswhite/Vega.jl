@@ -1,4 +1,4 @@
-function boxplot(;y::AbstractArray = Int[], group::AbstractArray = Int[])
+function boxplot(;y::AbstractVector = Int[], group::AbstractVector = Int[])
 
     #If x is missing, create ones array of same length
     if group == Int[]

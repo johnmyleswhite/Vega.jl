@@ -1,4 +1,4 @@
-function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 0)
+function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize::Int = 0)
 
     v = VegaVisualization(height = 250, width = 250)
     legend!(v)

@@ -1,4 +1,4 @@
-function asterplot(; x::AbstractArray = [], y::AbstractArray = Int[], weight::AbstractArray = Float64[], holesize = 0)
+function asterplot(; x::AbstractVector = [], y::AbstractVector = Int[], weight::AbstractVector = Float64[], holesize = 0)
 
     v = piechart(x = x, y = y, holesize = holesize)
 

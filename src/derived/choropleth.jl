@@ -1,4 +1,4 @@
-function choropleth(; x::AbstractArray = Int[], y::AbstractArray = Int[], entity::Symbol = :uscounties)
+function choropleth(; x::AbstractVector = Int[], y::AbstractVector = Int[], entity::Symbol = :uscounties)
     v = VegaVisualization(width = 960, height = 500)
 
     #Add numeric data

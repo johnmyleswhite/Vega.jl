@@ -1,4 +1,4 @@
-function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], position::Vector{Int} = Int[], horizontal::Bool = false)
+function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], position::Vector{Int} = Int[], horizontal::Bool = false)
 
     v = VegaVisualization(height = 300, width = 500, name = "groupedbar")
 

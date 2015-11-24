@@ -1,7 +1,7 @@
 function heatmap(;
-                 x::Vector = Float64[],
-                 y::Vector = Float64[],
-                 color::Vector = Int[])
+                 x::AbstractVector = Float64[],
+                 y::AbstractVector = Float64[],
+                 color::AbstractVector = Int[])
 
     v = VegaVisualization(width = 800, height = 500)
     add_data!(v, x = x, y = y, group = color)
