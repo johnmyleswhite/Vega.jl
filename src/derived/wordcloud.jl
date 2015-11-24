@@ -2,7 +2,7 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
 
     v = VegaVisualization(height = 400,
                       width = 800,
-                      padding = VegaPadding(top = 0, bottom = 0, left = 0, right = 0),
+                      padding = "auto",
                       name = "wordcloud",
                       data = Array(VegaData,1),
                       scales = Array(VegaScale, 1),
@@ -48,8 +48,6 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
     "test" => "datum.count > $(minThreshold)"
 
                                                          ))
-
-
 
     #Define color palette
     v.scales[1] = VegaScale(name = "color", _type = "ordinal", range = ["#d5a928", "#652c90", "#939597"])

@@ -11,21 +11,11 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], posi
     default_axes!(v)
     legend!(v)
 
-    v.scales = Array(VegaScale, 3)
 
-    v.scales[1] = VegaScale(name = "x",
-                            _type = "ordinal",
-                            range = "width",
-                            padding = 0.2,
-                            domain = VegaDataRef("table", "x"))
-    v.scales[2] = VegaScale(name = "y",
-                            range = "height",
-                            domain = VegaDataRef("table", "y"),
-                            nice = true)
-    v.scales[3] = VegaScale(name = "group",
-                            _type = "ordinal",
-                            range = "category20",
-                            domain = VegaDataRef("table", "group"))
+    default_scales!(v, typeXaxis = "ordinal")
+    v.scales[1].padding = 0.2
+    v.scales[2].nice = true
+
 
     v.marks = [VegaMark(_type = "group")]
     v.marks[1].from = VegaMarkFrom(data = "table",
@@ -48,9 +38,6 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], posi
                                     _type = "ordinal",
                                     range = "width",
                                     domain = VegaDataRef(field = "group"))]
-
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
 
     if horizontal == true
         coord_flip!(v)

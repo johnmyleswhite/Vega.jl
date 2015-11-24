@@ -5,10 +5,9 @@ function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize
 
     add_data!(v, x = x, y = y)
 
-    v.scales = [VegaScale(name = "group",
-                      domain = VegaDataRef("table", "x"),
-                      range = "category10",
-                      _type = "ordinal")]
+    default_scales!(v)
+
+    v.scales[3].domain = VegaDataRef("table", "x")
 
     v.marks = [VegaMark(_type = "arc",
                        from = VegaMarkFrom(data = "table",
@@ -27,7 +26,5 @@ function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize
                         )
                 ]
 
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
     return v
 end

@@ -15,13 +15,16 @@ function waterfall(;x::AbstractVector = Int[], y::AbstractVector = Int[])
     #Calculate group based on positive or negative
     _group = [Int(val < 0) for val in y]
 
+    #Make a copy so x isn't mutated
+    _x = deepcopy(x)
+
     #Add Summary to Arrays
     push!(_start, 0)
     push!(_end, _end[end])
     push!(_group, _group[end] + 1)
-    push!(x, "Total")
+    push!(_x, "Total")
 
-    v = barplot(x = x, y = _end, y2 = _start, group = _group)
+    v = barplot(x = _x, y = _end, y2 = _start, group = _group)
 
     #Clean-up presentation
     v.width = 110 * length(x) #Make the graph variable width based on number of levels

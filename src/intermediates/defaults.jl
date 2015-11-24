@@ -25,6 +25,7 @@ function default_scales!(v::VegaVisualization;
 end
 
 function default_axes!(v::VegaVisualization)
+
     v.axes = Array(VegaAxis, 2)
 
     v.axes[1] = VegaAxis(_type = "x", scale = "x", title = "x",

@@ -8,8 +8,7 @@ function barplot(;x::AbstractVector = Int[],
 
     v = VegaVisualization()
 
-    default_scales!(v)
-    v.scales[1]._type = "ordinal"
+    default_scales!(v; typeXaxis = "ordinal")
     default_axes!(v)
 
     #If non-zero group is passed, add a legend
