@@ -15,8 +15,6 @@ function histogram(; x::AbstractVector = Int[],
         v.marks[1].properties.enter.height.offset = 0
     end
 
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
     return v
 
 end

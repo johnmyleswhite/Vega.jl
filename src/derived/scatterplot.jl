@@ -32,7 +32,5 @@ function scatterplot(;x::AbstractVector = Int[],
     v.marks[1].properties.enter.size = VegaValueRef(value = pointSize)
     v.marks[1].properties.enter.shape = VegaValueRef(value = pointShape)
 
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
     return v
 end

@@ -41,8 +41,5 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
                                                        )
       )]
 
-
-    colorscheme!(v; palette = ("Paired", 12))
-
     return v
 end

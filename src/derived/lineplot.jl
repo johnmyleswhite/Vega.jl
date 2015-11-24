@@ -51,7 +51,5 @@ function lineplot(;x::AbstractVector = Int[],
 
     end
 
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
     return v
 end

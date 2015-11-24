@@ -40,7 +40,5 @@ function areaplot(;x::AbstractVector = Int[],
         v.scales[1].zero = false
     end
 
-    #Default to Paired color scale, 12
-    colorscheme!(v; palette = ("Paired", 12))
     return v
 end
