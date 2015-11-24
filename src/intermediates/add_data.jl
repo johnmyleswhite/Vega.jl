@@ -4,22 +4,20 @@ function add_data!(v::VegaVisualization;
 	                          y::AbstractVector = Int[],
                               y2::AbstractVector = Int[],
 	                          group::AbstractVector = Int[])
+
+    #Check arrays all of same length
     n = length(x)
 
     if n != length(y) || (n != length(group) && length(group) != 0)
     	error("x, y and group must all have the same length")
     end
 
+    #Create empty arrays as necessary
     res = Array(Dict{Any, Any}, n)
+    isempty(group)? group = ones(Int, n): group
+    isempty(y2)? y2 = zeros(Int, n): y2
 
-    if isempty(group)
-        group = ones(Int, n)
-    end
-
-    if isempty(y2)
-        y2 = zeros(Int, n)
-    end
-
+    #Concatenate arrays into Dicts
     for i in 1:n
         res[i] = Dict{Any, Any}()
         res[i]["x"] = x[i]
@@ -28,13 +26,9 @@ function add_data!(v::VegaVisualization;
         res[i]["y2"] = y2[i]
     end
 
+    #Set VegaData with values, create/add to VegaVisualization
     d = VegaData(name = name, values = res)
-
-    if v.data == nothing
-		v.data = [d]
-    else
-		push!(v.data, d)
-	end
+    v.data == nothing? v.data = [d]: push!(v.data, d)
 
     return v
 end

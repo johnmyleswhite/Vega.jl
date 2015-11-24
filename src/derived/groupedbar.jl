@@ -9,7 +9,7 @@ function groupedbar(; x::AbstractArray = Int[], y::AbstractArray = Int[], positi
 
     add_data!(v, x = x, y = y, group = position)
     default_axes!(v)
-    default_legend!(v)
+    legend!(v)
 
     v.scales = Array(VegaScale, 3)
 

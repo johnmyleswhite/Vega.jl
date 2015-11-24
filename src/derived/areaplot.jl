@@ -10,7 +10,9 @@ function areaplot(;x::AbstractVector = Int[],
 	    v.scales[1].points = true
 		  v.scales[1]._type = nothing
 
-        innermark = VegaMark(_type="area", properties=VegaMarkProperties(enter = default_props()))
+        innermark = VegaMark(_type="area", properties=VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                                                     y = VegaValueRef(scale = "y", field = "y"))))
+
         innermark.properties.enter.y = VegaValueRef(scale = "y", field = "layout_start")
         innermark.properties.enter.y2 = VegaValueRef(scale = "y", field = "layout_end")
         innermark.properties.enter.fill = VegaValueRef(scale = "group", field = "group")

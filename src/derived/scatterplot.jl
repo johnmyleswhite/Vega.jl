@@ -11,11 +11,22 @@ function scatterplot(;x::AbstractVector = Int[],
     #if non-null array for group, add legend
 
     if group != Int[]
-        default_legend!(v)
+        legend!(v)
     end
 
     add_data!(v, x = x, y = y, group = group)
-    add_points!(v)
+
+    #Old add_points! code
+    res = VegaMark(_type = "symbol",
+                from = VegaMarkFrom(data="table"),
+                properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                            y = VegaValueRef(scale = "y", field = "y"))
+                                                )
+                                )
+
+
+    v.marks == nothing? v.marks = [res] : push!(v.marks, res)
+    #End add_points! code
 
     v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "group")
     v.marks[1].properties.enter.size = VegaValueRef(value = pointSize)

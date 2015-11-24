@@ -5,10 +5,10 @@ module Vega
     using JSON, ColorBrewer, Compat, KernelDensity
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
-           VegaTransform, VegaVisualization, VegaFormat, #VegaJSON,
-           #VegaCSV, VegaTSV,
+           VegaTransform, VegaVisualization, VegaFormat,
+           #VegaJSON, VegaCSV, VegaTSV,
            VegaDataRef, VegaValueRef,
-           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaTransform, VegaStream, VegaMarkFrom, VegaPredicate
+           VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaStream, VegaMarkFrom, VegaPredicate
 
     export tojs
 
@@ -18,8 +18,7 @@ module Vega
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
-    export default_scales!, default_axes!, default_legend!
-    export add_data!, add_points!, add_area!, add_rects!, add_lines!
+    export default_scales!, default_axes!, add_data!
     export colorscheme!, coord_flip!, stroke!, hline!, vline!, hover!, jitter!
 
     #Import helper code
@@ -50,12 +49,11 @@ module Vega
     # Intermediates
     include("intermediates/modifiers.jl")
     include("intermediates/defaults.jl")
-    include("intermediates/data.jl")
-    include("intermediates/points.jl")
-    include("intermediates/props.jl")
-    include("intermediates/area.jl")
-    include("intermediates/lines.jl")
-    include("intermediates/rects.jl")
+    include("intermediates/add_data.jl")
+    include("intermediates/xlab_ylab.jl")
+    include("intermediates/xlim_ylim.jl")
+    include("intermediates/title_text.jl")
+    include("intermediates/hline_vline.jl")
 
     # Higher-level API
     include("derived/choropleth.jl")

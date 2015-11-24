@@ -19,7 +19,7 @@ function heatmap(;
     default_axes!(v)
 
     #Use default legend
-    default_legend!(v)
+    legend!(v)
     v.legends[1].values = [0, 0.5, 1]
     v.legends[1].title = ""
 

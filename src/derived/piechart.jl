@@ -1,7 +1,7 @@
 function piechart(; x::AbstractArray = Real[], y::AbstractArray = [], holesize::Int = 0)
 
     v = VegaVisualization(height = 250, width = 250)
-    v.legends = [VegaLegend(fill = "group", title = "group")]
+    legend!(v)
 
     add_data!(v, x = x, y = y)
 

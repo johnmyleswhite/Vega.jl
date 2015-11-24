@@ -1,124 +1,3 @@
-#Axes
-function xlab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
-                       format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
-                       tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
-
-    #Find where axis is in array
-    a = v.axes[findfirst([z.name == "x" for z in v.scales])]
-
-    #Assign properties, checking for values already set
-    title == "" && a.title != "" ? a.title = a.title: a.title = title
-    a.grid = grid
-    ticks == 0 && a.ticks != nothing? a.ticks = a.ticks: a.ticks = ticks
-    tickSize == 0 && a.tickSize != nothing? a.tickSize = a.tickSize: a.tickSize = tickSize
-    tickSizeMajor == 0 && a.tickSizeMajor != nothing? a.tickSizeMajor = a.tickSizeMajor: a.tickSizeMajor = tickSizeMajor
-    tickSizeMinor == 0 && a.tickSizeMinor != nothing? a.tickSizeMinor = a.tickSizeMinor: a.tickSizeMinor = tickSizeMinor
-    tickSizeEnd == 0 && a.tickSizeEnd != nothing? a.tickSizeEnd = a.tickSizeEnd: a.tickSizeEnd = tickSizeEnd
-    a.format = format
-    a.layer = layer
-
-    #See if properties are already defined, and if so merge. If not, define it from function argument
-    a.properties == nothing ? properties : merge!(a.properties, properties)
-
-	return v
-end
-
-#Axes
-function ylab!(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
-                       format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
-                       tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
-
-    #Find where axis is in array
-    a = v.axes[findfirst([z.name == "y" for z in v.scales])]
-
-    #Assign properties, checking for values already set
-    title == "" && a.title != "" ? a.title = a.title: a.title = title
-    a.grid = grid
-    ticks == 0 && a.ticks != nothing? a.ticks = a.ticks: a.ticks = ticks
-    tickSize == 0 && a.tickSize != nothing? a.tickSize = a.tickSize: a.tickSize = tickSize
-    tickSizeMajor == 0 && a.tickSizeMajor != nothing? a.tickSizeMajor = a.tickSizeMajor: a.tickSizeMajor = tickSizeMajor
-    tickSizeMinor == 0 && a.tickSizeMinor != nothing? a.tickSizeMinor = a.tickSizeMinor: a.tickSizeMinor = tickSizeMinor
-    tickSizeEnd == 0 && a.tickSizeEnd != nothing? a.tickSizeEnd = a.tickSizeEnd: a.tickSizeEnd = tickSizeEnd
-    a.format = format
-    a.layer = layer
-
-    #See if properties are already defined, and if so merge. If not, define it from function argument
-    a.properties == nothing ? properties : merge!(a.properties, properties)
-
-	return v
-end
-
-#Scales
-function xlim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
-
-    if min > max
-        error("Min must be less than Max")
-    end
-
-    s = v.scales[findfirst([z.name == "x" for z in v.scales])]
-	s.domainMin = min == 0? s.domainMin : min
-	s.domainMax = max == 0? s.domainMax : max
-    s.reverse = reverse
-    s.round = round
-    min != 0? s.zero = false : s.zero = true
-	return v
-end
-
-#Scales
-function ylim!(v::VegaVisualization; min::Real = 0, max::Real = 1000, reverse::Bool = false, round::Bool = false)
-
-    if min > max
-        error("Min must be less than Max")
-    end
-
-    s = v.scales[findfirst([z.name == "y" for z in v.scales])]
-	s.domainMin = min == 0? s.domainMin : min
-	s.domainMax = max == 1000? s.domainMax : max
-    s.reverse = reverse
-    s.round = round
-    min != 0? s.zero = false : s.zero = true
-	return v
-end
-
-function title!(v::VegaVisualization;
-                        title::AbstractString = "", y::Int = -40, fill::AbstractString = "black", fontSize::Int = 16,
-                        align::AbstractString = "center", baseline::AbstractString = "top", fontWeight::AbstractString = "bold",
-                        font::AbstractString = "", x::Int = 0)
-	titlemark = VegaMark(_type = "text", from = VegaMarkFrom(value = title))
-    enterprops = VegaMarkPropertySet(x = VegaValueRef(value = (x == 0 ? (v.width / 2) : x)),
-                                     y = VegaValueRef(value = y),
-                                     text = VegaValueRef(value = title),
-                                     fill = VegaValueRef(value = fill),
-                                     fontSize = VegaValueRef(value = fontSize),
-                                     align = VegaValueRef(value = align),
-                                     baseline = VegaValueRef(value = baseline),
-                                     fontWeight = VegaValueRef(value = fontWeight),
-                                     font = VegaValueRef(value = font)
-                                     )
-	titlemark.properties = VegaMarkProperties(enter = enterprops)
-	push!(v.marks, titlemark)
-	return v
-end
-
-#Same function as title, just with different name and defaults for a different conceptual feel
-function text!(v::VegaVisualization;
-                        title::AbstractString = "", y::Int = 50, fill::AbstractString = "black", fontSize::Int = 12,
-                        align::AbstractString = "center", baseline::AbstractString = "top", fontWeight::AbstractString = "",
-                        font::AbstractString = "", x::Int = 50)
-
-    title!(v,
-            title = title,
-            y = y,
-            fill = fill,
-            fontSize = fontSize,
-            align = align,
-            baseline = baseline,
-            fontWeight = fontWeight,
-            font = font,
-            x = x)
-
-end
-
 #Works for bar and grouped bar charts, add more cases if it makes sense
 function coord_flip!(v::VegaVisualization)
 
@@ -170,14 +49,9 @@ end
 
 function legend!(v::VegaVisualization; title::AbstractString="Group", show::Bool=true)
 
-    if show == true
-        default_legend!(v)
-        v.legends[1].title = title
-    else
-        empty!(v.legends)
-    end
-
+    show == true? v.legends = [VegaLegend(fill = "group", title = title)] : empty!(v.legends)
     return v
+
 end
 
 #Use ColorBrewer.jl scales
@@ -227,41 +101,6 @@ function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::R
             v.marks[1].marks[1].properties.enter.strokeOpacity = nothing
         end
     end
-
-    return v
-end
-
-
-function hline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
-    line = VegaMark(_type = "rule",
-                    properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(field = Dict{Any, Any}("group" => "x")),
-                                                                                x2 = VegaValueRef(field = Dict{Any, Any}("group" => "width")),
-                                                                                y = VegaValueRef(scale = "y", value = value),
-                                                                                strokeWidth = VegaValueRef(value = strokeWidth),
-                                                                                stroke = VegaValueRef(value = stroke),
-                                                                                strokeDash = VegaValueRef(value = strokeDash != 0? [strokeDash] : [])
-                                                                                )
-                                )
-                    )
-
-    push!(v.marks, line)
-
-    return v
-end
-
-function vline!(v::VegaVisualization; value::Real = 0, strokeWidth::Real = 1.5, stroke::AbstractString = "#000", strokeDash::Real = 0)
-    line = VegaMark(_type = "rule",
-                    properties = VegaMarkProperties(enter = VegaMarkPropertySet(y = VegaValueRef(field = Dict{Any, Any}("group" => "y")),
-                                                                                y2 = VegaValueRef(field = Dict{Any, Any}("group" => "height")),
-                                                                                x = VegaValueRef(scale = "x", value = value),
-                                                                                strokeWidth = VegaValueRef(value = strokeWidth),
-                                                                                stroke = VegaValueRef(value = stroke),
-                                                                                strokeDash = VegaValueRef(value = strokeDash != 0? [strokeDash] : [])
-                                                                                )
-                                )
-                    )
-
-    push!(v.marks, line)
 
     return v
 end

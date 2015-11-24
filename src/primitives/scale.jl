@@ -23,4 +23,4 @@ scale_spec =
 
 primitivefactory(:VegaScale, scale_spec)
 
-isordinal(x::VegaScale) = x._type == :ordinal
+#isordinal(x::VegaScale) = x._type == :ordinal

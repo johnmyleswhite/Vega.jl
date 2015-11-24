@@ -3,7 +3,7 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
     v = VegaVisualization(width = 640, height = 400)
     add_data!(v, x = x, y = y, group = group)
 
-    default_legend!(v)
+    legend!(v)
 
     v.scales = Array(VegaScale, 3)
     v.scales[1] = VegaScale(name = "g", domain = [2,1], range = "width",  _type = "ordinal")

@@ -12,11 +12,28 @@ function lineplot(;x::AbstractVector = Int[],
 
     #If non-null array passed, put legend
     if group != Int[]
-        default_legend!(v)
+        legend!(v)
     end
 
     add_data!(v, x = x, y = y, group = group)
-    add_lines!(v)
+
+    #Old add_lines! code
+    innermarks = VegaMark(_type = "line",
+                          properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                                      y = VegaValueRef(scale = "y", field = "y"))
+                                                                            )
+                            )
+
+
+    res = VegaMark(_type = "group",
+                   from = VegaMarkFrom(data = "table",
+                                       transform =[VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"]))]
+                                       ),
+                   marks = [innermarks])
+
+    v.marks == nothing? v.marks = [res] : push!(v.marks, res)
+
+    #End add_lines!
 
     v.marks[1].marks[1].properties.enter.stroke = VegaValueRef(scale = "group", field="group")
 

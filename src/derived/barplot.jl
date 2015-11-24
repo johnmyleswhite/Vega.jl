@@ -14,11 +14,22 @@ function barplot(;x::AbstractVector = Int[],
 
     #If non-zero group is passed, add a legend
     if group != Int[]
-      default_legend!(v)
+      legend!(v)
     end
 
     add_data!(v, x = x, y = y, group = group, y2 = y2)
-    add_rects!(v)
+
+    #old add_rects code
+    res = VegaMark(_type = "rect",
+                                        from = VegaMarkFrom(data="table"),
+                                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                                                    y = VegaValueRef(scale = "y", field = "y"))
+                                                                        )
+                                                        )
+
+
+    v.marks == nothing? v.marks = [res] : push!(v.marks, res)
+    #end add_rects code
 
     v.marks[1].properties.enter.width = VegaValueRef(scale = "x", band = true, offset = -1)
     v.marks[1].properties.enter.y = VegaValueRef(scale = "y", field = "y")
