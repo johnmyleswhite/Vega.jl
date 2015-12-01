@@ -547,11 +547,21 @@ ylim!(a, _type = "pow")
 @test typeof(a) == VegaVisualization
 
 #51 lineplot with sqrt yaxis
-println("Test 50")
+println("Test 51")
 x = [1:100; 1:100]
 y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
 group = [[1 for i in 1:100]; [2 for i in 1:100]]
 
 a = lineplot(x = x, y = y, group = group)
 ylim!(a, _type = "sqrt")
+@test typeof(a) == VegaVisualization
+
+#52 reverse keyword for colorscheme!
+println("Test 52")
+x = [1:100; 1:100]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
+group = [[1 for i in 1:100]; [2 for i in 1:100]]
+
+a = lineplot(x = x, y = y, group = group)
+colorscheme!(a, palette = ("wesanderson", "BottleRocket1"), reversePalette = true)
 @test typeof(a) == VegaVisualization

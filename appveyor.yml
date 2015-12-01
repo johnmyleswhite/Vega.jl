@@ -31,4 +31,4 @@ build_script:
       Pkg.clone(pwd(), \"Vega\"); Pkg.build(\"Vega\")"
 
 test_script:
-  - C:\projects\julia\bin\julia --check-bounds=yes -e "Pkg.add(\"PyCall\");Pkg.add(\"RDatasets\");Pkg.test(\"Vega\")"
+  - C:\projects\julia\bin\julia --check-bounds=yes -e "Pkg.add(\"RDatasets\");Pkg.test(\"Vega\")"
