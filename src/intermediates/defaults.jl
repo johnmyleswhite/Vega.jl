@@ -31,7 +31,7 @@ function default_axes!(v::VegaVisualization)
     v.axes[1] = VegaAxis(_type = "x", scale = "x", title = "x",
                             properties = Dict{Any, Any}("title" => Dict{Any, Any}("fontSize" => Dict{Any, Any}("value" => 14))))
 
-    v.axes[2] = VegaAxis(_type = "y", scale = "y", title = "y", titleOffset = 40,
+    v.axes[2] = VegaAxis(_type = "y", scale = "y", title = "y",
                             properties = Dict{Any, Any}("title" => Dict{Any, Any}("fontSize" => Dict{Any, Any}("value" => 14))))
 
 

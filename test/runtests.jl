@@ -525,3 +525,33 @@ end
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre], sorted = false)
 @test typeof(a) == VegaVisualization
 #@test jsonschema.validate(tojs(a), vegaschema) == nothing
+
+#49 lineplot with log yaxis
+println("Test 49")
+x = [1:100; 1:100]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
+group = [[1 for i in 1:100]; [2 for i in 1:100]]
+
+a = lineplot(x = x, y = y, group = group)
+ylim!(a, _type = "log")
+@test typeof(a) == VegaVisualization
+
+#50 lineplot with pow yaxis
+println("Test 50")
+x = [1:100; 1:100]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
+group = [[1 for i in 1:100]; [2 for i in 1:100]]
+
+a = lineplot(x = x, y = y, group = group)
+ylim!(a, _type = "pow")
+@test typeof(a) == VegaVisualization
+
+#51 lineplot with sqrt yaxis
+println("Test 50")
+x = [1:100; 1:100]
+y = [collect(1:100) + randn(100); 3.0 + 1.5 * collect(1:100) + randn(100)]
+group = [[1 for i in 1:100]; [2 for i in 1:100]]
+
+a = lineplot(x = x, y = y, group = group)
+ylim!(a, _type = "sqrt")
+@test typeof(a) == VegaVisualization

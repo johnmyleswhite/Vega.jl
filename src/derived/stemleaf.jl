@@ -41,14 +41,14 @@ function stemleaf(; y::AbstractArray{Int} = Int[])
     v.marks[1].properties.enter.x = VegaValueRef(scale = "x", field = "x", offset = -10)
 
     #Hide x ticks, axis, labels
-    xlab!(v, title = "", properties = Dict{Any, Any}("ticks" => Dict{Any, Any}("stroke" => VegaValueRef(value = "transparent")),
+    xlab!(v, title = " ", properties = Dict{Any, Any}("ticks" => Dict{Any, Any}("stroke" => VegaValueRef(value = "transparent")),
                                          "axis" => Dict{Any, Any}("stroke" => VegaValueRef(value = "transparent")),
                                          "labels" => Dict{Any, Any}("fill" => VegaValueRef(value = "transparent"))
                                         )
          )
 
     #Hide y ticks
-    ylab!(v, title = "", ticks = length(unique(stem)), tickSizeEnd = 0, properties = Dict{Any, Any}("ticks" => Dict{Any, Any}("stroke" => VegaValueRef(value = "transparent"))
+    ylab!(v, title = " ", ticks = length(unique(stem)), tickSizeEnd = 0, properties = Dict{Any, Any}("ticks" => Dict{Any, Any}("stroke" => VegaValueRef(value = "transparent"))
                                         )
          )
 
