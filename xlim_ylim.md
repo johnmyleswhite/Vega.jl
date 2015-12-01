@@ -15,9 +15,13 @@ min::Real = 0
 max::Real = 1000
 reverse::Bool = false
 round::Bool = false
+_type::AbstractString = ""
+exponent::Real = 0.3
 {% endhighlight %}
 
-This function mutates `:VegaVisualization`, modifying the min/max and scale of the axes.
+This function mutates `:VegaVisualization`, modifying the properties of the scales underlying the axes.
+
+Note that for the `exponent` keyword, it is only in effect if `_type` is set to `"pow"`. The default value for `"pow"` of `0.3` is arbitrary, chosen so that setting `_type` to `"pow"` actually does something (the d3/vega default = `1`, which is an identity transformation).
 
 ### Default Axis limits
 {% highlight julia %}
