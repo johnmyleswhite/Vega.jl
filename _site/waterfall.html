@@ -52,6 +52,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='choropleth.html'>Choropleth</a></small>
           <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
           <small><a href='groupedbar.html'>Grouped Bar</a></small>
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
@@ -87,6 +89,8 @@ function parse(divid,spec) {
           <small><a href='hline_vline.html'>hline! / vline!</a></small>
           <br/>
           <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
           <br/>
           <small><a href='legend.html'>legend!</a></small>
           <br/>
@@ -128,7 +132,7 @@ function parse(divid,spec) {
 <div id="wf"></div>
 <script type="text/javascript">
 parse("wf",
-    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"offset":31,"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"mult":0.5,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"x","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"title":"","type":"x","ticks":0},{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"y","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"titleOffset":40,"title":"","type":"y","ticks":0}],"data":[{"name":"table","values":[{"x":"Product Revenue","y2":0,"group":0,"y":420000},{"x":"Services Revenue","y2":420000,"group":0,"y":630000},{"x":"Fixed Costs","y2":630000,"group":1,"y":460000},{"x":"Variable Costs","y2":460000,"group":1,"y":320000},{"x":"One-Time Costs","y2":320000,"group":1,"y":245000},{"x":"Total","y2":0,"group":2,"y":245000}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["#4daf4a","#e41a1c","#377eb8"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":660,"legends":[]}
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"offset":31,"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"mult":0.5,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"x","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"title":"","type":"x","ticks":0},{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"y","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"title":"","type":"y","ticks":0}],"data":[{"name":"table","values":[{"x":"Product Revenue","y2":0,"group":0,"y":420000},{"x":"Services Revenue","y2":420000,"group":0,"y":630000},{"x":"Fixed Costs","y2":630000,"group":1,"y":460000},{"x":"Variable Costs","y2":460000,"group":1,"y":320000},{"x":"One-Time Costs","y2":320000,"group":1,"y":245000},{"x":"Total","y2":0,"group":2,"y":245000}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["#4daf4a","#e41a1c","#377eb8"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":660,"legends":[]}
 
 	);
 </script>
