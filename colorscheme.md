@@ -12,6 +12,7 @@ Required Arguments:
 {% highlight julia %}
 v::VegaVisualization
 palette::Union(Tuple{AbstractString,Int64}, AbstractString, Array)
+reversePalette::Bool = false
 {% endhighlight %}
 
 This function mutates `:VegaVisualization`, modifying the colors for the `group` or `fill` properties of the visualization. The `palette` argument supports:
@@ -24,7 +25,7 @@ This function mutates `:VegaVisualization`, modifying the colors for the `group`
 {% highlight julia %}
 using Vega
 
-ab = barplot(x = [1:20], y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
+ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
 colorscheme!(ab, palette = ("Purples", 3))
 {% endhighlight %}
 
@@ -32,6 +33,21 @@ colorscheme!(ab, palette = ("Purples", 3))
 <script type="text/javascript">
 parse("purple",
     {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.8513796776202947},{"x":2,"y2":0,"group":1,"y":0.2625870861178603},{"x":3,"y2":0,"group":1,"y":0.9724565473384092},{"x":4,"y2":0,"group":1,"y":0.015489300595124655},{"x":5,"y2":0,"group":1,"y":0.2322286982937969},{"x":6,"y2":0,"group":1,"y":0.8186993719743252},{"x":7,"y2":0,"group":1,"y":0.8449349512662294},{"x":8,"y2":0,"group":1,"y":0.11070149212729241},{"x":9,"y2":0,"group":1,"y":0.3363164971342141},{"x":10,"y2":0,"group":1,"y":0.11479303595540746},{"x":11,"y2":0,"group":2,"y":0.7336879076495093},{"x":12,"y2":0,"group":2,"y":0.796077249393629},{"x":13,"y2":0,"group":2,"y":0.7599214628249928},{"x":14,"y2":0,"group":2,"y":0.5830675502045222},{"x":15,"y2":0,"group":2,"y":0.07028149908563153},{"x":16,"y2":0,"group":2,"y":0.37499661502958626},{"x":17,"y2":0,"group":2,"y":0.23561976542903285},{"x":18,"y2":0,"group":2,"y":0.15851353408668123},{"x":19,"y2":0,"group":2,"y":0.6284289392867841},{"x":20,"y2":0,"group":2,"y":0.9173802628931469}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(239,237,245)","rgb(188,189,220)","rgb(117,107,177)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+    );
+</script>
+
+### ColorBrewer scale, Reversed
+{% highlight julia %}
+using Vega
+
+ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
+colorscheme!(ab, palette = ("Purples", 3), reversePalette = true)
+{% endhighlight %}
+
+<div id="purple2"></div>
+<script type="text/javascript">
+parse("purple2",
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"x","grid":false,"type":"x","scale":"x"},{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"y","grid":false,"type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.9381179497008088},{"x":2,"y2":0,"group":1,"y":0.4964967441994834},{"x":3,"y2":0,"group":1,"y":0.18448114788656222},{"x":4,"y2":0,"group":1,"y":0.345915403095592},{"x":5,"y2":0,"group":1,"y":0.3295086909789129},{"x":6,"y2":0,"group":1,"y":0.6878649809527333},{"x":7,"y2":0,"group":1,"y":0.8182435494175802},{"x":8,"y2":0,"group":1,"y":0.6776403456457463},{"x":9,"y2":0,"group":1,"y":0.6483467878451943},{"x":10,"y2":0,"group":1,"y":0.6918815761886847},{"x":11,"y2":0,"group":2,"y":0.9075294897982495},{"x":12,"y2":0,"group":2,"y":0.9663468029837556},{"x":13,"y2":0,"group":2,"y":0.5146891806853813},{"x":14,"y2":0,"group":2,"y":0.37983788550900477},{"x":15,"y2":0,"group":2,"y":0.38740217343629735},{"x":16,"y2":0,"group":2,"y":0.5561657007191216},{"x":17,"y2":0,"group":2,"y":0.9495716801415124},{"x":18,"y2":0,"group":2,"y":0.7405958485706121},{"x":19,"y2":0,"group":2,"y":0.17496599266688206},{"x":20,"y2":0,"group":2,"y":0.09041640970752174}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(117,107,177)","rgb(188,189,220)","rgb(239,237,245)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
     );
 </script>
 
