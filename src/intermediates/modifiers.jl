@@ -55,7 +55,7 @@ function legend!(v::VegaVisualization; title::AbstractString="Group", show::Bool
 end
 
 #Use ColorBrewer.jl scales
-function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Int}, AbstractString, Array} = "ordinal10")
+function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,Any}, AbstractString, Array} = "ordinal10")
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])
@@ -66,7 +66,7 @@ function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,
 
     #colorscheme, single color or array of arbitrary string colors
     if isa(palette, Tuple)
-        s.range = ColorBrewer.colorSchemes[palette[1]]["$(palette[2])"]
+        s.range = colorpalettes[palette[1]]["$(palette[2])"]
     elseif isa(palette, AbstractString)
         s.range = [palette]
     elseif isa(palette, Array)

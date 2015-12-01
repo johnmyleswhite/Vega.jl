@@ -2,7 +2,7 @@ VERSION >= v"0.4" && __precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, Compat, KernelDensity
+    using JSON, ColorBrewer, Compat, KernelDensity, NoveltyColors
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat,
@@ -20,6 +20,10 @@ module Vega
 
     export default_scales!, default_axes!, add_data!
     export colorscheme!, coord_flip!, stroke!, hline!, vline!, hover!, jitter!
+
+    #Create base color library
+    #Eventually, merge in NoveltyColors
+    colorpalettes = merge(ColorBrewer.colorSchemes, NoveltyColors.ColorDict)
 
     #Import helper code
     include("jstypes.jl")
