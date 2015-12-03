@@ -37,8 +37,6 @@ Functions/Types:
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
 - error bars/shading around lines/bars/dots, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
-- Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
-
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
@@ -59,6 +57,7 @@ Vega Visualizations:
 
 d3 Visualizations (?):
 
+- Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
 - Add chord chart from d3.js (requested at vega/vega project)
 - Hexbinning (requested at vega/vega project)
 - Sankey from d3.js
