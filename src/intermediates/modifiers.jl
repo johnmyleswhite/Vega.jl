@@ -59,7 +59,7 @@ function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,
 
     #See if group or color key exists
     i = findfirst([z.name == "group" for z in v.scales])
-    i = i > 0? i: findfirst([z.name == "color" for z in v.scales])
+    i = i > 0? i: findfirst([z.name == "color" for z in v.scales]) #Was choropleth hack, standardized scale name to group
 
     #Copy scales property
     s = v.scales[i]
@@ -105,20 +105,35 @@ function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::R
     return v
 end
 
-function hover!(v::VegaVisualization; opacity::Number = 1)
+function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString = "")
+
+    color == ""? color_ = VegaValueRef(scale = "group", field = "group") : color_ = VegaValueRef(value = color)
 
     #Grouped bar, line chart, popchart
     if v.marks[1].marks != nothing
 
-        v.marks[1].marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity), strokeOpacity = VegaValueRef(value = opacity))
-        v.marks[1].marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1), strokeOpacity = VegaValueRef(value = 1))
+        v.marks[1].marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity),
+                                                                   strokeOpacity = VegaValueRef(value = opacity),
+                                                                   fill = v.name == "lineplot"? nothing: color_,
+                                                                   stroke = v.name == "lineplot"? color_ : nothing
+                                                                   )
+        v.marks[1].marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1),
+                                                                    strokeOpacity = VegaValueRef(value = 1),
+                                                                    fill = v.name == "lineplot"? nothing: VegaValueRef(scale = "group", field = "group")
+                                                                    )
 
 
     #Area, Bar, Heatmap, Pie Chart, Scatterplot, Waterfall, WordCloud, Bubble Chart, Stemleaf, Choropleth
     else
 
-        v.marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity))
-        v.marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1))
+        v.marks[1].properties.hover = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = opacity),
+                                                          strokeOpacity = VegaValueRef(value = opacity),
+                                                          fill = color_
+                                                        )
+        v.marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1),
+                                                           strokeOpacity = VegaValueRef(value = 1),
+                                                           fill = v.name == "choropleth"? VegaValueRef(scale = "group", field = "table2.y"): VegaValueRef(scale = "group", field = "group")
+                                                        )
 
     end
 

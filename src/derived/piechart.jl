@@ -3,7 +3,7 @@ function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize
     v = VegaVisualization(height = 250, width = 250)
     legend!(v)
 
-    add_data!(v, x = x, y = y)
+    add_data!(v, x = x, y = y, group = x)
 
     default_scales!(v)
 
@@ -14,7 +14,7 @@ function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize
                                            transform = [VegaTransform(Dict{Any, Any}("type"=> "pie", "field"=> "y"))]),
                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(
                                                                                    endAngle = VegaValueRef(field = "layout_end"),
-                                                                                   fill = VegaValueRef(field = "x", scale = "group"),
+                                                                                   fill = VegaValueRef(field = "group", scale = "group"),
                                                                                    innerRadius = VegaValueRef(value = holesize),
                                                                                    outerRadius = VegaValueRef(value = 250),
                                                                                    startAngle = VegaValueRef(field = "layout_start"),

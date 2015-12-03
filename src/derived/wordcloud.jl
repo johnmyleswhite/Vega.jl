@@ -10,7 +10,7 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
 
     v.data[1] = VegaData(name = "table",
                          values = x,
-                         transform = Array(VegaTransform, 5))
+                         transform = Array(VegaTransform, 6))
 
     v.data[1].transform[1] = VegaTransform(Dict{Any, Any}("type" => "countpattern",
                                                         "field" => "data",
@@ -49,8 +49,15 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
 
                                                          ))
 
+    #Create field "group" for consistency
+    v.data[1].transform[6] = VegaTransform(Dict{Any, Any}("type" => "formula",
+    "field" => "group",
+    "expr" => "datum.text"
+
+                                                         ))
+
     #Define color palette
-    v.scales[1] = VegaScale(name = "color", _type = "ordinal", range = ["#d5a928", "#652c90", "#939597"])
+    v.scales[1] = VegaScale(name = "group", _type = "ordinal", range = ["#d5a928", "#652c90", "#939597"])
 
     #Draw words
     v.marks[1] = VegaMark(_type = "text",
@@ -67,7 +74,7 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
                                                                                       text = VegaValueRef(field = "text"),
                                                                                       align = VegaValueRef(value = "center"),
                                                                                       baseline = VegaValueRef(value = "alphabetic"),
-                                                                                      fill = VegaValueRef(scale = "color", field = "text")
+                                                                                      fill = VegaValueRef(scale = "group", field = "text")
                                                                                      )
 
                                                           )
