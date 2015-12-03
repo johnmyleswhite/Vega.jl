@@ -20,7 +20,7 @@ Currently, an Internet connection is required to use Vega.jl through Jupyter Not
 
 # Documentation
 
-For examples of the current functionality of Vega.jl, please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/)
+Please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/), which is rendered on-the-fly using Vega code generated from Vega.jl
 
 # TODO/Contributing
 
@@ -32,11 +32,13 @@ Functions/Types:
 
 - area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
 - annotate heatmap / `marklabels!` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
+- Check inputs to set scales correctly for visualization [#87](https://github.com/johnmyleswhite/Vega.jl/issues/87)
 - Fill in `::VegaTransform` type with actual fields
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
 - error bars/shading around lines/bars/dots, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
 - How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
 - Create a "cheater" d3 type to use charts from [http://bl.ocks.org/mbostock](http://bl.ocks.org/mbostock) and [https://github.com/mbostock/d3/wiki/Gallery](https://github.com/mbostock/d3/wiki/Gallery) as templates?
+
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
@@ -64,16 +66,5 @@ d3 Visualizations (?):
 
 Maps:
 
-- State-level
-- Country-level
-
-Value unclear (but still possible):
-
-- Switch to Nullable Types
-- Sanitize inputs to be correct for visualization
-- change add_data! to not add zeroes everywhere there are blanks
-- overload Base.+ with pipe operator to mimic ggplot syntax
-- Have global settings similar to Seaborn/Gadfly themes
-- Integrate with DataFrames more in-depth
-- control charts ~~[#41](https://github.com/johnmyleswhite/Vega.jl/issues/41)~~
-- `yticks!`, `xticks!` function (covered by keyword arguments on `xlab!` and `ylab!` I think)
+- 50 United States maps
+- 200 Country-level maps (?)

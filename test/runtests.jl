@@ -565,3 +565,12 @@ group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group)
 colorscheme!(a, palette = ("wesanderson", "BottleRocket1"), reversePalette = true)
 @test typeof(a) == VegaVisualization
+
+#53 color keyword for hover!
+println("Test 53")
+x = [1, 2, 3, 4, 5]
+y = [1, 2, 3, 2, 1]
+
+a = barplot(x = x, y = y)
+hover!(a, color = "red")
+@test typeof(a) == VegaVisualization
