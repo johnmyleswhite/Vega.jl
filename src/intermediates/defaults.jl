@@ -11,16 +11,16 @@ function default_scales!(v::VegaVisualization;
     v.scales[1] = VegaScale(name = "x",
                             _type = typeXaxis,
                             range = "width",
-                            domain = VegaDataRef("table", "x"))
+                            domain = VegaDataRef(data = "table", field = "x"))
     v.scales[2] = VegaScale(name = "y",
                             _type = typeYaxis,
                             range = "height",
-                            domain = VegaDataRef("table", "y"))
+                            domain = VegaDataRef(data = "table", field = "y"))
 
     v.scales[3] = VegaScale(name = "group",
                             _type = "ordinal",
-                            range = ColorBrewer.colorSchemes["Paired"]["12"],
-                            domain = VegaDataRef("table", "group"))
+                            range = colorpalettes["Paired"]["12"],
+                            domain = VegaDataRef(data = "table", field = "group"))
     return v
 end
 
