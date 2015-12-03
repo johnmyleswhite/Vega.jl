@@ -7,7 +7,7 @@ function piechart(; x::AbstractVector = Real[], y::AbstractVector = [], holesize
 
     default_scales!(v)
 
-    v.scales[3].domain = VegaDataRef("table", "x")
+    v.scales[3].domain = VegaDataRef(data = "table", field = "x")
 
     v.marks = [VegaMark(_type = "arc",
                        from = VegaMarkFrom(data = "table",

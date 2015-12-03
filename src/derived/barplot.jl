@@ -43,7 +43,7 @@ function barplot(;x::AbstractVector = Int[],
       v.marks[1].properties.enter.y = VegaValueRef(scale = "y", field = "layout_start")
       v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "layout_end")
 
-      v.scales[2].domain = VegaDataRef("stats", "sum_y")
+      v.scales[2].domain = VegaDataRef(data = "stats", field = "sum_y")
 
       v.marks[1].from = VegaMarkFrom(data = "table",
                                      transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y", "offset" => normalize == true? "normalize" : "zero"))])
