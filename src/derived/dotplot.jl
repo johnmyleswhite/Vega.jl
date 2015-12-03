@@ -26,7 +26,8 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
        )
 
     if sorted
-        push!(v.data[2].transform, VegaTransform(Dict{Any, Any}("type" => "sort", "by"=> "-average_x")))
+        v.scales[2].domain.sort = Dict{Any, Any}("field" => "average_x", "op" => "mean")
+        v.scales[2].reverse = true
     end
 
     v.marks = [VegaMark(_type = "symbol",
