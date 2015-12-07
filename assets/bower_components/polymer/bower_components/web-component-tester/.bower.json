@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "mocha": "^2.3.0",
-    "stacky": "PolymerLabs/stacky#^1.2.4",
+    "stacky": "^1.3.0",
     "async": "^1.5.0",
     "chai": "^2.3.0",
     "lodash": "^3.7.0",
@@ -33,13 +33,13 @@
     "accessibility-developer-tools": "GoogleChrome/accessibility-developer-tools#^2.7.0",
     "test-fixture": "polymerelements/test-fixture#^1.0.0"
   },
-  "version": "3.4.0",
+  "version": "3.4.2",
   "homepage": "https://github.com/Polymer/web-component-tester",
-  "_release": "3.4.0",
+  "_release": "3.4.2",
   "_resolution": {
     "type": "version",
-    "tag": "v3.4.0",
-    "commit": "0dc34b1ef20b968f9d75994aab3d4b2f14cbb62a"
+    "tag": "v3.4.2",
+    "commit": "bdbc4301e011b5834c995b900d76acaaecb9ccbc"
   },
   "_source": "git://github.com/Polymer/web-component-tester.git",
   "_target": "*",
