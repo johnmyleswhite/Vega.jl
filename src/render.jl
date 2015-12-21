@@ -32,17 +32,11 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
                       }
                     });
 
-                    require(["d3"], function(d3){
+                    require(["d3", "topojson", "cloud"], function(d3, topojson, cloud){
 
                         window.d3 = d3;
-
-                        require(["topojson"], function(topojson){
-
-                          window.topojson = topojson;
-
-                          require(["cloud"], function(cloud){
-
-                            window.cloud = cloud;
+                        window.topojson = topojson;
+                        window.d3.layout.cloud = cloud;
 
                               require(["vega"], function(vg) {
 
@@ -56,14 +50,9 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
 
                           }); //vega require end
 
-                        }); //cloud require end
-
-                      }); //topojson require end
-
                     }); //d3 require end
 
                   </script>
-
 
               """)
 end
