@@ -3,6 +3,7 @@ VERSION >= v"0.4" && __precompile__()
 module Vega
 
     using JSON, ColorBrewer, Compat, KernelDensity, NoveltyColors
+    import Base.print
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat,
@@ -10,7 +11,7 @@ module Vega
            VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaStream, VegaMarkFrom, VegaPredicate
 
-    export tojs
+    export tojs, print
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
@@ -85,6 +86,6 @@ module Vega
         include("escher_integration.jl")
     end
 
-
+    print(x::VegaVisualization) = print(JSON.json(tojs(x)))
 
 end

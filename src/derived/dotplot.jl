@@ -7,6 +7,9 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
     default_axes!(v)
     default_scales!(v)
 
+    #Get unique table name
+    table = v.data[1].name
+
     #Switch data source
     v.scales[1].domain.data = v.scales[2].domain.data = "aggregate"
     v.scales[1].domain.field = "average_x"
@@ -19,7 +22,7 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
     ylab!(v, grid = true, layer = "back")
 
     #Calculate average
-    push!(v.data, VegaData(name = "aggregate", source = "table",
+    push!(v.data, VegaData(name = "aggregate", source = table,
                           transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby"=> "y", "summarize"=> Dict{Any, Any}("x" => ["average"])))
                                       ]
                 )

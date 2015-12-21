@@ -6,6 +6,9 @@ function heatmap(;
     v = VegaVisualization(width = 800, height = 500)
     add_data!(v, x = x, y = y, group = color)
 
+    #Get unique table name
+    table = v.data[1].name
+
     #Use defaults as shortcut, update properties as necessary
     default_scales!(v)
     v.scales[1]._type = "ordinal"
@@ -26,7 +29,7 @@ function heatmap(;
     #Marks
     v.marks = Array(VegaMark, 1)
     v.marks[1] = VegaMark(_type = "rect",
-                          from = VegaMarkFrom(data = "table"),
+                          from = VegaMarkFrom(data = table),
                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
                                                                                       width = VegaValueRef(value = 26),
                                                                                       y = VegaValueRef(scale = "y", field = "y"),

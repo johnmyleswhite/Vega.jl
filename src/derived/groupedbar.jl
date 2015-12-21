@@ -11,6 +11,8 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], posi
     default_axes!(v)
     legend!(v)
 
+    #Get unique table name
+    table = v.data[1].name
 
     default_scales!(v, typeXaxis = "ordinal")
     v.scales[1].padding = 0.2
@@ -18,7 +20,7 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], posi
 
 
     v.marks = [VegaMark(_type = "group")]
-    v.marks[1].from = VegaMarkFrom(data = "table",
+    v.marks[1].from = VegaMarkFrom(data = table,
                                    transform = [VegaTransform(Dict{Any, Any}("groupby" => ["x"], "type" => "facet"))])
 
     v.marks[1].marks = [VegaMark(_type = "rect")]

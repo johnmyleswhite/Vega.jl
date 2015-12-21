@@ -2,6 +2,10 @@ function rugplot(; x::AbstractVector = Int[])
     v = VegaVisualization(width = 400, height = 20, padding = "auto")
 
     add_data!(v, x = x, y = zeros(Int,length(x)))
+
+    #Get unique table name
+    table = v.data[1].name
+
     default_scales!(v)
 
     #Creates axis and light gray lines
@@ -21,7 +25,7 @@ function rugplot(; x::AbstractVector = Int[])
     #Add data
     v.marks = Array(VegaMark, 1)
     v.marks[1] = VegaMark(_type = "rect",
-                           from = VegaMarkFrom(data = "table"),
+                           from = VegaMarkFrom(data = table),
                            properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
                                                                                        y =  VegaValueRef(value = 0),
                                                                                        width =  VegaValueRef(value = 1),

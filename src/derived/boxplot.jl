@@ -13,9 +13,12 @@ function boxplot(;y::AbstractVector = Int[], group::AbstractVector = Int[])
     #Add data defaults
     add_data!(v, x = group , y = y)
 
+    #Get unique table name
+    table = v.data[1].name
+
     #Calculate moments
     stats = VegaData(name = "stats",
-                     source = "table",
+                     source = table,
                      transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby" => "x", "summarize" => Dict{Any, Any}("y" => ["min", "max", "median", "q1", "q3", "valid"])))]
                     )
 
@@ -39,13 +42,13 @@ function boxplot(;y::AbstractVector = Int[], group::AbstractVector = Int[])
     #Scales
     v.scales = Array(VegaScale, 3)
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", points = true, round = true,
-                            padding = 1.5, domain = VegaDataRef(data = "table", field = "x"))
+                            padding = 1.5, domain = VegaDataRef(data = table, field = "x"))
 
 
-    v.scales[1] = VegaScale(name = "x", _type = "linear", domain = VegaDataRef(data = "table", field = "y"),
+    v.scales[1] = VegaScale(name = "x", _type = "linear", domain = VegaDataRef(data = table, field = "y"),
                             range = "width", round = true, nice = true)
 
-    v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = VegaDataRef(data = "table", field = "x"),
+    v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = VegaDataRef(data = table, field = "x"),
                             range = "ordinal20", round = true, nice = true)
 
     #Marks

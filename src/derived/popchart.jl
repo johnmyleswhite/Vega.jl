@@ -3,11 +3,14 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
     v = VegaVisualization(width = 640, height = 400)
     add_data!(v, x = x, y = y, group = group)
 
+    #Get unique table name
+    table = v.data[1].name
+
     legend!(v)
 
     v.scales = Array(VegaScale, 3)
     v.scales[1] = VegaScale(name = "g", domain = [2,1], range = "width",  _type = "ordinal")
-    v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef(data = "table", field = "y"))
+    v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef(data = table, field = "y"))
     v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = [1,2], range = ["#1f77b4", "#e377c2"])
 
     v.marks = Array(VegaMark,2)
@@ -15,7 +18,7 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
     #Y-axis labels
     v.marks[2] = VegaMark(
                             _type = "text",
-                            from = VegaMarkFrom(data = "table",
+                            from = VegaMarkFrom(data = table,
                                                 transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby" => ["y"]))]),
                             properties = VegaMarkProperties(
                                                             enter = VegaMarkPropertySet(
@@ -34,7 +37,7 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
 
     v.marks[1] = VegaMark(
                             _type = "group",
-                            from = VegaMarkFrom(data = "table",
+                            from = VegaMarkFrom(data = table,
                                                 transform = [VegaTransform(Dict{Any, Any}("type" => "facet", "groupby" => ["group"])),
                                                              VegaTransform(Dict{Any, Any}("type" => "formula", "field" => "reverse", "expr" => "datum.key==2"))]),
                             properties = VegaMarkProperties(update = VegaMarkPropertySet(
@@ -50,7 +53,7 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
                                 range = "width",
                                 reverse = VegaDataRef(field = "reverse"),
                                 nice = true,
-                                domain = VegaDataRef(data = "table", field = "x")
+                                domain = VegaDataRef(data = table, field = "x")
                                 )
 
                             ],

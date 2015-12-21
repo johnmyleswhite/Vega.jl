@@ -8,24 +8,25 @@ function barplot(;x::AbstractVector = Int[],
 
     v = VegaVisualization()
 
+    add_data!(v, x = x, y = y, group = group, y2 = y2)
     default_scales!(v; typeXaxis = "ordinal")
     default_axes!(v)
+
+    #Get unique table name
+    table = v.data[1].name
 
     #If non-zero group is passed, add a legend
     if group != Int[]
       legend!(v)
     end
 
-    add_data!(v, x = x, y = y, group = group, y2 = y2)
-
     #old add_rects code
     res = VegaMark(_type = "rect",
-                                        from = VegaMarkFrom(data="table"),
-                                        properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
-                                                                                                    y = VegaValueRef(scale = "y", field = "y"))
-                                                                        )
-                                                        )
-
+                  from = VegaMarkFrom(data=table),
+                  properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
+                                                                              y = VegaValueRef(scale = "y", field = "y"))
+                                                  )
+                  )
 
     v.marks == nothing? v.marks = [res] : push!(v.marks, res)
     #end add_rects code
@@ -36,7 +37,7 @@ function barplot(;x::AbstractVector = Int[],
     v.marks[1].properties.enter.fill = VegaValueRef(scale = "group", field = "group")
 
     if stacked
-      push!(v.data, VegaData(name = "stats", source = "table",
+      push!(v.data, VegaData(name = "stats", source = table,
                              transform = [VegaTransform(Dict{Any, Any}("type"=> "aggregate", "groupby" => ["x"], "summarize"=>[Dict{Any,Any}("field" => "y", "ops" => ["sum"])]))]))
 
       # bind the y scale to layout start and layout end
@@ -45,7 +46,7 @@ function barplot(;x::AbstractVector = Int[],
 
       v.scales[2].domain = VegaDataRef(data = "stats", field = "sum_y")
 
-      v.marks[1].from = VegaMarkFrom(data = "table",
+      v.marks[1].from = VegaMarkFrom(data = table,
                                      transform = [VegaTransform(Dict{Any, Any}("type" => "stack", "groupby" => ["x"], "sortby" => ["group"], "field"=>"y", "offset" => normalize == true? "normalize" : "zero"))])
 
       if normalize

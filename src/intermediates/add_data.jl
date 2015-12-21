@@ -1,5 +1,5 @@
 function add_data!(v::VegaVisualization;
-	                          name::AbstractString = "table",
+	                          name::AbstractString = string("table_", lowercase(randstring(5))),
                               x::AbstractVector = Int[],
 	                          y::AbstractVector = Int[],
                               y2::AbstractVector = Int[],

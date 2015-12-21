@@ -6,21 +6,24 @@ function default_scales!(v::VegaVisualization;
                         typeXaxis::AbstractString = "linear",
                         typeYaxis::AbstractString = "linear")
 
+
+    table = v.data[1].name
+
     v.scales = Array(VegaScale, 3)
 
     v.scales[1] = VegaScale(name = "x",
                             _type = typeXaxis,
                             range = "width",
-                            domain = VegaDataRef(data = "table", field = "x"))
+                            domain = VegaDataRef(data = table, field = "x"))
     v.scales[2] = VegaScale(name = "y",
                             _type = typeYaxis,
                             range = "height",
-                            domain = VegaDataRef(data = "table", field = "y"))
+                            domain = VegaDataRef(data = table, field = "y"))
 
     v.scales[3] = VegaScale(name = "group",
                             _type = "ordinal",
                             range = colorpalettes["Paired"]["12"],
-                            domain = VegaDataRef(data = "table", field = "group"))
+                            domain = VegaDataRef(data = table, field = "group"))
     return v
 end
 

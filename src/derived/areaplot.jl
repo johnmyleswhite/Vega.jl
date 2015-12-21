@@ -7,6 +7,10 @@ function areaplot(;x::AbstractVector = Int[],
 
     if stacked
     	v = barplot(x = x, y = y, group = group, stacked = true)
+
+        #Get unique table name
+        table = v.data[1].name
+
 	    v.scales[1].points = true
 		  v.scales[1]._type = nothing
 
@@ -19,7 +23,7 @@ function areaplot(;x::AbstractVector = Int[],
         innermark.properties.enter.interpolate = VegaValueRef(value="monotone")
 
         mark = VegaMark(_type = "group",
-                        from = VegaMarkFrom(data="table",
+                        from = VegaMarkFrom(data=table,
                                             transform=[VegaTransform(Dict{Any,Any}("type"=>"stack", "groupby" => ["x"], "sortby" => ["group"], "field" => "y", "offset" => normalize == true? "normalize" : "zero")),
                                                        VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))]),
                         marks = [innermark])

@@ -107,7 +107,11 @@ end
 
 function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString = "")
 
-    color == ""? color_ = VegaValueRef(scale = "group", field = "group") : color_ = VegaValueRef(value = color)
+    #Hack due to boxplot having a different color setup than other visualizations
+    v.name == "boxplot" ? field = "x" : field = "group"
+
+    #Test if color is set in function, so that we know to reset the color on update
+    color == ""? color_ = VegaValueRef(scale = "group", field = field) : color_ = VegaValueRef(value = color)
 
     #Grouped bar, line chart, popchart
     if v.marks[1].marks != nothing
@@ -119,7 +123,7 @@ function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString
                                                                    )
         v.marks[1].marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1),
                                                                     strokeOpacity = VegaValueRef(value = 1),
-                                                                    fill = v.name == "lineplot"? nothing: VegaValueRef(scale = "group", field = "group")
+                                                                    fill = v.name == "lineplot"? nothing: VegaValueRef(scale = "group", field = field)
                                                                     )
 
 
@@ -132,7 +136,7 @@ function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString
                                                         )
         v.marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1),
                                                            strokeOpacity = VegaValueRef(value = 1),
-                                                           fill = v.name == "choropleth"? VegaValueRef(scale = "group", field = "table2.y"): VegaValueRef(scale = "group", field = "group")
+                                                           fill = v.name == "choropleth"? VegaValueRef(scale = "group", field = "table2.y"): VegaValueRef(scale = "group", field = field)
                                                         )
 
     end

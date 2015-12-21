@@ -8,7 +8,10 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
                       scales = Array(VegaScale, 1),
                       marks = Array(VegaMark, 1))
 
-    v.data[1] = VegaData(name = "table",
+    #Make unique table name
+    table = string("table_", lowercase(randstring(5)))
+
+    v.data[1] = VegaData(name = table,
                          values = x,
                          transform = Array(VegaTransform, 6))
 
@@ -61,7 +64,7 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
 
     #Draw words
     v.marks[1] = VegaMark(_type = "text",
-                          from = VegaMarkFrom(data = "table"),
+                          from = VegaMarkFrom(data = table),
                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(
                                                                                       x = VegaValueRef(field = "layout_x"),
                                                                                       y = VegaValueRef(field = "layout_y"),
@@ -69,7 +72,6 @@ function wordcloud(; x::AbstractVector =  UTF8String[], wordAngles::AbstractVect
                                                                                       font = VegaValueRef(field = "layout_font"),
                                                                                       fontSize = VegaValueRef(field = "layout_fontSize"),
                                                                                       fontStyle = VegaValueRef(field = "layout_fontStyle"),
-                                                                                      fontSize = VegaValueRef(field = "layout_fontSize"),
                                                                                       fontWeight = VegaValueRef(field = "layout_fontWeight"),
                                                                                       text = VegaValueRef(field = "text"),
                                                                                       align = VegaValueRef(value = "center"),
