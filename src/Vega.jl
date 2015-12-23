@@ -20,7 +20,7 @@ module Vega
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
     export default_scales!, default_axes!, add_data!
-    export colorscheme!, coord_flip!, stroke!, hline!, vline!, hover!, jitter!
+    export colorscheme!, coord_flip!, stroke!, hline!, vline!, hover!, jitter!, layer
 
     #Create base color library
     #Eventually, merge in NoveltyColors
@@ -59,6 +59,7 @@ module Vega
     include("intermediates/xlim_ylim.jl")
     include("intermediates/title_text.jl")
     include("intermediates/hline_vline.jl")
+    include("intermediates/layer.jl")
 
     # Higher-level API
     include("derived/choropleth.jl")

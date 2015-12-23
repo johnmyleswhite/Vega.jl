@@ -1,7 +1,8 @@
 dataref_spec =
 [
-	(:data, AbstractString, ""),
-	(:field, Union{AbstractString, Vector, Dict{Any,Any}}, ""),
+	(:data, AbstractString, nothing),
+	(:field, Union{AbstractString, Vector, Dict{Any,Any}}, nothing),
+	(:fields, Union{AbstractString, Vector, Dict{Any,Any}}, nothing),
 	(:sort, Union{Bool, Dict{Any,Any}}, nothing)
 ]
 
