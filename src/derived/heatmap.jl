@@ -31,7 +31,7 @@ function heatmap(;
     v.marks[1] = VegaMark(_type = "rect",
                           from = VegaMarkFrom(data = table),
                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),
-                                                                                      width = VegaValueRef(value = 26),
+                                                                                      width = VegaValueRef(scale = "x", band = true),
                                                                                       y = VegaValueRef(scale = "y", field = "y"),
                                                                                       height = VegaValueRef(scale = "y", band = true),
                                                                                       fill = VegaValueRef(scale = "group", field = "group")
