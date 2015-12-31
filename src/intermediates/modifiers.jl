@@ -70,7 +70,7 @@ function colorscheme!(v::VegaVisualization; palette::Union{Tuple{AbstractString,
     elseif isa(palette, AbstractString)
         s.range = [palette]
     elseif isa(palette, Array)
-        reversePalette == true? s.range = reverse([palette]) : s.range = [palette]
+        reversePalette == true? s.range = reverse(collect(palette)) : s.range = collect(palette)
     end
 
     return v
