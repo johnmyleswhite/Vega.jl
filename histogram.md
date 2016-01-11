@@ -13,6 +13,7 @@ Function Keywords:
 x::AbstractVector
 relativefreq::Bool = false
 horizontal::Bool = false
+nbins::Int = 10
 {% endhighlight %}
 
 ### Histogram
