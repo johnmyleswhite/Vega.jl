@@ -1,2 +1,3 @@
 _site/*
 *assets/bower_components/vega/node_modules/
+.DS_Store

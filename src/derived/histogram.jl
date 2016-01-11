@@ -1,8 +1,9 @@
 function histogram(; x::AbstractVector = Int[],
 					relativefreq::Bool = false,
-					horizontal::Bool = false)
+					horizontal::Bool = false,
+					nbins::Int = 10)
 
-	a, b = hist(x)
+	a, b = hist(x, nbins)
 	total = relativefreq == false? 1 : sum(b)
 
     v = barplot(x = a[2:end], y = b/total)
