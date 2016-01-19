@@ -4,17 +4,19 @@ function title!(v::VegaVisualization;
                         font::AbstractString = "", x::Int = 0)
 
 	titlemark = VegaMark(_type = "text",
-                           from = VegaMarkFrom(value = title))
-                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(value = (x == 0 ? (v.width / 2) : x)),
-                                                       y = VegaValueRef(value = y),
-                                                       text = VegaValueRef(value = title),
-                                                       fill = VegaValueRef(value = fill),
-                                                       fontSize = VegaValueRef(value = fontSize),
-                                                       align = VegaValueRef(value = align),
-                                                       baseline = VegaValueRef(value = baseline),
-                                                       fontWeight = VegaValueRef(value = fontWeight),
-                                                       font = VegaValueRef(value = font)
-                                                       ))
+                       from = VegaMarkFrom(value = title),
+                       properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(value = (x == 0 ? (v.width / 2) : x)),
+                                                                                   y = VegaValueRef(value = y),
+                                                                                   text = VegaValueRef(value = title),
+                                                                                   fill = VegaValueRef(value = fill),
+                                                                                   fontSize = VegaValueRef(value = fontSize),
+                                                                                   align = VegaValueRef(value = align),
+                                                                                   baseline = VegaValueRef(value = baseline),
+                                                                                   fontWeight = VegaValueRef(value = fontWeight),
+                                                                                   font = VegaValueRef(value = font)
+                                                                                  )
+))
+
 
 	push!(v.marks, titlemark)
 

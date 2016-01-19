@@ -105,7 +105,7 @@ function stroke!(v::VegaVisualization; color::AbstractString = "Black", width::R
     return v
 end
 
-function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString = "", tooltip::Bool = true)
+function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString = "")
 
     #Hack due to boxplot having a different color setup than other visualizations
     v.name == "boxplot" ? field = "x" : field = "group"
@@ -141,31 +141,7 @@ function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString
 
     end
 
-    if tooltip
-        #Add mouseover events
-        v.signals = [Dict{Any, Any}()]
-        v.signals[1]["name"] = "tooltip"
-        v.signals[1]["init"] = Dict()
-        v.signals[1]["streams"] = [Dict{Any, Any}("type" => "rect:mouseover", "expr" => "datum"),
-                                     Dict{Any, Any}("type" => "rect:mouseout", "expr" => "{}")
-                                    ]
-
-        #Add text marks
-        push!(v.marks, VegaMark())
-        v.marks[end]._type = "text"
-        v.marks[end].properties = VegaMarkProperties()
-        v.marks[end].properties.enter = VegaMarkPropertySet(align = VegaValueRef(value = "center"),
-                                                            fill = VegaValueRef(value = "#333"))
-
-        v.marks[end].properties.update = VegaMarkPropertySet(x = VegaValueRef(scale = "x", signal = "tooltip.x"),
-                                                             dx = VegaValueRef(scale = "x", band = true, mult = 0.5),
-                                                             y = VegaValueRef(scale = "y", signal = "tooltip.y", offset = -5),
-                                                             text = VegaValueRef(signal = "tooltip.x")
-                                                            )
-    end
-
     return v
-
 end
 
 function jitter!(v::VegaVisualization; pctXrange::Real = 0.05, pctYrange::Real = 0.05)
