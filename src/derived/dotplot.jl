@@ -3,9 +3,13 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
     v = VegaVisualization(width = 800, height = 400)
 
     #Quick defaults
-    add_data!(v, y = y, x = x)
+    add_data!(v, y = y, x = x, group = group)
     default_axes!(v)
     default_scales!(v)
+
+    if group != Real[]
+      legend!(v)
+    end
 
     #Get unique table name
     table = v.data[1].name
@@ -23,7 +27,7 @@ function dotplot(; x::AbstractVector = Real[], y::AbstractVector = Real[], group
 
     #Calculate average
     push!(v.data, VegaData(name = "aggregate", source = table,
-                          transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby"=> "y", "summarize"=> Dict{Any, Any}("x" => ["average"])))
+                          transform = [VegaTransform(Dict{Any, Any}("type" => "aggregate", "groupby"=> ["y", "group"], "summarize"=> Dict{Any, Any}("x" => ["average"])))
                                       ]
                 )
        )
