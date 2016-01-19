@@ -14,7 +14,7 @@ function default_scales!(v::VegaVisualization;
     v.scales[1] = VegaScale(name = "x",
                             _type = typeXaxis,
                             range = "width",
-                            domain = VegaDataRef(data = table, field = "x"))
+                            domain = VegaDataRef(data = table, field = "x", sort = true))
     v.scales[2] = VegaScale(name = "y",
                             _type = typeYaxis,
                             range = "height",
