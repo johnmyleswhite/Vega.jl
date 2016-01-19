@@ -31,12 +31,11 @@ To Do:
 Functions/Types:
 
 - area, (vertical) boxplot in `coord_flip!`, public-facing as `horizontal` keyword
-- annotate heatmap / `marklabels!` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
+- annotate heatmap / `marklabels!` /`tooltip` function [#59](https://github.com/johnmyleswhite/Vega.jl/issues/59)
 - Check inputs to set scales correctly for visualization [#87](https://github.com/johnmyleswhite/Vega.jl/issues/87)
 - Fill in `::VegaTransform` type with actual fields
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
 - error bars/shading around lines/bars/dots, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
-- How to incorporate more interactivity to `hover!` [#70](https://github.com/johnmyleswhite/Vega.jl/issues/70)
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
@@ -47,7 +46,7 @@ Vega Visualizations:
 - Contour
 - Parallel coordinates
 - Scatterplot matrix (faceting)
-- Barley (Faceting)
+- Barley (faceting)
 - Diverging Stacked Bar Chart
 - Polar coordinate graph
 - Spiderweb graph / radial
