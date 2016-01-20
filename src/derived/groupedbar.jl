@@ -1,4 +1,4 @@
-function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], position::Vector{Int} = Int[], horizontal::Bool = false)
+function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], group::AbstractVector = Int[], horizontal::Bool = false)
 
     v = VegaVisualization(height = 300, width = 500, name = "groupedbar")
 
@@ -7,7 +7,7 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], posi
         x = UTF8String[string(s) for s in x]
     end
 
-    add_data!(v, x = x, y = y, group = position)
+    add_data!(v, x = x, y = y, group = group)
     default_axes!(v)
     legend!(v)
 
