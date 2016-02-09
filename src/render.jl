@@ -25,25 +25,19 @@ function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
     """)
 end
 
-isinstalled(pkg) = Pkg.installed(pkg) != nothing
+import Patchwork: Elem
 
-# writemime for signals of Plots
-if isinstalled("Patchwork")
-    import Patchwork: Elem
+function patchwork_repr(v::VegaVisualization)
+    divid = "vg" * randstring(3)
+    script_contents = scriptstr(v, divid)
+    Elem(:div, [
+        Elem(:div, "") & Dict(:id=>divid),
+        Elem(:script, script_contents) & Dict(:type=>"text/javascript")
+    ])
+end
 
-    function patchwork_repr(v::VegaVisualization)
-        divid = "vg" * randstring(3)
-        script_contents = scriptstr(v, divid)
-        Elem(:div, [
-            Elem(:div, "") & [:id=>divid],
-            Elem(:script, script_contents) & [:type=>"text/javascript"]
-        ])
-    end
-
-    function writemime(io::IO, m::MIME"text/html", v::VegaVisualization)
-        writemime(io, m, patchwork_repr(v))
-    end
-
+function writemime(io::IO, m::MIME"text/html", v::VegaVisualization)
+    writemime(io, m, patchwork_repr(v))
 end
 
 function scriptstr(v::VegaVisualization, divid)
