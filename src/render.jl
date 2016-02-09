@@ -11,50 +11,67 @@ import Base.writemime
 asset(url...) = readall(Pkg.dir("Vega", "assets", "bower_components", url...))
 
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
+    divid = "vg" * randstring(3)
+    script_contents = scriptstr(v, divid)
+    display("text/html", """
 
-        spec = JSON.json(tojs(v))
-        divid = "vg" * randstring(3)
+    <body>
+    <div id=\"$divid\"></div>
+    </body>
 
-        display("text/html", """
+    <script type="text/javascript">
+        $script_contents
+    </script>
+    """)
+end
 
-              <body>
-                <div id=\"$divid\"></div>
-              </body>
+import Patchwork: Elem
 
-                <script type="text/javascript">
+function patchwork_repr(v::VegaVisualization)
+    divid = "vg" * randstring(3)
+    script_contents = scriptstr(v, divid)
+    Elem(:div, [
+        Elem(:div, "") & Dict(:id=>divid),
+        Elem(:script, script_contents) & Dict(:type=>"text/javascript")
+    ])
+end
 
-                    require.config({
-                      paths: {
-                        d3: "https://vega.github.io/vega-editor/vendor/d3.min",
-                        vega: "https://vega.github.io/vega/vega.min",
-                        cloud: "https://vega.github.io/vega-editor/vendor/d3.layout.cloud",
-                        topojson: "https://vega.github.io/vega-editor/vendor/topojson"
-                      }
-                    });
+function writemime(io::IO, m::MIME"text/html", v::VegaVisualization)
+    writemime(io, m, patchwork_repr(v))
+end
 
-                    require(["d3", "topojson", "cloud"], function(d3, topojson, cloud){
+function scriptstr(v::VegaVisualization, divid)
+    spec = JSON.json(tojs(v))
+    return """
+        require.config({
+          paths: {
+            d3: "https://vega.github.io/vega-editor/vendor/d3.min",
+            vega: "https://vega.github.io/vega/vega.min",
+            cloud: "https://vega.github.io/vega-editor/vendor/d3.layout.cloud",
+            topojson: "https://vega.github.io/vega-editor/vendor/topojson"
+          }
+        });
 
-                        window.d3 = d3;
-                        window.topojson = topojson;
-                        window.d3.layout.cloud = cloud;
+        require(["d3", "topojson", "cloud"], function(d3, topojson, cloud){
 
-                              require(["vega"], function(vg) {
+            window.d3 = d3;
+            window.topojson = topojson;
+            window.d3.layout.cloud = cloud;
 
-                              vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
+                  require(["vega"], function(vg) {
 
-                              window.setTimeout(function() {
-                                var pnglink = document.getElementById(\"$divid\").getElementsByTagName(\"canvas\")[0].toDataURL(\"image/png\")
-                                document.getElementById(\"$divid\").insertAdjacentHTML('beforeend', '<br><a href=\"' + pnglink + '\" download>Save as PNG</a>')
+                  vg.parse.spec($spec, function(chart) { chart({el:\"#$divid\"}).update(); });
 
-                              }, 20);
+                  window.setTimeout(function() {
+                    var pnglink = document.getElementById(\"$divid\").getElementsByTagName(\"canvas\")[0].toDataURL(\"image/png\")
+                    document.getElementById(\"$divid\").insertAdjacentHTML('beforeend', '<br><a href=\"' + pnglink + '\" download>Save as PNG</a>')
 
-                          }); //vega require end
+                  }, 20);
 
-                    }); //d3 require end
+              }); //vega require end
 
-                  </script>
-
-              """)
+        }); //d3 require end
+    """
 end
 
 #Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
