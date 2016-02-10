@@ -31,7 +31,7 @@ function patchwork_repr(v::VegaVisualization)
     divid = "vg" * randstring(3)
     script_contents = scriptstr(v, divid)
     Elem(:div, [
-        Elem(:div, "") & Dict(:id=>divid),
+        Elem(:div, "") & Dict(:id=>divid, :style=>Dict("min-height"=>"$(v.height + 110)px")),
         Elem(:script, script_contents) & Dict(:type=>"text/javascript")
     ])
 end
