@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,15 +121,15 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector
+group::AbstractVector</code></pre></figure>
 
 <h3 id="stream-plot-1">Stream Plot</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/streamdata.csv&quot;</span><span class="p">))</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">streamplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">date</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">value</span><span class="p">],</span> <span class="n">group</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">key</span><span class="p">])</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;#B30000&quot;</span><span class="p">,</span> <span class="s">&quot;#E34A33&quot;</span><span class="p">,</span> <span class="s">&quot;#FC8D59&quot;</span><span class="p">,</span> <span class="s">&quot;#FDBB84&quot;</span><span class="p">,</span> <span class="s">&quot;#FDD49E&quot;</span><span class="p">,</span> <span class="s">&quot;#FEF0D9&quot;</span><span class="p">])</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">df = readtable(Pkg.dir("Vega", "vega-datasets/streamdata.csv"))
+a = streamplot(x = df[:date], y = df[:value], group = df[:key])
+colorscheme!(a, palette = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"])</code></pre></figure>
 
 <div id="stream"></div>
 <script type="text/javascript">

@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,17 +121,17 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">y::AbstractVector
+group::AbstractVector</code></pre></figure>
 
 <p>This function calculates a Tukey boxplot, where the whiskers are the min(max) of 1.5 * IQR or the smallest(largest) datapoint. The circles on the boxplot represent the most extreme values in the data. Currently, printing outliers on the boxplot is not implemented.</p>
 
 <h3 id="single-box-plot">Single Box Plot</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">RDatasets</span><span class="p">,</span> <span class="n">Vega</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;mtcars&quot;</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using RDatasets, Vega
+df = dataset("datasets", "mtcars")
 
-<span class="n">boxplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">MPG</span><span class="p">])</span></code></pre></div>
+boxplot(y = df[:MPG])</code></pre></figure>
 
 <div id="singlebox"></div>
 <script type="text/javascript">
@@ -136,10 +142,10 @@ parse("singlebox",
 
 <h3 id="grouped-box-plot">Grouped Box Plot</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">RDatasets</span><span class="p">,</span> <span class="n">Vega</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;mtcars&quot;</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using RDatasets, Vega
+df = dataset("datasets", "mtcars")
 
-<span class="n">boxplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">MPG</span><span class="p">],</span> <span class="n">group</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">Cyl</span><span class="p">])</span></code></pre></div>
+boxplot(y = df[:MPG], group = df[:Cyl])</code></pre></figure>
 
 <div id="multibox"></div>
 <script type="text/javascript">

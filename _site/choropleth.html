@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,17 +121,17 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">entity</span><span class="p">::</span><span class="n">Symbol</span> <span class="o">=</span> <span class="p">:</span><span class="n">uscounties</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector
+entity::Symbol = :uscounties</code></pre></figure>
 
 <h1 id="us-counties">U.S. Counties</h1>
 <p>The input for the X array are <a href="https://en.wikipedia.org/wiki/FIPS_county_code">5-digit U.S. county-level FIPS codes</a>, not zip codes. The two are not interchangeable. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/unemployment.tsv&quot;</span><span class="p">))</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, DataFrames
+df = readtable(Pkg.dir("Vega", "vega-datasets/unemployment.tsv"))
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">id</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">rate</span><span class="p">])</span></code></pre></div>
+v = choropleth(x = df[:id], y = df[:rate])</code></pre></figure>
 
 <div id="uscounties"></div>
 <script type="text/javascript">
@@ -138,10 +144,10 @@ parse("uscounties",
 <h1 id="us-states">U.S. States</h1>
 <p>The input for the X array are 2-digit <a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code">U.S. state-level FIPS codes</a>. Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [1:60]
+y = rand(Float64, 60)
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">entity</span> <span class="o">=</span> <span class="p">:</span><span class="n">usstates</span><span class="p">)</span></code></pre></div>
+a = choropleth(x = x, y = y, entity = :usstates)</code></pre></figure>
 
 <div id="usstates"></div>
 <script type="text/javascript">

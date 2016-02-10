@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,35 +121,35 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">pointSize</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">pointShape</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;circle&quot;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector
+group::AbstractVector
+pointSize::AbstractVector
+pointShape::AbstractString = "circle"</code></pre></figure>
 
 <h3 id="bubble-chart-1">Bubble Chart</h3>
 
 <p>Example data taken from the <a href="http://www.highcharts.com/demo/bubble">High Charts Bubble Chart</a> example, with some modifications</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">86.5</span><span class="p">,</span> <span class="mf">80.8</span><span class="p">,</span> <span class="mf">80.4</span><span class="p">,</span> <span class="mf">80.3</span><span class="p">,</span> <span class="mf">78.4</span><span class="p">,</span> <span class="mf">74.2</span><span class="p">,</span> <span class="mf">73.5</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mf">69.2</span><span class="p">,</span> <span class="mf">68.6</span><span class="p">,</span> <span class="mf">65.5</span><span class="p">,</span> <span class="mf">65.4</span><span class="p">,</span> <span class="mf">63.4</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">102.9</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="mf">102.5</span><span class="p">,</span> <span class="mf">86.1</span><span class="p">,</span> <span class="mf">70.1</span><span class="p">,</span> <span class="mf">68.5</span><span class="p">,</span> <span class="mf">83.1</span><span class="p">,</span> <span class="mf">93.2</span><span class="p">,</span> <span class="mf">57.6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">126.4</span><span class="p">,</span> <span class="mf">50.8</span><span class="p">,</span> <span class="mf">51.8</span><span class="p">,</span> <span class="mf">82.9</span><span class="p">]</span>
-<span class="n">cont</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NO&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;RU&quot;</span><span class="p">,</span> <span class="s">&quot;US&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NZ&quot;</span><span class="p">]</span>
-<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mf">13.8</span><span class="p">,</span> <span class="mf">14.7</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">11.8</span><span class="p">,</span> <span class="mf">16.6</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">24.7</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">35.3</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">15.4</span><span class="p">,</span> <span class="mf">31.3</span><span class="p">]</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [95, 86.5, 80.8, 80.4, 80.3, 78.4, 74.2, 73.5, 71, 69.2, 68.6, 65.5, 65.4, 63.4, 64]
+y = [95, 102.9, 91.5, 102.5, 86.1, 70.1, 68.5, 83.1, 93.2, 57.6, 20, 126.4, 50.8, 51.8, 82.9]
+cont = ["EU", "EU", "EU", "EU", "EU", "EU", "EU", "NO", "EU", "EU", "RU", "US", "EU", "EU", "NZ"]
+z = [13.8, 14.7, 15.8, 12, 11.8, 16.6, 14.5, 10, 24.7, 10.4, 16, 35.3, 28.5, 15.4, 31.3]
 
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">bubblechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">cont</span><span class="p">,</span> <span class="n">pointSize</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+v = bubblechart(x = x, y = y, group = cont, pointSize = z)
 
-<span class="c">#Chart mods</span>
-<span class="n">v</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span>
-<span class="n">v</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">300</span>
-<span class="n">xlim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">160</span><span class="p">)</span>
-<span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Sugar and Fat Intake Per Country&quot;</span><span class="p">)</span>
-<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Sugar Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
-<span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Fat Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
-<span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
-<span class="n">vline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">65</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
-<span class="n">hover</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span></code></pre></div>
+#Chart mods
+v.width = 600
+v.height = 300
+xlim!(v, min = 60, max = 100)
+ylim!(v, min = 10, max = 160)
+title!(v, title = "Sugar and Fat Intake Per Country")
+ylab!(v, title = "Daily Sugar Intake", grid = true)
+xlab!(v, title = "Daily Fat Intake", grid = true)
+hline!(v, value = 50, strokeDash = 5, stroke = "gray")
+vline!(v, value = 65, strokeDash = 5, stroke = "gray")
+hover!(v, opacity = 0.5)</code></pre></figure>
 
 <div id="bubble"></div>
 <script type="text/javascript">

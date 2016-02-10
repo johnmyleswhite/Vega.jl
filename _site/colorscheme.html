@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,22 +121,24 @@ function parse(divid,spec) {
 
 <p>Required Arguments:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
-<span class="n">palette</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">Tuple</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">AbstractString</span><span class="p">,</span> <span class="n">Array</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
+palette::Union(Tuple{AbstractString,Int64}, AbstractString, Array)
+reversePalette::Bool = false</code></pre></figure>
 
-<p>This function mutates <code>:VegaVisualization</code>, modifying the colors for the <code>group</code> or <code>fill</code> properties of the visualization. The <code>palette</code> argument supports:</p>
+<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, modifying the colors for the <code class="highlighter-rouge">group</code> or <code class="highlighter-rouge">fill</code> properties of the visualization. The <code class="highlighter-rouge">palette</code> argument supports:</p>
 
-<pre><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
+<div class="highlighter-rouge"><pre class="highlight"><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
 * AbstractString: A string representing a color the browser understands (i.e. "Pink", "#FFF")
 * Array: An array of colors (i.e. ["Red", "Green"])
 </code></pre>
+</div>
 
 <h3 id="colorbrewer-scale">ColorBrewer scale</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
 
-<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
+ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
+colorscheme!(ab, palette = ("Purples", 3))</code></pre></figure>
 
 <div id="purple"></div>
 <script type="text/javascript">
@@ -139,13 +147,27 @@ parse("purple",
     );
 </script>
 
+<h3 id="colorbrewer-scale-reversed">ColorBrewer scale, Reversed</h3>
+
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+
+ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
+colorscheme!(ab, palette = ("Purples", 3), reversePalette = true)</code></pre></figure>
+
+<div id="purple2"></div>
+<script type="text/javascript">
+parse("purple2",
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"x","grid":false,"type":"x","scale":"x"},{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"y","grid":false,"type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.9381179497008088},{"x":2,"y2":0,"group":1,"y":0.4964967441994834},{"x":3,"y2":0,"group":1,"y":0.18448114788656222},{"x":4,"y2":0,"group":1,"y":0.345915403095592},{"x":5,"y2":0,"group":1,"y":0.3295086909789129},{"x":6,"y2":0,"group":1,"y":0.6878649809527333},{"x":7,"y2":0,"group":1,"y":0.8182435494175802},{"x":8,"y2":0,"group":1,"y":0.6776403456457463},{"x":9,"y2":0,"group":1,"y":0.6483467878451943},{"x":10,"y2":0,"group":1,"y":0.6918815761886847},{"x":11,"y2":0,"group":2,"y":0.9075294897982495},{"x":12,"y2":0,"group":2,"y":0.9663468029837556},{"x":13,"y2":0,"group":2,"y":0.5146891806853813},{"x":14,"y2":0,"group":2,"y":0.37983788550900477},{"x":15,"y2":0,"group":2,"y":0.38740217343629735},{"x":16,"y2":0,"group":2,"y":0.5561657007191216},{"x":17,"y2":0,"group":2,"y":0.9495716801415124},{"x":18,"y2":0,"group":2,"y":0.7405958485706121},{"x":19,"y2":0,"group":2,"y":0.17496599266688206},{"x":20,"y2":0,"group":2,"y":0.09041640970752174}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(117,107,177)","rgb(188,189,220)","rgb(239,237,245)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+    );
+</script>
+
 <h3 id="single-color">Single Color</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
 
-<span class="n">srand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&quot;Violet&quot;</span><span class="p">)</span></code></pre></div>
+srand(1)
+a = barplot(x = [1:20], y = rand(20))
+colorscheme!(a, palette = "Violet")</code></pre></figure>
 
 <div id="violet"></div>
 <script type="text/javascript">
@@ -157,21 +179,21 @@ parse("violet",
 
 <h3 id="array-of-colors">Array of Colors</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">Vega</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using DataFrames, JSON, Vega
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/population.json&quot;</span><span class="p">)))</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
-<span class="k">end</span>
+df = DataFrame()
+for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
+    df = vcat(df, DataFrame(;[symbol(k)=&gt;v for (k,v) in p]...))
+end
 
-<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
+pop1900 = df[df[:year] .== 1900, :];
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
+x = pop1900[:people]
+y = pop1900[:age]
+group = pop1900[:sex]
 
-<span class="n">pc1</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">pc1</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Green&quot;</span><span class="p">,</span> <span class="s">&quot;Red&quot;</span><span class="p">])</span></code></pre></div>
+pc1 = popchart(x = x, y = y, group = group)
+colorscheme!(pc1, palette = ["Green", "Red"])</code></pre></figure>
 
 <div id="array"></div>
 <script type="text/javascript">
