@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,25 +121,25 @@ function parse(divid,spec) {
 
 <p>Required Arguments:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization</code></pre></figure>
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">color</span><span class="p">::</span><span class="n">String</span> <span class="o">=</span> <span class="s">&quot;Black&quot;</span>
-<span class="n">width</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mf">0.75</span>
-<span class="n">opacity</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">visible</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">true</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">color::String = "Black"
+width::Real = 0.75
+opacity::Real = 1
+visible::Bool = true</code></pre></figure>
 
-<p>This function mutates <code>:VegaVisualization</code>, adding borders around <code>:VegaMarks</code>.</p>
+<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, adding borders around <code class="highlighter-rouge">:VegaMarks</code>.</p>
 
 <h3 id="no-stroke">No stroke</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
-<span class="n">category</span> <span class="o">=</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">,</span> <span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;C&#39;</span><span class="p">]</span>
-<span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, DataFrames
+category = ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C']
+position = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+value = [0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.2, 0.1, 0.7]
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">groupedbar</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">category</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">position</span><span class="p">)</span></code></pre></div>
+a = groupedbar(x = category, y = value, position = position)</code></pre></figure>
 
 <div id="nostroke"></div>
 <script type="text/javascript">
@@ -145,7 +151,7 @@ parse("nostroke",
 
 <h3 id="stroke-1">Stroke</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">stroke</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">stroke!(v, width = 1.5)</code></pre></figure>
 
 <div id="strokedark"></div>
 <script type="text/javascript">

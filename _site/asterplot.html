@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,10 +121,10 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">weight</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">holesize</span><span class="p">::</span><span class="kt">Int</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector
+weight::AbstractVector
+holesize::Int</code></pre></figure>
 
 <p>This plot is a replication of the <a href="http://bl.ocks.org/bbest/2de0e25d4840c68f2db1">Aster Plot d3.js</a> example on <a href="http://bl.ocks.org/">bl.ocks.org</a>. From their description:</p>
 
@@ -126,14 +132,14 @@ function parse(divid,spec) {
 
 <h3 id="aster-plot-with-interactivity">Aster Plot With Interactivity</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">59</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">60</span> <span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">83</span><span class="p">]</span>
-<span class="n">id</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;FIS&quot;</span><span class="p">,</span> <span class="s">&quot;MAR&quot;</span><span class="p">,</span><span class="s">&quot;AO&quot;</span><span class="p">,</span><span class="s">&quot;NP&quot;</span><span class="p">,</span><span class="s">&quot;CS&quot;</span><span class="p">,</span><span class="s">&quot;CP&quot;</span><span class="p">,</span><span class="s">&quot;TR&quot;</span><span class="p">,</span><span class="s">&quot;LIV&quot;</span><span class="p">,</span><span class="s">&quot;ECO&quot;</span><span class="p">,</span><span class="s">&quot;ICO&quot;</span><span class="p">,</span><span class="s">&quot;LSP&quot;</span><span class="p">,</span><span class="s">&quot;CW&quot;</span><span class="p">,</span><span class="s">&quot;HAB&quot;</span><span class="p">,</span><span class="s">&quot;SPP&quot;</span><span class="p">]</span>
-<span class="n">weight</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">score = [59, 24, 98, 60 ,74,70,42,77,88,60,65,71,88,83]
+id = ["FIS", "MAR","AO","NP","CS","CP","TR","LIV","ECO","ICO","LSP","CW","HAB","SPP"]
+weight = [0.5, 0.5, 1,1,1,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5]
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">asterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">id</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">score</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span><span class="p">,</span> <span class="n">holesize</span> <span class="o">=</span> <span class="mi">75</span><span class="p">)</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;#9E0041&quot;</span><span class="p">,</span> <span class="s">&quot;#C32F4B&quot;</span><span class="p">,</span> <span class="s">&quot;#E1514B&quot;</span><span class="p">,</span> <span class="s">&quot;#F47245&quot;</span><span class="p">,</span> <span class="s">&quot;#FB9F59&quot;</span><span class="p">,</span> <span class="s">&quot;#FEC574&quot;</span><span class="p">,</span> <span class="s">&quot;#FAE38C&quot;</span><span class="p">,</span> <span class="s">&quot;#EAF195&quot;</span><span class="p">,</span>
-                            <span class="s">&quot;#C7E89E&quot;</span><span class="p">,</span> <span class="s">&quot;#9CD6A4&quot;</span><span class="p">,</span> <span class="s">&quot;#6CC4A4&quot;</span><span class="p">,</span> <span class="s">&quot;#4D9DB4&quot;</span><span class="p">,</span> <span class="s">&quot;#4776B4&quot;</span><span class="p">,</span> <span class="s">&quot;#5E4EA1&quot;</span><span class="p">])</span>
-<span class="n">hover</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span></code></pre></div>
+v = asterplot(x = id, y = score, weight = weight, holesize = 75)
+colorscheme!(v, palette = ["#9E0041", "#C32F4B", "#E1514B", "#F47245", "#FB9F59", "#FEC574", "#FAE38C", "#EAF195",
+                            "#C7E89E", "#9CD6A4", "#6CC4A4", "#4D9DB4", "#4776B4", "#5E4EA1"])
+hover!(v, opacity = 0.5)</code></pre></figure>
 
 <div id="aster"></div>
 <script type="text/javascript">

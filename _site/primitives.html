@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,20 +121,20 @@ function parse(divid,spec) {
 
 <p>At the most fundamental level, Vega.jl translates the Vega grammar into a series of Julia composite types as primitives to build upon. This allows for users to build visualizations using familiar Julia syntax, without having to worry about how those types translate into JSON.</p>
 
-<p>For example, here is the highest-level composite type defined, <code>:VegaVisualization</code>:</p>
+<p>For example, here is the highest-level composite type defined, <code class="highlighter-rouge">:VegaVisualization</code>:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">type</span><span class="nc"> VegaVisualization</span>
-	<span class="n">name</span><span class="p">::</span><span class="n">String</span>
-	<span class="n">width</span><span class="p">::</span><span class="kt">Int</span>
-	<span class="n">height</span><span class="p">::</span><span class="kt">Int</span>
-	<span class="n">padding</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">VegaPadding</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
-	<span class="n">viewport</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span>
-	<span class="n">data</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaData</span><span class="p">}</span>
-	<span class="n">scales</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaScale</span><span class="p">}</span>
-	<span class="n">axes</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaAxis</span><span class="p">},</span>
-	<span class="n">marks</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaMark</span><span class="p">},</span>
-	<span class="n">legends</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaLegend</span><span class="p">}</span>
-<span class="k">end</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">type VegaVisualization
+	name::String
+	width::Int
+	height::Int
+	padding::Union(VegaPadding, Number, String)
+	viewport::Vector{Int}
+	data::Vector{VegaData}
+	scales::Vector{VegaScale}
+	axes::Vector{VegaAxis},
+	marks::Vector{VegaMark},
+	legends::Vector{VegaLegend}
+end</code></pre></figure>
 
 <p>This is a one-to-one mapping of the grammar outlined in the Vega Documentation for <a href="https://github.com/vega/vega/wiki">Visualization</a>.</p>
 

@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,19 +121,19 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector</code></pre></figure>
 
 <p>A waterfall chart is often used in marketing and finance to show the cumulative effect of multiple line items in an Income Statement or Marketing Campaign.</p>
 
 <p>To create this chart, pass in each line-item individually; the function will do the appropriate calculations, as well as setting the positive values to green, the negative values to red and the total to blue (customizable using <a href="http://johnmyleswhite.github.io/Vega.jl/colorscheme.html">colorscheme!</a>)</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
 
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Product Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Services Revenue&quot;</span><span class="p">,</span> <span class="s">&quot;Fixed Costs&quot;</span><span class="p">,</span> <span class="s">&quot;Variable Costs&quot;</span><span class="p">,</span> <span class="s">&quot;One-Time Costs&quot;</span><span class="p">]</span>
-<span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">420000</span><span class="p">,</span> <span class="mi">210000</span><span class="p">,</span> <span class="o">-</span><span class="mi">170000</span><span class="p">,</span> <span class="o">-</span><span class="mi">140000</span><span class="p">,</span> <span class="o">-</span><span class="mi">75000</span><span class="p">]</span>
+categories = ["Product Revenue", "Services Revenue", "Fixed Costs", "Variable Costs", "One-Time Costs"]
+value = [420000, 210000, -170000, -140000, -75000]
 
-<span class="n">waterfall</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">categories</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span></code></pre></div>
+waterfall(x = categories, y = value)</code></pre></figure>
 
 <div id="wf"></div>
 <script type="text/javascript">

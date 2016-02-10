@@ -39,6 +39,7 @@ function parse(divid,spec) {
           <br/>
           <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
           <br/>
+
           <h4>Pre-defined Visualizations</h4>
           <small><a href='areaplot.html'>Area Plot</a></small>
           <br/>
@@ -81,6 +82,11 @@ function parse(divid,spec) {
           <small><a href='wordcloud.html'>Word Cloud</a></small>
           <br/>
           <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <br/>
+
           <h4>Visualization Mutating Functions</h4>
           <small><a href='colorscheme.html'>colorscheme!</a></small>
           <br/>
@@ -115,20 +121,20 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
-<span class="n">stacked</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
-<span class="n">normalize</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
+y::AbstractVector
+group::AbstractVector
+stacked::Bool = false
+normalize::Bool = false</code></pre></figure>
 
 <h3 id="area-plot-1">Area Plot</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">KernelDensity</span><span class="p">,</span> <span class="n">Distributions</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, KernelDensity, Distributions
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Beta</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">k</span> <span class="o">=</span> <span class="n">kde</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+x = rand(Beta(3.0, 2.0), 10)
+k = kde(x)
 
-<span class="n">areaplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">density</span><span class="p">)</span></code></pre></div>
+areaplot(x = k.x, y = k.density)</code></pre></figure>
 
 <div id="area"></div>
 <script type="text/javascript">
@@ -140,13 +146,13 @@ parse("area",
 
 <h3 id="stacked-area">Stacked Area</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
 
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
-<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
+y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
+g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">areaplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
+a = areaplot(x = x, y = y, group = g, stacked = true)</code></pre></figure>
 
 <div id="stackedarea"></div>
 <script type="text/javascript">
@@ -157,12 +163,12 @@ parse("stackedarea",
 	);
 </script>
 
-<h3 id="normalized-stacked-area-with-colorscheme-hover-and-hline">Normalized Stacked Area (with <code>colorscheme!</code>, <code>hover!</code> and <code>hline</code>)</h3>
+<h3 id="normalized-stacked-area-with-colorscheme-hover-and-hline">Normalized Stacked Area (with <code class="highlighter-rouge">colorscheme!</code>, <code class="highlighter-rouge">hover!</code> and <code class="highlighter-rouge">hline</code>)</h3>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">a</span> <span class="o">=</span> <span class="n">areaplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
-<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Reds&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">hover</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
-<span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia">a = areaplot(x = x, y = y, group = g, stacked = true, normalize = true)
+colorscheme!(a, palette = ("Reds", 4))
+hover!(a, opacity = 0.75)
+hline!(a, value = 0.5, strokeDash = 5)</code></pre></figure>
 
 <div id="hlinearea"></div>
 <script type="text/javascript">
