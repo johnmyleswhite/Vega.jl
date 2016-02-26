@@ -15,7 +15,7 @@ module Vega
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
-           bubblechart, streamplot, stemleaf, asterplot, jointplot, dotplot,ribbonplot
+           bubblechart, streamplot, stemleaf, asterplot, jointplot, dotplot, ribbonplot
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 

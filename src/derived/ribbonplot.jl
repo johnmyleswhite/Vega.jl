@@ -7,9 +7,6 @@ function ribbonplot(;x::AbstractVector = Int[],
 
   tablename = v.data[1].name
 
-  # v.scales[1].points = true
-  # v.scales[1]._type = nothing
-
   innermark = VegaMark()
   innermark._type = "area"
   innermark.properties = VegaMarkProperties()
@@ -25,14 +22,13 @@ function ribbonplot(;x::AbstractVector = Int[],
   mark.from = VegaMarkFrom()
   mark.from.data      = tablename
   mark.from.transform = [VegaTransform(Dict{Any,Any}("type"=>"facet", "groupby" => ["group"]))]
-  mark.marks = [innermark]
+  mark.marks = [innermark;]
 
+  v.marks = [mark;]
 
-  # v.marks[1]._type = "area"
-  # v.marks[1].properties.enter.width = nothing
-  # v.marks[1].properties.enter.interpolate = VegaValueRef(value = "monotone")
   v.scales[1]._type = "linear"
   v.scales[1].zero = false
+  v.scales[2].domain = VegaDataRef(data = tablename, field = ["y", "y2"])
 
   return v
 end
