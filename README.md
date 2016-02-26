@@ -35,7 +35,8 @@ Functions/Types:
 - Check inputs to set scales correctly for visualization [#87](https://github.com/johnmyleswhite/Vega.jl/issues/87)
 - Fill in `::VegaTransform` type with actual fields
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
-- error bars/shading around lines/bars/dots, regression line [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- Regression line through points [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
+- Figure out how vega-lite fits in with this package (if at all)
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
