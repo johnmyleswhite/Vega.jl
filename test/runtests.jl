@@ -574,3 +574,12 @@ y = [1, 2, 3, 2, 1]
 a = barplot(x = x, y = y)
 hover!(a, color = "red")
 @test typeof(a) == VegaVisualization
+
+#54. Ribbon plot
+println("Test 54")
+x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
+y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
+g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
+a = ribbonplot(x = x, ylow = 0.9y, yhigh=1.1y, group = g);
+
+@test typeof(a) == VegaVisualization

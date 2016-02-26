@@ -15,7 +15,7 @@ module Vega
 
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
-           bubblechart, streamplot, stemleaf, asterplot, jointplot, dotplot
+           bubblechart, streamplot, stemleaf, asterplot, jointplot, dotplot, ribbonplot
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
@@ -74,6 +74,7 @@ module Vega
     include("derived/piechart.jl")
     include("derived/histogram.jl")
     include("derived/popchart.jl")
+    include("derived/ribbonplot.jl")
     include("derived/rugplot.jl")
     include("derived/stemleaf.jl")
     include("derived/streamplot.jl")
