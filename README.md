@@ -40,7 +40,6 @@ Functions/Types:
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
-- Horizon [#69](https://github.com/johnmyleswhite/Vega.jl/issues/69)
 - Treemap
 - Force
 - Violin plot
