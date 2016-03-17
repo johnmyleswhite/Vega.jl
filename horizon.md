@@ -7,6 +7,8 @@ title: Vega.jl - A Julia package for generating visualizations using Vega
 
 # Horizon Plot
 
+The horizon plot alters the height of the Y-axis for each click, in order to increase information density. See paper ["Sizing the Horizon: The Effects of Chart Size and Layering on the Graphical Perception of Time Series Visualizations" by Jeffrey Heer, Nicholas Kong, Maneesh Agrawala](http://idl.cs.washington.edu/papers/horizon/)
+
 Function Keywords:
 
 {% highlight julia %}
@@ -32,3 +34,4 @@ parse("horizon",
 
 	);
 </script>
+(Click to change the number of layers)
