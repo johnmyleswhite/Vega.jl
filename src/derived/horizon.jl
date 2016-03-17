@@ -1,8 +1,9 @@
-function horizon(; x = x, y = y)
+function horizon(; x::AbstractVector = [], y::AbstractVector = [])
 
     #Base for code to modify
     v = areaplot(x = x, y = y)
     v.height = 100
+    v.name = "horizon"
 
     #Add signals to deal with mouse-clicks
     v.signals = [
@@ -61,7 +62,7 @@ function horizon(; x = x, y = y)
                                                                                             enter = VegaMarkPropertySet(
                                                                                                                         interpolate = VegaValueRef(value = "monotone"),
                                                                                                                         x = VegaValueRef(scale = "x", field = "x"),
-                                                                                                                        fill = VegaValueRef(value = "steelblue")
+                                                                                                                        fill = VegaValueRef(scale = "group", field = "group")
                                                                                                                         ),
                                                                                             update = VegaMarkPropertySet(
                                                                                                                         y = VegaValueRef(scale = "y", field = "y"),
