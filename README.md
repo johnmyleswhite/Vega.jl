@@ -36,7 +36,7 @@ Functions/Types:
 - Fill in `::VegaTransform` type with actual fields
 - How to layer plots? [#73](https://github.com/johnmyleswhite/Vega.jl/issues/73)
 - Regression line through points [#53](https://github.com/johnmyleswhite/Vega.jl/issues/53)
-- Figure out how vega-lite fits in with this package (if at all)
+- Figure out how vega-lite/[VegaLite.jl](https://github.com/fredo-dedup/VegaLite.jl) fits in with this package (if at all)
 
 Vega Visualizations:
 - Bullet Chart [#47](https://github.com/johnmyleswhite/Vega.jl/issues/47)
