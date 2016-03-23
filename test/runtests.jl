@@ -583,3 +583,11 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 a = ribbonplot(x = x, ylow = 0.9y, yhigh=1.1y, group = g);
 
 @test typeof(a) == VegaVisualization
+
+#55. Horizon plot
+x = 1:20
+y = [28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15]
+a = horizon(x = x, y = y)
+colorscheme!(a, palette = "green")
+
+@test typeof(a) == VegaVisualization

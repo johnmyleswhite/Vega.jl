@@ -18,7 +18,11 @@ This package is unrelated to [VegaLite.jl](https://github.com/fredo-dedup/VegaLi
 	Pkg.add("Vega")
 	using Vega
 
-An Internet connection is required to use Vega.jl through Jupyter Notebook, as the required JavaScript libraries are delivered from a CDN. Using Vega from the REPL or Atom IDE will work without an Internet connection.
+Using Vega from the REPL/Atom will work with or without an Internet connection, as the required JavaScript libraries are injected into the HTML before the browser is opened (automatically).
+
+In order to use Jupyter Notebook offline, you will need to set up a shortcut/softlink to the Julia libraries named `vegajl`; for example, to serve notebooks from the folder `ijulia_notebooks` on OSX, run the following at the OSX Terminal (substituting the proper directory links of course):
+
+	ln -s /Users/randyzwitch/.julia/v0.4/Vega /Users/randyzwitch/ijulia_notebooks/vegajl
 
 # Documentation
 
