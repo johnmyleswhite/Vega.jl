@@ -30,4 +30,4 @@ Please see the [documentation](http://johnmyleswhite.github.io/Vega.jl/), which 
 
 # TODO/Contributing
 
-[GitHub issues](https://github.com/johnmyleswhite/Vega.jl/issues)) has a To-Do list of visualizations and open bugs/feature requests; of course, any contribution is welcomed!
+[GitHub issues](https://github.com/johnmyleswhite/Vega.jl/issues) has a To-Do list of visualizations and open bugs/feature requests; of course, any contribution is welcomed!
