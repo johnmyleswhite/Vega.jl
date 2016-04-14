@@ -15,15 +15,16 @@ function heatmap(;
     v.scales[2]._type = "ordinal"
 
     v.scales[3]._type = "linear"
-    v.scales[3].domain = [0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     v.scales[3].range = ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#ffffbf", "#fee090", "#fdae61", "#f46d43", "#d73027", "#a50026"]
+    cmin,cmax = extrema(color)
+    v.scales[3].domain = collect(linspace(cmin,cmax,length(v.scales[3].range)))
 
     #Use defaults for axes
     default_axes!(v)
 
     #Use default legend
     legend!(v)
-    v.legends[1].values = [0, 0.5, 1]
+    v.legends[1].values = [cmin, cmax]
     v.legends[1].title = ""
 
     #Marks
