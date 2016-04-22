@@ -123,7 +123,8 @@ function hover!(v::VegaVisualization; opacity::Number = 1, color::AbstractString
                                                                    )
         v.marks[1].marks[1].properties.update = VegaMarkPropertySet(fillOpacity = VegaValueRef(value = 1),
                                                                     strokeOpacity = VegaValueRef(value = 1),
-                                                                    fill = v.name == "lineplot"? nothing: VegaValueRef(scale = "group", field = field)
+                                                                    fill = v.name == "lineplot"? nothing: VegaValueRef(scale = "group", field = field),
+                                                                    stroke = v.name == "lineplot"? VegaValueRef(scale = "group", field = field) : nothing
                                                                     )
 
 
