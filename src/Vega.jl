@@ -16,7 +16,7 @@ module Vega
     export barplot, choropleth, lineplot, scatterplot, areaplot, heatmap, piechart,
            histogram, popchart, waterfall, wordcloud, groupedbar, rugplot, boxplot,
            bubblechart, streamplot, stemleaf, asterplot, jointplot, dotplot, ribbonplot,
-           horizon
+           horizon, punchcard
 
     export xlab!, ylab!, xlim!, ylim!, title!, legend!, text!
 
@@ -85,6 +85,7 @@ module Vega
     include("derived/jointplot.jl")
     include("derived/dotplot.jl")
     include("derived/horizon.jl")
+    include("derived/punchcard.jl")
 
     if Pkg.installed("Escher") != nothing
         include("escher_integration.jl")
