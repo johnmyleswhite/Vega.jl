@@ -5,8 +5,9 @@ for fun in [:x, :y]
     fname = symbol("$(fun)lab!")
 
         @eval begin function ($fname)(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
-                               format::AbstractString = "", layer::AbstractString = "front", properties::Dict = Dict{Any, Any}(),
-                               tickSize::Number = 0, tickSizeMajor::Number = 0, tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
+                               format::AbstractString = "", formatType::AbstractString="", layer::AbstractString = "front",
+                               properties::Dict = Dict{Any, Any}(), tickSize::Number = 0, tickSizeMajor::Number = 0,
+                               tickSizeMinor::Number = 0, tickSizeEnd::Number = 0)
 
             #Find where axis is in array
             a = v.axes[findfirst([z.name == $"$fun" for z in v.scales])]
@@ -20,6 +21,7 @@ for fun in [:x, :y]
             tickSizeMinor == 0 && a.tickSizeMinor != nothing? a.tickSizeMinor = a.tickSizeMinor: a.tickSizeMinor = tickSizeMinor
             tickSizeEnd == 0 && a.tickSizeEnd != nothing? a.tickSizeEnd = a.tickSizeEnd: a.tickSizeEnd = tickSizeEnd
             a.format = format
+            a.formatType = formatType
             a.layer = layer
 
             #See if properties are already defined, and if so merge. If not, define it from function argument
