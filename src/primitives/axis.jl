@@ -6,6 +6,7 @@ axis_spec =
     (:title, AbstractString, nothing),
     (:titleOffset, Number, nothing),
     (:format, AbstractString, nothing),
+    (:formatType, AbstractString, nothing),
     (:ticks, Number, nothing),
     (:values, Vector, nothing),
     (:subdivide, Number, nothing),
