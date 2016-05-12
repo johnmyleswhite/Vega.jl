@@ -46,10 +46,11 @@ module Vega
     include("primitives/scale.jl")
     include("primitives/mark.jl")
     include("primitives/legend.jl")
+    include("primitives/scene.jl")
     include("primitives/container.jl")
     include("primitives/predicate.jl")
     include("primitives/visualization.jl")
-    include("primitives/scene.jl")
+
 
     include("render.jl")
 
