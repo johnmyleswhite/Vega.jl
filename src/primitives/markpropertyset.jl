@@ -16,6 +16,7 @@ markpropertyset_spec =
 	(:strokeOpacity, VegaValueRef, nothing),
 	(:strokeDash, VegaValueRef, nothing),
 	(:strokeDashOffset, VegaValueRef, nothing),
+	(:cursor, VegaValueRef, nothing),
 	(:clip, VegaValueRef, nothing),
 	(:size, VegaValueRef, nothing),
 	(:shape, VegaValueRef, nothing),
@@ -26,6 +27,7 @@ markpropertyset_spec =
 	(:endAngle, VegaValueRef, nothing),
 	(:interpolate, VegaValueRef, nothing),
 	(:tension, VegaValueRef, nothing),
+	(:orient, VegaValueRef, nothing),
 	(:url, VegaValueRef, nothing),
 	(:align, VegaValueRef, nothing),
 	(:baseline, VegaValueRef, nothing),
@@ -39,11 +41,11 @@ markpropertyset_spec =
 	(:fontSize, VegaValueRef, nothing),
 	(:fontWeight, VegaValueRef, nothing),
 	(:fontStyle, VegaValueRef, nothing),
-	(:title, VegaValueRef, nothing),
-	(:labels, VegaValueRef, nothing),
-	(:legend, VegaValueRef, nothing),
-	(:symbols, VegaValueRef, nothing),
-	(:gradient, VegaValueRef, nothing)
+	# (:title, VegaValueRef, nothing),
+	# (:labels, VegaValueRef, nothing),
+	# (:legend, VegaValueRef, nothing),
+	# (:symbols, VegaValueRef, nothing),
+	# (:gradient, VegaValueRef, nothing)
 
 
 ]

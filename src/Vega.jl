@@ -6,7 +6,7 @@ module Vega
     import Base.print
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
-           VegaTransform, VegaVisualization, VegaFormat,
+           VegaTransform, VegaVisualization, VegaFormat, VegaScene,
            #VegaJSON, VegaCSV, VegaTSV,
            VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaStream, VegaMarkFrom, VegaPredicate
@@ -49,6 +49,7 @@ module Vega
     include("primitives/container.jl")
     include("primitives/predicate.jl")
     include("primitives/visualization.jl")
+    include("primitives/scene.jl")
 
     include("render.jl")
 
