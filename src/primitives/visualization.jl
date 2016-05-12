@@ -13,7 +13,8 @@ vis_spec =
     (:marks, Vector{VegaMark}, nothing),
     (:legends, Vector{VegaLegend}, nothing),
     (:signals, Vector{Dict{Any, Any}}, nothing),
-    (:predicates, Vector{Dict{Any, Any}}, nothing)
+    (:predicates, Vector{Dict{Any, Any}}, nothing),
+    (:modify, Vector{Dict{Any, Any}}, nothing)
 ]
 
 primitivefactory(:VegaVisualization, vis_spec)

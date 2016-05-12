@@ -8,6 +8,7 @@ legend_spec =
 	(:offset, Number, nothing),
 	(:title, AbstractString, nothing),
 	(:format, AbstractString, nothing),
+	(:formatType, AbstractString, nothing),
 	(:values, Vector, nothing),
 	(:properties, Union{Dict{Any, Any}, VegaMarkPropertySet}, nothing)
 ]
