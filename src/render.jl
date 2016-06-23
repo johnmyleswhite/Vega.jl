@@ -74,9 +74,7 @@ function scriptstr(v::VegaVisualization, divid)
     """
 end
 
-#Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
-function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
-
+function genhtml(v::VegaVisualization; title="Vega.jl Visualization")
     d3 = asset("d3","d3.min.js")
     topojson = asset("topojson","topojson.js")
     cloudlayout = asset("d3-cloud", "build", "d3.layout.cloud.js")
@@ -84,7 +82,6 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
     divid = "vg" * randstring(3)
 
-    println(io,
     "
     <html>
       <head>
@@ -116,14 +113,20 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
 
 
     </html>
-    ")
+    "
 
+end
+#Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
+function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
+    println(io, genhtml(v, title=title))
 end
 
 function Base.show(io::IO, v::VegaVisualization)
 
     if displayable("text/html")
         v
+    elseif BLINK_INSTALLED
+        blink_show(v)
     else
         # create a temporary file
         tmppath = string(tempname(), ".vega.html")
