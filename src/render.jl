@@ -74,30 +74,11 @@ function scriptstr(v::VegaVisualization, divid)
     """
 end
 
-#Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
-function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
-
-    d3 = asset("d3","d3.min.js")
-    topojson = asset("topojson","topojson.js")
-    cloudlayout = asset("d3-cloud", "build", "d3.layout.cloud.js")
-    vega = asset("vega", "vega.js")
-
+function body(v::VegaVisualization)
     divid = "vg" * randstring(3)
 
-    println(io,
     "
-    <html>
-      <head>
-        <title>$title</title>
-        <script>$d3</script>
-        <script>$topojson</script>
-        <script>$cloudlayout</script>
-        <script>$vega</script>
-
-      </head>
-      <body>
-        <div id=\"$divid\"></div>
-      </body>
+    <div id=\"$divid\"></div>
 
     <script type=\"text/javascript\">
     // parse a spec and create a visualization view
@@ -113,17 +94,40 @@ function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
     }, 20);
 
     </script>
+    "
+end
 
+function genhtml(v::VegaVisualization; title="Vega.jl Visualization")
+    d3 = asset("d3","d3.min.js")
+    topojson = asset("topojson","topojson.js")
+    cloudlayout = asset("d3-cloud", "build", "d3.layout.cloud.js")
+    vega = asset("vega", "vega.js")
 
-    </html>
-    ")
+    "
+    <html>
+      <head>
+        <title>$title</title>
+        <script>$d3</script>
+        <script>$topojson</script>
+        <script>$cloudlayout</script>
+        <script>$vega</script>
+      </head>
+      $(body(v))
+      </html>
+   "
+end
 
+#Vega Scaffold: https://github.com/vega/vega/wiki/Runtime
+function writehtml(io::IO, v::VegaVisualization; title="Vega.jl Visualization")
+    println(io, genhtml(v, title=title))
 end
 
 function Base.show(io::IO, v::VegaVisualization)
 
     if displayable("text/html")
         v
+    elseif BLINK_INSTALLED
+        blink_show(v)
     else
         # create a temporary file
         tmppath = string(tempname(), ".vega.html")

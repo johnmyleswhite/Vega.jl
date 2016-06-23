@@ -93,6 +93,13 @@ module Vega
         include("escher_integration.jl")
     end
 
+    if Pkg.installed("Blink") != nothing
+        include("blink_integration.jl")
+        BLINK_INSTALLED = true
+    else
+        BLINK_INSTALLED = false
+    end
+    
     print(x::VegaVisualization) = print(JSON.json(tojs(x)))
 
 end
