@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,26 +129,26 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-y::AbstractVector
-group::AbstractVector</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
 <h3 id="population-chart-1">Population Chart</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, DataFrames, JSON
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span>
 
-df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=&gt;v for (k,v) in p]...))
-end
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/population.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
 
-pop1900 = df[df[:year] .== 1900, :];
+<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
 
-x = pop1900[:people]
-y = pop1900[:age]
-group = pop1900[:sex]
+<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
 
-popchart(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="pop"></div>
 <script type="text/javascript">

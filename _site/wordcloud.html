@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,19 +129,19 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-wordAngles::AbstractVector = [-45, 0, 45]
-minThreshold::Int = 0</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">wordAngles</span><span class="p">::</span><span class="n">AbstractVector</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">]</span>
+<span class="n">minThreshold</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
 <h3 id="wordcloud-1">Wordcloud</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">corpus = [
-"Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Julia’s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Julia’s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.",
-"Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual."
-]
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s">&quot;Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Julia’s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Julia’s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.&quot;</span><span class="p">,</span>
+<span class="s">&quot;Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual.&quot;</span>
+<span class="p">]</span>
 
-wc = wordcloud(x = corpus)
-colorscheme!(wc, palette = ("Spectral", 11))</code></pre></figure>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Spectral&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span></code></pre></div>
 
 <div id="wc1"></div>
 <script type="text/javascript">
@@ -145,7 +153,7 @@ parse("wc1",
 
 <h3 id="wordcloud-with-custom-angles">Wordcloud With Custom Angles</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">wordcloud(x = corpus, wordAngles = [0, 90])</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">wordAngles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span></code></pre></div>
 
 <div id="wc2"></div>
 <script type="text/javascript">
@@ -157,7 +165,7 @@ parse("wc2",
 
 <h3 id="wordcloud-with-minimum-word-count-threshold">Wordcloud With Minimum Word Count Threshold</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">wordcloud(x = corpus, minThreshold = 1)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">minThreshold</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span></code></pre></div>
 
 <div id="wc3"></div>
 <script type="text/javascript">

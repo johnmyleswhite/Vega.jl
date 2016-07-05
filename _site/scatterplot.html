@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,25 +129,25 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-y::AbstractVector
-group::AbstractVector
-pointShape::AbstractString = "circle"
-pointSize::Real = 50</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">pointShape</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;circle&quot;</span>
+<span class="n">pointSize</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">50</span></code></pre></div>
 
 <h3 id="scatterplot-by-group">Scatterplot By Group</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, Distributions
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">Distributions</span>
 
-d1 = MultivariateNormal([0.0, 0.0], [1.0 0.9; 0.9 1.0])
-d2 = MultivariateNormal([10.0, 10.0], [4.0 0.5; 0.5 4.0])
-points = vcat(rand(d1, 500)', rand(d2, 500)')
+<span class="n">d1</span> <span class="o">=</span> <span class="n">MultivariateNormal</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span> <span class="mf">0.9</span><span class="p">;</span> <span class="mf">0.9</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">MultivariateNormal</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.0</span> <span class="mf">0.5</span><span class="p">;</span> <span class="mf">0.5</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">rand</span><span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span><span class="o">&#39;</span><span class="p">)</span>
 
-x = points[:, 1]
-y = points[:, 2]
-group = vcat(ones(Int, 500), ones(Int, 500) + 1)
+<span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">ones</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-scatterplot(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="scatter"></div>
 <script type="text/javascript">

@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,22 +129,22 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-y::AbstractVector
-group::AbstractVector
-sort::Bool = true</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">sort</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">true</span></code></pre></div>
 
 <h3 id="dot-plot-1">Dot Plot</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=&gt;v for (k,v) in p]...))
-end
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/movies.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
 
-a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre])
-a.width = 500
-ylab!(a, title = " ", grid = true)
-xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")</code></pre></figure>
+<span class="n">a</span> <span class="o">=</span> <span class="n">dotplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">US_Gross</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">Major_Genre</span><span class="p">])</span>
+<span class="n">a</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Avg. U.S. Gross Movie Receipts&quot;</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;.3s&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="dot"></div>
 <script type="text/javascript">

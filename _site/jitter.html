@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,17 +129,17 @@ function parse(divid,spec) {
 
 <p>Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-pctXrange::Real = 0.05
-pctYrange::Real = 0.05</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">pctXrange</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">pctYrange</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mf">0.05</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, adding a random amount of noise to data as a means of remedying ‘overplotting’. The <code class="highlighter-rouge">pctXrange/pctYrange</code> arguments is the percentage of the data series range allowable (+/-) to add to the data. Academic literature suggests that values greater than 0.1/10% is excessive.</p>
+<p>This function mutates <code>:VegaVisualization</code>, adding a random amount of noise to data as a means of remedying ‘overplotting’. The <code>pctXrange/pctYrange</code> arguments is the percentage of the data series range allowable (+/-) to add to the data. Academic literature suggests that values greater than 0.1/10% is excessive.</p>
 
 <h3 id="no-jitter">No jitter</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = rand(1:10, 500)
-y = rand(0:10, 500) + x
-a = scatterplot(x = x, y = y)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span></code></pre></div>
 
 <div id="nojitter"></div>
 <script type="text/javascript">
@@ -144,7 +152,7 @@ parse("nojitter",
 
 <h3 id="default-jitter---5-along-x--and-y-axis">Default jitter (+/- 5% along X- and Y-axis)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">jitter!(a)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">jitter</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></div>
 
 <div id="jitter5pct"></div>
 <script type="text/javascript">
@@ -156,10 +164,10 @@ parse("jitter5pct",
 
 <h3 id="jitter-along-x-axis-only">Jitter along X-axis only</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = rand(1:10, 500)
-y = rand(0:10, 500) + x
-a = scatterplot(x = x, y = y)
-jitter!(a, pctXrange = 0.1, pctYrange = 0)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">jitter</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pctXrange</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">pctYrange</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre></div>
 
 <div id="jitterx"></div>
 <script type="text/javascript">

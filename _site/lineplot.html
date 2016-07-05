@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,22 +129,22 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-y::AbstractVector
-group::AbstractVector
-points::Bool = false
-pointShape::AbstractString = "circle"
-pointSize::Real = 10</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">points</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">pointShape</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;circle&quot;</span>
+<span class="n">pointSize</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">10</span></code></pre></div>
 
 <h3 id="multiple-lines-in-single-plot">Multiple Lines In Single Plot</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-lineplot(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="lineplot"></div>
 <script type="text/javascript">
@@ -148,7 +156,7 @@ parse("lineplot",
 
 <h3 id="adding-points">Adding Points</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">lineplot(x = x, y = y, group = group, points = true)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
 
 <div id="lineplot2"></div>
 <script type="text/javascript">
@@ -160,7 +168,7 @@ parse("lineplot2",
 
 <h3 id="making-points-larger">Making Points Larger</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">lineplot(x = x, y = y, group = group, points = true, pointSize = 20)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">pointSize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span></code></pre></div>
 
 <div id="lineplot3"></div>
 <script type="text/javascript">

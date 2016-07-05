@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,22 +129,22 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x::AbstractVector
-y::AbstractVector
-y2::AbstractVector
-group::AbstractVector
-stacked::Bool = false
-horizontal::Bool = false
-normalize::Bool = false</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y2</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">stacked</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">horizontal</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">normalize</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
 
 <h3 id="vertical-bar">Vertical Bar</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1, 2, 3, 4, 5]
-y = [1, 2, 3, 2, 1]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-barplot(x = x, y = y)</code></pre></figure>
+<span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span></code></pre></div>
 
 <div id="verticalbar"></div>
 <script type="text/javascript">
@@ -147,12 +155,12 @@ parse("verticalbar",
 
 <h3 id="horizontal-bar">Horizontal Bar</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1, 2, 3, 4, 5]
-y = [1, 2, 3, 2, 1]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-barplot(x = x, y = y, horizontal = true)</code></pre></figure>
+<span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">horizontal</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
 
 <div id="horizontalbar"></div>
 <script type="text/javascript">
@@ -163,13 +171,13 @@ parse("horizontalbar",
 
 <h3 id="group-argument">Group Argument</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1:20]
-y = rand(20)
-group = [round(val/10) for val in x]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="k">in</span> <span class="n">x</span><span class="p">]</span>
 
-barplot(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="groupbar"></div>
 <script type="text/javascript">
@@ -178,16 +186,16 @@ parse("groupbar",
 	);
 </script>
 
-<h3 id="stacked-bar-with-additional-colorscheme-change">Stacked Bar (with additional <code class="highlighter-rouge">colorscheme!</code> change)</h3>
+<h3 id="stacked-bar-with-additional-colorscheme-change">Stacked Bar (with additional <code>colorscheme!</code> change)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
-g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-a = barplot(x = x, y = y, group = g, stacked = true)
-colorscheme!(a, palette = ("Greens", 3))</code></pre></figure>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Greens&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
 
 <div id="stacked"></div>
 <script type="text/javascript">
@@ -197,16 +205,16 @@ parse("stacked",
 	);
 </script>
 
-<h3 id="normalized-horizontal-stacked-bar-with-additional-hover-change">Normalized Horizontal Stacked Bar (with additional <code class="highlighter-rouge">hover!</code> change)</h3>
+<h3 id="normalized-horizontal-stacked-bar-with-additional-hover-change">Normalized Horizontal Stacked Bar (with additional <code>hover!</code> change)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
-g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-a = barplot(x = x, y = y, group = g, stacked = true, normalize = true, horizontal = true)
-hover!(a, opacity = 0.75)</code></pre></figure>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="n">horizontal</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">hover</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span></code></pre></div>
 
 <div id="horizhover"></div>
 <script type="text/javascript">

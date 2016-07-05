@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,29 +129,29 @@ function parse(divid,spec) {
 
 <p>Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-title::AbstractString = ""
-grid::Bool = false
-ticks::Number = 0
-format::AbstractString = ""
-layer::AbstractString = "front",
-properties::Dict = Dict{Any, Any}
-tickSize::Number = 0
-tickSizeMajor::Number = 0
-tickSizeMinor::Number = 0
-tickSizeEnd::Number = 0</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">title</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">grid</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">ticks</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">format</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">layer</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;front&quot;</span><span class="p">,</span>
+<span class="n">properties</span><span class="p">::</span><span class="n">Dict</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span> <span class="kt">Any</span><span class="p">}</span>
+<span class="n">tickSize</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeMajor</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeMinor</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeEnd</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, adding/modifying the X axis or Y axis.</p>
+<p>This function mutates <code>:VegaVisualization</code>, adding/modifying the X axis or Y axis.</p>
 
 <h3 id="default-axis-labels">Default Axis labels</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-v = lineplot(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="line"></div>
 <script type="text/javascript">
@@ -155,8 +163,8 @@ parse("line",
 
 <h3 id="modified-axis-labels">Modified Axis labels</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">xlab!(v, title = "Weight (kg)")
-ylab!(v, title = "Height (cm)")</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Weight (kg)&quot;</span><span class="p">)</span>
+<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Height (cm)&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="newlabs"></div>
 <script type="text/javascript">

@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,20 +129,20 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-title::String
-show::Bool</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">title</span><span class="p">::</span><span class="n">String</span>
+<span class="n">show</span><span class="p">::</span><span class="kt">Bool</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, modifying the legend attributes.</p>
+<p>This function mutates <code>:VegaVisualization</code>, modifying the legend attributes.</p>
 
 <h3 id="default-legend-title">Default legend title</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-fruit = ["peaches", "plums", "blueberries", "strawberries", "bananas"]
-bushels = [100, 32, 180, 46, 21]
+<span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;peaches&quot;</span><span class="p">,</span> <span class="s">&quot;plums&quot;</span><span class="p">,</span> <span class="s">&quot;blueberries&quot;</span><span class="p">,</span> <span class="s">&quot;strawberries&quot;</span><span class="p">,</span> <span class="s">&quot;bananas&quot;</span><span class="p">]</span>
+<span class="n">bushels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
 
-v = piechart(x = fruit, y = bushels)</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">piechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">bushels</span><span class="p">)</span></code></pre></div>
 
 <div id="defaultlegend"></div>
 <script type="text/javascript">
@@ -146,7 +154,7 @@ parse("defaultlegend",
 
 <h3 id="modified-legend-title">Modified legend title</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">legend!(v, title = "Fruit")</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">legend</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Fruit&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="legendchange"></div>
 <script type="text/javascript">

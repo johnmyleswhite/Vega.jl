@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,17 +129,17 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">y::AbstractVector
-group::AbstractVector</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">group</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
 
 <p>This function calculates a Tukey boxplot, where the whiskers are the min(max) of 1.5 * IQR or the smallest(largest) datapoint. The circles on the boxplot represent the most extreme values in the data. Currently, printing outliers on the boxplot is not implemented.</p>
 
 <h3 id="single-box-plot">Single Box Plot</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using RDatasets, Vega
-df = dataset("datasets", "mtcars")
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">RDatasets</span><span class="p">,</span> <span class="n">Vega</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;mtcars&quot;</span><span class="p">)</span>
 
-boxplot(y = df[:MPG])</code></pre></figure>
+<span class="n">boxplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">MPG</span><span class="p">])</span></code></pre></div>
 
 <div id="singlebox"></div>
 <script type="text/javascript">
@@ -142,10 +150,10 @@ parse("singlebox",
 
 <h3 id="grouped-box-plot">Grouped Box Plot</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using RDatasets, Vega
-df = dataset("datasets", "mtcars")
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">RDatasets</span><span class="p">,</span> <span class="n">Vega</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;mtcars&quot;</span><span class="p">)</span>
 
-boxplot(y = df[:MPG], group = df[:Cyl])</code></pre></figure>
+<span class="n">boxplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">MPG</span><span class="p">],</span> <span class="n">group</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">Cyl</span><span class="p">])</span></code></pre></div>
 
 <div id="multibox"></div>
 <script type="text/javascript">

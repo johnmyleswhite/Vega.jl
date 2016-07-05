@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,8 +129,8 @@ function parse(divid,spec) {
 
 <p>Vega.jl is listed on METADATA.jl, so downloading and installing Vega is the same as any other package:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">Pkg.add("Vega")
-using Vega</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">Vega</span></code></pre></div>
 
 <p>Currently, Vega.jl requires an Internet connection to render graphs, as the <a href="https://github.com/vega/vega">vega</a> project is progressing so rapidly in version 2 that it is infeasible to have the JavaScript libraries as local copies. In the future, all of the JavaScript libraries needed to render graphics will be provided as part of the package for the ability to create visualizations without requiring an Internet connection.</p>
 
@@ -130,7 +138,7 @@ using Vega</code></pre></figure>
 
 <p>Vega.jl works with both Jupyter Notebook and the Julia REPL. When using Jupyter Notebooks, the graphics will automatically be printed in-line. Submitting commands via the REPL will either open a new tab in the currently open (default) browser, or trigger the default browser to open.</p>
 
-<p>Vega.jl is only targeted to work against v0.4 of Julia (or newer). However, some use of the <a href="https://github.com/JuliaLang/Compat.jl"><code class="highlighter-rouge">Compat.jl</code></a> package to provide backwards compatibility has been done. If you are looking for increased backwards capatibility, please submit a pull request as necessary to support your preferred version of Julia.</p>
+<p>Vega.jl is only targeted to work against v0.4 of Julia (or newer). However, some use of the <a href="https://github.com/JuliaLang/Compat.jl"><code>Compat.jl</code></a> package to provide backwards compatibility has been done. If you are looking for increased backwards capatibility, please submit a pull request as necessary to support your preferred version of Julia.</p>
 
 <h2 id="browser--os-compatibility">Browser / OS compatibility</h2>
 

@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,24 +129,23 @@ function parse(divid,spec) {
 
 <p>Required Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-palette::Union(Tuple{AbstractString,Int64}, AbstractString, Array)
-reversePalette::Bool = false</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">palette</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">Tuple</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">AbstractString</span><span class="p">,</span> <span class="n">Array</span><span class="p">)</span>
+<span class="n">reversePalette</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, modifying the colors for the <code class="highlighter-rouge">group</code> or <code class="highlighter-rouge">fill</code> properties of the visualization. The <code class="highlighter-rouge">palette</code> argument supports:</p>
+<p>This function mutates <code>:VegaVisualization</code>, modifying the colors for the <code>group</code> or <code>fill</code> properties of the visualization. The <code>palette</code> argument supports:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
+<pre><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
 * AbstractString: A string representing a color the browser understands (i.e. "Pink", "#FFF")
 * Array: An array of colors (i.e. ["Red", "Green"])
 </code></pre>
-</div>
 
 <h3 id="colorbrewer-scale">ColorBrewer scale</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
-colorscheme!(ab, palette = ("Purples", 3))</code></pre></figure>
+<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
 
 <div id="purple"></div>
 <script type="text/javascript">
@@ -149,10 +156,10 @@ parse("purple",
 
 <h3 id="colorbrewer-scale-reversed">ColorBrewer scale, Reversed</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-ab = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 for i in 1:10]))
-colorscheme!(ab, palette = ("Purples", 3), reversePalette = true)</code></pre></figure>
+<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">reversePalette</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
 
 <div id="purple2"></div>
 <script type="text/javascript">
@@ -163,11 +170,11 @@ parse("purple2",
 
 <h3 id="single-color">Single Color</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-srand(1)
-a = barplot(x = [1:20], y = rand(20))
-colorscheme!(a, palette = "Violet")</code></pre></figure>
+<span class="n">srand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&quot;Violet&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="violet"></div>
 <script type="text/javascript">
@@ -179,21 +186,21 @@ parse("violet",
 
 <h3 id="array-of-colors">Array of Colors</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using DataFrames, JSON, Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">Vega</span>
 
-df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=&gt;v for (k,v) in p]...))
-end
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/population.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
 
-pop1900 = df[df[:year] .== 1900, :];
+<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
 
-x = pop1900[:people]
-y = pop1900[:age]
-group = pop1900[:sex]
+<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
 
-pc1 = popchart(x = x, y = y, group = group)
-colorscheme!(pc1, palette = ["Green", "Red"])</code></pre></figure>
+<span class="n">pc1</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">pc1</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Green&quot;</span><span class="p">,</span> <span class="s">&quot;Red&quot;</span><span class="p">])</span></code></pre></div>
 
 <div id="array"></div>
 <script type="text/javascript">

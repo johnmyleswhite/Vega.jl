@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="punchcard">Punchcard</h1>
+
+<p>Function Keywords:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">pointSize</span><span class="p">::</span><span class="n">AbstractVector</span></code></pre></div>
+
+<h3 id="punchcard-1">Punchcard</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">readtable</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/punchcard.csv&quot;</span><span class="p">))</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">punchcard</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">hour</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">day</span><span class="p">],</span> <span class="n">pointSize</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="n">commits</span><span class="p">])</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">)</span></code></pre></div>
+
+<div id="punch"></div>
+<script type="text/javascript">
+parse("punch",
+    {"name":"Vega Visualization","height":300,"padding":"auto","marks":[{"properties":{"enter":{"shape":{"value":"circle"},"x":{"field":"x","scale":"x"},"size":{"mult":30,"field":"y2"},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table_dcsw3"},"type":"symbol"}],"axes":[{"layer":"front","offset":20,"properties":{"axis":{"strokeWidth":{"value":0}},"title":{"fontSize":{"value":14}}},"title":"","grid":false,"type":"x","scale":"x","tickSize":0},{"layer":"front","offset":20,"properties":{"axis":{"strokeWidth":{"value":0}},"title":{"fontSize":{"value":14}}},"title":"","grid":false,"type":"y","scale":"y","tickSize":0}],"data":[{"name":"table_dcsw3","values":[{"x":0,"y2":0,"group":1,"y":"Sunday"},{"x":1,"y2":0,"group":1,"y":"Sunday"},{"x":2,"y2":0,"group":1,"y":"Sunday"},{"x":3,"y2":0,"group":1,"y":"Sunday"},{"x":4,"y2":0,"group":1,"y":"Sunday"},{"x":5,"y2":17,"group":1,"y":"Sunday"},{"x":6,"y2":2,"group":1,"y":"Sunday"},{"x":7,"y2":16,"group":1,"y":"Sunday"},{"x":8,"y2":7,"group":1,"y":"Sunday"},{"x":9,"y2":11,"group":1,"y":"Sunday"},{"x":10,"y2":0,"group":1,"y":"Sunday"},{"x":11,"y2":4,"group":1,"y":"Sunday"},{"x":12,"y2":1,"group":1,"y":"Sunday"},{"x":13,"y2":10,"group":1,"y":"Sunday"},{"x":14,"y2":9,"group":1,"y":"Sunday"},{"x":15,"y2":5,"group":1,"y":"Sunday"},{"x":16,"y2":2,"group":1,"y":"Sunday"},{"x":17,"y2":19,"group":1,"y":"Sunday"},{"x":18,"y2":10,"group":1,"y":"Sunday"},{"x":19,"y2":13,"group":1,"y":"Sunday"},{"x":20,"y2":12,"group":1,"y":"Sunday"},{"x":21,"y2":15,"group":1,"y":"Sunday"},{"x":22,"y2":12,"group":1,"y":"Sunday"},{"x":23,"y2":3,"group":1,"y":"Sunday"},{"x":0,"y2":1,"group":1,"y":"Monday"},{"x":1,"y2":0,"group":1,"y":"Monday"},{"x":2,"y2":0,"group":1,"y":"Monday"},{"x":3,"y2":0,"group":1,"y":"Monday"},{"x":4,"y2":0,"group":1,"y":"Monday"},{"x":5,"y2":0,"group":1,"y":"Monday"},{"x":6,"y2":1,"group":1,"y":"Monday"},{"x":7,"y2":8,"group":1,"y":"Monday"},{"x":8,"y2":11,"group":1,"y":"Monday"},{"x":9,"y2":19,"group":1,"y":"Monday"},{"x":10,"y2":20,"group":1,"y":"Monday"},{"x":11,"y2":10,"group":1,"y":"Monday"},{"x":12,"y2":10,"group":1,"y":"Monday"},{"x":13,"y2":3,"group":1,"y":"Monday"},{"x":14,"y2":5,"group":1,"y":"Monday"},{"x":15,"y2":8,"group":1,"y":"Monday"},{"x":16,"y2":12,"group":1,"y":"Monday"},{"x":17,"y2":3,"group":1,"y":"Monday"},{"x":18,"y2":13,"group":1,"y":"Monday"},{"x":19,"y2":9,"group":1,"y":"Monday"},{"x":20,"y2":19,"group":1,"y":"Monday"},{"x":21,"y2":10,"group":1,"y":"Monday"},{"x":22,"y2":12,"group":1,"y":"Monday"},{"x":23,"y2":12,"group":1,"y":"Monday"},{"x":0,"y2":17,"group":1,"y":"Tuesday"},{"x":1,"y2":8,"group":1,"y":"Tuesday"},{"x":2,"y2":19,"group":1,"y":"Tuesday"},{"x":3,"y2":20,"group":1,"y":"Tuesday"},{"x":4,"y2":12,"group":1,"y":"Tuesday"},{"x":5,"y2":0,"group":1,"y":"Tuesday"},{"x":6,"y2":0,"group":1,"y":"Tuesday"},{"x":7,"y2":11,"group":1,"y":"Tuesday"},{"x":8,"y2":0,"group":1,"y":"Tuesday"},{"x":9,"y2":9,"group":1,"y":"Tuesday"},{"x":10,"y2":20,"group":1,"y":"Tuesday"},{"x":11,"y2":20,"group":1,"y":"Tuesday"},{"x":12,"y2":9,"group":1,"y":"Tuesday"},{"x":13,"y2":19,"group":1,"y":"Tuesday"},{"x":14,"y2":12,"group":1,"y":"Tuesday"},{"x":15,"y2":17,"group":1,"y":"Tuesday"},{"x":16,"y2":20,"group":1,"y":"Tuesday"},{"x":17,"y2":17,"group":1,"y":"Tuesday"},{"x":18,"y2":1,"group":1,"y":"Tuesday"},{"x":19,"y2":17,"group":1,"y":"Tuesday"},{"x":20,"y2":16,"group":1,"y":"Tuesday"},{"x":21,"y2":18,"group":1,"y":"Tuesday"},{"x":22,"y2":16,"group":1,"y":"Tuesday"},{"x":23,"y2":3,"group":1,"y":"Tuesday"},{"x":0,"y2":8,"group":1,"y":"Wednesday"},{"x":1,"y2":19,"group":1,"y":"Wednesday"},{"x":2,"y2":1,"group":1,"y":"Wednesday"},{"x":3,"y2":0,"group":1,"y":"Wednesday"},{"x":4,"y2":4,"group":1,"y":"Wednesday"},{"x":5,"y2":16,"group":1,"y":"Wednesday"},{"x":6,"y2":15,"group":1,"y":"Wednesday"},{"x":7,"y2":8,"group":1,"y":"Wednesday"},{"x":8,"y2":4,"group":1,"y":"Wednesday"},{"x":9,"y2":3,"group":1,"y":"Wednesday"},{"x":10,"y2":1,"group":1,"y":"Wednesday"},{"x":11,"y2":15,"group":1,"y":"Wednesday"},{"x":12,"y2":4,"group":1,"y":"Wednesday"},{"x":13,"y2":13,"group":1,"y":"Wednesday"},{"x":14,"y2":8,"group":1,"y":"Wednesday"},{"x":15,"y2":20,"group":1,"y":"Wednesday"},{"x":16,"y2":9,"group":1,"y":"Wednesday"},{"x":17,"y2":6,"group":1,"y":"Wednesday"},{"x":18,"y2":4,"group":1,"y":"Wednesday"},{"x":19,"y2":4,"group":1,"y":"Wednesday"},{"x":20,"y2":14,"group":1,"y":"Wednesday"},{"x":21,"y2":19,"group":1,"y":"Wednesday"},{"x":22,"y2":0,"group":1,"y":"Wednesday"},{"x":23,"y2":0,"group":1,"y":"Wednesday"},{"x":0,"y2":0,"group":1,"y":"Thursday"},{"x":1,"y2":0,"group":1,"y":"Thursday"},{"x":2,"y2":0,"group":1,"y":"Thursday"},{"x":3,"y2":19,"group":1,"y":"Thursday"},{"x":4,"y2":11,"group":1,"y":"Thursday"},{"x":5,"y2":14,"group":1,"y":"Thursday"},{"x":6,"y2":16,"group":1,"y":"Thursday"},{"x":7,"y2":14,"group":1,"y":"Thursday"},{"x":8,"y2":1,"group":1,"y":"Thursday"},{"x":9,"y2":15,"group":1,"y":"Thursday"},{"x":10,"y2":11,"group":1,"y":"Thursday"},{"x":11,"y2":0,"group":1,"y":"Thursday"},{"x":12,"y2":0,"group":1,"y":"Thursday"},{"x":13,"y2":16,"group":1,"y":"Thursday"},{"x":14,"y2":7,"group":1,"y":"Thursday"},{"x":15,"y2":13,"group":1,"y":"Thursday"},{"x":16,"y2":18,"group":1,"y":"Thursday"},{"x":17,"y2":0,"group":1,"y":"Thursday"},{"x":18,"y2":0,"group":1,"y":"Thursday"},{"x":19,"y2":2,"group":1,"y":"Thursday"},{"x":20,"y2":3,"group":1,"y":"Thursday"},{"x":21,"y2":13,"group":1,"y":"Thursday"},{"x":22,"y2":5,"group":1,"y":"Thursday"},{"x":23,"y2":5,"group":1,"y":"Thursday"},{"x":0,"y2":0,"group":1,"y":"Friday"},{"x":1,"y2":8,"group":1,"y":"Friday"},{"x":2,"y2":5,"group":1,"y":"Friday"},{"x":3,"y2":9,"group":1,"y":"Friday"},{"x":4,"y2":17,"group":1,"y":"Friday"},{"x":5,"y2":14,"group":1,"y":"Friday"},{"x":6,"y2":4,"group":1,"y":"Friday"},{"x":7,"y2":2,"group":1,"y":"Friday"},{"x":8,"y2":3,"group":1,"y":"Friday"},{"x":9,"y2":8,"group":1,"y":"Friday"},{"x":10,"y2":6,"group":1,"y":"Friday"},{"x":11,"y2":0,"group":1,"y":"Friday"},{"x":12,"y2":0,"group":1,"y":"Friday"},{"x":13,"y2":0,"group":1,"y":"Friday"},{"x":14,"y2":17,"group":1,"y":"Friday"},{"x":15,"y2":8,"group":1,"y":"Friday"},{"x":16,"y2":6,"group":1,"y":"Friday"},{"x":17,"y2":10,"group":1,"y":"Friday"},{"x":18,"y2":9,"group":1,"y":"Friday"},{"x":19,"y2":6,"group":1,"y":"Friday"},{"x":20,"y2":4,"group":1,"y":"Friday"},{"x":21,"y2":17,"group":1,"y":"Friday"},{"x":22,"y2":1,"group":1,"y":"Friday"},{"x":23,"y2":18,"group":1,"y":"Friday"},{"x":0,"y2":2,"group":1,"y":"Saturday"},{"x":1,"y2":17,"group":1,"y":"Saturday"},{"x":2,"y2":15,"group":1,"y":"Saturday"},{"x":3,"y2":1,"group":1,"y":"Saturday"},{"x":4,"y2":3,"group":1,"y":"Saturday"},{"x":5,"y2":16,"group":1,"y":"Saturday"},{"x":6,"y2":2,"group":1,"y":"Saturday"},{"x":7,"y2":12,"group":1,"y":"Saturday"},{"x":8,"y2":7,"group":1,"y":"Saturday"},{"x":9,"y2":14,"group":1,"y":"Saturday"},{"x":10,"y2":10,"group":1,"y":"Saturday"},{"x":11,"y2":17,"group":1,"y":"Saturday"},{"x":12,"y2":10,"group":1,"y":"Saturday"},{"x":13,"y2":2,"group":1,"y":"Saturday"},{"x":14,"y2":18,"group":1,"y":"Saturday"},{"x":15,"y2":20,"group":1,"y":"Saturday"},{"x":16,"y2":4,"group":1,"y":"Saturday"},{"x":17,"y2":4,"group":1,"y":"Saturday"},{"x":18,"y2":0,"group":1,"y":"Saturday"},{"x":19,"y2":0,"group":1,"y":"Saturday"},{"x":20,"y2":0,"group":1,"y":"Saturday"},{"x":21,"y2":0,"group":1,"y":"Saturday"},{"x":22,"y2":0,"group":1,"y":"Saturday"},{"x":23,"y2":0,"group":1,"y":"Saturday"}]}],"scales":[{"name":"x","points":true,"range":"width","domain":{"sort":true,"data":"table_dcsw3","field":"x"},"type":"ordinal"},{"name":"y","points":true,"range":"height","domain":{"data":"table_dcsw3","field":"y"},"type":"ordinal"},{"name":"group","range":["black"],"domain":{"data":"table_dcsw3","field":"group"},"type":"ordinal"}],"width":700}
+    );
+</script>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

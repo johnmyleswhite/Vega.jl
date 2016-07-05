@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -119,49 +127,49 @@ function parse(divid,spec) {
       <section>
         <h1 id="general-visualization-properties">General Visualization Properties</h1>
 
-<p>There are several commonly-used visualization properties in top-level <a href="http://johnmyleswhite.github.io/Vega.jl/primitives.html"><code class="highlighter-rouge">::VegaVisualization</code> type</a> such as <code class="highlighter-rouge">width</code> and <code class="highlighter-rouge">height</code>. Given that these are accessible from the high-level Julia composite type (i.e. the return type of every Vega plot), it doesn’t make sense to replicate these features as separate mutating functions.</p>
+<p>There are several commonly-used visualization properties in top-level <a href="http://johnmyleswhite.github.io/Vega.jl/primitives.html"><code>::VegaVisualization</code> type</a> such as <code>width</code> and <code>height</code>. Given that these are accessible from the high-level Julia composite type (i.e. the return type of every Vega plot), it doesn’t make sense to replicate these features as separate mutating functions.</p>
 
-<p>For the most part, these properties have sensible defaults for working from Jupyter Notebook or from the REPL (which opens a new browser/tab); changing them is as simple as accessing the fields directly in the <code class="highlighter-rouge">::VegaVisualization</code> composite type.</p>
+<p>For the most part, these properties have sensible defaults for working from Jupyter Notebook or from the REPL (which opens a new browser/tab); changing them is as simple as accessing the fields directly in the <code>::VegaVisualization</code> composite type.</p>
 
 <h3 id="height">Height</h3>
 
 <p>Keyword:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">height::Int</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">height</span><span class="p">::</span><span class="kt">Int</span></code></pre></div>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v = barplot(x = x, y = y)
-v.height = 700</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">700</span></code></pre></div>
 
 <h3 id="width">Width</h3>
 
 <p>Keyword:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">width::Int</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">width</span><span class="p">::</span><span class="kt">Int</span></code></pre></div>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v2 = barplot(x = x, y = y)
-v2.width = 1000</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v2</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v2</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1000</span></code></pre></div>
 
 <h3 id="background">Background</h3>
 
-<p>The default for background is <code class="highlighter-rouge">transparent</code>, which can become an issue when you download PNG files. Set background to white or the desired color of your background is this is an issue.</p>
+<p>The default for background is <code>transparent</code>, which can become an issue when you download PNG files. Set background to white or the desired color of your background is this is an issue.</p>
 
 <p>Keyword:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">background::AbstractString</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">background</span><span class="p">::</span><span class="n">AbstractString</span></code></pre></div>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v2 = barplot(x = x, y = y)
-v2.background = "green"</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v2</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v2</span><span class="o">.</span><span class="n">background</span> <span class="o">=</span> <span class="s">&quot;green&quot;</span></code></pre></div>
 
 <h3 id="padding">Padding</h3>
 
-<p>Padding is an awkward union of CSS padding through the <code class="highlighter-rouge">::VegaPadding</code> type, a single number for even padding all around the plot. The default is “auto”, which should be sufficient for most cases.</p>
+<p>Padding is an awkward union of CSS padding through the <code>::VegaPadding</code> type, a single number for even padding all around the plot. The default is “auto”, which should be sufficient for most cases.</p>
 
 <p>Keyword:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">padding::Union(VegaPadding, Number, String)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">padding</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">VegaPadding</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span></code></pre></div>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v3 = barplot(x = x, y = y)
-v3.padding = 10</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v3</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v3</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="mi">10</span></code></pre></div>
 
 <h3 id="viewport">Viewport</h3>
 
@@ -169,7 +177,7 @@ v3.padding = 10</code></pre></figure>
 
 <p>Keyword:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">viewport::Vector{Int}</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">viewport</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span></code></pre></div>
 
 
       </section>

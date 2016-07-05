@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -123,15 +131,13 @@ function parse(divid,spec) {
 
 <p>Here is a simple example using the Distributions package:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>using Interact, Vega, Distributions
-@manipulate for μ in -10:10, σ = 0.1:0.5:5.1
-    x = -20:0.01:20
-    lineplot(y = pdf(Normal(μ, σ), x), x=x)
-end
-</code></pre>
-</div>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Interact</span><span class="p">,</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">Distributions</span>
+    <span class="p">@</span><span class="n">manipulate</span> <span class="k">for</span> <span class="err">μ</span> <span class="k">in</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="err">σ</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mf">5.1</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mi">20</span>
+        <span class="n">lineplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">pdf</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="err">μ</span><span class="p">,</span> <span class="err">σ</span><span class="p">),</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">end</span></code></pre></div>
 
-<p><img src="/images/interact_jupyter.gif" alt="alt text" /></p>
+<p><img src="http://johnmyleswhite.github.io/Vega.jl/images/interact_jupyter.gif" /></p>
 
       </section>
       <footer>

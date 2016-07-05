@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,35 +129,35 @@ function parse(divid,spec) {
 
 <p>Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-title::AbstractString = ""
-x::Int = 0
-y::Int = -40
-fill::AbstractString = "black"
-fontSize::Int = 16
-align::AbstractString = "center"
-baseline::AbstractString = "top"
-fontWeight::AbstractString = "bold"
-font::AbstractString = ""</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">title</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">x</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">40</span>
+<span class="n">fill</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span>
+<span class="n">fontSize</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">align</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;center&quot;</span>
+<span class="n">baseline</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;top&quot;</span>
+<span class="n">fontWeight</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span>
+<span class="n">font</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, adding/modifying a chart title.</p>
+<p>This function mutates <code>:VegaVisualization</code>, adding/modifying a chart title.</p>
 
 <h3 id="no-title">No title</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, DataFrames, JSON
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span>
 
-df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=&gt;v for (k,v) in p]...))
-end
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/population.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
 
-pop1900 = df[df[:year] .== 1900, :];
+<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
 
-x = pop1900[:people]
-y = pop1900[:age]
-group = pop1900[:sex]
+<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
 
-a = popchart(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">a</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="pop"></div>
 <script type="text/javascript">
@@ -161,7 +169,7 @@ parse("pop",
 
 <h3 id="with-title">With title</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">title!(a, title = "Gender &amp; Age Comparison - 1900")</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Gender &amp; Age Comparison - 1900&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="poptitle"></div>
 <script type="text/javascript">
@@ -176,27 +184,27 @@ parse("poptitle",
 
 <p>In Vega.jl, to add a subtitle (or multiple!), just change the y offset value. The larger the value (i.e. less negative until you cross over 0), the further DOWN the chart the title will be located. Note that there is nothing that keeps the titles from overlapping the chart; if you find the text to be in a sub-optimal location, just keep modifying the y parameter until you get the desired outcome.</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [95, 86.5, 80.8, 80.4, 80.3, 78.4, 74.2, 73.5, 71, 69.2, 68.6, 65.5, 65.4, 63.4, 64]
-y = [95, 102.9, 91.5, 102.5, 86.1, 70.1, 68.5, 83.1, 93.2, 57.6, 20, 126.4, 50.8, 51.8, 82.9]
-cont = ["EU", "EU", "EU", "EU", "EU", "EU", "EU", "NO", "EU", "EU", "RU", "US", "EU", "EU", "NZ"]
-z = [13.8, 14.7, 15.8, 12, 11.8, 16.6, 14.5, 10, 24.7, 10.4, 16, 35.3, 28.5, 15.4, 31.3]
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">86.5</span><span class="p">,</span> <span class="mf">80.8</span><span class="p">,</span> <span class="mf">80.4</span><span class="p">,</span> <span class="mf">80.3</span><span class="p">,</span> <span class="mf">78.4</span><span class="p">,</span> <span class="mf">74.2</span><span class="p">,</span> <span class="mf">73.5</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mf">69.2</span><span class="p">,</span> <span class="mf">68.6</span><span class="p">,</span> <span class="mf">65.5</span><span class="p">,</span> <span class="mf">65.4</span><span class="p">,</span> <span class="mf">63.4</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">102.9</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="mf">102.5</span><span class="p">,</span> <span class="mf">86.1</span><span class="p">,</span> <span class="mf">70.1</span><span class="p">,</span> <span class="mf">68.5</span><span class="p">,</span> <span class="mf">83.1</span><span class="p">,</span> <span class="mf">93.2</span><span class="p">,</span> <span class="mf">57.6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">126.4</span><span class="p">,</span> <span class="mf">50.8</span><span class="p">,</span> <span class="mf">51.8</span><span class="p">,</span> <span class="mf">82.9</span><span class="p">]</span>
+<span class="n">cont</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NO&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;RU&quot;</span><span class="p">,</span> <span class="s">&quot;US&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;EU&quot;</span><span class="p">,</span> <span class="s">&quot;NZ&quot;</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mf">13.8</span><span class="p">,</span> <span class="mf">14.7</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">11.8</span><span class="p">,</span> <span class="mf">16.6</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">24.7</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">35.3</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">15.4</span><span class="p">,</span> <span class="mf">31.3</span><span class="p">]</span>
 
 
-v = bubblechart(x = x, y = y, group = cont, pointSize = z)
+<span class="n">v</span> <span class="o">=</span> <span class="n">bubblechart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">cont</span><span class="p">,</span> <span class="n">pointSize</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
 
-#Chart mods
-v.width = 600
-v.height = 300
-xlim!(v, min = 60, max = 100)
-ylim!(v, min = 10, max = 160)
-#Main title
-title!(v, title = "Sugar and Fat Intake Per Country")
-#Subtitle - just change y offset, and fontSize/Weight if desired
-title!(v, title = "Source: Euromonitor and OECD", y = -20, fontSize = 12, fontWeight = "")
-ylab!(v, title = "Daily Sugar Intake", grid = true)
-xlab!(v, title = "Daily Fat Intake", grid = true)
-hline!(v, value = 50, strokeDash = 5, stroke = "gray")
-vline!(v, value = 65, strokeDash = 5, stroke = "gray")</code></pre></figure>
+<span class="c">#Chart mods</span>
+<span class="n">v</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">v</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">xlim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">160</span><span class="p">)</span>
+<span class="c">#Main title</span>
+<span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Sugar and Fat Intake Per Country&quot;</span><span class="p">)</span>
+<span class="c">#Subtitle - just change y offset, and fontSize/Weight if desired</span>
+<span class="n">title</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Source: Euromonitor and OECD&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontSize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">fontWeight</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Sugar Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Daily Fat Intake&quot;</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">vline</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">65</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span> <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="subtitle_"></div>
 <script type="text/javascript">

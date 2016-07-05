@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,28 +129,28 @@ function parse(divid,spec) {
 
 <p>Function Keywords:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span></code></pre></div>
 
-<p>The purpose of this function is effectively to rotate a bar chart 90 degrees to the right, creating a horizontal bar chart from a vertical bar chart. This function is exported for completeness, but for clarity, it’s probably easier to just use the <code class="highlighter-rouge">horizontal</code> keyword argument for <a href="http://johnmyleswhite.github.io/Vega.jl/barplot.html"><code class="highlighter-rouge">barchart</code></a> or <a href="http://johnmyleswhite.github.io/Vega.jl/histogram.html"><code class="highlighter-rouge">histogram</code></a>.</p>
+<p>The purpose of this function is effectively to rotate a bar chart 90 degrees to the right, creating a horizontal bar chart from a vertical bar chart. This function is exported for completeness, but for clarity, it’s probably easier to just use the <code>horizontal</code> keyword argument for <a href="http://johnmyleswhite.github.io/Vega.jl/barplot.html"><code>barchart</code></a> or <a href="http://johnmyleswhite.github.io/Vega.jl/histogram.html"><code>histogram</code></a>.</p>
 
 <h3 id="histogram">Histogram</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, Distributions
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">Distributions</span>
 
-x = rand(Gamma(3.0, 1.0), 1_000_000)
+<span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Gamma</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="mi">1_000_000</span><span class="p">)</span>
 
-v = histogram(x = x)</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/histogram.png" alt="histogram" /></p>
 
 <h3 id="histogram---rotated">Histogram - Rotated</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega, Distributions
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">Distributions</span>
 
-x = rand(Gamma(3.0, 1.0), 1_000_000)
+<span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Gamma</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="mi">1_000_000</span><span class="p">)</span>
 
-v = histogram(x = x)
-coord_flip!(v)</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">histogram</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">coord_flip</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://johnmyleswhite.github.io/Vega.jl/images/histh.png" alt="histh" /></p>
 

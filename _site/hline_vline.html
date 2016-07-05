@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,23 +129,23 @@ function parse(divid,spec) {
 
 <p>Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-value::Real = 0
-strokeWidth::Real = 1.5
-stroke::AbstractString = "#000"
-strokeDash::Real = 0</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">value</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">strokeWidth</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">stroke</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;#000&quot;</span>
+<span class="n">strokeDash</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, adding a horizontal/vertical line at a specified location.</p>
+<p>This function mutates <code>:VegaVisualization</code>, adding a horizontal/vertical line at a specified location.</p>
 
 <h3 id="default-chart">Default Chart</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-y = [28, 43, 81, 19, 52, 24, 87, 17, 68, 49, 55, 91, 53, 87, 48, 49, 66, 27, 16, 15]
-g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-a = areaplot(x = x, y = y, group = g, stacked = true)</code></pre></figure>
+<span class="n">a</span> <span class="o">=</span> <span class="n">areaplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
 
 <div id="defaultc"></div>
 <script type="text/javascript">
@@ -150,8 +158,8 @@ parse("defaultc",
 
 <h3 id="with-horizontal-lines">With horizontal lines</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">hline!(a, value = 60.25, strokeDash = 3)
-hline!(a, value = 80, strokeDash = 5)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">60.25</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">hline</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">strokeDash</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span></code></pre></div>
 
 <div id="hline"></div>
 <script type="text/javascript">

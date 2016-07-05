@@ -59,6 +59,8 @@ function parse(divid,spec) {
           <br/>
           <small><a href='heatmap.html'>Heatmap</a></small>
           <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
           <small><a href='histogram.html'>Histogram</a></small>
           <br/>
           <small><a href='jointplot.html'>Joint Plot</a></small>
@@ -68,6 +70,10 @@ function parse(divid,spec) {
           <small><a href='piechart.html'>Pie/Donut Chart</a></small>
           <br/>
           <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
           <br/>
           <small><a href='rugplot.html'>Rug Plot</a></small>
           <br/>
@@ -83,7 +89,9 @@ function parse(divid,spec) {
           <br/>
           <br/>
           <h4>Interactive Visualization</h4>
-          <small><a href='interact.html'>Interact and Vega in Jupyter Notebooks</a></small>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
           <br/>
           <br/>
 
@@ -121,27 +129,27 @@ function parse(divid,spec) {
 
 <p>Arguments:</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">v::VegaVisualization
-min::Real = 0
-max::Real = 1000
-reverse::Bool = false
-round::Bool = false
-_type::AbstractString = ""
-exponent::Real = 0.3</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">min</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">reverse</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">round</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">_type</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">exponent</span><span class="p">::</span><span class="n">Real</span> <span class="o">=</span> <span class="mf">0.3</span></code></pre></div>
 
-<p>This function mutates <code class="highlighter-rouge">:VegaVisualization</code>, modifying the properties of the scales underlying the axes.</p>
+<p>This function mutates <code>:VegaVisualization</code>, modifying the properties of the scales underlying the axes.</p>
 
-<p>Note that for the <code class="highlighter-rouge">exponent</code> keyword, it is only in effect if <code class="highlighter-rouge">_type</code> is set to <code class="highlighter-rouge">"pow"</code>. The default value for <code class="highlighter-rouge">"pow"</code> of <code class="highlighter-rouge">0.3</code> is arbitrary, chosen so that setting <code class="highlighter-rouge">_type</code> to <code class="highlighter-rouge">"pow"</code> actually does something (the d3/vega default = <code class="highlighter-rouge">1</code>, which is an identity transformation).</p>
+<p>Note that for the <code>exponent</code> keyword, it is only in effect if <code>_type</code> is set to <code>"pow"</code>. The default value for <code>"pow"</code> of <code>0.3</code> is arbitrary, chosen so that setting <code>_type</code> to <code>"pow"</code> actually does something (the d3/vega default = <code>1</code>, which is an identity transformation).</p>
 
 <h3 id="default-axis-limits">Default Axis limits</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">using Vega
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
 
-x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-v = lineplot(x = x, y = y, group = group)</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
 
 <div id="defaultaxis"></div>
 <script type="text/javascript">
@@ -153,8 +161,8 @@ parse("defaultaxis",
 
 <h3 id="modified-axis-limits">Modified Axis limits</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">xlim!(v, min=0, max=200)
-ylim!(v, min=0, max=200)</code></pre></figure>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">xlim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span></code></pre></div>
 
 <div id="modaxis"></div>
 <script type="text/javascript">
@@ -167,12 +175,12 @@ parse("modaxis",
 
 <h3 id="log-scale-y-axis">Log Scale (Y-axis)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-v = lineplot(x = x, y = y, group = group)
-ylim!(v, _type = "log")</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">_type</span> <span class="o">=</span> <span class="s">&quot;log&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="logscale"></div>
 <script type="text/javascript">
@@ -185,12 +193,12 @@ parse("logscale",
 
 <h3 id="sqrt-scale-y-axis">sqrt Scale (Y-axis)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-v = lineplot(x = x, y = y, group = group)
-ylim!(v, _type = "sqrt")</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">_type</span> <span class="o">=</span> <span class="s">&quot;sqrt&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="sqrtscale"></div>
 <script type="text/javascript">
@@ -203,12 +211,12 @@ parse("sqrtscale",
 
 <h3 id="power-scale-y-axis-default-exponent--03">Power Scale (Y-axis, default exponent = 0.3)</h3>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia">x = [1:100; 1:100]
-y = [[1:100] + randn(100); 3.0 + 1.5 * [1:100] + randn(100)]
-group = [[1 for i in 1:100]; [2 for i in 1:100]]
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
 
-v = lineplot(x = x, y = y, group = group)
-ylim!(v, _type = "pow")</code></pre></figure>
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">ylim</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">_type</span> <span class="o">=</span> <span class="s">&quot;pow&quot;</span><span class="p">)</span></code></pre></div>
 
 <div id="powscale"></div>
 <script type="text/javascript">
