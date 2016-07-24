@@ -7,16 +7,18 @@ function histogram(; x::AbstractVector = Int[],
     if bandwidth == 0.0
         a, b = hist(x, nbins)
         bandwidth=a.step/a.divisor
-    else
+    elseif bandwidth < 0.0
+		error("bandwidth should be a positive number but got $(bandwidth)")
+	else
         xmin, xmax = extrema(x)
         a, b = hist(x, xmin:bandwidth:xmax)
     end
-    total = relativefreq ? sum(b) : 1
+    total = relativefreq ? sum(b)*bandwidth : 1
 
     #v = barplot(x = a[2:end], y = b/total)
     v = VegaVisualization()
     add_data!(v, x = a[1:end-1], x2=a[2:end],
-        y = b/total/bandwidth,y2=zeros(length(b)))
+        y = b/total,y2=zeros(length(b)))
     default_scales!(v; typeXaxis = "linear")
     default_axes!(v)
 
