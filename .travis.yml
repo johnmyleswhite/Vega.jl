@@ -5,7 +5,8 @@ os:
 notifications:
   email: false
 julia:
-  - release
+  - 0.4
+  - 0.5
   - nightly
 before_install:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
