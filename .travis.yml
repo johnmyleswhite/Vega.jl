@@ -5,9 +5,10 @@ os:
 notifications:
   email: false
 julia:
-  - release
+  - 0.4
+  - 0.5
   - nightly
 before_install:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 script:
-  - julia -e 'Pkg.init(); Pkg.add("RDatasets"); Pkg.clone(pwd()); Pkg.test("Vega")'
+  - julia -e 'Pkg.init(); Pkg.clone(pwd()); Pkg.test("Vega")'

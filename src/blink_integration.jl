@@ -2,7 +2,7 @@ using Blink
 
 function blink_show(v::VegaVisualization)
     w = Window()
-    path(url...) = Pkg.dir("Vega", "assets", "bower_components", url...)
+    path(url...) = joinpath(dirname(@__FILE__), "..", "assets", "bower_components", url...)
     d3 = path("d3","d3.min.js")
     topojson = path("topojson","topojson.js")
     cloudlayout = path("d3-cloud", "build", "d3.layout.cloud.js")

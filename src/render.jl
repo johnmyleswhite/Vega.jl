@@ -8,7 +8,7 @@ end
 #Jupyter Notebook display
 import Base.writemime
 
-asset(url...) = readall(Pkg.dir("Vega", "assets", "bower_components", url...))
+asset(url...) = readall(joinpath(dirname(@__FILE__), "..", "assets", "bower_components", url...))
 
 function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
     divid = "vg" * randstring(3)

@@ -1,7 +1,7 @@
 #using PyCall
 #@pyimport jsonschema
 using JSON, Vega, Base.Test, KernelDensity, Distributions, RDatasets
-vegaschema = JSON.parse(readall(Pkg.dir("Vega", "assets/bower_components/vega/vega-schema.json")))
+vegaschema = JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "assets/bower_components/vega/vega-schema.json")))
 
 #### Tests ####
 #Test that Julia returned VegaVisulization (every public function does)
@@ -123,7 +123,7 @@ a = bubblechart(x = x, y = y, group = cont, pointSize = z)
 
 #13. Choropleth Counties
 println("Test 13")
-df = readtable(Pkg.dir("Vega", "vega-datasets/unemployment.tsv"))
+df = readtable(joinpath(dirname(@__FILE__), "..", "vega-datasets/unemployment.tsv"))
 a = choropleth(x = df[:id], y = df[:rate])
 
 @test typeof(a) == VegaVisualization
@@ -243,7 +243,7 @@ a = piechart(x = fruit, y = bushels, holesize = 175);
 #25. Population Chart
 println("Test 25")
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
+for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 pop1900 = df[df[:year] .== 1900, :];
@@ -295,7 +295,7 @@ a = stemleaf(y = data);
 
 #29. Stream Plot
 println("Test 29")
-df = readtable(Pkg.dir("Vega", "vega-datasets/streamdata.csv"))
+df = readtable(joinpath(dirname(@__FILE__), "..", "vega-datasets/streamdata.csv"))
 a = streamplot(x = df[:date], y = df[:value], group = df[:key]);
 
 @test typeof(a) == VegaVisualization
@@ -363,7 +363,7 @@ colorscheme!(a, palette = "Violet");
 #36. colorscheme!
 println("Test 36")
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
+for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 pop1900 = df[df[:year] .== 1900, :];
@@ -452,7 +452,7 @@ text!(a, title = "Safe Fat Intake 65g/day", x = 150, y = 10)
 #43 title!
 println("Test 43")
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
+for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 pop1900 = df[df[:year] .== 1900, :];
@@ -503,7 +503,7 @@ a.background = "green"
 #47 dotplot
 println("Test 47")
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
+for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 
@@ -518,7 +518,7 @@ xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")
 #48 dotplot
 println("Test 48")
 df = DataFrame()
-for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
+for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
     df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
 end
 
