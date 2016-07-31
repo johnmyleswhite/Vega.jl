@@ -1,0 +1,14 @@
+{
+  "name": "d3-dispatch",
+  "homepage": "https://github.com/d3/d3-dispatch",
+  "version": "0.2.6",
+  "_release": "0.2.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.6",
+    "commit": "bd1ead61f8f15eb0de5dde145bb07d06167d98b4"
+  },
+  "_source": "https://github.com/d3/d3-dispatch.git",
+  "_target": "0.2.x",
+  "_originalSource": "d3-dispatch"
+}

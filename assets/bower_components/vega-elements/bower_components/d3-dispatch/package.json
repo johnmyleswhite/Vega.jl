@@ -1,0 +1,35 @@
+{
+  "name": "d3-dispatch",
+  "version": "0.2.6",
+  "description": "Register named callbacks and call them with arguments.",
+  "keywords": [
+    "d3",
+    "event",
+    "listener",
+    "dispatch"
+  ],
+  "homepage": "https://github.com/d3/d3-dispatch",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike"
+  },
+  "main": "build/d3-dispatch.js",
+  "jsnext:main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d3/d3-dispatch.git"
+  },
+  "scripts": {
+    "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n d3_dispatch -o build/d3-dispatch.js -- build/bundle.js",
+    "test": "faucet `find test -name '*-test.js'` && eslint index.js src",
+    "prepublish": "npm run test && uglifyjs build/d3-dispatch.js -c -m -o build/d3-dispatch.min.js && rm -f build/d3-dispatch.zip && zip -j build/d3-dispatch.zip -- LICENSE README.md build/d3-dispatch.js build/d3-dispatch.min.js",
+    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git tag -am \"Release $VERSION.\" v${VERSION} && git push --tags && cp build/d3-dispatch.js ../d3.github.com/d3-dispatch.v0.2.js && cp build/d3-dispatch.min.js ../d3.github.com/d3-dispatch.v0.2.min.js && cd ../d3.github.com && git add d3-dispatch.v0.2.js d3-dispatch.v0.2.min.js && git commit -m \"d3-dispatch ${VERSION}\" && git push"
+  },
+  "devDependencies": {
+    "faucet": "0.0",
+    "rollup": "0.25",
+    "tape": "4",
+    "uglify-js": "2"
+  }
+}
