@@ -1,12 +1,12 @@
 # Open a URL in a browser
 function openurl(url::AbstractString)
-    @osx_only     run(`open $url`)
-    @windows_only run(`cmd /c start $url`)
-    @linux_only   run(`xdg-open $url`)
+    @static if is_apple() run(`open $url`) end
+    @static if is_windows() run(`cmd /c start $url`) end
+    @static if is_linux()   run(`xdg-open $url`) end
 end
 
 #Jupyter Notebook display
-import Base.writemime
+import Base.show
 
 asset(url...) = readall(joinpath(dirname(@__FILE__), "..", "assets", "bower_components", url...))
 
@@ -36,7 +36,7 @@ function patchwork_repr(v::VegaVisualization)
     ])
 end
 
-function writemime(io::IO, m::MIME"text/html", v::VegaVisualization)
+function show(io::IO, m::MIME"text/html", v::VegaVisualization)
     writemime(io, m, patchwork_repr(v))
 end
 

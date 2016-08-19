@@ -2,7 +2,7 @@
 #xlab!/ylab!
 for fun in [:x, :y]
 
-    fname = symbol("$(fun)lab!")
+    fname = Symbol("$(fun)lab!")
 
         @eval begin function ($fname)(v::VegaVisualization; title::AbstractString = "", grid::Bool = false, ticks::Number = 0,
                                format::AbstractString = "", formatType::AbstractString="", layer::AbstractString = "front",

@@ -24,33 +24,12 @@ module Vega
     export colorscheme!, coord_flip!, stroke!, hline!, vline!, hover!, jitter!, layer
 
     #Create base color library
-    #Eventually, merge in NoveltyColors
     colorpalettes = merge(ColorBrewer.colorSchemes, NoveltyColors.ColorDict)
 
     #Import helper code
-    include("jstypes.jl")
-
-    # Lower-level API - These are in specific order!
-    include("primitives/stream.jl")
-    include("primitives/dataref.jl")
-    include("primitives/valueref.jl")
-    include("primitives/padding.jl")
-    include("primitives/markpropertyset.jl")
-    include("primitives/axis.jl")
-    include("primitives/format.jl")
-    include("primitives/transform.jl")
-    include("primitives/data.jl")
-    include("primitives/markproperties.jl")
-    include("primitives/markfrom.jl")
-    include("primitives/signal.jl")
-    include("primitives/scale.jl")
-    include("primitives/mark.jl")
-    include("primitives/legend.jl")
-    include("primitives/scene.jl")
-    include("primitives/container.jl")
-    include("primitives/predicate.jl")
-    include("primitives/visualization.jl")
-
+    include("primitives/definetypes.jl")
+    include("primitives/constructors.jl")
+    include("primitives/tojs.jl")
 
     include("render.jl")
 
@@ -99,7 +78,7 @@ module Vega
     else
         BLINK_INSTALLED = false
     end
-    
+
     print(x::VegaVisualization) = print(JSON.json(tojs(x)))
 
 end

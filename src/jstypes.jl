@@ -1,27 +1,27 @@
 # All types in Vega.jl are subtypes of AbstractVegaType. Overloading `call` as
 # a parametric type over the field of `AbstractVegaType`s allows us to get much
 # better performance for the first visualization after importing Vega
-abstract AbstractVegaType
+# abstract AbstractVegaType
+#
+# function Base.call{T<:AbstractVegaType}(::Type{T}; kwargs...)
+#     out = T()
+#     for (sym, val) in kwargs
+#         setfield!(out, sym, val)
+#     end
+#     out
+# end
 
-function Base.call{T<:AbstractVegaType}(::Type{T}; kwargs...)
-    out = T()
-    for (sym, val) in kwargs
-        setfield!(out, sym, val)
-    end
-    out
-end
-
-tojs(s::Symbol) = string(s)
-tojs(v::Vector) = [tojs(v_i) for v_i in v]
-
-function tojs(v::Dict)
-    res = Dict()
-    for (k, v) in v
-        res[k] = tojs(v)
-    end
-    return res
-end
-tojs(x::Any) = x
+# tojs(s::Symbol) = string(s)
+# tojs(v::Vector) = [tojs(v_i) for v_i in v]
+#
+# function tojs(v::Dict)
+#     res = Dict()
+#     for (k, v) in v
+#         res[k] = tojs(v)
+#     end
+#     return res
+# end
+# tojs(x::Any) = x
 
 #Takes in a type name and its specification
 #Returns Expr for the type code as if you had written it yourself
@@ -123,7 +123,11 @@ end
 #Create primitives from one function instead of repeating
 #Use of eval() takes all Expr created above, evaluates their results, so that they become Julia citizens
 function primitivefactory(create::Symbol, spec::AbstractArray)
-    eval(maketype(create, spec))
-    eval(makedefaultfunc(create, spec))
-    eval(maketojs(create, spec))
+    #println(maketype(create, spec))
+    #eval(maketype(create, spec))
+    #println(makedefaultfunc(create, spec))
+    #eval(makedefaultfunc(create, spec))
+    #println(maketojs(create, spec))
+    #eval(maketojs(create, spec))
+    #println("")
 end
