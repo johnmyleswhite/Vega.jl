@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="xlab--ylab">xlab! / ylab!</h1>
+
+<p>Arguments:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">title</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">grid</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">ticks</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">format</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">layer</span><span class="p">::</span><span class="n">AbstractString</span> <span class="o">=</span> <span class="s">&quot;front&quot;</span><span class="p">,</span>
+<span class="n">properties</span><span class="p">::</span><span class="n">Dict</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span> <span class="kt">Any</span><span class="p">}</span>
+<span class="n">tickSize</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeMajor</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeMinor</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tickSizeEnd</span><span class="p">::</span><span class="n">Number</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
+
+<p>This function mutates <code>:VegaVisualization</code>, adding/modifying the X axis or Y axis.</p>
+
+<h3 id="default-axis-labels">Default Axis labels</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="mf">3.0</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">]]</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span></code></pre></div>
+
+<div id="line"></div>
+<script type="text/javascript">
+parse("line",
+          {"name":"lineplot","height":450,"padding":"auto","marks":[{"marks":[{"properties":{"enter":{"stroke":{"field":"group","scale":"group"},"x":{"field":"x","scale":"x"},"strokeWidth":{"value":2},"y":{"field":"y","scale":"y"}}},"type":"line"}],"from":{"data":"table","transform":[{"groupby":["group"],"type":"facet"}]},"type":"group"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":2.1531194508073894},{"x":2,"y2":0,"group":1,"y":1.2463873263561334},{"x":3,"y2":0,"group":1,"y":1.7009662965989876},{"x":4,"y2":0,"group":1,"y":2.4778438365440874},{"x":5,"y2":0,"group":1,"y":3.7861596913067275},{"x":6,"y2":0,"group":1,"y":5.507370930328429},{"x":7,"y2":0,"group":1,"y":7.024094229969154},{"x":8,"y2":0,"group":1,"y":7.011845403273659},{"x":9,"y2":0,"group":1,"y":7.548213779750423},{"x":10,"y2":0,"group":1,"y":10.619218489624325},{"x":11,"y2":0,"group":1,"y":13.296985018851418},{"x":12,"y2":0,"group":1,"y":11.63360373247325},{"x":13,"y2":0,"group":1,"y":12.92329862985136},{"x":14,"y2":0,"group":1,"y":15.364145645009387},{"x":15,"y2":0,"group":1,"y":14.673097491717597},{"x":16,"y2":0,"group":1,"y":16.841595197377433},{"x":17,"y2":0,"group":1,"y":19.369928072721383},{"x":18,"y2":0,"group":1,"y":17.85471555658107},{"x":19,"y2":0,"group":1,"y":16.824112172704037},{"x":20,"y2":0,"group":1,"y":19.247916301812676},{"x":21,"y2":0,"group":1,"y":21.110754277241615},{"x":22,"y2":0,"group":1,"y":21.828237022098243},{"x":23,"y2":0,"group":1,"y":20.9007697544539},{"x":24,"y2":0,"group":1,"y":23.254269554941214},{"x":25,"y2":0,"group":1,"y":24.759720445392997},{"x":26,"y2":0,"group":1,"y":26.10385139282106},{"x":27,"y2":0,"group":1,"y":26.075143264256216},{"x":28,"y2":0,"group":1,"y":27.600686494881973},{"x":29,"y2":0,"group":1,"y":27.866346092200203},{"x":30,"y2":0,"group":1,"y":30.29583108845087},{"x":31,"y2":0,"group":1,"y":30.477329922093624},{"x":32,"y2":0,"group":1,"y":32.679550450618564},{"x":33,"y2":0,"group":1,"y":32.72151211905141},{"x":34,"y2":0,"group":1,"y":34.29809062851551},{"x":35,"y2":0,"group":1,"y":35.759279464026925},{"x":36,"y2":0,"group":1,"y":36.55111514621453},{"x":37,"y2":0,"group":1,"y":37.14910508308702},{"x":38,"y2":0,"group":1,"y":36.907539324329},{"x":39,"y2":0,"group":1,"y":39.697423475803824},{"x":40,"y2":0,"group":1,"y":42.255151353498135},{"x":41,"y2":0,"group":1,"y":41.743441173283045},{"x":42,"y2":0,"group":1,"y":41.95868002778019},{"x":43,"y2":0,"group":1,"y":41.715526823491125},{"x":44,"y2":0,"group":1,"y":44.9084463089189},{"x":45,"y2":0,"group":1,"y":46.18561969880118},{"x":46,"y2":0,"group":1,"y":47.193106316888375},{"x":47,"y2":0,"group":1,"y":45.967517460232095},{"x":48,"y2":0,"group":1,"y":49.78660189659115},{"x":49,"y2":0,"group":1,"y":48.4155376404244},{"x":50,"y2":0,"group":1,"y":50.550338154905745},{"x":51,"y2":0,"group":1,"y":51.308423163390344},{"x":52,"y2":0,"group":1,"y":52.17031430444255},{"x":53,"y2":0,"group":1,"y":52.06706045368677},{"x":54,"y2":0,"group":1,"y":54.81851722352859},{"x":55,"y2":0,"group":1,"y":55.73978068133678},{"x":56,"y2":0,"group":1,"y":55.70228435090552},{"x":57,"y2":0,"group":1,"y":58.00100606187576},{"x":58,"y2":0,"group":1,"y":59.05449731578143},{"x":59,"y2":0,"group":1,"y":60.79459240036539},{"x":60,"y2":0,"group":1,"y":60.927556616603184},{"x":61,"y2":0,"group":1,"y":61.12028325195802},{"x":62,"y2":0,"group":1,"y":62.85497017402414},{"x":63,"y2":0,"group":1,"y":64.03327503651742},{"x":64,"y2":0,"group":1,"y":63.7859755741915},{"x":65,"y2":0,"group":1,"y":63.65232451660322},{"x":66,"y2":0,"group":1,"y":65.30279019970563},{"x":67,"y2":0,"group":1,"y":66.3720701204291},{"x":68,"y2":0,"group":1,"y":68.39379152572083},{"x":69,"y2":0,"group":1,"y":68.13512602169247},{"x":70,"y2":0,"group":1,"y":69.44745781688002},{"x":71,"y2":0,"group":1,"y":70.18940951993869},{"x":72,"y2":0,"group":1,"y":74.75348813864505},{"x":73,"y2":0,"group":1,"y":71.52857675953703},{"x":74,"y2":0,"group":1,"y":73.50761185833142},{"x":75,"y2":0,"group":1,"y":75.69813166462082},{"x":76,"y2":0,"group":1,"y":74.79166844695025},{"x":77,"y2":0,"group":1,"y":77.43958942148005},{"x":78,"y2":0,"group":1,"y":75.80968876499199},{"x":79,"y2":0,"group":1,"y":78.77216837053312},{"x":80,"y2":0,"group":1,"y":80.59544786992547},{"x":81,"y2":0,"group":1,"y":80.40261053672008},{"x":82,"y2":0,"group":1,"y":82.76974941133318},{"x":83,"y2":0,"group":1,"y":82.414388362214},{"x":84,"y2":0,"group":1,"y":83.45782986070375},{"x":85,"y2":0,"group":1,"y":84.68785833311229},{"x":86,"y2":0,"group":1,"y":84.47428145162183},{"x":87,"y2":0,"group":1,"y":88.3131623811189},{"x":88,"y2":0,"group":1,"y":87.26761656638281},{"x":89,"y2":0,"group":1,"y":89.60624299403958},{"x":90,"y2":0,"group":1,"y":88.97459349865419},{"x":91,"y2":0,"group":1,"y":91.92352154297475},{"x":92,"y2":0,"group":1,"y":92.34481071348607},{"x":93,"y2":0,"group":1,"y":93.44440765660312},{"x":94,"y2":0,"group":1,"y":94.2727655536556},{"x":95,"y2":0,"group":1,"y":94.1274430025574},{"x":96,"y2":0,"group":1,"y":97.17789780922685},{"x":97,"y2":0,"group":1,"y":97.11403652475425},{"x":98,"y2":0,"group":1,"y":97.87186040769552},{"x":99,"y2":0,"group":1,"y":99.13249366143388},{"x":100,"y2":0,"group":1,"y":101.43309441783364},{"x":1,"y2":0,"group":2,"y":4.3825051666316925},{"x":2,"y2":0,"group":2,"y":6.363378460239108},{"x":3,"y2":0,"group":2,"y":5.654671275732239},{"x":4,"y2":0,"group":2,"y":9.383101404782293},{"x":5,"y2":0,"group":2,"y":8.623877727440963},{"x":6,"y2":0,"group":2,"y":12.279650993769414},{"x":7,"y2":0,"group":2,"y":14.615133258516673},{"x":8,"y2":0,"group":2,"y":15.057426138109246},{"x":9,"y2":0,"group":2,"y":16.705869108744544},{"x":10,"y2":0,"group":2,"y":17.68727411911899},{"x":11,"y2":0,"group":2,"y":20.07347106325154},{"x":12,"y2":0,"group":2,"y":21.227789420359734},{"x":13,"y2":0,"group":2,"y":23.179746208391137},{"x":14,"y2":0,"group":2,"y":24.907561594264642},{"x":15,"y2":0,"group":2,"y":24.430162025851686},{"x":16,"y2":0,"group":2,"y":25.78328671087343},{"x":17,"y2":0,"group":2,"y":28.710077653231256},{"x":18,"y2":0,"group":2,"y":30.833427607574073},{"x":19,"y2":0,"group":2,"y":32.1948877643721},{"x":20,"y2":0,"group":2,"y":33.16162650503957},{"x":21,"y2":0,"group":2,"y":34.13846427920727},{"x":22,"y2":0,"group":2,"y":36.74912558382756},{"x":23,"y2":0,"group":2,"y":37.41528871047662},{"x":24,"y2":0,"group":2,"y":38.44600731200284},{"x":25,"y2":0,"group":2,"y":40.99186103035033},{"x":26,"y2":0,"group":2,"y":40.946617387065025},{"x":27,"y2":0,"group":2,"y":43.80503983685587},{"x":28,"y2":0,"group":2,"y":44.568448344916874},{"x":29,"y2":0,"group":2,"y":45.264913178921056},{"x":30,"y2":0,"group":2,"y":47.47883118002294},{"x":31,"y2":0,"group":2,"y":51.297399968996096},{"x":32,"y2":0,"group":2,"y":50.197135956780684},{"x":33,"y2":0,"group":2,"y":52.23791992151682},{"x":34,"y2":0,"group":2,"y":54.71348314464185},{"x":35,"y2":0,"group":2,"y":57.300974079449595},{"x":36,"y2":0,"group":2,"y":56.568419231214015},{"x":37,"y2":0,"group":2,"y":59.05756216706204},{"x":38,"y2":0,"group":2,"y":58.790692381019284},{"x":39,"y2":0,"group":2,"y":61.65027052256409},{"x":40,"y2":0,"group":2,"y":62.05389461997834},{"x":41,"y2":0,"group":2,"y":63.6919341383419},{"x":42,"y2":0,"group":2,"y":66.46398619562076},{"x":43,"y2":0,"group":2,"y":68.77306081599565},{"x":44,"y2":0,"group":2,"y":69.4501432296484},{"x":45,"y2":0,"group":2,"y":72.13549953908334},{"x":46,"y2":0,"group":2,"y":70.86762320312192},{"x":47,"y2":0,"group":2,"y":74.75005124366808},{"x":48,"y2":0,"group":2,"y":74.27499132524683},{"x":49,"y2":0,"group":2,"y":76.45876475952709},{"x":50,"y2":0,"group":2,"y":79.1571141626857},{"x":51,"y2":0,"group":2,"y":78.40561552343458},{"x":52,"y2":0,"group":2,"y":80.16963003346038},{"x":53,"y2":0,"group":2,"y":82.60958934898389},{"x":54,"y2":0,"group":2,"y":84.31223316219831},{"x":55,"y2":0,"group":2,"y":85.03091859678867},{"x":56,"y2":0,"group":2,"y":85.4151201085083},{"x":57,"y2":0,"group":2,"y":89.31261415719916},{"x":58,"y2":0,"group":2,"y":90.79617081852794},{"x":59,"y2":0,"group":2,"y":92.16837100708054},{"x":60,"y2":0,"group":2,"y":92.07518315352155},{"x":61,"y2":0,"group":2,"y":94.90554640541654},{"x":62,"y2":0,"group":2,"y":95.54214377791902},{"x":63,"y2":0,"group":2,"y":97.4312983768089},{"x":64,"y2":0,"group":2,"y":99.90234135943726},{"x":65,"y2":0,"group":2,"y":101.50466133154923},{"x":66,"y2":0,"group":2,"y":103.12319027176873},{"x":67,"y2":0,"group":2,"y":102.40260332163959},{"x":68,"y2":0,"group":2,"y":104.43675489932137},{"x":69,"y2":0,"group":2,"y":106.82150329192945},{"x":70,"y2":0,"group":2,"y":110.11636138368002},{"x":71,"y2":0,"group":2,"y":110.27366662733583},{"x":72,"y2":0,"group":2,"y":111.42565630467398},{"x":73,"y2":0,"group":2,"y":112.70910073210827},{"x":74,"y2":0,"group":2,"y":113.13373333845178},{"x":75,"y2":0,"group":2,"y":113.12507430947183},{"x":76,"y2":0,"group":2,"y":115.14820750858534},{"x":77,"y2":0,"group":2,"y":119.10301071442763},{"x":78,"y2":0,"group":2,"y":118.71894902708478},{"x":79,"y2":0,"group":2,"y":122.92084972626367},{"x":80,"y2":0,"group":2,"y":123.95876872180682},{"x":81,"y2":0,"group":2,"y":124.495114799066},{"x":82,"y2":0,"group":2,"y":126.40827029988671},{"x":83,"y2":0,"group":2,"y":127.68989976437838},{"x":84,"y2":0,"group":2,"y":129.75355086274465},{"x":85,"y2":0,"group":2,"y":130.69743273830025},{"x":86,"y2":0,"group":2,"y":131.0572976904735},{"x":87,"y2":0,"group":2,"y":134.56180978196946},{"x":88,"y2":0,"group":2,"y":134.08963279267934},{"x":89,"y2":0,"group":2,"y":137.52070679168668},{"x":90,"y2":0,"group":2,"y":137.66410635742767},{"x":91,"y2":0,"group":2,"y":138.20636886231998},{"x":92,"y2":0,"group":2,"y":141.60956019945573},{"x":93,"y2":0,"group":2,"y":142.8663945113256},{"x":94,"y2":0,"group":2,"y":144.12182834356398},{"x":95,"y2":0,"group":2,"y":144.78300656468647},{"x":96,"y2":0,"group":2,"y":146.96981628480265},{"x":97,"y2":0,"group":2,"y":149.22286044319506},{"x":98,"y2":0,"group":2,"y":149.25698497233407},{"x":99,"y2":0,"group":2,"y":150.9128854977089},{"x":100,"y2":0,"group":2,"y":153.46389373534825}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"linear"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+
+    );
+</script>
+
+<h3 id="modified-axis-labels">Modified Axis labels</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">xlab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Weight (kg)&quot;</span><span class="p">)</span>
+<span class="n">ylab</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Height (cm)&quot;</span><span class="p">)</span></code></pre></div>
+
+<div id="newlabs"></div>
+<script type="text/javascript">
+parse("newlabs",
+    {"name":"lineplot","height":450,"padding":"auto","marks":[{"marks":[{"properties":{"enter":{"stroke":{"field":"group","scale":"group"},"x":{"field":"x","scale":"x"},"strokeWidth":{"value":2},"y":{"field":"y","scale":"y"}}},"type":"line"}],"from":{"data":"table","transform":[{"groupby":["group"],"type":"facet"}]},"type":"group"}],"axes":[{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"x","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"title":"Weight (kg)","type":"x","ticks":0},{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"y","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}}},"grid":false,"title":"Height (cm)","type":"y","ticks":0}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":2.1531194508073894},{"x":2,"y2":0,"group":1,"y":1.2463873263561334},{"x":3,"y2":0,"group":1,"y":1.7009662965989876},{"x":4,"y2":0,"group":1,"y":2.4778438365440874},{"x":5,"y2":0,"group":1,"y":3.7861596913067275},{"x":6,"y2":0,"group":1,"y":5.507370930328429},{"x":7,"y2":0,"group":1,"y":7.024094229969154},{"x":8,"y2":0,"group":1,"y":7.011845403273659},{"x":9,"y2":0,"group":1,"y":7.548213779750423},{"x":10,"y2":0,"group":1,"y":10.619218489624325},{"x":11,"y2":0,"group":1,"y":13.296985018851418},{"x":12,"y2":0,"group":1,"y":11.63360373247325},{"x":13,"y2":0,"group":1,"y":12.92329862985136},{"x":14,"y2":0,"group":1,"y":15.364145645009387},{"x":15,"y2":0,"group":1,"y":14.673097491717597},{"x":16,"y2":0,"group":1,"y":16.841595197377433},{"x":17,"y2":0,"group":1,"y":19.369928072721383},{"x":18,"y2":0,"group":1,"y":17.85471555658107},{"x":19,"y2":0,"group":1,"y":16.824112172704037},{"x":20,"y2":0,"group":1,"y":19.247916301812676},{"x":21,"y2":0,"group":1,"y":21.110754277241615},{"x":22,"y2":0,"group":1,"y":21.828237022098243},{"x":23,"y2":0,"group":1,"y":20.9007697544539},{"x":24,"y2":0,"group":1,"y":23.254269554941214},{"x":25,"y2":0,"group":1,"y":24.759720445392997},{"x":26,"y2":0,"group":1,"y":26.10385139282106},{"x":27,"y2":0,"group":1,"y":26.075143264256216},{"x":28,"y2":0,"group":1,"y":27.600686494881973},{"x":29,"y2":0,"group":1,"y":27.866346092200203},{"x":30,"y2":0,"group":1,"y":30.29583108845087},{"x":31,"y2":0,"group":1,"y":30.477329922093624},{"x":32,"y2":0,"group":1,"y":32.679550450618564},{"x":33,"y2":0,"group":1,"y":32.72151211905141},{"x":34,"y2":0,"group":1,"y":34.29809062851551},{"x":35,"y2":0,"group":1,"y":35.759279464026925},{"x":36,"y2":0,"group":1,"y":36.55111514621453},{"x":37,"y2":0,"group":1,"y":37.14910508308702},{"x":38,"y2":0,"group":1,"y":36.907539324329},{"x":39,"y2":0,"group":1,"y":39.697423475803824},{"x":40,"y2":0,"group":1,"y":42.255151353498135},{"x":41,"y2":0,"group":1,"y":41.743441173283045},{"x":42,"y2":0,"group":1,"y":41.95868002778019},{"x":43,"y2":0,"group":1,"y":41.715526823491125},{"x":44,"y2":0,"group":1,"y":44.9084463089189},{"x":45,"y2":0,"group":1,"y":46.18561969880118},{"x":46,"y2":0,"group":1,"y":47.193106316888375},{"x":47,"y2":0,"group":1,"y":45.967517460232095},{"x":48,"y2":0,"group":1,"y":49.78660189659115},{"x":49,"y2":0,"group":1,"y":48.4155376404244},{"x":50,"y2":0,"group":1,"y":50.550338154905745},{"x":51,"y2":0,"group":1,"y":51.308423163390344},{"x":52,"y2":0,"group":1,"y":52.17031430444255},{"x":53,"y2":0,"group":1,"y":52.06706045368677},{"x":54,"y2":0,"group":1,"y":54.81851722352859},{"x":55,"y2":0,"group":1,"y":55.73978068133678},{"x":56,"y2":0,"group":1,"y":55.70228435090552},{"x":57,"y2":0,"group":1,"y":58.00100606187576},{"x":58,"y2":0,"group":1,"y":59.05449731578143},{"x":59,"y2":0,"group":1,"y":60.79459240036539},{"x":60,"y2":0,"group":1,"y":60.927556616603184},{"x":61,"y2":0,"group":1,"y":61.12028325195802},{"x":62,"y2":0,"group":1,"y":62.85497017402414},{"x":63,"y2":0,"group":1,"y":64.03327503651742},{"x":64,"y2":0,"group":1,"y":63.7859755741915},{"x":65,"y2":0,"group":1,"y":63.65232451660322},{"x":66,"y2":0,"group":1,"y":65.30279019970563},{"x":67,"y2":0,"group":1,"y":66.3720701204291},{"x":68,"y2":0,"group":1,"y":68.39379152572083},{"x":69,"y2":0,"group":1,"y":68.13512602169247},{"x":70,"y2":0,"group":1,"y":69.44745781688002},{"x":71,"y2":0,"group":1,"y":70.18940951993869},{"x":72,"y2":0,"group":1,"y":74.75348813864505},{"x":73,"y2":0,"group":1,"y":71.52857675953703},{"x":74,"y2":0,"group":1,"y":73.50761185833142},{"x":75,"y2":0,"group":1,"y":75.69813166462082},{"x":76,"y2":0,"group":1,"y":74.79166844695025},{"x":77,"y2":0,"group":1,"y":77.43958942148005},{"x":78,"y2":0,"group":1,"y":75.80968876499199},{"x":79,"y2":0,"group":1,"y":78.77216837053312},{"x":80,"y2":0,"group":1,"y":80.59544786992547},{"x":81,"y2":0,"group":1,"y":80.40261053672008},{"x":82,"y2":0,"group":1,"y":82.76974941133318},{"x":83,"y2":0,"group":1,"y":82.414388362214},{"x":84,"y2":0,"group":1,"y":83.45782986070375},{"x":85,"y2":0,"group":1,"y":84.68785833311229},{"x":86,"y2":0,"group":1,"y":84.47428145162183},{"x":87,"y2":0,"group":1,"y":88.3131623811189},{"x":88,"y2":0,"group":1,"y":87.26761656638281},{"x":89,"y2":0,"group":1,"y":89.60624299403958},{"x":90,"y2":0,"group":1,"y":88.97459349865419},{"x":91,"y2":0,"group":1,"y":91.92352154297475},{"x":92,"y2":0,"group":1,"y":92.34481071348607},{"x":93,"y2":0,"group":1,"y":93.44440765660312},{"x":94,"y2":0,"group":1,"y":94.2727655536556},{"x":95,"y2":0,"group":1,"y":94.1274430025574},{"x":96,"y2":0,"group":1,"y":97.17789780922685},{"x":97,"y2":0,"group":1,"y":97.11403652475425},{"x":98,"y2":0,"group":1,"y":97.87186040769552},{"x":99,"y2":0,"group":1,"y":99.13249366143388},{"x":100,"y2":0,"group":1,"y":101.43309441783364},{"x":1,"y2":0,"group":2,"y":4.3825051666316925},{"x":2,"y2":0,"group":2,"y":6.363378460239108},{"x":3,"y2":0,"group":2,"y":5.654671275732239},{"x":4,"y2":0,"group":2,"y":9.383101404782293},{"x":5,"y2":0,"group":2,"y":8.623877727440963},{"x":6,"y2":0,"group":2,"y":12.279650993769414},{"x":7,"y2":0,"group":2,"y":14.615133258516673},{"x":8,"y2":0,"group":2,"y":15.057426138109246},{"x":9,"y2":0,"group":2,"y":16.705869108744544},{"x":10,"y2":0,"group":2,"y":17.68727411911899},{"x":11,"y2":0,"group":2,"y":20.07347106325154},{"x":12,"y2":0,"group":2,"y":21.227789420359734},{"x":13,"y2":0,"group":2,"y":23.179746208391137},{"x":14,"y2":0,"group":2,"y":24.907561594264642},{"x":15,"y2":0,"group":2,"y":24.430162025851686},{"x":16,"y2":0,"group":2,"y":25.78328671087343},{"x":17,"y2":0,"group":2,"y":28.710077653231256},{"x":18,"y2":0,"group":2,"y":30.833427607574073},{"x":19,"y2":0,"group":2,"y":32.1948877643721},{"x":20,"y2":0,"group":2,"y":33.16162650503957},{"x":21,"y2":0,"group":2,"y":34.13846427920727},{"x":22,"y2":0,"group":2,"y":36.74912558382756},{"x":23,"y2":0,"group":2,"y":37.41528871047662},{"x":24,"y2":0,"group":2,"y":38.44600731200284},{"x":25,"y2":0,"group":2,"y":40.99186103035033},{"x":26,"y2":0,"group":2,"y":40.946617387065025},{"x":27,"y2":0,"group":2,"y":43.80503983685587},{"x":28,"y2":0,"group":2,"y":44.568448344916874},{"x":29,"y2":0,"group":2,"y":45.264913178921056},{"x":30,"y2":0,"group":2,"y":47.47883118002294},{"x":31,"y2":0,"group":2,"y":51.297399968996096},{"x":32,"y2":0,"group":2,"y":50.197135956780684},{"x":33,"y2":0,"group":2,"y":52.23791992151682},{"x":34,"y2":0,"group":2,"y":54.71348314464185},{"x":35,"y2":0,"group":2,"y":57.300974079449595},{"x":36,"y2":0,"group":2,"y":56.568419231214015},{"x":37,"y2":0,"group":2,"y":59.05756216706204},{"x":38,"y2":0,"group":2,"y":58.790692381019284},{"x":39,"y2":0,"group":2,"y":61.65027052256409},{"x":40,"y2":0,"group":2,"y":62.05389461997834},{"x":41,"y2":0,"group":2,"y":63.6919341383419},{"x":42,"y2":0,"group":2,"y":66.46398619562076},{"x":43,"y2":0,"group":2,"y":68.77306081599565},{"x":44,"y2":0,"group":2,"y":69.4501432296484},{"x":45,"y2":0,"group":2,"y":72.13549953908334},{"x":46,"y2":0,"group":2,"y":70.86762320312192},{"x":47,"y2":0,"group":2,"y":74.75005124366808},{"x":48,"y2":0,"group":2,"y":74.27499132524683},{"x":49,"y2":0,"group":2,"y":76.45876475952709},{"x":50,"y2":0,"group":2,"y":79.1571141626857},{"x":51,"y2":0,"group":2,"y":78.40561552343458},{"x":52,"y2":0,"group":2,"y":80.16963003346038},{"x":53,"y2":0,"group":2,"y":82.60958934898389},{"x":54,"y2":0,"group":2,"y":84.31223316219831},{"x":55,"y2":0,"group":2,"y":85.03091859678867},{"x":56,"y2":0,"group":2,"y":85.4151201085083},{"x":57,"y2":0,"group":2,"y":89.31261415719916},{"x":58,"y2":0,"group":2,"y":90.79617081852794},{"x":59,"y2":0,"group":2,"y":92.16837100708054},{"x":60,"y2":0,"group":2,"y":92.07518315352155},{"x":61,"y2":0,"group":2,"y":94.90554640541654},{"x":62,"y2":0,"group":2,"y":95.54214377791902},{"x":63,"y2":0,"group":2,"y":97.4312983768089},{"x":64,"y2":0,"group":2,"y":99.90234135943726},{"x":65,"y2":0,"group":2,"y":101.50466133154923},{"x":66,"y2":0,"group":2,"y":103.12319027176873},{"x":67,"y2":0,"group":2,"y":102.40260332163959},{"x":68,"y2":0,"group":2,"y":104.43675489932137},{"x":69,"y2":0,"group":2,"y":106.82150329192945},{"x":70,"y2":0,"group":2,"y":110.11636138368002},{"x":71,"y2":0,"group":2,"y":110.27366662733583},{"x":72,"y2":0,"group":2,"y":111.42565630467398},{"x":73,"y2":0,"group":2,"y":112.70910073210827},{"x":74,"y2":0,"group":2,"y":113.13373333845178},{"x":75,"y2":0,"group":2,"y":113.12507430947183},{"x":76,"y2":0,"group":2,"y":115.14820750858534},{"x":77,"y2":0,"group":2,"y":119.10301071442763},{"x":78,"y2":0,"group":2,"y":118.71894902708478},{"x":79,"y2":0,"group":2,"y":122.92084972626367},{"x":80,"y2":0,"group":2,"y":123.95876872180682},{"x":81,"y2":0,"group":2,"y":124.495114799066},{"x":82,"y2":0,"group":2,"y":126.40827029988671},{"x":83,"y2":0,"group":2,"y":127.68989976437838},{"x":84,"y2":0,"group":2,"y":129.75355086274465},{"x":85,"y2":0,"group":2,"y":130.69743273830025},{"x":86,"y2":0,"group":2,"y":131.0572976904735},{"x":87,"y2":0,"group":2,"y":134.56180978196946},{"x":88,"y2":0,"group":2,"y":134.08963279267934},{"x":89,"y2":0,"group":2,"y":137.52070679168668},{"x":90,"y2":0,"group":2,"y":137.66410635742767},{"x":91,"y2":0,"group":2,"y":138.20636886231998},{"x":92,"y2":0,"group":2,"y":141.60956019945573},{"x":93,"y2":0,"group":2,"y":142.8663945113256},{"x":94,"y2":0,"group":2,"y":144.12182834356398},{"x":95,"y2":0,"group":2,"y":144.78300656468647},{"x":96,"y2":0,"group":2,"y":146.96981628480265},{"x":97,"y2":0,"group":2,"y":149.22286044319506},{"x":98,"y2":0,"group":2,"y":149.25698497233407},{"x":99,"y2":0,"group":2,"y":150.9128854977089},{"x":100,"y2":0,"group":2,"y":153.46389373534825}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"linear"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+
+    );
+</script>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

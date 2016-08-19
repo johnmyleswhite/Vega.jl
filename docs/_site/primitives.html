@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="visualization-primitives">Visualization Primitives</h1>
+
+<p>At the most fundamental level, Vega.jl translates the Vega grammar into a series of Julia composite types as primitives to build upon. This allows for users to build visualizations using familiar Julia syntax, without having to worry about how those types translate into JSON.</p>
+
+<p>For example, here is the highest-level composite type defined, <code>:VegaVisualization</code>:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">type</span><span class="nc"> VegaVisualization</span>
+	<span class="n">name</span><span class="p">::</span><span class="n">String</span>
+	<span class="n">width</span><span class="p">::</span><span class="kt">Int</span>
+	<span class="n">height</span><span class="p">::</span><span class="kt">Int</span>
+	<span class="n">padding</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">VegaPadding</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+	<span class="n">viewport</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span>
+	<span class="n">data</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaData</span><span class="p">}</span>
+	<span class="n">scales</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaScale</span><span class="p">}</span>
+	<span class="n">axes</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaAxis</span><span class="p">},</span>
+	<span class="n">marks</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaMark</span><span class="p">},</span>
+	<span class="n">legends</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">VegaLegend</span><span class="p">}</span>
+<span class="k">end</span></code></pre></div>
+
+<p>This is a one-to-one mapping of the grammar outlined in the Vega Documentation for <a href="https://github.com/vega/vega/wiki">Visualization</a>.</p>
+
+<h2 id="defined-primitives-in-julia">Defined Primitives in Julia</h2>
+
+<p>The following primitives have been defined in Julia, to correspond to the types outlined in the Vega.js documentation. See link to Vega documentation to understand structure of each type (or view <a href="https://github.com/johnmyleswhite/Vega.jl/tree/master/src/primitives">Vega.jl primitives source code</a>)</p>
+
+<ul>
+  <li><a href="https://github.com/vega/vega/wiki/Visualization">VegaVisualization</a></li>
+  <li><a href="https://github.com/vega/vega/wiki/Data">VegaData</a></li>
+  <li><a href="https://github.com/vega/vega/wiki/Scales">VegaScale</a></li>
+  <li><a href="https://github.com/vega/vega/wiki/Axes">VegaAxis</a></li>
+  <li><a href="https://github.com/vega/vega/wiki/Legends">VegaLegend</a></li>
+  <li><a href="https://github.com/vega/vega/wiki/Marks">VegaMark</a></li>
+</ul>
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

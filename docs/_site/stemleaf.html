@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="stem-and-leaf-plot">Stem-and-Leaf Plot</h1>
+
+<p>Function Keywords:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">y</span><span class="p">::</span><span class="n">AbstractVector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span></code></pre></div>
+
+<h3 id="stem-and-leaf-plot-1">Stem-and-Leaf Plot</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span>
+        <span class="mi">79</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span>
+        <span class="mi">95</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span>
+        <span class="mi">103</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span>
+        <span class="mi">111</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span>
+        <span class="mi">120</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span>
+        <span class="mi">130</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span>
+        <span class="mi">135</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span>
+        <span class="mi">145</span><span class="p">,</span> <span class="mi">147</span><span class="p">,</span> <span class="mi">149</span><span class="p">,</span> <span class="mi">152</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">159</span><span class="p">]</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">stemleaf</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="c">#Add Key</span>
+<span class="n">text</span><span class="o">!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Key: 4 | 2 = 42 parts per million&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">fontWeight</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span><span class="p">)</span></code></pre></div>
+
+<div id="stem"></div>
+<script type="text/javascript">
+parse("stem",
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"text":{"field":"group"},"shape":{"value":""},"x":{"offset":-10,"field":"x","scale":"x"},"fillOpacity":{"value":1},"fill":{"field":"group","scale":"group"},"size":{"value":""},"baseline":{"value":"middle"},"y":{"offset":0.5,"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"text"},{"properties":{"enter":{"align":{"value":"center"},"fontWeight":{"value":"bold"},"x":{"value":80},"font":{"value":""},"fontSize":{"value":12},"fill":{"value":"black"},"baseline":{"value":"top"},"text":{"value":"Key: 4 | 2 = 42 parts per million"},"y":{"value":500}}},"from":{"value":"Key: 4 | 2 = 42 parts per million"},"type":"text"}],"axes":[{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"x","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"axis":{"stroke":{"value":"transparent"}},"labels":{"fill":{"value":"transparent"}},"title":{"fontSize":{"value":14}},"ticks":{"stroke":{"value":"transparent"}}},"grid":false,"title":"","type":"x","ticks":0},{"tickSizeEnd":0,"tickSizeMajor":0,"scale":"y","tickSize":0,"tickSizeMinor":0,"format":"","layer":"front","properties":{"title":{"fontSize":{"value":14}},"ticks":{"stroke":{"value":"transparent"}}},"grid":false,"title":"","type":"y","ticks":15}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0},{"x":2,"y2":0,"group":3,"y":0},{"x":3,"y2":0,"group":5,"y":0},{"x":4,"y2":0,"group":6,"y":0},{"x":1,"y2":0,"group":7,"y":1},{"x":1,"y2":0,"group":2,"y":3},{"x":1,"y2":0,"group":7,"y":4},{"x":1,"y2":0,"group":3,"y":5},{"x":1,"y2":0,"group":0,"y":6},{"x":2,"y2":0,"group":1,"y":6},{"x":3,"y2":0,"group":4,"y":6},{"x":4,"y2":0,"group":7,"y":6},{"x":1,"y2":0,"group":0,"y":7},{"x":2,"y2":0,"group":0,"y":7},{"x":3,"y2":0,"group":1,"y":7},{"x":4,"y2":0,"group":2,"y":7},{"x":5,"y2":0,"group":3,"y":7},{"x":6,"y2":0,"group":3,"y":7},{"x":7,"y2":0,"group":4,"y":7},{"x":8,"y2":0,"group":6,"y":7},{"x":9,"y2":0,"group":7,"y":7},{"x":10,"y2":0,"group":9,"y":7},{"x":1,"y2":0,"group":1,"y":8},{"x":2,"y2":0,"group":2,"y":8},{"x":3,"y2":0,"group":3,"y":8},{"x":4,"y2":0,"group":3,"y":8},{"x":5,"y2":0,"group":3,"y":8},{"x":6,"y2":0,"group":3,"y":8},{"x":7,"y2":0,"group":4,"y":8},{"x":8,"y2":0,"group":5,"y":8},{"x":9,"y2":0,"group":6,"y":8},{"x":10,"y2":0,"group":7,"y":8},{"x":11,"y2":0,"group":7,"y":8},{"x":12,"y2":0,"group":8,"y":8},{"x":13,"y2":0,"group":9,"y":8},{"x":1,"y2":0,"group":0,"y":9},{"x":2,"y2":0,"group":1,"y":9},{"x":3,"y2":0,"group":1,"y":9},{"x":4,"y2":0,"group":2,"y":9},{"x":5,"y2":0,"group":4,"y":9},{"x":6,"y2":0,"group":4,"y":9},{"x":7,"y2":0,"group":5,"y":9},{"x":8,"y2":0,"group":6,"y":9},{"x":9,"y2":0,"group":7,"y":9},{"x":10,"y2":0,"group":8,"y":9},{"x":11,"y2":0,"group":8,"y":9},{"x":12,"y2":0,"group":9,"y":9},{"x":13,"y2":0,"group":9,"y":9},{"x":14,"y2":0,"group":9,"y":9},{"x":15,"y2":0,"group":9,"y":9},{"x":16,"y2":0,"group":9,"y":9},{"x":1,"y2":0,"group":0,"y":10},{"x":2,"y2":0,"group":0,"y":10},{"x":3,"y2":0,"group":0,"y":10},{"x":4,"y2":0,"group":1,"y":10},{"x":5,"y2":0,"group":1,"y":10},{"x":6,"y2":0,"group":2,"y":10},{"x":7,"y2":0,"group":3,"y":10},{"x":8,"y2":0,"group":3,"y":10},{"x":9,"y2":0,"group":3,"y":10},{"x":10,"y2":0,"group":3,"y":10},{"x":11,"y2":0,"group":4,"y":10},{"x":12,"y2":0,"group":6,"y":10},{"x":13,"y2":0,"group":6,"y":10},{"x":14,"y2":0,"group":6,"y":10},{"x":15,"y2":0,"group":6,"y":10},{"x":16,"y2":0,"group":7,"y":10},{"x":17,"y2":0,"group":7,"y":10},{"x":18,"y2":0,"group":7,"y":10},{"x":19,"y2":0,"group":7,"y":10},{"x":20,"y2":0,"group":8,"y":10},{"x":21,"y2":0,"group":9,"y":10},{"x":22,"y2":0,"group":9,"y":10},{"x":1,"y2":0,"group":0,"y":11},{"x":2,"y2":0,"group":1,"y":11},{"x":3,"y2":0,"group":1,"y":11},{"x":4,"y2":0,"group":1,"y":11},{"x":5,"y2":0,"group":2,"y":11},{"x":6,"y2":0,"group":2,"y":11},{"x":7,"y2":0,"group":3,"y":11},{"x":8,"y2":0,"group":4,"y":11},{"x":9,"y2":0,"group":4,"y":11},{"x":10,"y2":0,"group":4,"y":11},{"x":11,"y2":0,"group":5,"y":11},{"x":12,"y2":0,"group":6,"y":11},{"x":13,"y2":0,"group":7,"y":11},{"x":14,"y2":0,"group":7,"y":11},{"x":15,"y2":0,"group":9,"y":11},{"x":1,"y2":0,"group":0,"y":12},{"x":2,"y2":0,"group":0,"y":12},{"x":3,"y2":0,"group":0,"y":12},{"x":4,"y2":0,"group":0,"y":12},{"x":5,"y2":0,"group":1,"y":12},{"x":6,"y2":0,"group":1,"y":12},{"x":7,"y2":0,"group":2,"y":12},{"x":8,"y2":0,"group":2,"y":12},{"x":9,"y2":0,"group":2,"y":12},{"x":10,"y2":0,"group":3,"y":12},{"x":11,"y2":0,"group":4,"y":12},{"x":12,"y2":0,"group":4,"y":12},{"x":13,"y2":0,"group":5,"y":12},{"x":14,"y2":0,"group":5,"y":12},{"x":15,"y2":0,"group":6,"y":12},{"x":16,"y2":0,"group":6,"y":12},{"x":17,"y2":0,"group":7,"y":12},{"x":18,"y2":0,"group":8,"y":12},{"x":19,"y2":0,"group":9,"y":12},{"x":1,"y2":0,"group":0,"y":13},{"x":2,"y2":0,"group":1,"y":13},{"x":3,"y2":0,"group":1,"y":13},{"x":4,"y2":0,"group":1,"y":13},{"x":5,"y2":0,"group":1,"y":13},{"x":6,"y2":0,"group":2,"y":13},{"x":7,"y2":0,"group":2,"y":13},{"x":8,"y2":0,"group":2,"y":13},{"x":9,"y2":0,"group":2,"y":13},{"x":10,"y2":0,"group":3,"y":13},{"x":11,"y2":0,"group":3,"y":13},{"x":12,"y2":0,"group":4,"y":13},{"x":13,"y2":0,"group":4,"y":13},{"x":14,"y2":0,"group":4,"y":13},{"x":15,"y2":0,"group":5,"y":13},{"x":16,"y2":0,"group":5,"y":13},{"x":17,"y2":0,"group":5,"y":13},{"x":18,"y2":0,"group":6,"y":13},{"x":19,"y2":0,"group":6,"y":13},{"x":20,"y2":0,"group":6,"y":13},{"x":21,"y2":0,"group":7,"y":13},{"x":22,"y2":0,"group":8,"y":13},{"x":23,"y2":0,"group":9,"y":13},{"x":1,"y2":0,"group":0,"y":14},{"x":2,"y2":0,"group":0,"y":14},{"x":3,"y2":0,"group":2,"y":14},{"x":4,"y2":0,"group":3,"y":14},{"x":5,"y2":0,"group":4,"y":14},{"x":6,"y2":0,"group":5,"y":14},{"x":7,"y2":0,"group":5,"y":14},{"x":8,"y2":0,"group":5,"y":14},{"x":9,"y2":0,"group":5,"y":14},{"x":10,"y2":0,"group":5,"y":14},{"x":11,"y2":0,"group":7,"y":14},{"x":12,"y2":0,"group":9,"y":14},{"x":1,"y2":0,"group":2,"y":15},{"x":2,"y2":0,"group":5,"y":15},{"x":3,"y2":0,"group":7,"y":15},{"x":4,"y2":0,"group":9,"y":15}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"linear"},{"reverse":true,"name":"y","zero":true,"domainMax":15,"domain":{"data":"table","field":"y"},"range":"height","type":"linear","round":false},{"name":"group","range":["black"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[]}
+
+	);
+</script>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

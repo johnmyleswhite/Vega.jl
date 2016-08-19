@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="wordcloud">Wordcloud</h1>
+
+<p>Function Keywords:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">x</span><span class="p">::</span><span class="n">AbstractVector</span>
+<span class="n">wordAngles</span><span class="p">::</span><span class="n">AbstractVector</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">]</span>
+<span class="n">minThreshold</span><span class="p">::</span><span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
+
+<h3 id="wordcloud-1">Wordcloud</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s">&quot;Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Julia’s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Julia’s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.&quot;</span><span class="p">,</span>
+<span class="s">&quot;Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual.&quot;</span>
+<span class="p">]</span>
+
+<span class="n">wc</span> <span class="o">=</span> <span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Spectral&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span></code></pre></div>
+
+<div id="wc1"></div>
+<script type="text/javascript">
+parse("wc1",
+    {"name":"wordcloud","height":400,"padding":{"left":0,"bottom":0,"right":0,"top":0},"marks":[{"properties":{"enter":{"x":{"field":"layout_x"},"fontSize":{"field":"layout_fontSize"},"angle":{"field":"layout_rotate"},"fontWeight":{"field":"layout_fontWeight"},"fontStyle":{"field":"layout_fontStyle"},"font":{"field":"layout_font"},"fill":{"field":"text","scale":"color"},"align":{"value":"center"},"y":{"field":"layout_y"},"text":{"field":"text"},"baseline":{"value":"alphabetic"}}},"from":{"data":"table"},"type":"text"}],"data":[{"name":"table","values":["Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Juliaâ€™s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Juliaâ€™s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.","Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual."],"transform":[{"pattern":"[\\w']{3,}","case":"upper","field":"data","stopwords":"(i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)","type":"countpattern"},{"field":"weight","expr":"if(datum.text=='VEGA', 600, 300)","type":"formula"},{"field":"angle","expr":"[-45,0,45][~~(random() * 3)]","type":"formula"},{"fontScale":[12,56],"rotate":{"field":"angle"},"font":{"value":"Helvetica Neue"},"size":[800,400],"text":{"field":"text"},"type":"wordcloud","fontSize":{"field":"count"},"fontWeight":{"field":"weight"}},{"test":"datum.count > 0","type":"filter"}]}],"scales":[{"name":"color","range":["rgb(158,  1, 66)","rgb(213, 62, 79)","rgb(244,109, 67)","rgb(253,174, 97)","rgb(254,224,139)","rgb(255,255,191)","rgb(230,245,152)","rgb(171,221,164)","rgb(102,194,165)","rgb( 50,136,189)","rgb( 94, 79,162)"],"type":"ordinal"}],"width":800}
+
+	);
+</script>
+
+<h3 id="wordcloud-with-custom-angles">Wordcloud With Custom Angles</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">wordAngles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span></code></pre></div>
+
+<div id="wc2"></div>
+<script type="text/javascript">
+parse("wc2",
+    {"name":"wordcloud","height":400,"padding":{"left":0,"bottom":0,"right":0,"top":0},"marks":[{"properties":{"enter":{"x":{"field":"layout_x"},"fontSize":{"field":"layout_fontSize"},"angle":{"field":"layout_rotate"},"fontWeight":{"field":"layout_fontWeight"},"fontStyle":{"field":"layout_fontStyle"},"font":{"field":"layout_font"},"fill":{"field":"text","scale":"color"},"align":{"value":"center"},"y":{"field":"layout_y"},"text":{"field":"text"},"baseline":{"value":"alphabetic"}}},"from":{"data":"table"},"type":"text"}],"data":[{"name":"table","values":["Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Juliaâ€™s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Juliaâ€™s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.","Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual."],"transform":[{"pattern":"[\\w']{3,}","case":"upper","field":"data","stopwords":"(i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)","type":"countpattern"},{"field":"weight","expr":"if(datum.text=='VEGA', 600, 300)","type":"formula"},{"field":"angle","expr":"[0,90][~~(random() * 2)]","type":"formula"},{"fontScale":[12,56],"rotate":{"field":"angle"},"font":{"value":"Helvetica Neue"},"size":[800,400],"text":{"field":"text"},"type":"wordcloud","fontSize":{"field":"count"},"fontWeight":{"field":"weight"}},{"test":"datum.count > 0","type":"filter"}]}],"scales":[{"name":"color","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"type":"ordinal"}],"width":800}
+
+	);
+</script>
+
+<h3 id="wordcloud-with-minimum-word-count-threshold">Wordcloud With Minimum Word Count Threshold</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">wordcloud</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">minThreshold</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span></code></pre></div>
+
+<div id="wc3"></div>
+<script type="text/javascript">
+parse("wc3",
+    {"name":"wordcloud","height":400,"padding":{"left":0,"bottom":0,"right":0,"top":0},"marks":[{"properties":{"enter":{"x":{"field":"layout_x"},"fontSize":{"field":"layout_fontSize"},"angle":{"field":"layout_rotate"},"fontWeight":{"field":"layout_fontWeight"},"fontStyle":{"field":"layout_fontStyle"},"font":{"field":"layout_font"},"fill":{"field":"text","scale":"color"},"align":{"value":"center"},"y":{"field":"layout_y"},"text":{"field":"text"},"baseline":{"value":"alphabetic"}}},"from":{"data":"table"},"type":"text"}],"data":[{"name":"table","values":["Julia is a high-level, high-performance dynamic programming language for technical computing, with syntax that is familiar to users of other technical computing environments. It provides a sophisticated compiler, distributed parallel execution, numerical accuracy, and an extensive mathematical function library. Juliaâ€™s Base library, largely written in Julia itself, also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation, signal processing, and string processing. In addition, the Julia developer community is contributing a number of external packages through Juliaâ€™s built-in package manager at a rapid pace. IJulia, a collaboration between the IPython and Julia communities, provides a powerful browser-based graphical notebook interface to Julia.","Julia programs are organized around multiple dispatch; by defining functions and overloading them for different combinations of argument types, which can also be user-defined. For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the introduction in the online manual."],"transform":[{"pattern":"[\\w']{3,}","case":"upper","field":"data","stopwords":"(i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)","type":"countpattern"},{"field":"weight","expr":"if(datum.text=='VEGA', 600, 300)","type":"formula"},{"field":"angle","expr":"[-45,0,45][~~(random() * 3)]","type":"formula"},{"fontScale":[12,56],"rotate":{"field":"angle"},"font":{"value":"Helvetica Neue"},"size":[800,400],"text":{"field":"text"},"type":"wordcloud","fontSize":{"field":"count"},"fontWeight":{"field":"weight"}},{"test":"datum.count > 1","type":"filter"}]}],"scales":[{"name":"color","range":["rgb(166,206,227)","rgb( 31,120,180)","rgb(178,223,138)","rgb( 51,160, 44)","rgb(251,154,153)","rgb(227, 26, 28)","rgb(253,191,111)","rgb(255,127,  0)","rgb(202,178,214)","rgb(106, 61,154)","rgb(255,255,153)","rgb(177, 89, 40)"],"type":"ordinal"}],"width":800}
+
+	);
+</script>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

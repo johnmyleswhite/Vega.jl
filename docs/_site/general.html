@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="general-visualization-properties">General Visualization Properties</h1>
+
+<p>There are several commonly-used visualization properties in top-level <a href="http://johnmyleswhite.github.io/Vega.jl/primitives.html"><code>::VegaVisualization</code> type</a> such as <code>width</code> and <code>height</code>. Given that these are accessible from the high-level Julia composite type (i.e. the return type of every Vega plot), it doesn’t make sense to replicate these features as separate mutating functions.</p>
+
+<p>For the most part, these properties have sensible defaults for working from Jupyter Notebook or from the REPL (which opens a new browser/tab); changing them is as simple as accessing the fields directly in the <code>::VegaVisualization</code> composite type.</p>
+
+<h3 id="height">Height</h3>
+
+<p>Keyword:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">height</span><span class="p">::</span><span class="kt">Int</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">700</span></code></pre></div>
+
+<h3 id="width">Width</h3>
+
+<p>Keyword:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">width</span><span class="p">::</span><span class="kt">Int</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v2</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v2</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1000</span></code></pre></div>
+
+<h3 id="background">Background</h3>
+
+<p>The default for background is <code>transparent</code>, which can become an issue when you download PNG files. Set background to white or the desired color of your background is this is an issue.</p>
+
+<p>Keyword:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">background</span><span class="p">::</span><span class="n">AbstractString</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v2</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v2</span><span class="o">.</span><span class="n">background</span> <span class="o">=</span> <span class="s">&quot;green&quot;</span></code></pre></div>
+
+<h3 id="padding">Padding</h3>
+
+<p>Padding is an awkward union of CSS padding through the <code>::VegaPadding</code> type, a single number for even padding all around the plot. The default is “auto”, which should be sufficient for most cases.</p>
+
+<p>Keyword:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">padding</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">VegaPadding</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v3</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">v3</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="mi">10</span></code></pre></div>
+
+<h3 id="viewport">Viewport</h3>
+
+<p>It is possible to change the portion of the graph shown, without changing the actual graph size. This is useful if you want to highlight a specific portion of the graph, but in practice it’s rarely used.</p>
+
+<p>Keyword:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">viewport</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">}</span></code></pre></div>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

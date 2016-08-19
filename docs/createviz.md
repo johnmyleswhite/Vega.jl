@@ -1,0 +1,407 @@
+---
+
+layout: minimal
+title: Vega.jl - A Julia package for generating visualizations using Vega
+
+---
+
+# Creating a Visualization From Scratch
+
+To create a visualization from scratch, all code will need to instantiate a `:VegaVisualization` type, which comes with a handful of default values. As stated in the [Visualization Primitives](primitives.html) section, we will always work with Julia types, there is no need to worry about the JSON representation (although it can always be viewed using `tojson()`):
+
+{% highlight julia %}
+#Create new :VegaVisualization container
+vg = VegaVisualization()
+tojson(vg)
+
+#Result from REPL
+"{\"name\":\"Vega Visualization\",\"height\":450,\"padding\":\"auto\",\"width\":450}"
+
+{% endhighlight %}
+
+Note that the above doesn't represent the minimum necessary structure for building a Vega visualization; rather, it represents the default values when a new `:VegaVisualization` is created. An example of a full JSON object based on a fully-specified `:VegaVisualization` is provided below:
+
+{% highlight julia %}
+
+using Vega, DataFrames, JSON
+
+df = DataFrame()
+for p in JSON.parse(readall(Pkg.dir("Vega", "deps/vega2/test/data/population.json")))
+    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+end
+
+pop1900 = df[df[:year] .== 1900, :];
+
+x = pop1900[:people]
+y = pop1900[:age]
+group = pop1900[:sex]
+
+a = popchart(x = x, y = y, group = group)
+print(tojson(a))
+
+#Result
+{
+    "name":"Vega Visualization",
+    "height":450,
+    "padding":"auto",
+    "marks":[
+        {
+            "properties":{
+                "enter":{
+                    "align":{
+                        "value":"center"
+                    },
+                    "x":{
+                        "value":325
+                    },
+                    "fill":{
+                        "value":"#000"
+                    },
+                    "baseline":{
+                        "value":"middle"
+                    },
+                    "text":{
+                        "field":"y"
+                    },
+                    "y":{
+                        "offset":11,
+                        "field":"y",
+                        "scale":"y"
+                    }
+                }
+            },
+            "from":{
+                "data":"table",
+                "transform":[
+                    {
+                        "field":"data.y",
+                        "as":"y",
+                        "type":"unique"
+                    }
+                ]
+            },
+            "type":"text"
+        },
+        {
+            "marks":[
+                {
+                    "properties":{
+                        "enter":{
+                            "height":{
+                                "offset":-1,
+                                "scale":"y",
+                                "band":true
+                            },
+                            "x2":{
+                                "value":0,
+                                "scale":"x"
+                            },
+                            "x":{
+                                "field":"data.x",
+                                "scale":"x"
+                            },
+                            "fillOpacity":{
+                                "value":0.6
+                            },
+                            "fill":{
+                                "field":"data.group",
+                                "scale":"c"
+                            },
+                            "y":{
+                                "field":"data.y",
+                                "scale":"y"
+                            }
+                        }
+                    },
+                    "type":"rect"
+                }
+            ],
+            "properties":{
+                "update":{
+                    "height":{
+                        "group":"height"
+                    },
+                    "x":{
+                        "field":"index",
+                        "scale":"g"
+                    },
+                    "width":{
+                        "value":300
+                    },
+                    "y":{
+                        "value":0
+                    }
+                }
+            },
+            "axes":[
+                {
+                    "format":"s",
+                    "type":"x",
+                    "scale":"x"
+                }
+            ],
+            "scales":[
+                {
+                    "reverse":{
+                        "data":"",
+                        "field":"index"
+                    },
+                    "name":"x",
+                    "nice":true,
+                    "range":"width",
+                    "domain":{
+                        "data":"table",
+                        "field":"data.x"
+                    },
+                    "type":"linear"
+                }
+            ],
+            "from":{
+                "data":"table",
+                "transform":[
+                    {
+                        "keys":[
+                            "data.group"
+                        ],
+                        "type":"facet"
+                    }
+                ]
+            },
+            "type":"group"
+        }
+    ],
+    "data":[
+        {
+            "name":"table",
+            "values":[
+                {
+                    "x":4619544,
+                    "group":1,
+                    "y":0
+                },
+                {
+                    "x":4589196,
+                    "group":2,
+                    "y":0
+                },
+                {
+                    "x":4465783,
+                    "group":1,
+                    "y":5
+                },
+                {
+                    "x":4390483,
+                    "group":2,
+                    "y":5
+                },
+                {
+                    "x":4057669,
+                    "group":1,
+                    "y":10
+                },
+                {
+                    "x":4001749,
+                    "group":2,
+                    "y":10
+                },
+                {
+                    "x":3774846,
+                    "group":1,
+                    "y":15
+                },
+                {
+                    "x":3801743,
+                    "group":2,
+                    "y":15
+                },
+                {
+                    "x":3694038,
+                    "group":1,
+                    "y":20
+                },
+                {
+                    "x":3751061,
+                    "group":2,
+                    "y":20
+                },
+                {
+                    "x":3389280,
+                    "group":1,
+                    "y":25
+                },
+                {
+                    "x":3236056,
+                    "group":2,
+                    "y":25
+                },
+                {
+                    "x":2918964,
+                    "group":1,
+                    "y":30
+                },
+                {
+                    "x":2665174,
+                    "group":2,
+                    "y":30
+                },
+                {
+                    "x":2633883,
+                    "group":1,
+                    "y":35
+                },
+                {
+                    "x":2347737,
+                    "group":2,
+                    "y":35
+                },
+                {
+                    "x":2261070,
+                    "group":1,
+                    "y":40
+                },
+                {
+                    "x":2004987,
+                    "group":2,
+                    "y":40
+                },
+                {
+                    "x":1868413,
+                    "group":1,
+                    "y":45
+                },
+                {
+                    "x":1648025,
+                    "group":2,
+                    "y":45
+                },
+                {
+                    "x":1571038,
+                    "group":1,
+                    "y":50
+                },
+                {
+                    "x":1411981,
+                    "group":2,
+                    "y":50
+                },
+                {
+                    "x":1161908,
+                    "group":1,
+                    "y":55
+                },
+                {
+                    "x":1064632,
+                    "group":2,
+                    "y":55
+                },
+                {
+                    "x":916571,
+                    "group":1,
+                    "y":60
+                },
+                {
+                    "x":887508,
+                    "group":2,
+                    "y":60
+                },
+                {
+                    "x":672663,
+                    "group":1,
+                    "y":65
+                },
+                {
+                    "x":640212,
+                    "group":2,
+                    "y":65
+                },
+                {
+                    "x":454747,
+                    "group":1,
+                    "y":70
+                },
+                {
+                    "x":440007,
+                    "group":2,
+                    "y":70
+                },
+                {
+                    "x":268211,
+                    "group":1,
+                    "y":75
+                },
+                {
+                    "x":265879,
+                    "group":2,
+                    "y":75
+                },
+                {
+                    "x":127435,
+                    "group":1,
+                    "y":80
+                },
+                {
+                    "x":132449,
+                    "group":2,
+                    "y":80
+                },
+                {
+                    "x":44008,
+                    "group":1,
+                    "y":85
+                },
+                {
+                    "x":48614,
+                    "group":2,
+                    "y":85
+                },
+                {
+                    "x":15164,
+                    "group":1,
+                    "y":90
+                },
+                {
+                    "x":20093,
+                    "group":2,
+                    "y":90
+                }
+            ]
+        }
+    ],
+    "scales":[
+        {
+            "name":"g",
+            "range":[
+                340,
+                10
+            ],
+            "domain":[
+                0,
+                1
+            ]
+        },
+        {
+            "reverse":true,
+            "name":"y",
+            "range":"height",
+            "domain":{
+                "data":"table",
+                "field":"data.y"
+            },
+            "type":"ordinal"
+        },
+        {
+            "name":"c",
+            "range":[
+                "#1f77b4",
+                "#e377c2"
+            ],
+            "domain":[
+                1,
+                2
+            ],
+            "type":"ordinal"
+        }
+    ],
+    "width":450
+}
+{% endhighlight %}

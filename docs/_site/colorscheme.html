@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="colorscheme">colorscheme!</h1>
+
+<p>Required Arguments:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">v</span><span class="p">::</span><span class="n">VegaVisualization</span>
+<span class="n">palette</span><span class="p">::</span><span class="n">Union</span><span class="p">(</span><span class="n">Tuple</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">AbstractString</span><span class="p">,</span> <span class="n">Array</span><span class="p">)</span>
+<span class="n">reversePalette</span><span class="p">::</span><span class="kt">Bool</span> <span class="o">=</span> <span class="n">false</span></code></pre></div>
+
+<p>This function mutates <code>:VegaVisualization</code>, modifying the colors for the <code>group</code> or <code>fill</code> properties of the visualization. The <code>palette</code> argument supports:</p>
+
+<pre><code>* Tuple{AbstractString,Int64}: A ColorBrewer theme and number of color levels desired
+* AbstractString: A string representing a color the browser understands (i.e. "Pink", "#FFF")
+* Array: An array of colors (i.e. ["Red", "Green"])
+</code></pre>
+
+<h3 id="colorbrewer-scale">ColorBrewer scale</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></code></pre></div>
+
+<div id="purple"></div>
+<script type="text/javascript">
+parse("purple",
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.8513796776202947},{"x":2,"y2":0,"group":1,"y":0.2625870861178603},{"x":3,"y2":0,"group":1,"y":0.9724565473384092},{"x":4,"y2":0,"group":1,"y":0.015489300595124655},{"x":5,"y2":0,"group":1,"y":0.2322286982937969},{"x":6,"y2":0,"group":1,"y":0.8186993719743252},{"x":7,"y2":0,"group":1,"y":0.8449349512662294},{"x":8,"y2":0,"group":1,"y":0.11070149212729241},{"x":9,"y2":0,"group":1,"y":0.3363164971342141},{"x":10,"y2":0,"group":1,"y":0.11479303595540746},{"x":11,"y2":0,"group":2,"y":0.7336879076495093},{"x":12,"y2":0,"group":2,"y":0.796077249393629},{"x":13,"y2":0,"group":2,"y":0.7599214628249928},{"x":14,"y2":0,"group":2,"y":0.5830675502045222},{"x":15,"y2":0,"group":2,"y":0.07028149908563153},{"x":16,"y2":0,"group":2,"y":0.37499661502958626},{"x":17,"y2":0,"group":2,"y":0.23561976542903285},{"x":18,"y2":0,"group":2,"y":0.15851353408668123},{"x":19,"y2":0,"group":2,"y":0.6284289392867841},{"x":20,"y2":0,"group":2,"y":0.9173802628931469}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(239,237,245)","rgb(188,189,220)","rgb(117,107,177)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+    );
+</script>
+
+<h3 id="colorbrewer-scale-reversed">ColorBrewer scale, Reversed</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">ab</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">ab</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;Purples&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">reversePalette</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span></code></pre></div>
+
+<div id="purple2"></div>
+<script type="text/javascript">
+parse("purple2",
+    {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"x","grid":false,"type":"x","scale":"x"},{"layer":"front","properties":{"title":{"fontSize":{"value":14}}},"title":"y","grid":false,"type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.9381179497008088},{"x":2,"y2":0,"group":1,"y":0.4964967441994834},{"x":3,"y2":0,"group":1,"y":0.18448114788656222},{"x":4,"y2":0,"group":1,"y":0.345915403095592},{"x":5,"y2":0,"group":1,"y":0.3295086909789129},{"x":6,"y2":0,"group":1,"y":0.6878649809527333},{"x":7,"y2":0,"group":1,"y":0.8182435494175802},{"x":8,"y2":0,"group":1,"y":0.6776403456457463},{"x":9,"y2":0,"group":1,"y":0.6483467878451943},{"x":10,"y2":0,"group":1,"y":0.6918815761886847},{"x":11,"y2":0,"group":2,"y":0.9075294897982495},{"x":12,"y2":0,"group":2,"y":0.9663468029837556},{"x":13,"y2":0,"group":2,"y":0.5146891806853813},{"x":14,"y2":0,"group":2,"y":0.37983788550900477},{"x":15,"y2":0,"group":2,"y":0.38740217343629735},{"x":16,"y2":0,"group":2,"y":0.5561657007191216},{"x":17,"y2":0,"group":2,"y":0.9495716801415124},{"x":18,"y2":0,"group":2,"y":0.7405958485706121},{"x":19,"y2":0,"group":2,"y":0.17496599266688206},{"x":20,"y2":0,"group":2,"y":0.09041640970752174}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["rgb(117,107,177)","rgb(188,189,220)","rgb(239,237,245)"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450,"legends":[{"title":"Group","fill":"group"}]}
+    );
+</script>
+
+<h3 id="single-color">Single Color</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span>
+
+<span class="n">srand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&quot;Violet&quot;</span><span class="p">)</span></code></pre></div>
+
+<div id="violet"></div>
+<script type="text/javascript">
+parse("violet",
+        {"name":"Vega Visualization","height":450,"padding":"auto","marks":[{"properties":{"enter":{"x":{"field":"x","scale":"x"},"y2":{"field":"y2","scale":"y"},"width":{"offset":-1,"scale":"x","band":true},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"from":{"data":"table"},"type":"rect"}],"axes":[{"properties":{"title":{"fontSize":{"value":14}}},"title":"x","type":"x","scale":"x"},{"properties":{"title":{"fontSize":{"value":14}}},"title":"y","type":"y","scale":"y"}],"data":[{"name":"table","values":[{"x":1,"y2":0,"group":1,"y":0.23603334566204692},{"x":2,"y2":0,"group":1,"y":0.34651701419196046},{"x":3,"y2":0,"group":1,"y":0.3127069683360675},{"x":4,"y2":0,"group":1,"y":0.00790928339056074},{"x":5,"y2":0,"group":1,"y":0.4886128300795012},{"x":6,"y2":0,"group":1,"y":0.21096820215853596},{"x":7,"y2":0,"group":1,"y":0.951916339835734},{"x":8,"y2":0,"group":1,"y":0.9999046588986136},{"x":9,"y2":0,"group":1,"y":0.25166218303197185},{"x":10,"y2":0,"group":1,"y":0.9866663668987996},{"x":11,"y2":0,"group":1,"y":0.5557510873245723},{"x":12,"y2":0,"group":1,"y":0.43710797460962514},{"x":13,"y2":0,"group":1,"y":0.42471785049513144},{"x":14,"y2":0,"group":1,"y":0.773223048457377},{"x":15,"y2":0,"group":1,"y":0.2811902322857298},{"x":16,"y2":0,"group":1,"y":0.20947237319807077},{"x":17,"y2":0,"group":1,"y":0.25137920979222494},{"x":18,"y2":0,"group":1,"y":0.02037486871266725},{"x":19,"y2":0,"group":1,"y":0.2877015122756894},{"x":20,"y2":0,"group":1,"y":0.859512136087661}]}],"scales":[{"name":"x","range":"width","domain":{"data":"table","field":"x"},"type":"ordinal"},{"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"linear"},{"name":"group","range":["Violet"],"domain":{"data":"table","field":"group"},"type":"ordinal"}],"width":450}
+
+    );
+</script>
+
+<h3 id="array-of-colors">Array of Colors</h3>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">Vega</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;vega-datasets/population.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
+
+<span class="n">pc1</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">colorscheme</span><span class="o">!</span><span class="p">(</span><span class="n">pc1</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Green&quot;</span><span class="p">,</span> <span class="s">&quot;Red&quot;</span><span class="p">])</span></code></pre></div>
+
+<div id="array"></div>
+<script type="text/javascript">
+parse("array",
+      {"name":"Vega Visualization","height":400,"padding":"auto","marks":[{"marks":[{"properties":{"enter":{"height":{"offset":-1,"scale":"y","band":true},"x2":{"value":0,"scale":"x"},"x":{"field":"x","scale":"x"},"fill":{"field":"group","scale":"group"},"y":{"field":"y","scale":"y"}}},"type":"rect"}],"properties":{"update":{"height":{"field":{"group":"height"}},"x":{"field":"key","scale":"g"},"width":{"offset":-30,"scale":"g","band":true},"y":{"value":0}}},"axes":[{"format":"s","type":"x","scale":"x"}],"scales":[{"reverse":{"data":"","field":"reverse"},"name":"x","nice":true,"range":"width","domain":{"data":"table","field":"x"},"type":"linear"}],"from":{"data":"table","transform":[{"groupby":["group"],"type":"facet"},{"field":"reverse","expr":"datum.key==2","type":"formula"}]},"type":"group"},{"properties":{"enter":{"align":{"value":"center"},"x":{"offset":-15,"mult":0.5,"field":{"group":"width"}},"fill":{"value":"#000"},"baseline":{"value":"middle"},"text":{"field":"y"},"y":{"offset":11,"field":"y","scale":"y"}}},"from":{"data":"table","transform":[{"groupby":["y"],"type":"aggregate"}]},"type":"text"}],"data":[{"name":"table","values":[{"x":4619544,"y2":0,"group":1,"y":0},{"x":4589196,"y2":0,"group":2,"y":0},{"x":4465783,"y2":0,"group":1,"y":5},{"x":4390483,"y2":0,"group":2,"y":5},{"x":4057669,"y2":0,"group":1,"y":10},{"x":4001749,"y2":0,"group":2,"y":10},{"x":3774846,"y2":0,"group":1,"y":15},{"x":3801743,"y2":0,"group":2,"y":15},{"x":3694038,"y2":0,"group":1,"y":20},{"x":3751061,"y2":0,"group":2,"y":20},{"x":3389280,"y2":0,"group":1,"y":25},{"x":3236056,"y2":0,"group":2,"y":25},{"x":2918964,"y2":0,"group":1,"y":30},{"x":2665174,"y2":0,"group":2,"y":30},{"x":2633883,"y2":0,"group":1,"y":35},{"x":2347737,"y2":0,"group":2,"y":35},{"x":2261070,"y2":0,"group":1,"y":40},{"x":2004987,"y2":0,"group":2,"y":40},{"x":1868413,"y2":0,"group":1,"y":45},{"x":1648025,"y2":0,"group":2,"y":45},{"x":1571038,"y2":0,"group":1,"y":50},{"x":1411981,"y2":0,"group":2,"y":50},{"x":1161908,"y2":0,"group":1,"y":55},{"x":1064632,"y2":0,"group":2,"y":55},{"x":916571,"y2":0,"group":1,"y":60},{"x":887508,"y2":0,"group":2,"y":60},{"x":672663,"y2":0,"group":1,"y":65},{"x":640212,"y2":0,"group":2,"y":65},{"x":454747,"y2":0,"group":1,"y":70},{"x":440007,"y2":0,"group":2,"y":70},{"x":268211,"y2":0,"group":1,"y":75},{"x":265879,"y2":0,"group":2,"y":75},{"x":127435,"y2":0,"group":1,"y":80},{"x":132449,"y2":0,"group":2,"y":80},{"x":44008,"y2":0,"group":1,"y":85},{"x":48614,"y2":0,"group":2,"y":85},{"x":15164,"y2":0,"group":1,"y":90},{"x":20093,"y2":0,"group":2,"y":90}]}],"scales":[{"name":"g","range":"width","domain":[2,1],"type":"ordinal"},{"reverse":true,"name":"y","range":"height","domain":{"data":"table","field":"y"},"type":"ordinal"},{"name":"group","range":["Green","Red"],"domain":[1,2],"type":"ordinal"}],"width":640,"legends":[{"title":"Group","fill":"group"}]}
+    );
+</script>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

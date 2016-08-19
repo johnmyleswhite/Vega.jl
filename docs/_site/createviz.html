@@ -1,0 +1,530 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vega.jl: A Julia package for generating visualizations using Vega</title>
+
+    <link rel="stylesheet" href="stylesheets/minimal_styles.css">
+    <link rel="stylesheet" href="stylesheets/minimal_pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+         <script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(divid,spec) {
+  vg.parse.spec(spec, function(chart) { chart({el:"#" + divid}).update(); });
+}
+</script>
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="http://johnmyleswhite.github.io/Vega.jl"><h1>Vega.jl</h1></a>
+        <p>A Julia package for generating visualizations in Vega</p>
+
+        <p>
+          <small><a href='gettingstarted.html'>Getting Started</a></small>
+          <br/>
+          <small><a href='primitives.html'>Visualization Primitives</a></small>
+          <br/>
+          <small><a href='createviz.html'>Creating A Visualization From Scratch</a></small>
+          <br/>
+
+          <h4>Pre-defined Visualizations</h4>
+          <small><a href='areaplot.html'>Area Plot</a></small>
+          <br/>
+          <small><a href='asterplot.html'>Aster Plot</a></small>
+          <br/>
+          <small><a href='barplot.html'>Bar Plot</a></small>
+          <br/>
+          <small><a href='boxplot.html'>Box Plot</a></small>
+          <br/>
+          <small><a href='bubblechart.html'>Bubble Chart</a></small>
+          <br/>
+          <small><a href='choropleth.html'>Choropleth</a></small>
+          <br/>
+          <small><a href='dotplot.html'>Dot Plot</a></small>
+          <br/>
+          <small><a href='groupedbar.html'>Grouped Bar</a></small>
+          <br/>
+          <small><a href='heatmap.html'>Heatmap</a></small>
+          <br/>
+          <small><a href='horizon.html'>Horizon</a></small>
+          <br/>
+          <small><a href='histogram.html'>Histogram</a></small>
+          <br/>
+          <small><a href='jointplot.html'>Joint Plot</a></small>
+          <br/>
+          <small><a href='lineplot.html'>Line Plot</a></small>
+          <br/>
+          <small><a href='piechart.html'>Pie/Donut Chart</a></small>
+          <br/>
+          <small><a href='popchart.html'>Population Chart</a></small>
+          <br/>
+          <small><a href='punchcard.html'>Punchcard</a></small>
+          <br/>
+          <small><a href='ribbonplot.html'>Ribbon Plot</a></small>
+          <br/>
+          <small><a href='rugplot.html'>Rug Plot</a></small>
+          <br/>
+          <small><a href='scatterplot.html'>Scatter Plot</a></small>
+          <br/>
+          <small><a href='stemleaf.html'>Stem-and-Leaf Plot</a></small>
+          <br/>
+          <small><a href='streamplot.html'>Stream Plot</a></small>
+          <br/>
+          <small><a href='waterfall.html'>Waterfall</a></small>
+          <br/>
+          <small><a href='wordcloud.html'>Word Cloud</a></small>
+          <br/>
+          <br/>
+          <h4>Interactive Visualization</h4>
+          <small><a href='interact.html'>Interact.jl and Vega in Jupyter Notebooks</a></small>
+          <br/>
+          <small><a href='escher_vega.html'>Creating Interactive Sites Using Escher and Vega</a></small>
+          <br/>
+          <br/>
+
+          <h4>Visualization Mutating Functions</h4>
+          <small><a href='colorscheme.html'>colorscheme!</a></small>
+          <br/>
+          <small><a href='general.html'>General Visualization Properties</a></small>
+          <br/>
+          <small><a href='hline_vline.html'>hline! / vline!</a></small>
+          <br/>
+          <small><a href='hover.html'>hover!</a></small>
+          <br/>
+          <small><a href='jitter.html'>jitter!</a></small>
+          <br/>
+          <small><a href='legend.html'>legend!</a></small>
+          <br/>
+          <small><a href='stroke.html'>stroke!</a></small>
+          <br/>
+          <small><a href='text.html'>text!</a></small>
+          <br/>
+          <small><a href='title.html'>title!</a></small>
+          <br/>
+          <small><a href='xlab_ylab.html'>xlab! / ylab!</a></small>
+          <br/>
+          <small><a href='xlim_ylim.html'>xlim! / ylim!</a></small>
+          <br/>
+
+        </p>
+
+        <p class="view"><a href="https://github.com/johnmyleswhite/Vega.jl">View the Project on GitHub<small>johnmyleswhite/Vega.jl</small></a></p>
+
+      </header>
+      <section>
+        <h1 id="creating-a-visualization-from-scratch">Creating a Visualization From Scratch</h1>
+
+<p>To create a visualization from scratch, all code will need to instantiate a <code>:VegaVisualization</code> type, which comes with a handful of default values. As stated in the <a href="primitives.html">Visualization Primitives</a> section, we will always work with Julia types, there is no need to worry about the JSON representation (although it can always be viewed using <code>tojson()</code>):</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="c">#Create new :VegaVisualization container</span>
+<span class="n">vg</span> <span class="o">=</span> <span class="n">VegaVisualization</span><span class="p">()</span>
+<span class="n">tojson</span><span class="p">(</span><span class="n">vg</span><span class="p">)</span>
+
+<span class="c">#Result from REPL</span>
+<span class="s">&quot;{</span><span class="se">\&quot;</span><span class="s">name</span><span class="se">\&quot;</span><span class="s">:</span><span class="se">\&quot;</span><span class="s">Vega Visualization</span><span class="se">\&quot;</span><span class="s">,</span><span class="se">\&quot;</span><span class="s">height</span><span class="se">\&quot;</span><span class="s">:450,</span><span class="se">\&quot;</span><span class="s">padding</span><span class="se">\&quot;</span><span class="s">:</span><span class="se">\&quot;</span><span class="s">auto</span><span class="se">\&quot;</span><span class="s">,</span><span class="se">\&quot;</span><span class="s">width</span><span class="se">\&quot;</span><span class="s">:450}&quot;</span></code></pre></div>
+
+<p>Note that the above doesn’t represent the minimum necessary structure for building a Vega visualization; rather, it represents the default values when a new <code>:VegaVisualization</code> is created. An example of a full JSON object based on a fully-specified <code>:VegaVisualization</code> is provided below:</p>
+
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">using</span> <span class="n">Vega</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">JSON</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">readall</span><span class="p">(</span><span class="n">Pkg</span><span class="o">.</span><span class="n">dir</span><span class="p">(</span><span class="s">&quot;Vega&quot;</span><span class="p">,</span> <span class="s">&quot;deps/vega2/test/data/population.json&quot;</span><span class="p">)))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">(;[</span><span class="n">symbol</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">p</span><span class="p">]</span><span class="o">...</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="n">pop1900</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="n">year</span><span class="p">]</span> <span class="o">.==</span> <span class="mi">1900</span><span class="p">,</span> <span class="p">:];</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">people</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">age</span><span class="p">]</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">pop1900</span><span class="p">[:</span><span class="n">sex</span><span class="p">]</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">popchart</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">tojson</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="c">#Result</span>
+<span class="p">{</span>
+    <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;Vega Visualization&quot;</span><span class="p">,</span>
+    <span class="s">&quot;height&quot;</span><span class="p">:</span><span class="mi">450</span><span class="p">,</span>
+    <span class="s">&quot;padding&quot;</span><span class="p">:</span><span class="s">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="s">&quot;marks&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;properties&quot;</span><span class="p">:{</span>
+                <span class="s">&quot;enter&quot;</span><span class="p">:{</span>
+                    <span class="s">&quot;align&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="s">&quot;center&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="mi">325</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;fill&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="s">&quot;#000&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;baseline&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="s">&quot;middle&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;text&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;offset&quot;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">&quot;from&quot;</span><span class="p">:{</span>
+                <span class="s">&quot;data&quot;</span><span class="p">:</span><span class="s">&quot;table&quot;</span><span class="p">,</span>
+                <span class="s">&quot;transform&quot;</span><span class="p">:[</span>
+                    <span class="p">{</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.y&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;as&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;unique&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;text&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s">&quot;marks&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;properties&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;enter&quot;</span><span class="p">:{</span>
+                            <span class="s">&quot;height&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;offset&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+                                <span class="s">&quot;band&quot;</span><span class="p">:</span><span class="n">true</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;x2&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                                <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;x&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;x&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.x&quot;</span><span class="p">,</span>
+                                <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;x&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;fillOpacity&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="mf">0.6</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;fill&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.group&quot;</span><span class="p">,</span>
+                                <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;c&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;y&quot;</span><span class="p">:{</span>
+                                <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.y&quot;</span><span class="p">,</span>
+                                <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;rect&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s">&quot;properties&quot;</span><span class="p">:{</span>
+                <span class="s">&quot;update&quot;</span><span class="p">:{</span>
+                    <span class="s">&quot;height&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="s">&quot;height&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;index&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;g&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;width&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="mi">300</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;value&quot;</span><span class="p">:</span><span class="mi">0</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s">&quot;axes&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;format&quot;</span><span class="p">:</span><span class="s">&quot;s&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;x&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;scale&quot;</span><span class="p">:</span><span class="s">&quot;x&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s">&quot;scales&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;reverse&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;data&quot;</span><span class="p">:</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;index&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;x&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;nice&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                    <span class="s">&quot;range&quot;</span><span class="p">:</span><span class="s">&quot;width&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;domain&quot;</span><span class="p">:{</span>
+                        <span class="s">&quot;data&quot;</span><span class="p">:</span><span class="s">&quot;table&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.x&quot;</span>
+                    <span class="p">},</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;linear&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s">&quot;from&quot;</span><span class="p">:{</span>
+                <span class="s">&quot;data&quot;</span><span class="p">:</span><span class="s">&quot;table&quot;</span><span class="p">,</span>
+                <span class="s">&quot;transform&quot;</span><span class="p">:[</span>
+                    <span class="p">{</span>
+                        <span class="s">&quot;keys&quot;</span><span class="p">:[</span>
+                            <span class="s">&quot;data.group&quot;</span>
+                        <span class="p">],</span>
+                        <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;facet&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;group&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">&quot;data&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;table&quot;</span><span class="p">,</span>
+            <span class="s">&quot;values&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4619544</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">0</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4589196</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">0</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4465783</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">5</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4390483</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">5</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4057669</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">10</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">4001749</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">10</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3774846</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">15</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3801743</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">15</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3694038</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">20</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3751061</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">20</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3389280</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">25</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">3236056</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">25</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2918964</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">30</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2665174</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">30</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2633883</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">35</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2347737</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">35</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2261070</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">40</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">2004987</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">40</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1868413</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">45</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1648025</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">45</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1571038</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">50</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1411981</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">50</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1161908</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">55</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">1064632</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">55</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">916571</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">60</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">887508</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">60</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">672663</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">65</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">640212</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">65</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">454747</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">70</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">440007</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">70</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">268211</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">75</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">265879</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">75</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">127435</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">80</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">132449</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">80</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">44008</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">85</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">48614</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">85</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">15164</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">90</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s">&quot;x&quot;</span><span class="p">:</span><span class="mi">20093</span><span class="p">,</span>
+                    <span class="s">&quot;group&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;y&quot;</span><span class="p">:</span><span class="mi">90</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">&quot;scales&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;g&quot;</span><span class="p">,</span>
+            <span class="s">&quot;range&quot;</span><span class="p">:[</span>
+                <span class="mi">340</span><span class="p">,</span>
+                <span class="mi">10</span>
+            <span class="p">],</span>
+            <span class="s">&quot;domain&quot;</span><span class="p">:[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">1</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s">&quot;reverse&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+            <span class="s">&quot;range&quot;</span><span class="p">:</span><span class="s">&quot;height&quot;</span><span class="p">,</span>
+            <span class="s">&quot;domain&quot;</span><span class="p">:{</span>
+                <span class="s">&quot;data&quot;</span><span class="p">:</span><span class="s">&quot;table&quot;</span><span class="p">,</span>
+                <span class="s">&quot;field&quot;</span><span class="p">:</span><span class="s">&quot;data.y&quot;</span>
+            <span class="p">},</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;ordinal&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;c&quot;</span><span class="p">,</span>
+            <span class="s">&quot;range&quot;</span><span class="p">:[</span>
+                <span class="s">&quot;#1f77b4&quot;</span><span class="p">,</span>
+                <span class="s">&quot;#e377c2&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;domain&quot;</span><span class="p">:[</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="mi">2</span>
+            <span class="p">],</span>
+            <span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;ordinal&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">&quot;width&quot;</span><span class="p">:</span><span class="mi">450</span>
+<span class="p">}</span></code></pre></div>
+
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
