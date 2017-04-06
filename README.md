@@ -4,6 +4,9 @@ OSX/Linux: [![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?bra
 pkg.julialang.org: [![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4) </br>
 Windows 64-bit: [![Build status](https://ci.appveyor.com/api/projects/status/5rdwxsajxo5ybbfn?svg=true)](https://ci.appveyor.com/project/randyzwitch/vega-jl)
 
+# NOTE: THIS PACKAGE IS IN A STATE OF LIMBO
+
+Unfortunately, I haven't had a lot of time to maintain this package, and given the speed of Julia moving from 0.4 to 0.5 and 0.6 AND Vega moving versions from 2 to 3, there is a ton of bit rot. I will try and get this package refreshed to work on Julia 0.5 and 0.6 and tag new releases, but no new features will be added until I migrate the code to Vega 3. -- Randy 4/6/2016
 
 # Introduction
 
