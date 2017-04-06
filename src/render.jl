@@ -45,10 +45,10 @@ function scriptstr(v::VegaVisualization, divid)
     return """
         require.config({
           paths: {
-            d3: ["https://vega.github.io/vega-editor/vendor/d3.min", "/files/vegajl/assets/bower_components/d3/d3.min"],
-            vega: ["https://vega.github.io/vega/vega.min", "/files/vegajl/assets/bower_components/vega/vega.min"],
-            cloud: ["https://vega.github.io/vega-editor/vendor/d3.layout.cloud", "/files/vegajl/assets/bower_components/d3-cloud/build/d3.layout.cloud"],
-            topojson: ["https://vega.github.io/vega-editor/vendor/topojson", "/files/vegajl/assets/bower_components/topojson/topojson"]
+            d3: ["https://johnmyleswhite.github.io/Vega.jl/javascripts/d3.min", "/files/vegajl/assets/bower_components/d3/d3.min"],
+            vega: ["https://johnmyleswhite.github.io/Vega.jl/javascripts/vega.min", "/files/vegajl/assets/bower_components/vega/vega.min"],
+            cloud: ["https://johnmyleswhite.github.io/Vega.jl/javascripts/d3.layout.cloud", "/files/vegajl/assets/bower_components/d3-cloud/build/d3.layout.cloud"],
+            topojson: ["https://johnmyleswhite.github.io/Vega.jl/javascripts/topojson", "/files/vegajl/assets/bower_components/topojson/topojson"]
           }
         });
 
