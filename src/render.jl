@@ -7,6 +7,7 @@ end
 
 #Jupyter Notebook display
 import Base.show
+import Base.writemime
 
 asset(url...) = readall(joinpath(dirname(@__FILE__), "..", "assets", "bower_components", url...))
 
