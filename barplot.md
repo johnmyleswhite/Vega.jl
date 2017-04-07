@@ -57,7 +57,7 @@ parse("horizontalbar",
 {% highlight julia %}
 using Vega
 
-x = [1:20]
+x = 1:20
 y = rand(20)
 group = [round(val/10) for val in x]
 

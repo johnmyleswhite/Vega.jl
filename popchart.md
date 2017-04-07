@@ -22,7 +22,7 @@ using Vega, DataFrames, JSON
 
 df = DataFrame()
 for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+    df = vcat(df, DataFrame(; Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 
 pop1900 = df[df[:year] .== 1900, :];

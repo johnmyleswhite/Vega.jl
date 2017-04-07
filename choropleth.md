@@ -37,7 +37,7 @@ parse("uscounties",
 The input for the X array are 2-digit [U.S. state-level FIPS codes](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code). Additionally, you need to account for missing FIPS codes manually at the moment, this function will not plot shapes if you do not provide a FIPS code value. This will likely be remedied in a future release.
 
 {% highlight julia %}
-x = [1:60]
+x = 1:60
 y = rand(Float64, 60)
 
 a = choropleth(x = x, y = y, entity = :usstates)

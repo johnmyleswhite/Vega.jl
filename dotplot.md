@@ -21,7 +21,7 @@ sort::Bool = true
 {% highlight julia %}
 df = DataFrame()
 for p in JSON.parse(readall(Pkg.dir("Vega", "vega-datasets/movies.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre])
