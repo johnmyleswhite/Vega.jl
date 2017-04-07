@@ -1,4 +1,4 @@
-julia 0.5.0-rc1
+julia 0.5
 JSON
 ColorBrewer
 KernelDensity
