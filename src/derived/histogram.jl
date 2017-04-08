@@ -5,13 +5,19 @@ function histogram(; x::AbstractVector = Int[],
                     bandwidth::Real=0.0)
 
     if bandwidth == 0.0
-        a, b = hist(x, nbins)
+        #a, b = hist(x, nbins)
+        bbb = fit(Histogram, x, nbins = nbins)
+        a = bbb.edges[1]
+        b = bbb.weights
         bandwidth=a.step/a.divisor
     elseif bandwidth < 0.0
 		error("bandwidth should be a positive number but got $(bandwidth)")
 	else
         xmin, xmax = extrema(x)
-        a, b = hist(x, xmin:bandwidth:xmax)
+        #a, b = hist(x, xmin:bandwidth:xmax)
+        bbb = fit(Histogram, x, xmin:bandwidth:xmax)
+        a = bbb.edges[1]
+        b = bbb.weights
     end
     total = relativefreq ? sum(b)*bandwidth : 1
 

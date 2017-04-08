@@ -7,26 +7,24 @@ end
 
 #Jupyter Notebook display
 import Base.show
-import Base.writemime
+import Patchwork: Elem
 
 asset(url...) = readall(joinpath(dirname(@__FILE__), "..", "assets", "bower_components", url...))
 
-function writemime(io::IO, ::MIME"text/html", v::VegaVisualization)
-    divid = "vg" * randstring(3)
-    script_contents = scriptstr(v, divid)
-    display("text/html", """
-
-    <body>
-    <div id=\"$divid\"></div>
-    </body>
-
-    <script type="text/javascript">
-        $script_contents
-    </script>
-    """)
-end
-
-import Patchwork: Elem
+# function show(io::IO, ::MIME"text/html", v::VegaVisualization)
+#     divid = "vg" * randstring(3)
+#     script_contents = scriptstr(v, divid)
+#     display("text/html", """
+#
+#     <body>
+#     <div id=\"$divid\"></div>
+#     </body>
+#
+#     <script type="text/javascript">
+#         $script_contents
+#     </script>
+#     """)
+# end
 
 function patchwork_repr(v::VegaVisualization)
     divid = "vg" * randstring(3)
@@ -38,7 +36,7 @@ function patchwork_repr(v::VegaVisualization)
 end
 
 function show(io::IO, m::MIME"text/html", v::VegaVisualization)
-    writemime(io, m, patchwork_repr(v))
+    show(io, m, patchwork_repr(v))
 end
 
 function scriptstr(v::VegaVisualization, divid)
