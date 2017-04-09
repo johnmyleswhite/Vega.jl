@@ -5,13 +5,19 @@ function histogram(; x::AbstractVector = Int[],
                     bandwidth::Real=0.0)
 
     if bandwidth == 0.0
-        a, b = hist(x, nbins)
+        #a, b = hist(x, nbins)
+        bbb = fit(Histogram, x, nbins = nbins)
+        a = bbb.edges[1]
+        b = bbb.weights
         bandwidth=a.step/a.divisor
     elseif bandwidth < 0.0
 		error("bandwidth should be a positive number but got $(bandwidth)")
 	else
         xmin, xmax = extrema(x)
-        a, b = hist(x, xmin:bandwidth:xmax)
+        #a, b = hist(x, xmin:bandwidth:xmax)
+        bbb = fit(Histogram, x, xmin:bandwidth:xmax)
+        a = bbb.edges[1]
+        b = bbb.weights
     end
     total = relativefreq ? sum(b)*bandwidth : 1
 
@@ -38,8 +44,8 @@ function histogram(; x::AbstractVector = Int[],
     v.marks[1].properties.enter.x2 = VegaValueRef(scale = "x", field = "x2")
     v.marks[1].properties.enter.y = VegaValueRef(scale = "y", field = "y")
     v.marks[1].properties.enter.y2 = VegaValueRef(scale = "y", field = "y2")
-    #v.marks[1].properties.enter.fill = VegaValueRef(scale = "group",
-    #    field = "group")
+    v.marks[1].properties.enter.fill = VegaValueRef(scale = "group",
+        field = "group")
     v.marks[1].properties.enter.stroke = VegaValueRef(value="black")
     v.marks[1].properties.enter.strokeWidth = VegaValueRef(value=0.25)
 

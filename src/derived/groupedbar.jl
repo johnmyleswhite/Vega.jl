@@ -4,7 +4,7 @@ function groupedbar(; x::AbstractVector = Int[], y::AbstractVector = Int[], grou
 
     #This seems like it should be a method, but so easy to do right here
     if typeof(x) == Vector{Char}
-        x = UTF8String[string(s) for s in x]
+        x = String[string(s) for s in x]
     end
 
     add_data!(v, x = x, y = y, group = group)

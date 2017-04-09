@@ -1,7 +1,7 @@
 #using PyCall
 #@pyimport jsonschema
 using JSON, Vega, Base.Test, KernelDensity, Distributions, RDatasets
-vegaschema = JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "assets/bower_components/vega/vega-schema.json")))
+#vegaschema = JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "assets/bower_components/vega/vega-schema.json")))
 
 #### Tests ####
 #Test that Julia returned VegaVisulization (every public function does)
@@ -243,8 +243,8 @@ a = piechart(x = fruit, y = bushels, holesize = 175);
 #25. Population Chart
 println("Test 25")
 df = DataFrame()
-for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+for p in JSON.parse(readstring(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 pop1900 = df[df[:year] .== 1900, :];
 x = pop1900[:people]
@@ -363,8 +363,8 @@ colorscheme!(a, palette = "Violet");
 #36. colorscheme!
 println("Test 36")
 df = DataFrame()
-for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+for p in JSON.parse(readstring(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 pop1900 = df[df[:year] .== 1900, :];
 x = pop1900[:people]
@@ -452,8 +452,8 @@ text!(a, title = "Safe Fat Intake 65g/day", x = 150, y = 10)
 #43 title!
 println("Test 43")
 df = DataFrame()
-for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+for p in JSON.parse(readstring(joinpath(dirname(@__FILE__), "..", "vega-datasets/population.json")))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 pop1900 = df[df[:year] .== 1900, :];
 x = pop1900[:people]
@@ -503,8 +503,8 @@ a.background = "green"
 #47 dotplot
 println("Test 47")
 df = DataFrame()
-for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+for p in JSON.parse(readstring(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre])
@@ -518,8 +518,8 @@ xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")
 #48 dotplot
 println("Test 48")
 df = DataFrame()
-for p in JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
-    df = vcat(df, DataFrame(;[symbol(k)=>v for (k,v) in p]...))
+for p in JSON.parse(readstring(joinpath(dirname(@__FILE__), "..", "vega-datasets/movies.json")))
+    df = vcat(df, DataFrame(;Dict(Symbol(k)=>v for (k,v) in p)...))
 end
 
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre], sorted = false)
