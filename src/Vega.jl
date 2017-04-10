@@ -2,7 +2,7 @@ VERSION >= v"0.4" && __precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, Compat, KernelDensity, NoveltyColors, StatsBase
+    using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase
     import Base.print
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
