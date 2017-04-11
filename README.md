@@ -6,7 +6,7 @@ Windows 64-bit: [![Build status](https://ci.appveyor.com/api/projects/status/5rd
 
 # NOTE: THIS PACKAGE IS IN A STATE OF LIMBO
 
-Unfortunately, I haven't had a lot of time to maintain this package, and given the speed of Julia moving from 0.4 to 0.5 and 0.6 AND Vega moving versions from 2 to 3, there is a ton of bit rot. I will try and get this package refreshed to work on Julia 0.5 and 0.6 and tag new releases, but no new features will be added until I migrate the code to Vega 3. -- Randy 4/6/2016
+Vega.jl works for version 0.5; Vega.jl will not be updated to support Julia version 0.6 until the library is migrated to support Vega 3, which modified the majority of the JavaScript API. -- Randy, 4/11/2017
 
 # Introduction
 
