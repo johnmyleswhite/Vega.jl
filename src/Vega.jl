@@ -1,8 +1,8 @@
-VERSION >= v"0.4" && __precompile__()
+__precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase
+    using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase, Parameters
     import Base.print
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
@@ -28,7 +28,7 @@ module Vega
 
     #Import helper code
     include("primitives/definetypes.jl")
-    include("primitives/constructors.jl")
+    #include("primitives/constructors.jl")
     include("primitives/tojs.jl")
 
     include("render.jl")

@@ -28,7 +28,7 @@ function heatmap(;
     v.legends[1].title = ""
 
     #Marks
-    v.marks = Array(VegaMark, 1)
+    v.marks = Array{VegaMark}(1)
     v.marks[1] = VegaMark(_type = "rect",
                           from = VegaMarkFrom(data = table),
                           properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),

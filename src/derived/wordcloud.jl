@@ -4,16 +4,16 @@ function wordcloud(; x::AbstractVector =  String[], wordAngles::AbstractVector =
                       width = 800,
                       padding = "auto",
                       name = "wordcloud",
-                      data = Array(VegaData,1),
-                      scales = Array(VegaScale, 1),
-                      marks = Array(VegaMark, 1))
+                      data = Array{VegaData}(1),
+                      scales = Array{VegaScale}(1),
+                      marks = Array{VegaMark}(1))
 
     #Make unique table name
     table = string("table_", lowercase(randstring(5)))
 
     v.data[1] = VegaData(name = table,
                          values = x,
-                         transform = Array(VegaTransform, 6))
+                         transform = Array{VegaTransform}(6))
 
     v.data[1].transform[1] = VegaTransform(Dict{Any, Any}("type" => "countpattern",
                                                         "field" => "data",
