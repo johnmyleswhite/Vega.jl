@@ -1,12 +1,12 @@
 Vega.jl
 =======
 OSX/Linux: [![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl) </br>
-pkg.julialang.org: [![Vega](http://pkg.julialang.org/badges/Vega_0.4.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.4) </br>
+pkg.julialang.org: [![Vega](http://pkg.julialang.org/badges/Vega_0.5.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.5) </br>
 Windows 64-bit: [![Build status](https://ci.appveyor.com/api/projects/status/5rdwxsajxo5ybbfn?svg=true)](https://ci.appveyor.com/project/randyzwitch/vega-jl)
 
 # NOTE: THIS PACKAGE IS IN A STATE OF LIMBO
 
-Vega.jl works for version 0.5; Vega.jl will not be updated to support Julia version 0.6 until the library is migrated to support Vega 3, which modified the majority of the JavaScript API. -- Randy, 4/11/2017
+Vega.jl on METADATA works for version 0.5; Vega.jl master works for version 0.6 in Jupyter Notebook. Work will continue to convert package to version 0.6 of Julia, version 3 of Vega and adding support for Atom/Juno. -- Randy, 4/25/2016
 
 # Introduction
 
@@ -22,10 +22,6 @@ This package is unrelated to [VegaLite.jl](https://github.com/fredo-dedup/VegaLi
 	using Vega
 
 Using Vega from the REPL/Atom will work with or without an Internet connection, as the required JavaScript libraries are injected into the HTML before the browser is opened (automatically).
-
-In order to use Jupyter Notebook offline, you will need to set up a shortcut/softlink to the Julia libraries named `vegajl`; for example, to serve notebooks from the folder `ijulia_notebooks` on OSX, run the following at the OSX Terminal (substituting the proper directory links of course):
-
-	ln -s /Users/randyzwitch/.julia/v0.4/Vega /Users/randyzwitch/ijulia_notebooks/vegajl
 
 # Documentation
 

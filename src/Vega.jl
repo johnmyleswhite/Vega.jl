@@ -3,11 +3,10 @@ __precompile__()
 module Vega
 
     using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase, Parameters
-    import Base.print
+    import Base: print, show
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,
            VegaTransform, VegaVisualization, VegaFormat, VegaScene,
-           #VegaJSON, VegaCSV, VegaTSV,
            VegaDataRef, VegaValueRef,
            VegaMarkPropertySet, VegaMarkProperties, VegaLegend, VegaStream, VegaMarkFrom, VegaPredicate
 
@@ -28,9 +27,7 @@ module Vega
 
     #Import helper code
     include("primitives/definetypes.jl")
-    #include("primitives/constructors.jl")
     include("primitives/tojs.jl")
-
     include("render.jl")
 
     # Intermediates
@@ -67,18 +64,5 @@ module Vega
     include("derived/dotplot.jl")
     include("derived/horizon.jl")
     include("derived/punchcard.jl")
-
-    if Pkg.installed("Escher") != nothing
-        include("escher_integration.jl")
-    end
-
-    if Pkg.installed("Blink") != nothing
-        include("blink_integration.jl")
-        BLINK_INSTALLED = true
-    else
-        BLINK_INSTALLED = false
-    end
-
-    print(x::VegaVisualization) = print(JSON.json(tojs(x)))
 
 end
