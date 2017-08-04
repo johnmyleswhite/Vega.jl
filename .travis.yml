@@ -5,7 +5,6 @@ os:
 notifications:
   email: false
 julia:
-  - 0.5
   - 0.6
   - nightly
 before_install:
