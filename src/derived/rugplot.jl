@@ -9,7 +9,7 @@ function rugplot(; x::AbstractVector = Int[])
     default_scales!(v)
 
     #Creates axis and light gray lines
-    v.axes = Array(VegaAxis, 1)
+    v.axes = Array{VegaAxis}(1)
     v.axes[1] = VegaAxis(_type = "x",
                                   scale = "x",
                                   properties = Dict{Any, Any}("stroke" => Dict{Any, Any}("value" => "#000000"),
@@ -23,7 +23,7 @@ function rugplot(; x::AbstractVector = Int[])
 
 
     #Add data
-    v.marks = Array(VegaMark, 1)
+    v.marks = Array{VegaMark}(1)
     v.marks[1] = VegaMark(_type = "rect",
                            from = VegaMarkFrom(data = table),
                            properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "x"),

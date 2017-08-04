@@ -35,12 +35,12 @@ function boxplot(;y::AbstractVector = Int[], group::AbstractVector = Int[])
     push!(v.data, whiskers)
 
     #Axes
-    v.axes = Array(VegaAxis, 2)
+    v.axes = Array{VegaAxis}(2)
     v.axes[1] = VegaAxis(_type = "x", scale = "x")
     v.axes[2] = VegaAxis(_type = "y", scale = "y", tickSize = 0, offset = 5, properties = Dict{Any, Any}("axis" => Dict{Any, Any}("stroke" => Dict{Any, Any}("value" => "transparent"))))
 
     #Scales
-    v.scales = Array(VegaScale, 3)
+    v.scales = Array{VegaScale}(3)
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", points = true, round = true,
                             padding = 1.5, domain = VegaDataRef(data = table, field = "x"))
 
@@ -52,7 +52,7 @@ function boxplot(;y::AbstractVector = Int[], group::AbstractVector = Int[])
                             range = "ordinal20", round = true, nice = true)
 
     #Marks
-    v.marks = Array(VegaMark, 8)
+    v.marks = Array{VegaMark}(8)
     v.marks[2] = VegaMark(_type = "rect",
                           from = VegaMarkFrom(data = "iqrcalcs"),
                                              properties = VegaMarkProperties(enter = VegaMarkPropertySet(x = VegaValueRef(scale = "x", field = "lower"),

@@ -9,7 +9,7 @@ function default_scales!(v::VegaVisualization;
 
     table = v.data[1].name
 
-    v.scales = Array(VegaScale, 3)
+    v.scales = Array{VegaScale}(3)
 
     v.scales[1] = VegaScale(name = "x",
                             _type = typeXaxis,
@@ -29,7 +29,7 @@ end
 
 function default_axes!(v::VegaVisualization)
 
-    v.axes = Array(VegaAxis, 2)
+    v.axes = Array{VegaAxis}(2)
 
     v.axes[1] = VegaAxis(_type = "x", scale = "x", title = "x",
                             properties = Dict{Any, Any}("title" => Dict{Any, Any}("fontSize" => Dict{Any, Any}("value" => 14))))

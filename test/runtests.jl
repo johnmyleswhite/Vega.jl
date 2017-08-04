@@ -1,11 +1,7 @@
-#using PyCall
-#@pyimport jsonschema
 using JSON, Vega, Base.Test, KernelDensity, Distributions, RDatasets
-#vegaschema = JSON.parse(readall(joinpath(dirname(@__FILE__), "..", "assets/bower_components/vega/vega-schema.json")))
 
 #### Tests ####
 #Test that Julia returned VegaVisulization (every public function does)
-#jsonschema.validate returns nothing if json validates against schema
 
 #1. Area Plot
 println("Test 1")
@@ -14,7 +10,6 @@ k = kde(x)
 a = areaplot(x = k.x, y = k.density);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #2. Stacked Area
 println("Test 2")
@@ -24,7 +19,6 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 a = areaplot(x = x, y = y, group = g, stacked = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #3. Normalized Stacked area
 println("Test 3")
@@ -34,7 +28,6 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 a = areaplot(x = x, y = y, group = g, stacked = true, normalize = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #4. Aster Plot
 println("Test 4")
@@ -44,7 +37,6 @@ weight = [0.5, 0.5, 1,1,1,1,1,0.5,0.5,0.5,0.5,1,0.5,0.5]
 a = asterplot(x = id, y = score, weight = weight, holesize = 75);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #5. Bar plot
 println("Test 5")
@@ -53,7 +45,6 @@ y = [1, 2, 3, 2, 1]
 a = barplot(x = x, y = y);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #6. Horizontal Bar Plot
 println("Test 6")
@@ -62,7 +53,6 @@ y = [1, 2, 3, 2, 1]
 a = barplot(x = x, y = y, horizontal = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #7. Group Argument
 println("Test 7")
@@ -72,7 +62,6 @@ group = [round(val/10) for val in x]
 a = barplot(x = x, y = y, group = group);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #8. Stacked bar
 println("Test 8")
@@ -82,7 +71,6 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 a = barplot(x = x, y = y, group = g, stacked = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #9. Horizontal Normalized Bar
 println("Test 9")
@@ -92,7 +80,6 @@ g = [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1]
 a = barplot(x = x, y = y, group = g, stacked = true, normalize = true, horizontal = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #10. Single boxplot
 println("Test 10")
@@ -100,7 +87,6 @@ df = dataset("datasets", "mtcars")
 a = boxplot(y = df[:MPG])
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #11. Group boxplot
 println("Test 11")
@@ -108,7 +94,6 @@ df = dataset("datasets", "mtcars")
 boxplot(y = df[:MPG], group = df[:Cyl])
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #12. Bubble Chart
 println("Test 12")
@@ -119,7 +104,6 @@ z = [13.8, 14.7, 15.8, 12, 11.8, 16.6, 14.5, 10, 24.7, 10.4, 16, 35.3, 28.5, 15.
 a = bubblechart(x = x, y = y, group = cont, pointSize = z)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #13. Choropleth Counties
 println("Test 13")
@@ -127,7 +111,6 @@ df = readtable(joinpath(dirname(@__FILE__), "..", "vega-datasets/unemployment.ts
 a = choropleth(x = df[:id], y = df[:rate])
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #14. Choropleth States
 println("Test 14")
@@ -136,7 +119,6 @@ y = rand(Float64, 60)
 a = choropleth(x = x, y = y, entity = :usstates)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #15. Grouped Bar
 println("Test 15")
@@ -146,7 +128,6 @@ value = [0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.2, 0.1, 0.7]
 a = groupedbar(x = category, y = value, group = group);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #16. Heatmap
 println("Test 16")
@@ -166,7 +147,6 @@ end
 a = heatmap(x = x, y = y, color = color);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #17. Histogram
 println("Test 17")
@@ -174,7 +154,6 @@ x = rand(Gamma(3.0, 1.0), 100_000)
 a = histogram(x = x);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #18. Histogram
 println("Test 18")
@@ -182,7 +161,6 @@ x = rand(Gamma(3.0, 1.0), 100_000)
 a = histogram(x = x, relativefreq = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #19. Joint Plot
 println("Test 19")
@@ -190,7 +168,6 @@ faithful = dataset("datasets", "faithful")
 a = jointplot(x = faithful[:Eruptions], y = faithful[:Waiting]);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #20. Line Plot
 println("Test 20")
@@ -200,7 +177,6 @@ group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #21. Line Plot with Points
 println("Test 21")
@@ -210,7 +186,6 @@ group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group, points = true);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #22. Line Plot, Bigger Points
 println("Test 22")
@@ -220,7 +195,6 @@ group = [[1 for i in 1:100]; [2 for i in 1:100]]
 a = lineplot(x = x, y = y, group = group, points = true, pointSize = 20);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #23. Pie chart
 println("Test 23")
@@ -229,7 +203,6 @@ bushels = [100, 32, 180, 46, 21]
 a = piechart(x = fruit, y = bushels);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #24. Donut chart
 println("Test 24")
@@ -238,7 +211,6 @@ bushels = [100, 32, 180, 46, 21]
 a = piechart(x = fruit, y = bushels, holesize = 175);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #25. Population Chart
 println("Test 25")
@@ -253,7 +225,6 @@ group = pop1900[:sex]
 a = popchart(x = x, y = y, group = group);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #26. Rug Plot
 println("Test 26")
@@ -262,7 +233,6 @@ x = mtcars[:Disp]
 a = rugplot(x = x);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #27. Scatter Plot
 println("Test 27")
@@ -275,7 +245,6 @@ group = vcat(ones(Int, 500), ones(Int, 500) + 1)
 a = scatterplot(x = x, y = y, group = group);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #28. Stem and Leaf
 println("Test 28")
@@ -291,7 +260,6 @@ data = [6, 1,3,5, 17, 32, 47, 53, 60, 61, 64, 67, 70, 70, 71, 72, 73, 73, 74, 76
 a = stemleaf(y = data);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #29. Stream Plot
 println("Test 29")
@@ -299,7 +267,6 @@ df = readtable(joinpath(dirname(@__FILE__), "..", "vega-datasets/streamdata.csv"
 a = streamplot(x = df[:date], y = df[:value], group = df[:key]);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #30. Waterfall
 println("Test 30")
@@ -308,7 +275,6 @@ value = [420000, 210000, -170000, -140000, -75000]
 a = waterfall(x = categories, y = value)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #31. Wordcloud
 println("Test 31")
@@ -319,7 +285,6 @@ corpus = [
 a = wordcloud(x = corpus);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #32. Wordcloud
 println("Test 32")
@@ -330,7 +295,6 @@ corpus = [
 a = wordcloud(x = corpus, wordAngles = [0, 90]);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #33. Wordcloud
 println("Test 33")
@@ -341,7 +305,6 @@ corpus = [
 a = wordcloud(x = corpus, minThreshold = 1);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #34. colorscheme!
 println("Test 34")
@@ -349,7 +312,6 @@ a = barplot(x = collect(1:20), y = rand(20), group = vcat([1 for i in 1:10], [2 
 colorscheme!(a, palette = ("Purples", 3));
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #35. colorscheme!
 println("Test 35")
@@ -358,7 +320,6 @@ a = barplot(x = collect(1:20), y = rand(20))
 colorscheme!(a, palette = "Violet");
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #36. colorscheme!
 println("Test 36")
@@ -374,7 +335,6 @@ a = popchart(x = x, y = y, group = group);
 colorscheme!(a, palette = ["Green", "Red"]);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #37. hline!
 println("Test 37")
@@ -385,7 +345,6 @@ a = areaplot(x = x, y = y, group = g, stacked = true);
 hline!(a, value = 60.25, strokeDash = 3)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #38 hover!
 println("Test 38")
@@ -396,7 +355,6 @@ a = asterplot(x = id, y = score, weight = weight, holesize = 75);
 hover!(a, opacity = 0.5);
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #39 jitter!
 println("Test 39")
@@ -406,12 +364,10 @@ a = scatterplot(x = x, y = y);
 jitter!(a)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 jitter!(a, pctXrange = 0.1, pctYrange = 0)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #40 legend!
 println("Test 40")
@@ -421,7 +377,6 @@ a = piechart(x = fruit, y = bushels);
 legend!(a, title = "Fruit")
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #41 stroke!
 println("Test 41")
@@ -432,7 +387,6 @@ a = groupedbar(x = category, y = value, group = group);
 stroke!(a, width = 1.5)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #42 text!
 println("Test 42")
@@ -447,7 +401,6 @@ text!(a, title = "Safe Sugar Intake 50g/day", x = 525, y = 200)
 text!(a, title = "Safe Fat Intake 65g/day", x = 150, y = 10)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #43 title!
 println("Test 43")
@@ -463,7 +416,6 @@ a = popchart(x = x, y = y, group = group);
 title!(a, title = "Gender & Age Comparison - 1900")
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #44 xlab!/ylab!
 println("Test 44")
@@ -475,7 +427,6 @@ xlab!(a, title = "Weight (kg)")
 ylab!(a, title = "Height (cm)")
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #45 xlim!/ylim!
 println("Test 45")
@@ -487,7 +438,6 @@ xlim!(a, min=0, max=200)
 ylim!(a, min=0, max=200)
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #46 background color
 println("Test 46")
@@ -498,7 +448,6 @@ a = lineplot(x = x, y = y, group = group);
 a.background = "green"
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #47 dotplot
 println("Test 47")
@@ -513,7 +462,6 @@ ylab!(a, title = " ", grid = true)
 xlab!(a, title = "Avg. U.S. Gross Movie Receipts", format = ".3s")
 
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #48 dotplot
 println("Test 48")
@@ -524,7 +472,6 @@ end
 
 a = dotplot(x = x = df[:US_Gross], y = df[:Major_Genre], sorted = false)
 @test typeof(a) == VegaVisualization
-#@test jsonschema.validate(tojs(a), vegaschema) == nothing
 
 #49 lineplot with log yaxis
 println("Test 49")

@@ -14,7 +14,7 @@ function add_data!(v::VegaVisualization;
     end
 
     #Create empty arrays as necessary
-    res = Array(Dict{Any, Any}, n)
+    res = Array{Dict{Any, Any}}(n)
     isempty(group)? group = ones(Int, n): group
     isempty(y2)? y2 = zeros(Int, n): y2
     isempty(x2)? x2 = zeros(Int, n): x2

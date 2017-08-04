@@ -8,12 +8,12 @@ function popchart(; x::AbstractVector = Int[], y::AbstractVector = Int[], group:
 
     legend!(v)
 
-    v.scales = Array(VegaScale, 3)
+    v.scales = Array{VegaScale}(3)
     v.scales[1] = VegaScale(name = "g", domain = [2,1], range = "width",  _type = "ordinal")
     v.scales[2] = VegaScale(name = "y", _type = "ordinal", range = "height", reverse = true, domain = VegaDataRef(data = table, field = "y"))
     v.scales[3] = VegaScale(name = "group", _type = "ordinal", domain = [1,2], range = ["#1f77b4", "#e377c2"])
 
-    v.marks = Array(VegaMark,2)
+    v.marks = Array{VegaMark}(2)
 
     #Y-axis labels
     v.marks[2] = VegaMark(
