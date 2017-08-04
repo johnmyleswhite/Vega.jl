@@ -6,7 +6,7 @@ Windows 64-bit: [![Build status](https://ci.appveyor.com/api/projects/status/5rd
 
 # NOTE: THIS PACKAGE IS IN A STATE OF LIMBO
 
-Vega.jl on METADATA works for version 0.5; Vega.jl master works for version 0.6 in Jupyter Notebook. Work will continue to convert package to version 0.6 of Julia, version 3 of Vega and adding support for Atom/Juno. -- Randy, 4/25/2016
+Vega.jl on METADATA nominally works for version 0.6 in Jupyter Notebook. Work to convert to version 3 of Vega and adding support for Atom/Juno may happen in the future, but is not my highest priority. -- Randy, 8/4/2017
 
 # Introduction
 

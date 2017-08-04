@@ -6,7 +6,7 @@ function histogram(; x::AbstractVector = Int[],
 
     if bandwidth == 0.0
         #a, b = hist(x, nbins)
-        bbb = fit(Histogram, x, nbins = nbins)
+        bbb = fit(Histogram, x, nbins = nbins, closed=:left)
         a = bbb.edges[1]
         b = bbb.weights
         bandwidth=a.step/a.divisor

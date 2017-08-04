@@ -1,13 +1,5 @@
 abstract type AbstractVegaType end
 
-# function Base.call{T<:AbstractVegaType}(::Type{T}; kwargs...)
-#     out = T()
-#     for (sym, val) in kwargs
-#         setfield!(out, sym, val)
-#     end
-#     out
-# end
-
 # TODO: Fill me in
 @with_kw type VegaTransform
 	x::Dict{Any, Any} = Dict()
