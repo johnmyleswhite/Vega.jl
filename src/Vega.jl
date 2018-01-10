@@ -2,7 +2,7 @@ __precompile__()
 
 module Vega
 
-    using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase, Parameters
+    using JSON, ColorBrewer, KernelDensity, NoveltyColors, StatsBase, Parameters, Missings
     import Base: print, show
 
     export VegaAxis, VegaData, VegaMark, VegaPadding, VegaScale,

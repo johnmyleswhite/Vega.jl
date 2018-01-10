@@ -9,7 +9,7 @@ function histogram(; x::AbstractVector = Int[],
         bbb = fit(Histogram, x, nbins = nbins, closed=:left)
         a = bbb.edges[1]
         b = bbb.weights
-        bandwidth=a.step/a.divisor
+        bandwidth= float(a.step)/(a.len - 1) #RZ: guessing here, incompatbility from hist from base and StatsBase
     elseif bandwidth < 0.0
 		error("bandwidth should be a positive number but got $(bandwidth)")
 	else
@@ -23,8 +23,7 @@ function histogram(; x::AbstractVector = Int[],
 
     #v = barplot(x = a[2:end], y = b/total)
     v = VegaVisualization()
-    add_data!(v, x = a[1:end-1], x2=a[2:end],
-        y = b/total,y2=zeros(length(b)))
+    add_data!(v, x = a[1:end-1], x2=a[2:end], y = b/Float64(total), y2=zeros(length(b)))
     default_scales!(v; typeXaxis = "linear")
     default_axes!(v)
 

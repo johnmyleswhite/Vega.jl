@@ -1,7 +1,10 @@
 function jointplot(; x::AbstractVector = Int[], y::AbstractVector = Int[], smoothing::Int = 4)
 
+    @assert sum(Missings.ismissing.(x)) == 0 "x has missing data"
+    @assert sum(Missings.ismissing.(y)) == 0 "y has missing data"
+
     #Calculate kde
-    a = kde((x,y))
+    a = kde((collect(skipmissing(x)),collect(skipmissing(y))))
 
     #Parse data from grid to 1D array
     x_mod = []
