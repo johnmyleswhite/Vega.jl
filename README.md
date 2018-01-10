@@ -1,12 +1,11 @@
 Vega.jl
 =======
-OSX/Linux: [![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl) </br>
-pkg.julialang.org: [![Vega](http://pkg.julialang.org/badges/Vega_0.5.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.5) </br>
-Windows 64-bit: [![Build status](https://ci.appveyor.com/api/projects/status/5rdwxsajxo5ybbfn?svg=true)](https://ci.appveyor.com/project/randyzwitch/vega-jl)
+Linux: [![Build Status](https://travis-ci.org/johnmyleswhite/Vega.jl.svg?branch=master)](https://travis-ci.org/johnmyleswhite/Vega.jl) </br>
+pkg.julialang.org: [![Vega](http://pkg.julialang.org/badges/Vega_0.6.svg)](http://pkg.julialang.org/?pkg=Vega&ver=0.6) </br>
 
 # NOTE: THIS PACKAGE IS IN A STATE OF LIMBO
 
-Vega.jl on METADATA nominally works for version 0.6 in Jupyter Notebook. Work to convert to version 3 of Vega and adding support for Atom/Juno may happen in the future, but is not my highest priority. -- Randy, 8/4/2017
+Vega.jl on METADATA works for version 0.6 in Jupyter Notebook. Work to convert to version 3 of Vega and adding support for Atom/Juno may happen in the future, but is not my highest priority. -- Randy, 1/10/2018
 
 # Introduction
 
